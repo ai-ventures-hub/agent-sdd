@@ -1,0 +1,13 @@
+# Theme Standards (Minimal)
+- **Colors**:
+  - Primary: Gray (`bg-gray-500`)
+  - Secondary: Light gray (`#E5E7EB`)
+  - Success: Green (`#10B981`)
+  - Error: Red (`#EF4444`)
+- **Typography**: Roboto, 14px base, 1.4 line height
+- **Components**:
+  - Use shadcn/ui Button, Card
+  - Example: <Button variant="outline" className="bg-gray-500 text-white rounded-sm">Click</Button>
+- **Spacing**: 4px grid system
+- **Accessibility**: WCAG 2.1 AA, ARIA labels, 40px touch targets
+- **Tailwind CSS**: Utility-first, avoid custom CSS
