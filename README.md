@@ -44,6 +44,19 @@ Directory Structure
 ├── specs/               # SDDs and tasks
 ├── standards/           # Tech stack, theme standards, theme-files/
 
+Recommended Updates
+After initializing Agent-SDD and applying a theme via /sdd-apply-theme, consider updating the following files:
+
+✅ .agent-sdd/standards/tech-stack.md: Update with your project’s specific frontend, backend, styling, and testing tools (e.g., Tailwind CSS v4.1 for Syntax theme).
+✅ .agent-sdd/standards/theme-standards.md: Customize with theme-specific colors, typography, and components after running /sdd-apply-theme.
+✅ .agent-sdd/product/overview.md: Tailor mission, target users, and goals to your project.
+✅ .agent-sdd/product/roadmap.md: Add or modify phases and tasks based on your development plan.
+✅ .agent-sdd/product/decisions.md: Document project decisions as they evolve.
+❌ .agent-sdd/standards/code-style.md: Leave as default unless your team requires different naming or formatting conventions.
+❌ .agent-sdd/standards/best-practices.md: Retain default practices unless your workflow demands changes.
+⚠️ .agent-sdd/instructions/*.md: Update only if you need to modify command workflows (e.g., add custom steps).
+⚠️ .agent-sdd/agents/*.md: Adjust agent behaviors only for project-specific needs (e.g., custom git workflows).
+
 Contributing
 
 Fork the repo.

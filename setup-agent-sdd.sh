@@ -17,11 +17,16 @@ mkdir -p .agent-sdd/standards .agent-sdd/product .agent-sdd/specs .agent-sdd/ins
 echo "📥 Creating standards files..."
 cat << 'EOF' > .agent-sdd/standards/tech-stack.md
 # Tech Stack
-# Note: Update this file with project-specific tools and versions after integrating a theme via /sdd-apply-theme
+# ✅ Update this file with your project’s specific tools and versions after integrating a theme via /sdd-apply-theme
+- Frontend: React (update version), TypeScript (update version)
+- Backend: None (standalone components)
+- Styling: Tailwind CSS (update version), shadcn/ui (update version)
+- Testing: Jest (optional, requires setup; update if using another framework)
 EOF
 
 cat << 'EOF' > .agent-sdd/standards/code-style.md
 # Code Style
+# ❌ Leave as default unless your team requires different naming or formatting conventions
 - Naming: camelCase for variables, PascalCase for components
 - Formatting: 2-space indentation, Prettier enforced
 - Comments: JSDoc for functions, inline for clarity
@@ -29,11 +34,17 @@ EOF
 
 cat << 'EOF' > .agent-sdd/standards/best-practices.md
 # Best Practices
+# ❌ Retain default practices unless your workflow demands changes
 - Keep code simple and readable
 - DRY: Extract repeated logic to components/utils
 - Use TDD for critical components
 - Commit messages: "[type]: [description] (task-id)"
 - Accessibility: WCAG 2.1 AA compliance
+EOF
+
+cat << 'EOF' > .agent-sdd/standards/theme-standards.md
+# Theme Standards
+# ✅ Customize this file with theme-specific standards after running /sdd-apply-theme
 EOF
 
 # Product files
