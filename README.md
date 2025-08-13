@@ -43,7 +43,6 @@ Directory Structure
 ├── product/             # Product docs (overview.md, roadmap.md, decisions.md)
 ├── specs/               # SDDs and tasks
 ├── standards/           # Tech stack, theme standards, theme-files/
-components/              # Test components (e.g., TestButton/)
 
 Contributing
 

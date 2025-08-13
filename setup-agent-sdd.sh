@@ -13,14 +13,11 @@ echo ""
 echo "📁 Creating directories..."
 mkdir -p .agent-sdd/standards .agent-sdd/product .agent-sdd/specs .agent-sdd/instructions .agent-sdd/agents
 
-# Standards files (no theme-specific content yet)
+# Standards files (placeholder; update to match project stack after theme integration)
 echo "📥 Creating standards files..."
 cat << 'EOF' > .agent-sdd/standards/tech-stack.md
 # Tech Stack
-- Frontend: React 19, TypeScript 5
-- Backend: None (standalone components)
-- Styling: Tailwind CSS 3.4, shadcn/ui
-- Testing: Jest (optional, requires setup)
+# Note: Update this file with project-specific tools and versions after integrating a theme via /sdd-apply-theme
 EOF
 
 cat << 'EOF' > .agent-sdd/standards/code-style.md
