@@ -9,72 +9,11 @@ echo "🚀 Agent-SDD Setup Script"
 echo "========================"
 echo ""
 
-# Prompt for theme selection
-echo "Select a theme for styling (default/minimal/corporate):"
-read -p "Theme [default]: " theme
-theme=${theme:-default}
-
 # Create directories
 echo "📁 Creating directories..."
 mkdir -p .agent-sdd/standards .agent-sdd/product .agent-sdd/specs .agent-sdd/instructions .agent-sdd/agents
 
-# Theme standards
-echo "📥 Creating theme standards file..."
-case $theme in
-  minimal)
-    cat << 'EOF' > .agent-sdd/standards/theme-standards.md
-# Theme Standards (Minimal)
-- **Colors**:
-  - Primary: Gray (`bg-gray-500`)
-  - Secondary: Light gray (`#E5E7EB`)
-  - Success: Green (`#10B981`)
-  - Error: Red (`#EF4444`)
-- **Typography**: Roboto, 14px base, 1.4 line height
-- **Components**:
-  - Use shadcn/ui Button, Card
-  - Example: <Button variant="outline" className="bg-gray-500 text-white rounded-sm">Click</Button>
-- **Spacing**: 4px grid system
-- **Accessibility**: WCAG 2.1 AA, ARIA labels, 40px touch targets
-- **Tailwind CSS**: Utility-first, avoid custom CSS
-EOF
-    ;;
-  corporate)
-    cat << 'EOF' > .agent-sdd/standards/theme-standards.md
-# Theme Standards (Corporate)
-- **Colors**:
-  - Primary: Navy (`bg-blue-900`)
-  - Secondary: Gray (`#4B5563`)
-  - Success: Teal (`#14B8A6`)
-  - Error: Red (`#DC2626`)
-- **Typography**: Lora, 16px base, 1.6 line height
-- **Components**:
-  - Use shadcn/ui Button, Card, Input
-  - Example: <Button variant="default" className="bg-blue-900 text-white rounded-lg">Click</Button>
-- **Spacing**: 12px grid system
-- **Accessibility**: WCAG 2.1 AA, ARIA labels, 48px touch targets
-- **Tailwind CSS**: Utility-first, avoid custom CSS
-EOF
-    ;;
-  *)
-    cat << 'EOF' > .agent-sdd/standards/theme-standards.md
-# Theme Standards (Default)
-- **Colors**:
-  - Primary: Purple gradient (`bg-gradient-to-r from-purple-600 to-purple-800`)
-  - Secondary: Muted gray (`#6B7280`)
-  - Success: Green (`#10B981`)
-  - Error: Red (`#EF4444`)
-- **Typography**: Inter, 16px base, 1.5 line height
-- **Components**:
-  - Use shadcn/ui Button, Card, Input, AlertDialog
-  - Example: <Button variant="default" className="bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-md">Click</Button>
-- **Spacing**: 8px grid system
-- **Accessibility**: WCAG 2.1 AA, ARIA labels, 44px touch targets
-- **Tailwind CSS**: Utility-first, avoid custom CSS
-EOF
-    ;;
-esac
-
-# Standards files
+# Standards files (no theme-specific content yet)
 echo "📥 Creating standards files..."
 cat << 'EOF' > .agent-sdd/standards/tech-stack.md
 # Tech Stack
@@ -483,7 +422,5 @@ cp .agent-sdd/agents/*.md ~/.claude/commands/
 echo ""
 echo "✅ Agent-SDD installation complete!"
 echo "📍 Files installed to .agent-sdd/"
-echo "🎨 Theme: $theme"
-echo "💡 Customize standards in .agent-sdd/standards/"
-echo "🚀 Run /sdd-plan-product in Claude Code to start!"
-   # Ctrl+D to save
+echo "💡 No theme applied. Use /sdd-apply-theme to set a custom or default theme."
+echo "🚀 Run /sdd-plan-product or /sdd-apply-theme in Claude Code to start!"
