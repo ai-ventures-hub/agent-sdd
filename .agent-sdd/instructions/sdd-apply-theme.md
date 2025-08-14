@@ -311,7 +311,7 @@ if [[ -n "$APP_CSS" ]]; then
 else
   echo "🔗 Add this import to your app-level CSS (globals.css):"
 fi
-echo "@import "../../.agent-sdd/standards/theme-files/${THEME_NAME}/theme.css";"
+echo "@import \"../../.agent-sdd/standards/theme-files/${THEME_NAME}/theme.css\";"
 if [[ -n "$COMP_DIR" ]]; then
   echo "📁 Components directory detected: ${COMP_DIR}"
 fi
