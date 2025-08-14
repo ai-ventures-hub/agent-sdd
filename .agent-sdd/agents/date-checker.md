@@ -15,7 +15,10 @@ You are a specialized date determination agent for Agent-SDD workflows. Your rol
 
 ## Workflow
 1. Check if date is in context.
-2. If not, create temporary file: `.agent-sdd/specs/.date-check`.
+2. If not, ensure the specs directory exists:
+   ```sh
+   mkdir -p .agent-sdd/specs
+   ```
 3. Extract timestamp and parse to YYYY-MM-DD.
 4. Clean up temporary file.
 5. Validate format and output.
