@@ -442,8 +442,13 @@ mkdir -p ~/.claude/commands
 cp .agent-sdd/instructions/*.md ~/.claude/commands/
 cp .agent-sdd/agents/*.md ~/.claude/commands/
 
-echo ""
-echo "✅ Agent-SDD installation complete!"
+# Make scripts executable
+if [ -d ".agent-sdd/scripts" ]; then
+  chmod +x .agent-sdd/scripts/*.sh
+  echo "🔑 Made all scripts in .agent-sdd/scripts executable."
+fi
+
+echo # just a newline, no quotes needed
 echo "📍 Files installed to .agent-sdd/"
 echo "💡 No theme applied. Use /sdd-apply-theme to set a custom or default theme."
 echo "🚀 Run /sdd-plan-product or /sdd-apply-theme in Claude Code to start!"
