@@ -31,6 +31,8 @@ Tweak an existing file or feature and re-run style/theme checks.
    - Primary source: `.agent-sdd/standards/theme-files/[theme-name]/theme.css` (fail if missing).
    - Fallbacks: `syntax-custom.css` or `app.css` only if `theme.css` is missing.
    - Always run `/sdd-review-code` on modified files.
+5a. **Auto-fix styles (if `--fix-style`)**:
+   - Run `.agent-sdd/scripts/fix-theme-style.sh` to auto-replace non-compliant classes with theme-compliant ones before reviewing.
 6. **Tests**:
    - If not `--no-tests` and relevant, run minimal tests via `test-runner` agent.
 7. **Commit suggestion**:
