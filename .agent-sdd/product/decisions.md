@@ -1,25 +1,44 @@
-# Decisions
-- 2025-08-13: Use Tailwind/shadcn/ui (DEC-001, Accepted, Technical)
-  - Rationale: Consistent styling, accessibility
-  - Alternatives: Custom CSS (too complex)
-- 2025-08-13: Update roadmap to reflect tested Text Display component (DEC-002, Accepted, Documentation)
-  - Rationale: Ensure roadmap accurately reflects completed tasks from testing
-  - Alternatives: None (roadmap must reflect progress)
-- 2025-08-13: Make test code optional in sdd-execute-task, skip in sdd-fix/tweak (DEC-003, Accepted, Workflow)
-  - Rationale: Reduce token costs for local development while preserving quality for critical components
-  - Alternatives: Keep mandatory tests (increases token usage)
-- 2025-08-13: Add --quick and --no-spec modes to sdd-execute-task (DEC-004, Accepted, Workflow)
-  - Rationale: Incorporate Agent OS flexibility to reduce token usage and support ad-hoc tasks
-  - Alternatives: Retain original workflow (less flexible, higher token cost)
-- 2025-08-13: Enhance roadmap with details and sections (DEC-005, Accepted, Documentation)
-  - Rationale: Address /sdd-review-code feedback to make roadmap actionable and comprehensive
-  - Alternatives: Keep minimal roadmap (lacks planning depth)
-- 2025-08-13: Remove ./tasks.json references from sdd-execute-task (DEC-006, Accepted, Workflow)
-  - Rationale: Align with Agent-SDD’s spec-based structure, avoid agents searching for non-existent files
-  - Alternatives: Add ./tasks.json (increases complexity, deviates from design)
-- 2025-08-13: Sync test project with agent-sdd repo (DEC-008, Accepted, Workflow)
-  - Rationale: Align test directory with enhanced roadmap and fixed workflow for consistent proof-of-concept testing
-  - Alternatives: Keep test directory outdated (causes workflow errors)
-- 2025-08-13: Fix sdd-execute-task to enforce --no-tests (DEC-009, Accepted, Workflow)
-  - Rationale: Prevent test generation/execution with --no-tests to reduce token usage
-  - Alternatives: Allow test todos (increases token waste)
+# Project Decisions
+
+> **Instructions:**  
+> - Use this file to record **important decisions** made during the project’s lifecycle.  
+> - Each entry should explain *what* was decided, *why* it was made, and *when*.  
+> - Keep entries brief but detailed enough for future reference.  
+> - This document is a **single source of truth** for decision history — don’t track these only in chat or emails.
+
+---
+
+
+## Format for Entries
+[YYYY-MM-DD] – Decision Title
+What: Brief description of the decision made.
+Why: Reasoning or context for the decision.
+Impact: How it affects the project moving forward.
+
+---
+
+## Example Decisions
+
+**[2025-07-01] – Adopt Tailwind CSS for Styling**  
+**What:** Standardized on Tailwind CSS as the primary styling framework.  
+**Why:** Speeds up UI development, ensures consistency, and fits the team’s preferred workflow.  
+**Impact:** All new components must follow Tailwind utility class conventions.
+
+---
+
+**[2025-08-10] – Switch API Auth from JWT to Supabase Auth**  
+**What:** Replace manual JWT handling with Supabase’s built-in authentication.  
+**Why:** Simplifies implementation and leverages Supabase’s session management.  
+**Impact:** All backend endpoints updated to use Supabase’s auth middleware.
+
+---
+
+**[2025-08-14] – Roadmap Tracking Inside Agent-SDD Progress**  
+**What:** Decided to manage the project roadmap directly in Agent-SDD with linked progress updates.  
+**Why:** Keeps roadmap as the high-level tracker and progress as the detailed record.  
+**Impact:** Roadmap updates must be mirrored in the Progress section for consistency.
+
+---
+
+**User Tip:** If a decision is reverted later, note it in this file rather than deleting it — 
+
