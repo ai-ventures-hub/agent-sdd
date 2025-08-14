@@ -4,9 +4,13 @@
 
 ## What this does
 - Lets the user **choose a theme**: Preset (**minimal**, **classic**, **vibrant**) or **custom** (enter Primary, Secondary, Success, Error).
+- **Validates colors** strictly:
+  - Accepts **short hex** (`#abc`) and **long hex** (`#aabbcc`)
+  - Accepts **rgb(r,g,b)** with each component **0–255**
+  - Rejects invalid formats before doing any work
 - **Auto-detects** common paths (with simple overrides).
 - Generates a **tiny theme layer** with CSS variables + Tailwind utilities (no parsing).
-- Regenerates `.agent-sdd/standards/theme-standards.md` to mirror chosen colors (with an allow‑list).
+- Regenerates `.agent-sdd/standards/theme-standards.md` to mirror chosen colors (with an allow-list).
 - Logs a decision in `.agent-sdd/product/decisions.md`.
 
 ---
@@ -19,9 +23,15 @@ Interactive:
 
 Non‑interactive (example):
 ```bash
-/sdd-apply-theme --preset minimal   --primary "#4B5563"   --secondary "#E5E7EB"   --success "#10B981"   --error "#EF4444"   --app-css src/app/globals.css   --components src/components/ui   --theme-name brand-minimal
+/sdd-apply-theme --preset minimal \
+  --primary "#4B5563" \
+  --secondary "#E5E7EB" \
+  --success "#10B981" \
+  --error "#EF4444" \
+  --app-css src/app/globals.css \
+  --components src/components/ui \
+  --theme-name brand-minimal
 ```
-
 ---
 
 ## Steps (what the agent does)
