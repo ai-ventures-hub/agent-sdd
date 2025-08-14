@@ -17,6 +17,9 @@
 - 2025-08-13: Remove ./tasks.json references from sdd-execute-task (DEC-006, Accepted, Workflow)
   - Rationale: Align with Agent-SDD’s spec-based structure, avoid agents searching for non-existent files
   - Alternatives: Add ./tasks.json (increases complexity, deviates from design)
-- 2025-08-13: Fix sdd-execute-task task lookup and code paths (DEC-007, Accepted, Workflow)
-  - Rationale: Ensure tasks are loaded from .agent-sdd/specs/*/tasks.json, restrict code to components/, and prompt for file writes to avoid token waste
-  - Alternatives: Allow unrestricted paths (increases token usage, risks errors)
+- 2025-08-13: Sync test project with agent-sdd repo (DEC-008, Accepted, Workflow)
+  - Rationale: Align test directory with enhanced roadmap and fixed workflow for consistent proof-of-concept testing
+  - Alternatives: Keep test directory outdated (causes workflow errors)
+- 2025-08-13: Fix sdd-execute-task to enforce --no-tests (DEC-009, Accepted, Workflow)
+  - Rationale: Prevent test generation/execution with --no-tests to reduce token usage
+  - Alternatives: Allow test todos (increases token waste)
