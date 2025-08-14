@@ -1,5 +1,4 @@
 # /sdd-review-code <file-or-dir-path> [--fix] [--report-only]
-
 Review code for **Theme Standards** compliance and (optionally) auto‑fix issues.
 
 ---
