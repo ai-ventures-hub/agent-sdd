@@ -40,5 +40,7 @@ Impact: How it affects the project moving forward.
 
 ---
 
-**User Tip:** If a decision is reverted later, note it in this file rather than deleting it — 
+**User Tip:** If a decision is reverted later, note it in this file rather than deleting it —  
+this ensures historical context is preserved for future reference and helps avoid repeating past mistakes.
+
 
