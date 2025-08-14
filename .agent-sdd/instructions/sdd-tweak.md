@@ -54,3 +54,5 @@ Tweak an existing file or feature and re-run style/theme checks.
 
 # Adjust shadow on Card without running tests
 /sdd-tweak src/components/Card/Card.tsx --no-tests
+## Examples
+```
