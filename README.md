@@ -44,6 +44,7 @@ bash setup-agent-sdd.sh
 ├── product/             # Product docs (overview.md, roadmap.md, decisions.md)
 ├── specs/               # SDDs and tasks
 ├── standards/           # Tech stack, theme standards, theme-files/
+├── update-guide.md      # Instructions on which files user should update
 ```
 
 ## Contributing
