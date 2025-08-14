@@ -4,4 +4,5 @@
 node_modules/
 components/*.bak
 package-lock.json
+.DS_Store
 ```
