@@ -1,4 +1,4 @@
-# /sdd-fix [--no-tests] <target>
+# /sdd-fix [--no-tests] [--fix-style] <target>
 
 Fix a bug, styling issue, or accessibility problem in existing code.
 
@@ -12,6 +12,7 @@ Fix a bug, styling issue, or accessibility problem in existing code.
 
 ## Options
 - `--no-tests` → Skip test writing/execution.
+- `--fix-style` → Run `.agent-sdd/scripts/fix-theme-style.sh` to auto-replace non-compliant classes with theme-compliant ones.
 
 ---
 
@@ -30,6 +31,8 @@ Fix a bug, styling issue, or accessibility problem in existing code.
    - Primary source: `.agent-sdd/standards/theme-files/[theme-name]/theme.css` (fail if missing).
    - Fallback: `syntax-custom.css` or `app.css` only if `theme.css` is missing.
    - Run `/sdd-review-code` on modified files.
+5a. **Auto-fix styles (if `--fix-style`)**:
+   - Run `.agent-sdd/scripts/fix-theme-style.sh` before reviewing to ensure theme compliance.
 6. **Tests**:
    - If not `--no-tests`, write or update tests relevant to the fix and run with `test-runner` agent.
 7. **Commit suggestion**:
@@ -50,7 +53,9 @@ Fix a bug, styling issue, or accessibility problem in existing code.
 # Fix logic and run theme review
 /sdd-fix src/lib/dateFormatter.ts
 
+# Fix button style and auto-fix theme compliance
+/sdd-fix src/components/Button/Button.tsx --fix-style
+
 # Fix button style without running tests
 /sdd-fix src/components/Button/Button.tsx --no-tests
 ```
-
