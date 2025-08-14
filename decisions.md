@@ -11,3 +11,9 @@
 - 2025-08-13: Add --quick and --no-spec modes to sdd-execute-task (DEC-004, Accepted, Workflow)
   - Rationale: Incorporate Agent OS flexibility to reduce token usage and support ad-hoc tasks
   - Alternatives: Retain original workflow (less flexible, higher token cost)
+- 2025-08-13: Enhance roadmap with details and sections (DEC-005, Accepted, Documentation)
+  - Rationale: Address /sdd-review-code feedback to make roadmap actionable and comprehensive
+  - Alternatives: Keep minimal roadmap (lacks planning depth)
+- 2025-08-13: Remove ./tasks.json references from sdd-execute-task (DEC-006, Accepted, Workflow)
+  - Rationale: Align with Agent-SDD’s spec-based structure, avoid agents searching for non-existent files
+  - Alternatives: Add ./tasks.json (increases complexity, deviates from design)
