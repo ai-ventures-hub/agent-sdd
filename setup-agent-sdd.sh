@@ -7,7 +7,7 @@ set -e
 
 # Prevent accidental overwrite of existing configuration
 if [ -d ".agent-sdd" ]; then
-  read -p "⚠️  .agent-sdd already exists. Overwrite? (y/N) " CONFIRM
+  read -r -p "⚠️  .agent-sdd already exists. Overwrite? (y/N) " CONFIRM
   if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
     echo "❌ Setup aborted to avoid overwriting existing configuration."
     exit 1
