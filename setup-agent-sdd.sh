@@ -5,6 +5,15 @@
 
 set -e
 
+# Prevent accidental overwrite of existing configuration
+if [ -d ".agent-sdd" ]; then
+  read -p "⚠️  .agent-sdd already exists. Overwrite? (y/N) " CONFIRM
+  if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+    echo "❌ Setup aborted to avoid overwriting existing configuration."
+    exit 1
+  fi
+fi
+
 echo "🚀 Agent-SDD Setup Script"
 echo "========================"
 echo ""
@@ -62,6 +71,12 @@ cat << 'EOF' > .agent-sdd/product/roadmap.md
   - [x] Agent-SDD setup
 - Phase 1: Current Development (Q3 2025)
   - [ ] Text Display component
+
+## Example Progress Log Entry
+**[2025-08-14] – Completed Initial Theme Integration**
+- **What:** Applied minimal theme preset and verified color standards.
+- **Why:** Ensures consistent design and accessibility from the start.
+- **Impact:** All components must use theme variables; old hardcoded colors replaced.
 EOF
 
 cat << 'EOF' > .agent-sdd/product/decisions.md
@@ -116,7 +131,7 @@ Execute a task:
 EOF
 
 cat << 'EOF' > .agent-sdd/instructions/sdd-fix.md
-# /sdd-fix --quick <description>
+# /sdd-fix [--no-tests] <description>
 Apply a quick fix:
 1. Create task in .agent-sdd/specs/YYYY-MM-DD-quick-fix/tasks.json.
 2. Implement fix, ensuring .agent-sdd/standards/theme-standards.md compliance.
@@ -127,7 +142,7 @@ Apply a quick fix:
 EOF
 
 cat << 'EOF' > .agent-sdd/instructions/sdd-tweak.md
-# /sdd-tweak --quick <description>
+# /sdd-tweak [--fix-style] [--no-tests] <description>
 Apply a minor UI tweak:
 1. Create task in .agent-sdd/specs/YYYY-MM-DD-tweak/tasks.json.
 2. Implement tweak, strictly following .agent-sdd/standards/theme-standards.md.
