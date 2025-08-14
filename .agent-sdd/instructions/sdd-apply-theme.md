@@ -65,7 +65,6 @@ set -euo pipefail
 
 # -----------------------------------------------------------------------------
 # sdd-apply-theme.sh
-# Simple theme applier for Agent-SDD:
 # - Choose preset or custom
 # - Generate theme.css with CSS variables + Tailwind utilities (no parsing)
 # - Refresh theme-standards.md
@@ -90,16 +89,29 @@ PRODUCT_DIR="${AGENT_DIR}/product"
 
 DATE_STR="$(date +%F)" # YYYY-MM-DD
 
-# Color validation (hex or rgb)
+# Color validation: short hex (#abc), long hex (#aabbcc), or rgb(r,g,b) with 0–255
 is_color() {
   local v="$1"
-  [[ "$v" =~ ^\#[0-9A-Fa-f]{6}$ ]] || [[ "$v" =~ ^rgb\([0-9]{1,3}\ *\,\ *[0-9]{1,3}\ *\,\ *[0-9]{1,3}\)$ ]]
+  # Match short or long hex
+  if [[ "$v" =~ ^\#[0-9A-Fa-f]{3}$ ]] || [[ "$v" =~ ^\#[0-9A-Fa-f]{6}$ ]]; then
+    return 0
+  fi
+  # Match rgb(r,g,b) and enforce range
+  if [[ "$v" =~ ^rgb\(([0-9]{1,3}),\s*([0-9]{1,3}),\s*([0-9]{1,3})\)$ ]]; then
+    for comp in "${BASH_REMATCH[@]:1}"; do
+      if (( comp < 0 || comp > 255 )); then
+        return 1
+      fi
+    done
+    return 0
+  fi
+  return 1
 }
 
 usage() {
   cat <<EOF
 Usage: $0 [--preset minimal|classic|vibrant|custom]
-          [--primary "#112233" | "rgb(0,0,0)"]
+          [--primary "#112233" | "#123" | "rgb(0,0,0)"]
           [--secondary "..."] [--success "..."] [--error "..."]
           [--app-css path/to/app.css] [--components path/to/components/ui]
           [--theme-name my-theme]
@@ -122,6 +134,16 @@ while [[ $# -gt 0 ]]; do
     -h|--help) usage; exit 0;;
     *) echo "Unknown arg: $1"; usage; exit 1;;
   esac
+done
+
+# Early validation for CLI-provided colors
+for color_var in PRIMARY SECONDARY SUCCESS ERROR; do
+  val="${!color_var}"
+  if [[ -n "$val" && ! $(is_color "$val") ]]; then
+    echo "❌ Invalid $color_var value: $val"
+    echo "   Must be #RGB, #RRGGBB, or rgb(r,g,b) with each component 0–255."
+    exit 1
+  fi
 done
 
 # Interactive flow if needed
@@ -166,11 +188,11 @@ case "$PRESET" in
     echo "Invalid preset: $PRESET"; exit 1;;
 esac
 
-# Validate colors
+# Final validation after preset or interactive assignment
 for C in "$PRIMARY" "$SECONDARY" "$SUCCESS" "$ERROR"; do
   if ! is_color "$C"; then
     echo "Invalid color value: $C"
-    echo "Use hex (#RRGGBB) or rgb(r,g,b)."
+    echo "Use #RGB, #RRGGBB, or rgb(r,g,b) with 0–255."
     exit 1
   fi
 done
