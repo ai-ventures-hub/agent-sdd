@@ -448,7 +448,19 @@ if [ -d ".agent-sdd/scripts" ]; then
   echo "🔑 Made all scripts in .agent-sdd/scripts executable."
 fi
 
+# Ask user if they want to apply a theme right after install
+read -r -p "🎨 Do you want to apply a theme now? (y/N): " APPLY_THEME
+if [[ "$APPLY_THEME" =~ ^[Yy]$ ]]; then
+  echo "Select a theme preset:"
+  select opt in "minimal" "classic" "vibrant" "custom"; do
+    ./.agent-sdd/scripts/sdd-apply-theme.sh --preset "$opt"
+    break
+  done
+fi
+
 echo # just a newline, no quotes needed
 echo "📍 Files installed to .agent-sdd/"
-echo "💡 No theme applied. Use /sdd-apply-theme to set a custom or default theme."
+if [[ ! "$APPLY_THEME" =~ ^[Yy]$ ]]; then
+  echo "💡 No theme applied. Use /sdd-apply-theme to set a custom or default theme."
+fi
 echo "🚀 Run /sdd-plan-product or /sdd-apply-theme in Claude Code to start!"
