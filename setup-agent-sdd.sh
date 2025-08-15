@@ -477,3 +477,4 @@ if [[ ! "$APPLY_THEME" =~ ^[Yy]$ ]]; then
   echo "💡 No theme applied. Use /sdd-apply-theme to set a custom or default theme."
 fi
 echo "🚀 Run /sdd-plan-product or /sdd-apply-theme in Claude Code to start!"
+echo "✅ Agent-SDD setup complete."
