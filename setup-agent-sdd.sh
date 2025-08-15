@@ -442,10 +442,23 @@ mkdir -p ~/.claude/commands
 cp .agent-sdd/instructions/*.md ~/.claude/commands/
 cp .agent-sdd/agents/*.md ~/.claude/commands/
 
-# Make scripts executable
+# Ensure scripts directory exists before chmod
+mkdir -p .agent-sdd/scripts
+
+# Make all scripts executable (if any exist)
 if [ -d ".agent-sdd/scripts" ]; then
-  chmod +x .agent-sdd/scripts/*.sh
+  chmod +x .agent-sdd/scripts/*.sh 2>/dev/null || true
   echo "🔑 Made all scripts in .agent-sdd/scripts executable."
+fi
+
+# Add sdd-review-code npm script if not present
+if [ -f "package.json" ]; then
+  if ! grep -q '"sdd-review-code"' package.json; then
+    echo "📦 Adding sdd-review-code script to package.json..."
+    npx json -I -f package.json -e 'this.scripts["sdd-review-code"]=".agent-sdd/scripts/sdd-review-code.sh"'
+  else
+    echo "ℹ️  sdd-review-code script already exists in package.json."
+  fi
 fi
 
 # Ask user if they want to apply a theme right after install
