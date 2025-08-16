@@ -442,16 +442,16 @@ mkdir -p ~/.claude/commands
 cp .agent-sdd/instructions/*.md ~/.claude/commands/
 cp .agent-sdd/agents/*.md ~/.claude/commands/
 
-# Ensure scripts directory exists before chmod
+# Ensure scripts directory exists
 mkdir -p .agent-sdd/scripts
 
-# Make all scripts executable (if any exist)
+# Make scripts executable if any exist
 if [ -d ".agent-sdd/scripts" ]; then
   chmod +x .agent-sdd/scripts/*.sh 2>/dev/null || true
   echo "🔑 Made all scripts in .agent-sdd/scripts executable."
 fi
 
-# Add sdd-review-code npm script if not present
+# Add sdd-review-code npm script if not already in package.json
 if [ -f "package.json" ]; then
   if ! grep -q '"sdd-review-code"' package.json; then
     echo "📦 Adding sdd-review-code script to package.json..."
