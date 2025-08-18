@@ -1,6 +1,8 @@
 # /sdd-review-code <paths...> [--fix]
 Review code for compliance with Theme Standards, accessibility, and style consistency.
 
+**IMPORTANT:** This is an Agent-SDD instruction, NOT a bash command. Do not execute as `Bash(/sdd-review-code ...)`.
+
 ---
 
 ## Purpose
@@ -43,6 +45,7 @@ Review code for compliance with Theme Standards, accessibility, and style consis
 ## Integration
 - Used by `/sdd-execute-task`, `/sdd-tweak`, and `/sdd-fix` after modifications.
 - Always run after theme changes to catch non‑compliant styles.
+- **Fallback script**: If this instruction is unavailable, use `.agent-sdd/scripts/sdd-review-code.sh <file-path>`
 
 ---
 

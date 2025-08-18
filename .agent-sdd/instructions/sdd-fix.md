@@ -33,9 +33,8 @@ Fix a bug, styling issue, or accessibility problem in existing code.
 6. **Theme Review**:
    - Primary source: `.agent-sdd/standards/theme-files/[theme-name]/theme.css` (fail if missing).
    - Fallback: `syntax-custom.css` or `app.css` only if `theme.css` is missing.
-   Always run `/sdd-review-code` on modified files.
-   If `/sdd-review-code` is not available in your environment, run:  
-       `.agent-sdd/scripts/sdd-review-code.sh <target-file>`
+   - Use Agent-SDD instruction: `/sdd-review-code <modified-paths>` (NOT as bash command)
+   - **Fallback**: If `/sdd-review-code` instruction unavailable, use: `.agent-sdd/scripts/sdd-review-code.sh <target-file>`
 7. **Tests**:
    - If not `--no-tests`, write or update tests relevant to the fix and run with `test-runner` agent.
 8. **Commit suggestion**:

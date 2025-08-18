@@ -125,7 +125,7 @@ Execute a task:
 3. Write tests (TDD) if applicable.
 4. Implement code, commit with message "[task-id]: [description]".
 5. Run task-specific tests (if package.json exists).
-6. Run /sdd-review-code on modified files to ensure UX/UI compliance.
+6. Use Agent-SDD instruction: /sdd-review-code on modified files (NOT bash command) to ensure UX/UI compliance.
 7. Update task status to "completed" and set ux_ui_reviewed: true in tasks.json.
 8. Notify user with summary: tasks completed, issues, commit hash.
 EOF
@@ -135,7 +135,7 @@ cat << 'EOF' > .agent-sdd/instructions/sdd-fix.md
 Apply a quick fix:
 1. Use date-checker agent to get current date, then create task in .agent-sdd/specs/fix-[task-id]-[CURRENT-DATE]/tasks.json.
 2. Implement fix, ensuring .agent-sdd/standards/theme-standards.md compliance.
-3. Run /sdd-review-code on modified files to ensure UX/UI compliance.
+3. Use Agent-SDD instruction: /sdd-review-code on modified files (NOT bash command) to ensure UX/UI compliance.
 4. Commit with message "fix: [description]".
 5. Update task status to "completed" and set ux_ui_reviewed: true.
 6. Notify user with summary.
@@ -146,7 +146,7 @@ cat << 'EOF' > .agent-sdd/instructions/sdd-tweak.md
 Apply a minor UI tweak:
 1. Use date-checker agent to get current date, then create task in .agent-sdd/specs/tweak-[task-id]-[CURRENT-DATE]/tasks.json.
 2. Implement tweak, strictly following .agent-sdd/standards/theme-standards.md.
-3. Run /sdd-review-code on modified files to ensure UX/UI compliance.
+3. Use Agent-SDD instruction: /sdd-review-code on modified files (NOT bash command) to ensure UX/UI compliance.
 4. Commit with message "tweak: [description]".
 5. Update task status to "completed" and set ux_ui_reviewed: true.
 6. Notify user with summary.
