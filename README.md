@@ -6,7 +6,7 @@ A lightweight, Claude‑first system for structured software development. Uses a
 
 ## ✨ Features
 - **Project‑Specific**: All files live in `.agent-sdd/`, initialized by `setup-agent-sdd.sh`.
-- **Claude Commands**: `/sdd-plan-product`, `/sdd-create-spec [--lite | --ui-only]`, `/sdd-execute-task [--fix-style]`, `/sdd-fix [--no-tests]`, `/sdd-tweak [--fix-style | --no-tests]`, `/sdd-analyze`, `/sdd-review-code`, `/sdd-apply-theme`.
+- **Claude Commands**: `/sdd-plan-product`, `/sdd-create-spec [--lite | --ui-only]`, `/sdd-execute-task [--fix-style]`, `/sdd-fix [--no-tests]`, `/sdd-tweak [--fix-style | --no-tests]`, `/sdd-analyze`, `/sdd-review-code`, `/sdd-apply-theme`, `/sdd-check-task <task-id>`, `/sdd-queue-tweak <task-id>`, `/sdd-queue-fix <task-id>`.
 - **Themes (Presets or Custom)**: Built‑in presets (**minimal**, **classic**, **vibrant**) or **custom** palettes via `/sdd-apply-theme`. The active theme’s **source of truth** is `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
 - **Sub‑agents**: `context-fetcher`, `date-checker`, `file-creator`, `git-workflow`, `test-runner`, `code-reviewer` (UX/UI focus).
 - **UX/UI Enforcement**: Automatic style reviews after task execution with accessibility, responsive, and dark‑mode checks.
@@ -87,6 +87,21 @@ bash setup-agent-sdd.sh
 /sdd-analyze src/components
 ```
 
+8) **Check Task Completion**
+```bash
+# Verify task was executed and documented properly
+/sdd-check-task BTN-012
+```
+
+9) **Queue Tweaks and Fixes**
+```bash
+# Queue UI tweak for batch processing
+/sdd-queue-tweak NAV-001 "Add smooth transitions to menu"
+
+# Queue bug fix with severity
+/sdd-queue-fix AUTH-001 "Login fails with special characters"
+```
+
 ---
 
 ## 🎨 Theme Standards (Important)
@@ -105,6 +120,8 @@ bash setup-agent-sdd.sh
 - **Fix/Tweak**: Applies targeted changes; run `/sdd-review-code` automatically for compliance.
 - **Review Code**: Ensures accessibility, responsive utilities, dark mode pairing (`dark:`), and theme color usage.
 - **Analyze**: Broad scan for drift and opportunities.
+- **Check Task**: Validates task completion, documentation, and theme compliance.
+- **Queue Tweak/Fix**: Queue management for batch processing of improvements and bug fixes.
 - **Note**: Test runner requires a `package.json` and Jest/Vitest to execute tests.
 
 ---

@@ -173,6 +173,40 @@ Review code for theme standards compliance:
 5. Notify user with report: issues found, fixes applied.
 EOF
 
+cat << 'EOF' > .agent-sdd/instructions/sdd-check-task.md
+# /sdd-check-task <task-id>
+Verify task completion and documentation:
+1. Locate task in .agent-sdd/specs/*/tasks.json.
+2. Verify folder naming: <action>-<task-id>-[date].
+3. Check status: "completed" and ux_ui_reviewed: true.
+4. Validate documentation in sdd.md.
+5. Check theme compliance of modified files.
+6. Look for commit with task ID.
+7. Generate check report with overall status.
+EOF
+
+cat << 'EOF' > .agent-sdd/instructions/sdd-queue-tweak.md
+# /sdd-queue-tweak <task-id> <description>
+Queue UI/UX improvement for batch processing:
+1. Check if task exists in specs.
+2. Use date-checker for current date.
+3. Create/update spec: queue-tweak-[task-id]-[date].
+4. Add to tweaks-queue.json sorted by priority.
+5. Estimate effort (XS/S/M).
+6. Show queue position and next steps.
+EOF
+
+cat << 'EOF' > .agent-sdd/instructions/sdd-queue-fix.md
+# /sdd-queue-fix <task-id> <description>
+Queue bug/issue for systematic resolution:
+1. Categorize by severity and type.
+2. Use date-checker for current date.
+3. Create/update spec: queue-fix-[task-id]-[date].
+4. Add to fixes-queue.json sorted by severity.
+5. Link to original task if regression.
+6. Generate fix ticket with priority score.
+EOF
+
 # Agent files
 echo "📥 Creating agent files..."
 cat << 'EOF' > .agent-sdd/agents/context-fetcher.md
