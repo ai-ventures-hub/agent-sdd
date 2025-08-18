@@ -19,9 +19,10 @@ Create a Software Design Document (SDD) for a new feature or task.
 ## Workflow
 1. **Prompt for feature name and description**:
    - If user says "what's next?", check `.agent-sdd/product/roadmap.md` for next item.
-2. **Create spec folder**:
-   - `.agent-sdd/specs/YYYY-MM-DD-[feature-name]/` (kebab-case, max 5 words).
-3. **Generate `sdd.md`** with:
+2. **Get current date** using **date-checker** agent.
+3. **Create spec folder**:
+   - `.agent-sdd/specs/[CURRENT-DATE]-[feature-name]/` (kebab-case, max 5 words).
+4. **Generate `sdd.md`** with:
    - **Overview**: Goal, user story, success criteria.
    - **Technical Specs**:
      - UI requirements (skip if `--lite`).
@@ -33,11 +34,11 @@ Create a Software Design Document (SDD) for a new feature or task.
    - **Test Scenarios** (skip if `--lite` or `--ui-only`).
    - **Theme Standards Compliance**:
      - Colors, typography, spacing, and accessibility from `.agent-sdd/standards/theme-standards.md`.
-4. **Create `tasks.json`** with task details.
-5. **If `--lite`**: Only include Overview and Tasks.
-6. **If `--ui-only`**: Focus on UI Requirements and Theme Standards.
-7. **Check alignment** with `.agent-sdd/product/*`; update `decisions.md` if needed.
-8. **Prompt user**: `"Proceed with Task 1? (yes/no)"`.
+5. **Create `tasks.json`** with task details.
+6. **If `--lite`**: Only include Overview and Tasks.
+7. **If `--ui-only`**: Focus on UI Requirements and Theme Standards.
+8. **Check alignment** with `.agent-sdd/product/*`; update `decisions.md` if needed.
+9. **Prompt user**: `"Proceed with Task 1? (yes/no)"`.
 
 ---
 

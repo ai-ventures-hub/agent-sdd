@@ -6,7 +6,7 @@ Execute a task end‑to‑end and enforce Theme Standards.
 ## Modes
 - `default` → Load `.agent-sdd/specs/*/tasks.json`, `sdd.md`, and `.agent-sdd/product/*`.
 - `--quick` → Load only `.agent-sdd/specs/*/tasks.json` and `sdd.md` (skip roadmap sync).
-- `--no-spec` → Skip spec loading. If `<task-id>` not found, prompt and create ad‑hoc task under `.agent-sdd/specs/YYYY-MM-DD-ad-hoc/`.
+- `--no-spec` → Skip spec loading. If `<task-id>` not found, prompt and create ad‑hoc task under `.agent-sdd/specs/[CURRENT-DATE]-ad-hoc/` (use **date-checker** agent first).
 - `--no-tests` → Skip test writing/execution.
 - `--fix-style` → When review runs, apply safe style fixes automatically (calls `/sdd-review-code --fix`).
 
@@ -15,7 +15,7 @@ Execute a task end‑to‑end and enforce Theme Standards.
 ## Workflow (what the agent does)
 1. **Detect mode** (default / `--quick` / `--no-spec`) and **resolve task**:
    - `default`/`--quick`: look up `<task-id>` in `.agent-sdd/specs/*/tasks.json`. Error if missing.
-   - `--no-spec`: if `<task-id>` not present, prompt for details and create new ad‑hoc `tasks.json`.
+   - `--no-spec`: if `<task-id>` not present, use **date-checker** agent to get current date, then prompt for details and create new ad‑hoc `tasks.json` under `.agent-sdd/specs/[CURRENT-DATE]-ad-hoc/`.
 2. **Confirm target paths** with the user (examples):
    - UI: `src/components/Button/Button.tsx`
    - Logic: `src/lib/fileMonitor.ts`
