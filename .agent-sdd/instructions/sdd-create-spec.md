@@ -21,7 +21,7 @@ Create a Software Design Document (SDD) for a new feature or task.
    - If user says "what's next?", check `.agent-sdd/product/roadmap.md` for next item.
 2. **Get current date** using **date-checker** agent.
 3. **Create spec folder**:
-   - `.agent-sdd/specs/[CURRENT-DATE]-[feature-name]/` (kebab-case, max 5 words).
+   - `.agent-sdd/specs/create-spec-[task-id]-[CURRENT-DATE]/` (where task-id is kebab-case, max 5 words).
 4. **Generate `sdd.md`** with:
    - **Overview**: Goal, user story, success criteria.
    - **Technical Specs**:

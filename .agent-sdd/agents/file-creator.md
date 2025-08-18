@@ -101,7 +101,7 @@ text-default text-on-primary
 
 ## Workflow
 1. **Determine File Type**: Based on command input (e.g., `sdd.md`, `tasks.json`, `theme.css`, `theme-standards.md`).
-2. **Create Directories**: Use `mkdir -p` for paths like `.agent-sdd/specs/[CURRENT-DATE]-[feature-name]/` or `.agent-sdd/standards/theme-files/[theme-name]/` (use **date-checker** for current date).
+2. **Create Directories**: Use `mkdir -p` for paths like `.agent-sdd/specs/create-spec-[task-id]-[CURRENT-DATE]/` or `.agent-sdd/standards/theme-files/[theme-name]/` (use **date-checker** for current date).
 3. **Apply Template**: Fill in placeholders like `[FEATURE_NAME]`, `[CURRENT_DATE]` (use **date-checker** agent), `[PRIMARY_COLOR]` with provided variables.
 4. **Write File**: Save in the appropriate `.agent-sdd/` subdirectory.
 5. **Report Success or Skip**: Indicate whether the file was created or skipped if it exists.

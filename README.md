@@ -100,7 +100,7 @@ bash setup-agent-sdd.sh
 ## 🧪 Testing
 - **Plan Product**: Updates product docs with mission and roadmap.
 - **Apply Theme**: Generates `theme.css` and updates `theme-standards.md` with the active palette.
-- **Create Spec**: Creates `sdd.md` and `tasks.json` under `.agent-sdd/specs/YYYY-MM-DD-[feature]/`.
+- **Create Spec**: Creates `sdd.md` and `tasks.json` under `.agent-sdd/specs/create-spec-[task-id]-[date]/`.
 - **Execute Task**: Implements feature code and runs `/sdd-review-code` (optionally `--fix-style`).
 - **Fix/Tweak**: Applies targeted changes; run `/sdd-review-code` automatically for compliance.
 - **Review Code**: Ensures accessibility, responsive utilities, dark mode pairing (`dark:`), and theme color usage.

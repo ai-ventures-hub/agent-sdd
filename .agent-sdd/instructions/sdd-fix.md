@@ -19,23 +19,26 @@ Fix a bug, styling issue, or accessibility problem in existing code.
 ## Workflow
 1. **Identify the issue**:
    - Ask for a short description if not obvious from `<target>`.
-2. **Locate target file(s)**:
+2. **Create tracking spec** (optional, for complex fixes):
+   - Use **date-checker** agent to get current date.
+   - Create `.agent-sdd/specs/fix-[task-id]-[CURRENT-DATE]/tasks.json` if tracking is needed.
+3. **Locate target file(s)**:
    - Search by name within `src/`.
-3. **Backup file(s)**:
+4. **Backup file(s)**:
    - Create `.bak` copies before making changes.
-4. **Implement fix**:
+5. **Implement fix**:
    - Correct logic, UI, or styling.
    - Follow Theme Standards for typography, spacing, and colors.
    - For UI-only fixes, avoid changing business logic.
-5. **Theme Review**:
+6. **Theme Review**:
    - Primary source: `.agent-sdd/standards/theme-files/[theme-name]/theme.css` (fail if missing).
    - Fallback: `syntax-custom.css` or `app.css` only if `theme.css` is missing.
    Always run `/sdd-review-code` on modified files.
    If `/sdd-review-code` is not available in your environment, run:  
        `.agent-sdd/scripts/sdd-review-code.sh <target-file>`
-6. **Tests**:
+7. **Tests**:
    - If not `--no-tests`, write or update tests relevant to the fix and run with `test-runner` agent.
-7. **Commit suggestion**:
+8. **Commit suggestion**:
    - Use `date-checker` for timestamping FIX-ID.
    - Format: `fix(scope): message (FIX-ID)`.
 

@@ -19,25 +19,28 @@ Tweak an existing file or feature and re-run style/theme checks.
 
 ## Workflow
 1. **Prompt user** for tweak details if not provided in `<target>`:
-   - E.g., “Increase padding on primary button”, “Adjust card shadow”, “Fix text contrast”.
-2. **Locate target file(s)**:
+   - E.g., "Increase padding on primary button", "Adjust card shadow", "Fix text contrast".
+2. **Create tracking spec** (optional, for complex tweaks):
+   - Use **date-checker** agent to get current date.
+   - Create `.agent-sdd/specs/tweak-[task-id]-[CURRENT-DATE]/tasks.json` if tracking is needed.
+3. **Locate target file(s)**:
    - Search by component or file name within `src/`.
-3. **Backup file(s)**:
+4. **Backup file(s)**:
    - Create `.bak` copies before making any modifications.
-4. **Make the change**:
+5. **Make the change**:
    - Restrict scope to UI/UX adjustments unless explicitly approved to change logic.
    - Keep typography, spacing, and color variables within Theme Standards.
-5. **Theme Review**:
+6. **Theme Review**:
    - Primary source: `.agent-sdd/standards/theme-files/[theme-name]/theme.css` (fail if missing).
    - Fallbacks: `syntax-custom.css` or `app.css` only if `theme.css` is missing.
    - Always run `/sdd-review-code` on modified files.  
      If `/sdd-review-code` is not available in your environment, run:  
        `.agent-sdd/scripts/sdd-review-code.sh <target-file>`
-5a. **Auto-fix styles (if `--fix-style`)**:
+6a. **Auto-fix styles (if `--fix-style`)**:
    - Run `.agent-sdd/scripts/fix-theme-style.sh` to auto-replace non-compliant classes with theme-compliant ones before reviewing.
-6. **Tests**:
+7. **Tests**:
    - If not `--no-tests` and relevant, run minimal tests via `test-runner` agent.
-7. **Commit suggestion**:
+8. **Commit suggestion**:
    - Use `date-checker` for TWEAK-ID timestamping.
    - Format: `tweak(scope): message (TWEAK-ID)`.
 

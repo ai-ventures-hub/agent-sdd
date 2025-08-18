@@ -103,7 +103,7 @@ cat << 'EOF' > .agent-sdd/instructions/sdd-create-spec.md
 Create a Software Design Document:
 1. Prompt user for feature name and description.
 2. If "what's next?", check .agent-sdd/product/roadmap.md for next item.
-3. Use date-checker agent to get current date, then create folder .agent-sdd/specs/[CURRENT-DATE]-[feature-name]/ (kebab-case, max 5 words).
+3. Use date-checker agent to get current date, then create folder .agent-sdd/specs/create-spec-[task-id]-[CURRENT-DATE]/ (where task-id is kebab-case, max 5 words).
 4. Generate sdd.md with:
    - Overview: Goal, user story, success criteria
    - Technical Specs: UI requirements (skip if --lite)
@@ -133,7 +133,7 @@ EOF
 cat << 'EOF' > .agent-sdd/instructions/sdd-fix.md
 # /sdd-fix [--no-tests] <description>
 Apply a quick fix:
-1. Use date-checker agent to get current date, then create task in .agent-sdd/specs/[CURRENT-DATE]-quick-fix/tasks.json.
+1. Use date-checker agent to get current date, then create task in .agent-sdd/specs/fix-[task-id]-[CURRENT-DATE]/tasks.json.
 2. Implement fix, ensuring .agent-sdd/standards/theme-standards.md compliance.
 3. Run /sdd-review-code on modified files to ensure UX/UI compliance.
 4. Commit with message "fix: [description]".
@@ -144,7 +144,7 @@ EOF
 cat << 'EOF' > .agent-sdd/instructions/sdd-tweak.md
 # /sdd-tweak [--fix-style] [--no-tests] <description>
 Apply a minor UI tweak:
-1. Use date-checker agent to get current date, then create task in .agent-sdd/specs/[CURRENT-DATE]-tweak/tasks.json.
+1. Use date-checker agent to get current date, then create task in .agent-sdd/specs/tweak-[task-id]-[CURRENT-DATE]/tasks.json.
 2. Implement tweak, strictly following .agent-sdd/standards/theme-standards.md.
 3. Run /sdd-review-code on modified files to ensure UX/UI compliance.
 4. Commit with message "tweak: [description]".
