@@ -2,7 +2,7 @@
 - Keep code simple and readable
 - DRY: Extract repeated logic to components/utils
 - Use TDD for critical components
-- Commit messages: "[type]: [description] (task-id)"
+- Commit messages: "[type]: [description] (TASK-ID)"
 - Accessibility: WCAG 2.1 AA compliance
 
 

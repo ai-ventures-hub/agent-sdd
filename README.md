@@ -131,7 +131,7 @@ src/                     # Application code
 ## 🤝 Contributing
 - Fork the repo.
 - Create a feature branch: `git checkout -b feature-name`.
-- Commit: `git commit -m "feat: description"`.
+- Commit using `[type]: [description] (TASK-ID)` format, e.g., `git commit -m "feat: add theme validation (TDC-002)"`.
 - Push and open a PR.
 
 ---
