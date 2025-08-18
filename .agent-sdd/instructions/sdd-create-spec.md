@@ -51,7 +51,7 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
    - For each task:
      - Set required fields: `id` (e.g., `[FEATURE_NAME]-feature-[N]`), `type: "feature"`, `title` (from task description), `description` (detailed task details), `status: "pending"`, `priority` (from SDD or default "medium"), `created_date` (from `date-checker`), `ux_ui_reviewed: false`, `theme_changes` (true for `--ui-only`, else false).
      - Set optional fields: `target_files` (from Technical Specs or user input), `dependencies` (from SDD), `linked_task` (if task is a follow-up), `acceptance_criteria` (from SDD’s success criteria or Test Scenarios), `theme_name` (auto-populated if `theme_changes: true`).
-   - Validate against `.agent-sdd/standards/task-schema.json`.
+   - Validate against `.agent-sdd/standards/task-schema.md`.
 6. **If `--lite`**: Only include Overview and Tasks, set `theme_changes: false` unless specified.
 7. **If `--ui-only`**: Focus on UI Requirements and Theme Standards, set `theme_changes: true` and `theme_name` for tasks.
 8. **Check alignment** with `.agent-sdd/product/*` (e.g., `roadmap.md`); update `decisions.md` if needed.

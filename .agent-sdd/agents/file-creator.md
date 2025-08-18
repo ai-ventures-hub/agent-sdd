@@ -33,7 +33,25 @@ You are a specialized file creation agent for Agent-SDD projects. Your role is t
 ```json
 {
   "feature": "[FEATURE_NAME]",
-  "tasks": []
+  "tasks": [
+    {
+      "id": "[TASK-ID]-[type]-[N]",
+      "type": "feature|fix|tweak",
+      "title": "[Short title]",
+      "description": "[Detailed description]",
+      "status": "pending",
+      "priority": "medium",
+      "created_date": "[CURRENT-DATE]",
+      "completed_date": null,
+      "target_files": [],
+      "dependencies": [],
+      "linked_task": null,
+      "acceptance_criteria": [],
+      "ux_ui_reviewed": false,
+      "theme_changes": false,
+      "theme_name": null
+    }
+  ]
 }
 ```
 
@@ -106,7 +124,7 @@ text-default text-on-primary
 3. **Apply Template**: Fill in placeholders like `[FEATURE_NAME]`, `[CURRENT_DATE]` (use **date-checker** agent), `[PRIMARY_COLOR]` with provided variables.
 4. **Populate Tasks**: For `tasks.json`, populate the `tasks` array with objects conforming to `.agent-sdd/standards/task-schema.md`. Ensure required fields (`id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`) are set. Apply defaults for vibe coders (e.g., `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: false`).
 5. **Auto-Populate Theme Name**: For tasks with `theme_changes: true`, set `theme_name` to the active theme by checking `.agent-sdd/standards/theme-files/` (e.g., "minimal").
-6. **Validate Schema**: Validate task objects against `.agent-sdd/standards/task-schema.json` before writing to `tasks.json`.
+6. **Validate Schema**: Validate task objects against `.agent-sdd/standards/task-schema.md` before writing to `tasks.json`.
 7. **Write File**: Save in the appropriate `.agent-sdd/` subdirectory.
 8. **Report Success or Skip**: Indicate whether the file was created or skipped if it exists.
 
@@ -125,4 +143,4 @@ or
 - Never overwrite existing files without explicit instruction.
 - Always validate color values when generating theme files (`#RRGGBB` or `rgb(r,g,b)` formats).
 - Maintain template structure so other agents can rely on it.
-- Validate `tasks.json` task objects against `.agent-sdd/standards/task-schema.json` to ensure required fields are present and valid.
+- Validate `tasks.json` task objects against `.agent-sdd/standards/task-schema.md` to ensure required fields are present and valid.

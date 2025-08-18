@@ -1,7 +1,7 @@
 # Task Schema
 This schema defines the structure of task objects in the `tasks` array of `tasks.json` files for Agent-SDD workflows. It ensures consistency across commands (`/sdd-create-spec`, `/sdd-tweak`, `/sdd-fix`, `/sdd-execute-task`, `/sdd-queue-fix`, `/sdd-queue-tweak`, `/sdd-vibe-task`) and supports vibe coders with minimal input requirements. The desktop app uses this schema to visualize task progress, status, and theme compliance.
 
-Tasks are validated against `.agent-sdd/standards/task-schema.json` by the `file-creator` agent.
+Tasks are validated against this schema definition by the `file-creator` agent.
 
 ## Schema
 ```json
@@ -46,4 +46,4 @@ Tasks are validated against `.agent-sdd/standards/task-schema.json` by the `file
 ## Notes
 - **Vibe Coders**: Only `title` and `description` are typically prompted; other fields use defaults or are auto-populated (e.g., `theme_name` from `.agent-sdd/standards/theme-files/`).
 - **Desktop App**: Use `status`, `priority`, `theme_changes`, and `theme_name` for visual progress display (e.g., status indicators, priority color-coding).
-- **Validation**: The `file-creator` agent validates tasks against `.agent-sdd/standards/task-schema.json` to ensure required fields are present and valid.
+- **Validation**: The `file-creator` agent validates tasks against this schema definition to ensure required fields are present and valid.

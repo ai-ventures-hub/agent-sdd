@@ -44,7 +44,11 @@ Non‑interactive (example):
    - `.agent-sdd/standards/theme-files/[theme]/theme.css` (CSS variables + small utilities)
    - `.agent-sdd/standards/theme-standards.md` (colors + allow‑list + examples)
 5. Append decision to `.agent-sdd/product/decisions.md` with date and chosen settings.
-6. Print a short “what changed” summary with import snippet.
+6. **Update existing tasks** (if applicable):
+   - Find tasks with `theme_changes: true` in `.agent-sdd/specs/*/tasks.json`
+   - Update their `theme_name` field to match the applied theme
+   - Validate updated tasks against schema
+7. Print a short "what changed" summary with import snippet.
 
 ---
 

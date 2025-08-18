@@ -34,7 +34,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
    - Use `file-creator` to generate `tasks.json` with the feature name (derived from `title`) and a single task.
    - Set required fields: `id`, `type: "feature"`, `title`, `description`, `status: "pending"`, `priority: "medium"`, `created_date`, `ux_ui_reviewed: false`, `theme_changes` (based on user input or default `false`).
    - Set optional fields: `target_files`, `acceptance_criteria` (if provided), `theme_name` (auto-populated if `theme_changes: true`).
-   - Validate against `.agent-sdd/standards/task-schema.json`.
+   - Validate against `.agent-sdd/standards/task-schema.md`.
 7. **Prompt user**: `"Proceed with task? (yes/no)"`.
 
 ---

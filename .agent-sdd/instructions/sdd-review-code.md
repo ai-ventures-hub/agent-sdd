@@ -28,7 +28,9 @@ Review code for compliance with Theme Standards, accessibility, and style consis
    - Check component markup for missing focus states, ARIA attributes, and touch target sizing.
 3. **Report results**:
    - Show warnings and errors with file:line references.
-4. **If `--fix`**:
+4. **Update task status**:
+   - After successful review with no critical issues, update corresponding task's `ux_ui_reviewed: true` in tasks.json
+5. **If `--fix`**:
    - Replace disallowed colors with corresponding utility classes from Theme Standards.
    - Normalize typography and spacing utilities.
    - Add missing dark mode variants for primary/secondary colors.
