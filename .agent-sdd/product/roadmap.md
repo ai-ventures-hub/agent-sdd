@@ -2,7 +2,7 @@
 
 > **Instructions:**  
 > - Keep this roadmap updated at all times.  
-> - Mark tasks with `[x]` when complete, `[ ]` when pending.  
+> - Mark tasks with `[x]` when completed, `[ ]` when pending.  
 > - For each update, also record details in the **Progress** section below this roadmap.  
 > - Treat the roadmap as the *summary* and the progress section as the *story*.
 
@@ -50,5 +50,5 @@ Use this phase for refinement and launch prep. Progress updates should include b
 
 **[2025-08-15] – Implement Theme Presets**  
 **Goal:** Allow users to select from minimal, classic, and vibrant themes via `/sdd-apply-theme`.  
-**Status:** ✅ Complete  
+**Status:** ✅ completed  
 **Notes:** Theme standards updated, `theme.css` generated automatically, and applied to all UI components.

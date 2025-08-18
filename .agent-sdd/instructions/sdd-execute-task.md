@@ -34,7 +34,7 @@ Execute a task end‑to‑end and enforce Theme Standards.
      @import "../../.agent-sdd/standards/theme-files/[theme-name]/theme.css";
      ```
 7. **Update task state**:
-   - Mark status `"Done"` and set `ux_ui_reviewed: true` in the corresponding `tasks.json`.
+   - Mark status `"completed"` and set `ux_ui_reviewed: true` in the corresponding `tasks.json`.
 8. **Push (optional)**:
    - Prompt to push via GitHub Desktop (skip by default on `--quick`/`--no-spec` unless confirmed).
 9. **Summary to user**:
