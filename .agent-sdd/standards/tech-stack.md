@@ -1,5 +1,5 @@
 # Tech Stack
-# ✅ Update this file with your project’s specific tools and versions after integrating a theme via /sdd-apply-theme
+# ✅ Update this file with your project's specific tools and versions
 - Frontend: React (update version), TypeScript (update version)
 - Backend: None (standalone components)
 - Styling: Tailwind CSS (update version), shadcn/ui (update version)

@@ -19,7 +19,7 @@ Review code for compliance with Theme Standards, accessibility, and style consis
 
 ## Workflow
 1. **Load Theme Standards**:
-   - **Primary source:** `.agent-sdd/standards/theme-files/[theme-name]/theme.css` (from `/sdd-apply-theme`).
+   - **Primary source:** `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
    - **Fallbacks:** `.agent-sdd/standards/theme-files/[theme-name]/syntax-custom.css` → app CSS (`src/app/globals.css` or `src/app.css`) if theme.css is missing.
 2. **Analyze files** in `<paths...>`:
    - Flag disallowed hardcoded hex/RGB colors that conflict with Theme Standards.
@@ -47,7 +47,7 @@ Review code for compliance with Theme Standards, accessibility, and style consis
 ## Integration
 - Used by `/sdd-execute-task`, `/sdd-tweak`, and `/sdd-fix` after modifications.
 - Always run after theme changes to catch non‑compliant styles.
-- **Fallback script**: If this instruction is unavailable, use `.agent-sdd/scripts/sdd-review-code.sh <file-path>`
+- Use code-reviewer agent for automated theme compliance checking and fixes
 
 ---
 

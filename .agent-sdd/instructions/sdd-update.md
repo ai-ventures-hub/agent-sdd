@@ -7,7 +7,7 @@ Apply a UI/UX tweak or fix (bug, styling, accessibility) to existing code and en
 
 ## Purpose
 - Apply small UI/UX improvements or fix defects while maintaining Theme Standards.
-- Ensure changes align with the active theme from `/sdd-apply-theme`.
+- Ensure changes align with the active theme.
 - Support vibe coders with minimal input and consistent `tasks.json` output for desktop app visualization.
 
 ---
@@ -15,7 +15,7 @@ Apply a UI/UX tweak or fix (bug, styling, accessibility) to existing code and en
 ## Options
 - `--type tweak|fix` → Specify task type: `tweak` for UI/UX improvements, `fix` for bugs, styling, or accessibility issues. Default: `tweak`.
 - `--no-tests` → Skip test writing/execution.
-- `--fix-style` → Run `.agent-sdd/scripts/fix-theme-style.sh` to auto-replace non-compliant classes with theme-compliant ones.
+- `--fix-style` → Auto-replace non-compliant classes with theme-compliant ones using code-reviewer agent.
 
 ---
 
@@ -52,10 +52,10 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
    - Avoid changing business logic unless explicitly required for fixes.
 7. **Theme Review**:
    - Run `/sdd-review-code <modified-paths>` (NOT as bash command).
-   - If `--fix-style`, run `.agent-sdd/scripts/fix-theme-style.sh` to auto-replace non-compliant classes before review.
+   - If `--fix-style`, use code-reviewer agent to auto-replace non-compliant classes before review.
    - **Primary source**: `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
    - **Fallbacks**: `syntax-custom.css` or `app.css` if `theme.css` missing.
-   - **Fallback script**: If `/sdd-review-code` is unavailable, use `.agent-sdd/scripts/sdd-review-code.sh <target-file>`.
+   - Use `/sdd-review-code` command or code-reviewer agent for theme compliance checking.
 8. **Tests** (unless `--no-tests`):
    - Write or update minimal tests for the update using the `test-runner` agent.
    - Run tests to verify functionality or UI changes.

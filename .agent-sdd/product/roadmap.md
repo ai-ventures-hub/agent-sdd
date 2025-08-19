@@ -49,6 +49,6 @@ Use this phase for refinement and launch prep. Progress updates should include b
 ## Example:
 
 **[2025-08-15] – Implement Theme Presets**  
-**Goal:** Allow users to select from minimal, classic, and vibrant themes via `/sdd-apply-theme`.  
+**Goal:** Allow users to select from minimal, classic, and vibrant themes.  
 **Status:** ✅ completed  
 **Notes:** Theme standards updated, `theme.css` generated automatically, and applied to all UI components.

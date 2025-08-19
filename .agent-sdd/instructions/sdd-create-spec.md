@@ -39,7 +39,7 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
    - **Technical Specs**:
      - UI requirements (skip if `--lite`).
      - Reference Theme Standards:
-       - **Primary source**: `.agent-sdd/standards/theme-files/[theme-name]/theme.css` from `/sdd-apply-theme`.
+       - **Primary source**: `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
        - **Fallbacks**: `syntax-custom.css` or `app.css` if `theme.css` missing.
    - **Tasks**:
      - List tasks with IDs, descriptions, priorities, dependencies, and success criteria.

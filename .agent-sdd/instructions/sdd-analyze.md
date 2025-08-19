@@ -5,7 +5,7 @@ Analyze project files for potential issues, improvements, or alignment with Them
 
 ## Purpose
 - Identify inconsistencies in style, accessibility, and maintainability.
-- Check for drift from the active theme applied by `/sdd-apply-theme`.
+- Check for drift from the active theme.
 
 ---
 
