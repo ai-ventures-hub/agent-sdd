@@ -34,6 +34,7 @@ or (if no git repo)
 \`\`\`
 ℹ️ No git repository detected
 → Changes saved locally (no commit needed)
+→ To enable version control: git init
 \`\`\`
 
 ## Constraints

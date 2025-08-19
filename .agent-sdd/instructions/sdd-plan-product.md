@@ -11,8 +11,9 @@ Plan out the product roadmap, features, and milestones.
 
 ## Workflow
 1. **Review context**:
-   - Check `.agent-sdd/product/vision.md` for high-level goals.
+   - Check `.agent-sdd/product/overview.md` for high-level goals.
    - Look at `.agent-sdd/product/roadmap.md` for current progress.
+   - Review `.agent-sdd/product/decisions.md` for past technical decisions.
 2. **Confirm Theme Standards**:
    - **Source of truth:** `.agent-sdd/standards/theme-standards.md`.
    - Ensure new features and UI elements will use approved color, typography, and spacing utilities.

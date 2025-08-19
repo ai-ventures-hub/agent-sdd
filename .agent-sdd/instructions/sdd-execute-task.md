@@ -23,7 +23,7 @@ Execute a task end‑to‑end and enforce Theme Standards.
 4. **Git commit (if repo exists)**:
    - Check if `.git` directory exists
    - If yes: Suggest message: `"[task-id]: <short description>"` (e.g., `feat(Button): add disabled state (BTN-012)`)
-   - If no: Skip to next step (no git operations)
+   - If no: Show message "ℹ️ No git repository - changes saved locally. Run 'git init' to enable version control"
 5. **Tests**:
    - If not `--no-tests` and a `package.json` exists, write task‑level tests for critical paths and run tests via the **test-runner** agent.
 6. **Theme review (always run)**:
@@ -56,7 +56,7 @@ Execute a task end‑to‑end and enforce Theme Standards.
 ---
 
 ## Integration
-- **Theme must be configured**. The reviewer reads tokens from `theme.css` first.
+- **Theme standards** defined in `.agent-sdd/standards/theme-standards.md` are enforced.
 - **test-runner** is invoked unless `--no-tests`.
 - **git-workflow**: Only use if git repo exists and user opts to commit changes.
 

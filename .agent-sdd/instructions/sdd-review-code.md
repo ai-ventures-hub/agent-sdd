@@ -44,7 +44,7 @@ Review code for compliance with Theme Standards, accessibility, and style consis
 ---
 
 ## Integration
-- Used by `/sdd-execute-task`, `/sdd-tweak`, and `/sdd-fix` after modifications.
+- Used by `/sdd-execute-task` after modifications.
 - Always run after theme changes to catch non‑compliant styles.
 - Use code-reviewer agent for automated theme compliance checking and fixes
 

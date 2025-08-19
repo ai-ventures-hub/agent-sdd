@@ -40,9 +40,36 @@ After installing Agent-SDD:
 
 ## 🔄 **Keeping Updated**
 
-- Use `/sdd-update` to migrate to newer Agent-SDD versions
-- Your customizations in product/ and tech-stack.md will be preserved
-- Theme and instruction files may be updated with new features
+### **Smart Update System**
+
+The `setup-agent-sdd.sh` script now intelligently handles updates:
+
+**Fresh Install** (no `.agent-sdd` exists):
+- Downloads complete Agent-SDD from GitHub
+- Sets up all files and directories
+- Everything ready for customization
+
+**Smart Update** (`.agent-sdd` exists):
+- Downloads latest version to temp directory
+- Updates system files (instructions, agents, core standards)
+- **Preserves your customizations** in:
+  - `standards/tech-stack.md`
+  - `standards/theme-standards.md`
+  - `product/overview.md`
+  - `product/roadmap.md`
+  - `product/decisions.md`
+  - `specs/` directory (all your spec files)
+
+### **Update Commands**
+
+1. **Script Method**: `./setup-agent-sdd.sh`
+   - Handles both fresh install and updates
+   - Preserves customizations automatically
+   - Validates installation afterward
+
+2. **Claude Command**: `/sdd-update`
+   - Updates from within Claude Code
+   - Same preservation logic
 
 ## 💡 **Pro Tips**
 

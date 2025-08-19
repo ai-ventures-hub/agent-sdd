@@ -32,6 +32,8 @@ bash setup-agent-sdd.sh
 
 ## 🚀 Usage
 
+### Getting Started
+
 1) **Initialize**
 ```bash
 bash setup-agent-sdd.sh
@@ -40,55 +42,115 @@ bash setup-agent-sdd.sh
 2) **Theme Configuration**
 Update `.agent-sdd/standards/theme-standards.md` with your design tokens, colors, and component styles. Reference the approved Tailwind utilities in your components.
 
+### Natural Language Commands
+Claude Code understands natural language! You can use formal commands or just describe what you want:
+
+**Formal Command** → **Natural Language Alternatives**
+- `/sdd-next-phase` → "what's next on the roadmap" or "create spec for next item"
+- `/sdd-create-spec` → "create a spec for user login" or "I need a spec"
+- `/sdd-execute-task BTN-001` → "implement task BTN-001" or "execute the button task"
+- `/sdd-review-code` → "review my code for theme compliance" or "check styling"
+- `/sdd-vibe-task` → "quick task" or "create a simple task"
+
+### Command Reference
+
 3) **Next Phase** (Roadmap Integration)
 ```bash
-# Automatically create spec for next roadmap item
+# Formal command
 /sdd-next-phase
+
+# Or just ask naturally:
+"what's next on the roadmap?"
+"create spec for the next phase"
 ```
 
 4) **Create a Spec**
 ```bash
-# Lite (overview + tasks only)
+# Formal commands
 /sdd-create-spec --lite "Add text display component"
-
-# UI‑only spec (focus on UI requirements + Theme Standards)
 /sdd-create-spec --ui-only "Update modal styling"
+
+# Or describe naturally:
+"create a lite spec for adding user authentication"
+"I need a UI-only spec for the dashboard redesign"
+"make a spec for the payment flow"
 ```
 
 5) **Execute a Task**
 ```bash
-# Executes code, runs tests (if present), and enforces theme via review
+# Formal command
 /sdd-execute-task TDC-002 --fix-style
+
+# Or ask naturally:
+"implement task TDC-002"
+"execute the text display task and fix any style issues"
+"let's work on TDC-002"
 ```
 
 6) **Vibe Task** (Quick Development)
 ```bash
-# Create a simple task for rapid development
+# Formal command
 /sdd-vibe-task
+
+# Or simply say:
+"quick task for fixing the header"
+"create a simple task"
+"vibe mode: add a loading spinner"
 ```
 
 7) **Review Code**
 ```bash
-# Review and auto‑fix style issues per Theme Standards
+# Formal command
 /sdd-review-code components/TextDisplay/TextDisplay.tsx --fix
+
+# Or request naturally:
+"review the TextDisplay component for theme compliance"
+"check if my code follows the style guide and fix issues"
+"fix styling in components folder"
 ```
 
 8) **Analyze**
 ```bash
+# Formal command
 /sdd-analyze src/components
+
+# Or describe what you need:
+"analyze the components folder"
+"check for code drift in src"
+"scan for improvement opportunities"
 ```
 
 9) **Check Task Completion**
 ```bash
-# Verify task was executed and documented properly
+# Formal command
 /sdd-check-task BTN-012
+
+# Or ask naturally:
+"is task BTN-012 complete?"
+"check the button task status"
+"verify BTN-012 was done properly"
 ```
 
 10) **Update System**
 ```bash
-# Update Agent-SDD system to latest standards
+# Formal command
 /sdd-update
+
+# Or simply request:
+"update agent-sdd"
+"migrate to latest schema"
+"update the system"
 ```
+
+### 💡 Pro Tips for Natural Language
+
+- **Be conversational**: "Hey, can you create a spec for the user dashboard?"
+- **Combine actions**: "Create and execute a lite spec for adding a footer"
+- **Ask questions**: "What tasks are pending?" or "Show me the roadmap"
+- **Use context**: After viewing a task, just say "execute it" or "implement this"
+- **Request help**: "How do I create a UI-focused spec?" or "What's the next step?"
+
+Claude Code understands your intent, so don't worry about exact syntax!
 
 ---
 

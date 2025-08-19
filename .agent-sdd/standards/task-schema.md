@@ -1,5 +1,5 @@
 # Task Schema
-This schema defines the structure of task objects in the `tasks` array of `tasks.json` files for Agent-SDD workflows. It ensures consistency across commands (`/sdd-create-spec`, `/sdd-tweak`, `/sdd-fix`, `/sdd-execute-task`, `/sdd-queue-fix`, `/sdd-queue-tweak`, `/sdd-vibe-task`) and supports vibe coders with minimal input requirements. The desktop app uses this schema to visualize task progress, status, and theme compliance.
+This schema defines the structure of task objects in the `tasks` array of `tasks.json` files for Agent-SDD workflows. It ensures consistency across commands (`/sdd-create-spec`, `/sdd-execute-task`, `/sdd-vibe-task`) and supports vibe coders with minimal input requirements. The desktop app uses this schema to visualize task progress, status, and theme compliance.
 
 Tasks are validated against this schema definition by the `file-creator` agent.
 
