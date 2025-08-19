@@ -6,11 +6,11 @@ A lightweight, Claude‑first system for structured software development. Uses a
 
 ## ✨ Features
 - **Project‑Specific**: All files live in `.agent-sdd/`, initialized by `setup-agent-sdd.sh`.
-- **Claude Commands**: `/sdd-plan-product`, `/sdd-create-spec [--lite | --ui-only]`, `/sdd-execute-task [--fix-style]`, `/sdd-analyze`, `/sdd-review-code`, `/sdd-check-task <task-id>`, `/sdd-vibe-task`, `/sdd-update`.
-- **Themes**: The active theme's **source of truth** is `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
+- **Claude Commands**: `/sdd-plan-product`, `/sdd-next-phase`, `/sdd-create-spec [--lite | --ui-only]`, `/sdd-execute-task [--fix-style]`, `/sdd-analyze`, `/sdd-review-code`, `/sdd-check-task <task-id>`, `/sdd-vibe-task`, `/sdd-update`.
+- **Theme Standards**: Unified design system defined in `.agent-sdd/standards/theme-standards.md`.
 - **Sub‑agents**: `context-fetcher`, `date-checker`, `file-creator`, `git-workflow`, `test-runner`, `code-reviewer` (UX/UI focus).
 - **UX/UI Enforcement**: Automatic style reviews after task execution with accessibility, responsive, and dark‑mode checks.
-- **Custom Theme Integration**: Apply custom palettes and enforce them via the `code-reviewer` and allow‑lists in `theme-standards.md`.
+- **Theme Enforcement**: Design tokens and styling rules enforced via `code-reviewer` using `theme-standards.md`.
 
 ---
 
@@ -25,7 +25,7 @@ bash setup-agent-sdd.sh
 # OR: Local (if the script is already in your project)
 bash setup-agent-sdd.sh
 
-# Note: Theme will be configured through the setup wizard.
+# Note: Customize theme-standards.md with your design system.
 ```
 
 ---
@@ -38,12 +38,15 @@ bash setup-agent-sdd.sh
 ```
 
 2) **Theme Configuration**
-Themes are configured during the setup wizard. After setup, import the theme in your app CSS (e.g., `src/app/globals.css`):
-```css
-@import "../../.agent-sdd/standards/theme-files/[theme-name]/theme.css";
+Update `.agent-sdd/standards/theme-standards.md` with your design tokens, colors, and component styles. Reference the approved Tailwind utilities in your components.
+
+3) **Next Phase** (Roadmap Integration)
+```bash
+# Automatically create spec for next roadmap item
+/sdd-next-phase
 ```
 
-3) **Create a Spec**
+4) **Create a Spec**
 ```bash
 # Lite (overview + tasks only)
 /sdd-create-spec --lite "Add text display component"
@@ -52,36 +55,36 @@ Themes are configured during the setup wizard. After setup, import the theme in 
 /sdd-create-spec --ui-only "Update modal styling"
 ```
 
-4) **Execute a Task**
+5) **Execute a Task**
 ```bash
 # Executes code, runs tests (if present), and enforces theme via review
 /sdd-execute-task TDC-002 --fix-style
 ```
 
-5) **Vibe Task** (Quick Development)
+6) **Vibe Task** (Quick Development)
 ```bash
 # Create a simple task for rapid development
 /sdd-vibe-task
 ```
 
-6) **Review Code**
+7) **Review Code**
 ```bash
 # Review and auto‑fix style issues per Theme Standards
 /sdd-review-code components/TextDisplay/TextDisplay.tsx --fix
 ```
 
-7) **Analyze**
+8) **Analyze**
 ```bash
 /sdd-analyze src/components
 ```
 
-8) **Check Task Completion**
+9) **Check Task Completion**
 ```bash
 # Verify task was executed and documented properly
 /sdd-check-task BTN-012
 ```
 
-9) **Update System**
+10) **Update System**
 ```bash
 # Update Agent-SDD system to latest standards
 /sdd-update
@@ -90,16 +93,16 @@ Themes are configured during the setup wizard. After setup, import the theme in 
 ---
 
 ## 🎨 Theme Standards (Important)
-- The active theme’s **source of truth** is:  
-  `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.  
-- `theme-standards.md` is regenerated to reflect chosen colors and includes **allow‑lists** for colors/typography.
-- All agents that enforce UI rules (**/sdd-review-code**, **/sdd-execute-task**, **/sdd-analyze**) must check `theme.css` **first**, then fall back to `syntax-custom.css` or `app.css` only if needed.
+- The **single source of truth** for theme information is:  
+  `.agent-sdd/standards/theme-standards.md`  
+- Contains design tokens, approved color utilities, typography, spacing, and component guidelines.
+- All agents that enforce UI rules (**/sdd-review-code**, **/sdd-execute-task**, **/sdd-analyze**) reference `theme-standards.md` for compliance.
 
 ---
 
 ## 🧪 Testing
 - **Plan Product**: Updates product docs with mission and roadmap.
-- **Theme Setup**: Theme configuration handled by setup wizard.
+- **Next Phase**: Automatically creates specs for next roadmap items with `/sdd-next-phase`.
 - **Create Spec**: Creates `sdd.md` and `tasks.json` under `.agent-sdd/specs/create-spec-[task-id]-[date]/`.
 - **Execute Task**: Implements feature code and runs `/sdd-review-code` (optionally `--fix-style`).
 - **Vibe Task**: Quick task creation for rapid development.
@@ -118,11 +121,8 @@ Themes are configured during the setup wizard. After setup, import the theme in 
 ├── instructions/        # Commands (sdd-create-spec.md, etc.)
 ├── product/             # Product docs (overview.md, roadmap.md, decisions.md)
 ├── specs/               # SDDs and tasks
-├── standards/           # Tech stack, theme standards, theme-files/
-│   ├── theme-standards.md
-│   └── theme-files/
-│       └── [theme-name]/
-│           └── theme.css
+├── standards/           # Tech stack and theme standards
+│   └── theme-standards.md
 └── update-guide.md      # Guidance on which files users should customize
 src/                     # Application code
 ```

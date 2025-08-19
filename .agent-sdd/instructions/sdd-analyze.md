@@ -11,8 +11,7 @@ Analyze project files for potential issues, improvements, or alignment with Them
 
 ## Workflow
 1. **Load Theme Standards**:
-   - **Primary source:** `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
-   - **Fallbacks:** syntax-custom.css → app-level CSS if theme.css is missing.
+   - **Source of truth:** `.agent-sdd/standards/theme-standards.md`.
 2. **Scan `<paths...>`**:
    - Highlight use of colors, typography, or spacing outside Theme Standards.
    - Spot missing dark mode variants.

@@ -23,7 +23,7 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
 
 **Defaults for vibe coders**:
 - `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: false`.
-- `theme_name`: Auto-populated by `file-creator` from `.agent-sdd/standards/theme-files/` if `theme_changes: true`.
+- Theme compliance checked against `.agent-sdd/standards/theme-standards.md` if `theme_changes: true`.
 - `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`: Default to `null` or `[]` unless specified in the SDD.
 
 ---
@@ -39,8 +39,8 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
    - **Technical Specs**:
      - UI requirements (skip if `--lite`).
      - Reference Theme Standards:
-       - **Primary source**: `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
-       - **Fallbacks**: `syntax-custom.css` or `app.css` if `theme.css` missing.
+       - **Source of truth**: `.agent-sdd/standards/theme-standards.md`.
+       - Use defined design tokens, colors, and component styles.
    - **Tasks**:
      - List tasks with IDs, descriptions, priorities, dependencies, and success criteria.
    - **Test Scenarios** (skip if `--lite` or `--ui-only`).
@@ -50,10 +50,10 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
    - Use `file-creator` to generate `tasks.json` with the feature name and tasks derived from the **Tasks** section.
    - For each task:
      - Set required fields: `id` (e.g., `[FEATURE_NAME]-feature-[N]`), `type: "feature"`, `title` (from task description), `description` (detailed task details), `status: "pending"`, `priority` (from SDD or default "medium"), `created_date` (from `date-checker`), `ux_ui_reviewed: false`, `theme_changes` (true for `--ui-only`, else false).
-     - Set optional fields: `target_files` (from Technical Specs or user input), `dependencies` (from SDD), `linked_task` (if task is a follow-up), `acceptance_criteria` (from SDD’s success criteria or Test Scenarios), `theme_name` (auto-populated if `theme_changes: true`).
+     - Set optional fields: `target_files` (from Technical Specs or user input), `dependencies` (from SDD), `linked_task` (if task is a follow-up), `acceptance_criteria` (from SDD's success criteria or Test Scenarios).
    - Validate against `.agent-sdd/standards/task-schema.md`.
 6. **If `--lite`**: Only include Overview and Tasks, set `theme_changes: false` unless specified.
-7. **If `--ui-only`**: Focus on UI Requirements and Theme Standards, set `theme_changes: true` and `theme_name` for tasks.
+7. **If `--ui-only`**: Focus on UI Requirements and Theme Standards, set `theme_changes: true` for tasks.
 8. **Check alignment** with `.agent-sdd/product/*` (e.g., `roadmap.md`); update `decisions.md` if needed.
 9. **Prompt user**: `"Proceed with Task 1? (yes/no)"`.
 
@@ -97,7 +97,6 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
       "acceptance_criteria": ["Hero section displays correctly", "CTA button triggers action", "Meets WCAG 2.1 AA"],
       "ux_ui_reviewed": false,
       "theme_changes": true,
-      "theme_name": "minimal"
     }
   ]
 }

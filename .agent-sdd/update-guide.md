@@ -15,8 +15,7 @@ This guide tells you which files you should customize for your project and which
 - ✅ **decisions.md**: Document your project's architectural and technical decisions
 
 ### **Theme** (`.agent-sdd/standards/`)
-- ✅ **theme-standards.md**: Configure your theme through the setup wizard
-  - File will be regenerated with your chosen palette
+- ✅ **theme-standards.md**: Update with your project's design tokens, colors, and component styles
 
 ## 📋 **Files You Should LEAVE AS DEFAULT**
 
@@ -34,7 +33,7 @@ This guide tells you which files you should customize for your project and which
 After installing Agent-SDD:
 
 1. **Update tech-stack.md** with your actual project stack
-2. **Configure your theme** through the setup wizard  
+2. **Update theme standards** in `theme-standards.md` with your design system  
 3. **Update product/overview.md** with your project details
 4. **Add initial items to product/roadmap.md**
 5. **Start using `/sdd-create-spec`** for your first features
@@ -49,4 +48,4 @@ After installing Agent-SDD:
 
 - The `.agent-sdd` folder is detected by the desktop app for visual progress tracking
 - Task schema compliance ensures compatibility with future Agent-SDD versions
-- Custom themes are stored in `standards/theme-files/[theme-name]/` and persist across updates
+- Theme standards are defined in `standards/theme-standards.md` and persist across updates

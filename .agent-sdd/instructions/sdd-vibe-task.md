@@ -12,11 +12,10 @@ Simplified task creation for vibe coders.
 ## Task Schema
 Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 - **Required**: `id`, `type: "feature"`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
-- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`, `theme_name`.
+- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 
 **Defaults for vibe coders**:
 - `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: false`.
-- `theme_name`: Auto-populated by `file-creator` from `.agent-sdd/standards/theme-files/` if `theme_changes: true`.
 - `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`: Default to `null` or `[]` unless specified.
 
 ---
@@ -33,7 +32,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 6. **Create `tasks.json`**:
    - Use `file-creator` to generate `tasks.json` with the feature name (derived from `title`) and a single task.
    - Set required fields: `id`, `type: "feature"`, `title`, `description`, `status: "pending"`, `priority: "medium"`, `created_date`, `ux_ui_reviewed: false`, `theme_changes` (based on user input or default `false`).
-   - Set optional fields: `target_files`, `acceptance_criteria` (if provided), `theme_name` (auto-populated if `theme_changes: true`).
+   - Set optional fields: `target_files`, `acceptance_criteria` (if provided).
    - Validate against `.agent-sdd/standards/task-schema.md`.
 7. **Prompt user**: `"Proceed with task? (yes/no)"`.
 
@@ -41,7 +40,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 
 ## Notes
 - For vibe coders, only `title` and `description` are required; defaults simplify the process.
-- Desktop app uses `status`, `priority`, `theme_changes`, and `theme_name` for progress visualization.
+- Desktop app uses `status`, `priority`, and `theme_changes` for progress visualization.
 - Use `/sdd-execute-task` to implement the task and `/sdd-check-task` to validate completion.
 
 ---
@@ -67,8 +66,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
       "target_files": ["src/components/Button/Button.tsx"],
       "acceptance_criteria": ["Button displays with rounded corners", "Meets WCAG 2.1 AA"],
       "ux_ui_reviewed": false,
-      "theme_changes": true,
-      "theme_name": "minimal"
+      "theme_changes": true
     }
   ]
 }

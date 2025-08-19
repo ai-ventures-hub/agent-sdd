@@ -20,27 +20,27 @@ Execute a task end‑to‑end and enforce Theme Standards.
    - UI: `src/components/Button/Button.tsx`
    - Logic: `src/lib/fileMonitor.ts`
 3. **Implement code** per the spec/task and ensure **WCAG 2.1 AA**.
-4. **Commit step (guided)**:
-   - Suggest message: `"[task-id]: <short description>"` (e.g., `feat(Button): add disabled state (BTN-012)`).
-   - Prompt: Open GitHub Desktop → stage → commit. (For `--quick`/`--no-spec`, ask first.)
+4. **Git commit (if repo exists)**:
+   - Check if `.git` directory exists
+   - If yes: Suggest message: `"[task-id]: <short description>"` (e.g., `feat(Button): add disabled state (BTN-012)`)
+   - If no: Skip to next step (no git operations)
 5. **Tests**:
    - If not `--no-tests` and a `package.json` exists, write task‑level tests for critical paths and run tests via the **test-runner** agent.
 6. **Theme review (always run)**:
    - Use Agent-SDD instruction: `/sdd-review-code <modified-paths> [--fix]` (NOT as bash command)
      - Pass `--fix` automatically if `--fix-style` was provided.
    - Use `/sdd-review-code` command or code-reviewer agent for theme compliance checking
-   - **Source of truth:** `.agent-sdd/standards/theme-files/[theme-name]/theme.css`, then fall back to legacy files.
-   - If the theme import is missing, display the snippet:
-     ```css
-     @import "../../.agent-sdd/standards/theme-files/[theme-name]/theme.css";
-     ```
+   - **Source of truth:** `.agent-sdd/standards/theme-standards.md`.
+   - Ensure code follows the guidelines in `.agent-sdd/standards/theme-standards.md`.
 7. **Update task state**:
    - Mark status `"completed"` and set `completed_date` using **date-checker** agent
    - Set `ux_ui_reviewed: true` after successful theme review
    - Update `target_files` array with actually modified files
    - Validate final task object against `.agent-sdd/standards/task-schema.md`
-8. **Push (optional)**:
-   - Prompt to push via GitHub Desktop (skip by default on `--quick`/`--no-spec` unless confirmed).
+8. **Final git operations (if repo exists)**:
+   - If git repo exists, ask: "Would you like to commit and push changes? (y/n)"
+   - If yes: Guide through commit/push process
+   - If no or no repo: Continue without git operations
 9. **Summary to user**:
    - Implemented files, review results (and whether auto‑fixed), test outcomes, next steps.
 
@@ -58,7 +58,7 @@ Execute a task end‑to‑end and enforce Theme Standards.
 ## Integration
 - **Theme must be configured**. The reviewer reads tokens from `theme.css` first.
 - **test-runner** is invoked unless `--no-tests`.
-- **git-workflow**: If commits were created, remind the user to push when ready.
+- **git-workflow**: Only use if git repo exists and user opts to commit changes.
 
 ---
 

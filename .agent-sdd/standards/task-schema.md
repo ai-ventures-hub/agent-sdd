@@ -20,7 +20,6 @@ Tasks are validated against this schema definition by the `file-creator` agent.
   "acceptance_criteria": ["[criteria]"],
   "ux_ui_reviewed": true/false,
   "theme_changes": true/false,
-  "theme_name": "[theme-name]"
 }
 ```
 
@@ -41,9 +40,8 @@ Tasks are validated against this schema definition by the `file-creator` agent.
 - **`dependencies`**: Array of dependent task IDs (e.g., `["BTN-011"]`). Default: `[]`.
 - **`linked_task`**: Original task ID for fixes or tweaks (e.g., "BTN-012"). Default: `null`.
 - **`acceptance_criteria`**: Array of success criteria and testing instructions (e.g., `["Button displays correctly", "Meets WCAG 2.1 AA"]`). Default: `[]`.
-- **`theme_name`**: Active theme for UI tasks (e.g., "minimal"), auto-populated by `file-creator` if `theme_changes: true`. Default: `null`.
 
 ## Notes
-- **Vibe Coders**: Only `title` and `description` are typically prompted; other fields use defaults or are auto-populated (e.g., `theme_name` from `.agent-sdd/standards/theme-files/`).
-- **Desktop App**: Use `status`, `priority`, `theme_changes`, and `theme_name` for visual progress display (e.g., status indicators, priority color-coding).
+- **Vibe Coders**: Only `title` and `description` are typically prompted; other fields use defaults.
+- **Desktop App**: Use `status`, `priority`, and `theme_changes` for visual progress display (e.g., status indicators, priority color-coding).
 - **Validation**: The `file-creator` agent validates tasks against this schema definition to ensure required fields are present and valid.

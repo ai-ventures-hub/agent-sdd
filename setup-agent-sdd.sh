@@ -20,7 +20,7 @@ fi
 # Create necessary directories if they don't exist
 echo "📁 Creating directories (if needed)..."
 mkdir -p .agent-sdd/specs
-mkdir -p .agent-sdd/standards/theme-files
+mkdir -p .agent-sdd/standards
 echo "✅ Directories ready"
 
 # Copy instructions and agents to Claude
@@ -43,19 +43,14 @@ else
   echo "⚠️  No agent files found in .agent-sdd/agents/"
 fi
 
-# Make scripts executable if any exist
-if [ -d ".agent-sdd/scripts" ] && [ "$(ls -A .agent-sdd/scripts 2>/dev/null)" ]; then
-  chmod +x .agent-sdd/scripts/*.sh 2>/dev/null || true
-  echo "🔑 Made scripts executable"
-fi
-
-# Note: npm script integration removed as external scripts are now handled by Claude commands
+# Note: All functionality now handled by Claude Code commands (no external scripts needed)
 
 echo ""
 echo "✅ Agent-SDD activation complete!"
 echo ""
 echo "📍 Available commands in Claude Code:"
 echo "   /sdd-plan-product"
+echo "   /sdd-next-phase"
 echo "   /sdd-create-spec [--lite | --ui-only]"
 echo "   /sdd-execute-task [--fix-style]" 
 echo "   /sdd-vibe-task"
@@ -66,7 +61,7 @@ echo "   /sdd-update"
 echo ""
 echo "💡 Next steps:"
 echo "   1. Customize files marked with ✅ in .agent-sdd/update-guide.md"
-echo "   2. Configure your theme through the setup wizard"
+echo "   2. Update .agent-sdd/standards/theme-standards.md with your design system"
 echo "   3. Use /sdd-plan-product to define your project goals"
 echo ""
 echo "🔄 Run this script anytime to refresh Claude commands"

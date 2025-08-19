@@ -14,8 +14,7 @@ Plan out the product roadmap, features, and milestones.
    - Check `.agent-sdd/product/vision.md` for high-level goals.
    - Look at `.agent-sdd/product/roadmap.md` for current progress.
 2. **Confirm Theme Standards**:
-   - **Primary source:** `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
-   - **Fallbacks:** `syntax-custom.css` or `app.css` if theme.css missing.
+   - **Source of truth:** `.agent-sdd/standards/theme-standards.md`.
    - Ensure new features and UI elements will use approved color, typography, and spacing utilities.
 3. **Define milestones**:
    - Each milestone should have a clear deliverable and measurable outcome.

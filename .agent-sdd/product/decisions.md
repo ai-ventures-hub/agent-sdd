@@ -8,7 +8,6 @@
 
 ---
 
-
 ## Format for Entries
 [YYYY-MM-DD] – Decision Title
 What: Brief description of the decision made.

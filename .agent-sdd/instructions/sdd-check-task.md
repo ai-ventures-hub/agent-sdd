@@ -16,7 +16,7 @@ Verify if a task was executed and documented properly.
 ## Task Schema
 Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 - **Required**: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
-- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`, `theme_name`.
+- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 
 ---
 
@@ -30,7 +30,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 3. **Validate task schema**:
    - Ensure task object in `tasks.json` conforms to `.agent-sdd/standards/task-schema.md`.
    - Check required fields: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
-   - Verify optional fields (`completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`, `theme_name`) are valid if present.
+   - Verify optional fields (`completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`) are valid if present.
 4. **Verify task status**:
    - Check `status` field: `"completed"` for finished tasks, `"pending"` or `"in_progress"` otherwise.
    - Verify `ux_ui_reviewed: true` for completed UI tasks (with `theme_changes: true`).
@@ -45,8 +45,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
      - Technical specs with implementation details.
      - Theme Standards compliance notes.
 7. **Validate theme compliance**:
-   - For tasks with `theme_changes: true`, check that `theme_name` is valid (matches a theme in `.agent-sdd/standards/theme-files/`).
-   - Verify `target_files` follow `.agent-sdd/standards/theme-standards.md` (e.g., allowed color classes, WCAG 2.1 AA compliance, dark mode variants).
+   - For tasks with `theme_changes: true`, verify `target_files` follow `.agent-sdd/standards/theme-standards.md` (e.g., allowed color classes, WCAG 2.1 AA compliance, dark mode variants).
 8. **Check commit history**:
    - Look for commits with task ID in message, following format: `feat|fix|tweak(scope): message (TASK-ID)`.
 9. **Generate report**:

@@ -48,85 +48,21 @@ You are a specialized file creation agent for Agent-SDD projects. Your role is t
       "linked_task": null,
       "acceptance_criteria": [],
       "ux_ui_reviewed": false,
-      "theme_changes": false,
-      "theme_name": null
+      "theme_changes": false
     }
   ]
 }
 ```
 
-### theme.css
-```css
-/* Generated on [CURRENT_DATE] */
-@layer base {
-  :root {
-    --color-primary: [PRIMARY_COLOR];
-    --color-secondary: [SECONDARY_COLOR];
-    --color-success: [SUCCESS_COLOR];
-    --color-error: [ERROR_COLOR];
-
-    --text-on-primary: #FFFFFF;
-    --text-default: #111827;
-    --bg-default: #FFFFFF;
-  }
-  .dark {
-    --text-default: #F9FAFB;
-    --bg-default: #111827;
-  }
-}
-
-@layer utilities {
-  .bg-primary { background-color: var(--color-primary); }
-  .bg-secondary { background-color: var(--color-secondary); }
-  .bg-success { background-color: var(--color-success); }
-  .bg-error { background-color: var(--color-error); }
-
-  .text-on-primary { color: var(--text-on-primary); }
-  .text-default { color: var(--text-default); }
-  .bg-default { background-color: var(--bg-default); }
-}
-```
-
-### theme-standards.md
-```markdown
-# Theme Standards ([THEME_NAME])
-
-> Generated on [CURRENT_DATE]. Update if you change colors/typography/spacing.
-
-## Colors
-- **Primary:** `[PRIMARY_COLOR]` (use `bg-primary` or `bg-[var(--color-primary)]`)
-- **Secondary:** `[SECONDARY_COLOR]` (use `bg-secondary`)
-- **Success:** `[SUCCESS_COLOR]` (use `bg-success`)
-- **Error:** `[ERROR_COLOR]` (use `bg-error`)
-
-**Allowed Color Utilities (allow-list):**
-```txt
-bg-primary bg-secondary bg-success bg-error
-bg-[var(--color-primary)] bg-[var(--color-secondary)] bg-[var(--color-success)] bg-[var(--color-error)]
-text-default text-on-primary
-```
-
-## Typography
-- Font: Roboto, sans-serif
-- Base: 14px (`text-sm`)
-- Headings: H1 `text-3xl font-bold`, H2 `text-2xl font-semibold`, H3 `text-xl font-medium`
-
-## Notes
-- Import your theme once in your app CSS:
-```css
-@import "../../.agent-sdd/standards/theme-files/[THEME_NAME]/theme.css";
-```
-```
 
 ## Workflow
-1. **Determine File Type**: Based on command input (e.g., `sdd.md`, `tasks.json`, `theme.css`, `theme-standards.md`).
-2. **Create Directories**: Use `mkdir -p` for paths like `.agent-sdd/specs/[action]-[task-id]-[CURRENT-DATE]/` or `.agent-sdd/standards/theme-files/[theme-name]/` (use **date-checker** for current date).
+1. **Determine File Type**: Based on command input (e.g., `sdd.md`, `tasks.json`).
+2. **Create Directories**: Use `mkdir -p` for paths like `.agent-sdd/specs/[action]-[task-id]-[CURRENT-DATE]/` (use **date-checker** for current date).
 3. **Apply Template**: Fill in placeholders like `[FEATURE_NAME]`, `[CURRENT_DATE]` (use **date-checker** agent), `[PRIMARY_COLOR]` with provided variables.
 4. **Populate Tasks**: For `tasks.json`, populate the `tasks` array with objects conforming to `.agent-sdd/standards/task-schema.md`. Ensure required fields (`id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`) are set. Apply defaults for vibe coders (e.g., `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: false`).
-5. **Auto-Populate Theme Name**: For tasks with `theme_changes: true`, set `theme_name` to the active theme by checking `.agent-sdd/standards/theme-files/` (e.g., "minimal").
-6. **Validate Schema**: Validate task objects against `.agent-sdd/standards/task-schema.md` before writing to `tasks.json`.
-7. **Write File**: Save in the appropriate `.agent-sdd/` subdirectory.
-8. **Report Success or Skip**: Indicate whether the file was created or skipped if it exists.
+5. **Validate Schema**: Validate task objects against `.agent-sdd/standards/task-schema.md` before writing to `tasks.json`.
+6. **Write File**: Save in the appropriate `.agent-sdd/` subdirectory.
+7. **Report Success or Skip**: Indicate whether the file was created or skipped if it exists.
 
 ## Output Format
 ```
@@ -141,6 +77,6 @@ or
 
 ## Constraints
 - Never overwrite existing files without explicit instruction.
-- Always validate color values when generating theme files (`#RRGGBB` or `rgb(r,g,b)` formats).
+- Refer to `.agent-sdd/standards/theme-standards.md` for approved color utilities and design standards.
 - Maintain template structure so other agents can rely on it.
 - Validate `tasks.json` task objects against `.agent-sdd/standards/task-schema.md` to ensure required fields are present and valid.

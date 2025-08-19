@@ -22,11 +22,10 @@ Apply a UI/UX tweak or fix (bug, styling, accessibility) to existing code and en
 ## Task Schema
 Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 - **Required**: `id`, `type: "tweak" or "fix"`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
-- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`, `theme_name`.
+- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 
 **Defaults for vibe coders**:
 - `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: true`.
-- `theme_name`: Auto-populated by `file-creator` from `.agent-sdd/standards/theme-files/` if `theme_changes: true`.
 
 ---
 
@@ -39,7 +38,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 3. **Create tracking spec** (optional, for complex updates):
    - Use **date-checker** agent to get current date (e.g., "2025-08-18").
    - Create `.agent-sdd/specs/update-[task-id]-[CURRENT-DATE]/tasks.json` using `file-creator`.
-   - Set task fields: `id: "[task-id]-[type]-[N]"`, `title` (from description), `description`, `status: "pending"`, `priority: "medium"`, `created_date`, `ux_ui_reviewed: false`, `theme_changes: true`, `theme_name` (auto-populated).
+   - Set task fields: `id: "[task-id]-[type]-[N]"`, `title` (from description), `description`, `status: "pending"`, `priority: "medium"`, `created_date`, `ux_ui_reviewed: false`, `theme_changes: true`.
    - Include optional fields: `target_files` (from `<target>`), `acceptance_criteria` (from user input or inferred), `linked_task` (if applicable).
 4. **Locate target file(s)**:
    - Search by component or file name within `src/` based on `<target>`.
@@ -53,8 +52,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 7. **Theme Review**:
    - Run `/sdd-review-code <modified-paths>` (NOT as bash command).
    - If `--fix-style`, use code-reviewer agent to auto-replace non-compliant classes before review.
-   - **Primary source**: `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
-   - **Fallbacks**: `syntax-custom.css` or `app.css` if `theme.css` missing.
+   - **Source of truth**: `.agent-sdd/standards/theme-standards.md`.
    - Use `/sdd-review-code` command or code-reviewer agent for theme compliance checking.
 8. **Tests** (unless `--no-tests`):
    - Write or update minimal tests for the update using the `test-runner` agent.
@@ -72,7 +70,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
 - Use spacing in 4px multiples (`p-1`, `m-2`, `gap-3`, etc.).
 - Always provide `dark:` variants for themed colors where needed.
 - For vibe coders, prompt only for description and target; defaults are applied for other fields.
-- Desktop app uses `status`, `priority`, `theme_changes`, and `theme_name` for visualization.
+- Desktop app uses `status`, `priority`, and `theme_changes` for visualization.
 
 ---
 
@@ -104,8 +102,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
       "target_files": ["src/components/Button/Button.tsx"],
       "acceptance_criteria": ["Button padding increased", "Meets WCAG 2.1 AA"],
       "ux_ui_reviewed": false,
-      "theme_changes": true,
-      "theme_name": "minimal"
+      "theme_changes": true
     }
   ]
 }

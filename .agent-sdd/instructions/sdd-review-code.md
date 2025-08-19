@@ -19,8 +19,7 @@ Review code for compliance with Theme Standards, accessibility, and style consis
 
 ## Workflow
 1. **Load Theme Standards**:
-   - **Primary source:** `.agent-sdd/standards/theme-files/[theme-name]/theme.css`.
-   - **Fallbacks:** `.agent-sdd/standards/theme-files/[theme-name]/syntax-custom.css` → app CSS (`src/app/globals.css` or `src/app.css`) if theme.css is missing.
+   - **Source of truth:** `.agent-sdd/standards/theme-standards.md`.
 2. **Analyze files** in `<paths...>`:
    - Flag disallowed hardcoded hex/RGB colors that conflict with Theme Standards.
    - Flag typography, spacing, and shadow usage outside the allow‑list.
