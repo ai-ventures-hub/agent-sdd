@@ -35,7 +35,9 @@ After installing Agent-SDD:
 2. **Update theme standards** in `theme-standards.md` with your design system  
 3. **Update product/overview.md** with your project details
 4. **Add initial items to product/roadmap.md**
-5. **Start using `/sdd-create-spec`** for your first features
+5. **For existing projects with roadmap**: Start with `/sdd-next-phase` to work on next roadmap item
+6. **For new features**: Use `/sdd-create-spec` to define requirements first
+7. **For quick fixes**: Use `/sdd-vibe-task` or `/sdd-update` for rapid changes
 
 ## 🔄 **Keeping Updated**
 
@@ -70,11 +72,34 @@ The `setup-agent-sdd.sh` script now intelligently handles updates:
    - Updates from within Claude Code
    - Same preservation logic
 
+## 📚 **Available Instructions Reference**
+
+All instructions in `.agent-sdd/instructions/`:
+
+1. **`/sdd-plan-product`** - Plan product roadmap, features, and milestones
+2. **`/sdd-next-phase`** - Automatically create spec for next roadmap item (great for existing projects!)
+3. **`/sdd-create-spec`** - Create detailed Software Design Documents
+   - `--lite` flag for minimal specs
+   - `--ui-only` flag for UI-focused specs
+4. **`/sdd-execute-task`** - Implement tasks with theme compliance
+   - `--fix-style` flag for auto-fixing style issues
+   - `--no-tests` flag to skip test generation
+   - `--no-spec` flag for ad-hoc tasks
+5. **`/sdd-vibe-task`** - Quick task creation with minimal input
+6. **`/sdd-update`** - Apply UI/UX tweaks or fixes to existing code
+   - `--type tweak|fix` to specify update type
+   - `--fix-style` flag for auto-fixing
+7. **`/sdd-review-code`** - Review code for theme compliance
+   - `--fix` flag to auto-apply safe style changes
+8. **`/sdd-analyze`** - Analyze project for issues and improvements
+9. **`/sdd-check-task`** - Verify task completion and documentation
+
 ## 💡 **Pro Tips**
 
 - The `.agent-sdd` folder is detected by the desktop app for visual progress tracking
 - Task schema compliance ensures compatibility with future Agent-SDD versions
 - Theme standards are defined in `standards/theme-standards.md` and persist across updates
+- For existing projects with roadmaps, `/sdd-next-phase` is your best starting point
 
 ## 🚨 **Preventing Duplicate .agent-sdd Directories**
 
