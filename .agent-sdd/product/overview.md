@@ -1,34 +1,45 @@
 # Product Overview
 
-> **Instructions:**  
-> - This file should clearly communicate **what** the product is, **who** it’s for, and **why** it exists.  
-> - Keep it high-level — detailed specifications belong in other files.  
-> - Update whenever your product mission, audience, or main goals change.
+> **How to Use This File:**  
+> - Replace all bracketed placeholders with your project's specific information
+> - Write a clear one-sentence mission statement that explains your product's purpose
+> - List 2-4 primary user types who will directly benefit from your product
+> - Set 3-5 specific, measurable goals that define success
 
 ---
 
 ## Mission
-Simplify and speed up the creation of UI components by providing developers with pre-built, customizable, and reusable solutions.
+[Write a one-sentence description of what your product does and why it matters]
 
-**User Tip:** Keep this mission short, memorable, and non-technical. It should be the “elevator pitch” for your product.
+**Examples:**
+- *"Help small businesses manage inventory efficiently through automated tracking and reporting"*
+- *"Enable developers to deploy applications faster with streamlined CI/CD workflows"*
+- *"Connect pet owners with trusted local veterinarians through a mobile platform"*
 
 ---
 
 ## Target Users
-- Frontend developers working on web applications
-- Product teams needing rapid UI prototyping
-- Designers collaborating with development teams
+- [Primary user type - who will use this most often?]
+- [Secondary user type - who else benefits directly?]
+- [Tertiary user type - any other key stakeholders?]
 
-**User Tip:** Focus on primary users — the people most likely to benefit directly from your product. Avoid listing everyone who *might* use it.
+**Examples by Project Type:**
+- **Web App:** End users, admin users, content managers
+- **Developer Tool:** Frontend developers, DevOps engineers, team leads  
+- **Mobile App:** Primary users (age/demographic), business owners, support staff
+- **API/Service:** Integration developers, product teams, system administrators
 
 ---
 
 ## Goals
-1. Provide a library of reusable UI components
-2. Ensure components are easy to integrate with popular frameworks
-3. Maintain high code quality and clear documentation
+1. [Specific, measurable goal related to user experience]
+2. [Specific, measurable goal related to functionality or performance]
+3. [Specific, measurable goal related to adoption or business impact]
 
-**User Tip:** Goals should be measurable or verifiable.  
-For example, “Reduce UI build time by 30%” is better than “Make UI faster.”
+**Goal Writing Tips:**
+- Include numbers when possible: *"Reduce setup time from 2 hours to 15 minutes"*
+- Make them testable: *"Achieve 95% uptime over 6 months"*
+- Focus on user benefits: *"Enable users to complete tasks 50% faster"*
+- Set realistic timelines: *"Launch MVP with core features by Q3 2025"*
 
 ---

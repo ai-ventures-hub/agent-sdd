@@ -21,7 +21,6 @@ PRESERVE_FILES=(
 # Define system files that should ALWAYS be updated
 SYSTEM_FILES=(
   ".agent-sdd/standards/task-schema.md"
-  ".agent-sdd/standards/code-style.md"
   ".agent-sdd/standards/best-practices.md"
 )
 

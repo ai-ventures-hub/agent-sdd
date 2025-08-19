@@ -1,96 +1,167 @@
-# Best Practices
-- Keep code simple and readable
-- DRY: Extract repeated logic to components/utils
-- Use TDD for critical components
-- Commit messages: "[type]: [description] (TASK-ID)"
-- Accessibility: WCAG 2.1 AA compliance
+# Development Best Practices
 
+> **How to Use This File:**  
+> - Customize each section based on your project's technology stack and requirements
+> - Remove sections that don't apply to your project type
+> - Replace bracketed placeholders with your specific tools and conventions
+> - Add project-specific practices as you establish them
 
-## Context
+---
 
-Global development guidelines for all projects.
-
-<conditional-block context-check="core-principles"> 
-IF this Core Principles section already read in current context: 
-  SKIP: Re-reading this section NOTE: "Using Core Principles already in context" 
-ELSE: 
-  READ: The following principles
-</conditional-block>
-
-## Core Principles
+## Code Quality
 
 ### Keep It Simple
-- Implement solutions in the fewest lines possible without sacrificing clarity.
-- Avoid over-engineering; use straightforward, maintainable patterns.
-- Prefer built-in JavaScript/TypeScript features before introducing external dependencies.
+- Implement solutions clearly without over-engineering
+- Use straightforward, maintainable patterns
+- Prefer built-in language features before adding external dependencies
+- [Add your specific simplicity guidelines here]
 
-### Optimize for Readability
-- Code clarity takes priority over premature optimization.
-- Use camelCase for variables/functions and PascalCase for components/classes.
-- Use clear, descriptive names — avoid abbreviations unless widely understood.
-- Comment the "why" (intent/decision) rather than the "what" (code mechanics).
-- Use JSDoc for all exported functions, hooks, and components.
+### Code Organization
+- Keep files focused on a single responsibility
+- Group related functionality together
+- Use consistent folder structure: [document your project structure]
+- [Add your file organization principles]
 
-### DRY (Don't Repeat Yourself)
-- Extract repeated business logic into utilities or hooks (/lib or /hooks).
-- Extract repeated UI markup into reusable components (/components).
-- Use Tailwind utility classes consistently; avoid inline styles unless dynamically generated.
+---
 
-### File Structure
-- Keep files single-purpose.
-- Group by feature/domain rather than strict type-only folders.
-- Lowercase and hyphenate filenames for non-components (e.g., project-form.tsx).
-- Keep components and hooks in dedicated directories with matching test files.
+## Code Style
 
-<conditional-block context-check="dependencies" task-condition="choosing-external-library"> 
-IF current task involves choosing an external library: 
-  IF Dependencies section already read in current context: 
-SKIP: Re-reading this section NOTE: "Using Dependencies guidelines already in context" 
-  ELSE: 
-    READ: The following guidelines ELSE: SKIP: Dependencies section not relevant to current task
-</conditional-block>
+### Naming Conventions
+- Variables/functions: [specify your convention, e.g., camelCase, snake_case]
+- Classes/components: [specify your convention, e.g., PascalCase]
+- Constants: [specify your convention, e.g., UPPER_SNAKE_CASE]
+- Files: [specify your convention, e.g., kebab-case, camelCase]
+- Choose descriptive names that explain purpose
+- Avoid abbreviations unless widely understood in your domain
 
-## Dependencies
+### Formatting Standards
+- Indentation: [specify spaces or tabs, e.g., 2 spaces, 4 spaces]
+- Line length: [specify max characters, e.g., 80, 100, 120]
+- Semicolons: [required/optional based on your language]
+- Quotes: [single/double quotes preference]
+- [Add other formatting rules specific to your language]
 
-### Choose Libraries Wisely
-When adding third-party dependencies:
-- Avoid heavy dependencies where a lighter native solution exists.
+### Code Organization
+- Import order: [specify your import grouping/ordering rules]
+- Function/method order: [specify your organization pattern]
+- Comment style: [specify when and how to comment]
+- [Add language-specific organization rules]
 
-### Error Handling & Logging
-- Wrap all async calls in try/catch — log enough context without exposing secrets.
-- Use a centralized logger (/lib/logger.ts) for structured logging.
-- For AI/API calls, log request metadata (latency, token usage) but anonymize sensitive data.
+### Linting & Formatting Tools
+- Primary linter: [your linter, e.g., ESLint, Pylint, RuboCop]
+- Code formatter: [your formatter, e.g., Prettier, Black, rustfmt]
+- Configuration files: [list your config files, e.g., .eslintrc, .prettierrc]
+- Pre-commit hooks: [specify if you use automated formatting]
 
-### Environment Variables & Secrets
-- Use .env for all secrets; prefix client-safe vars with NEXT_PUBLIC_.
-- Never hardcode API keys or IDs.
-- Validate env vars at runtime with zod/envsafe in lib/env.ts.
-- Maintain .env.example for onboarding.
+---
 
-### AI & API Usage Patterns
-- Wrap all AI/API calls in a dedicated client module (/lib/ai-client.ts).
-- Store prompts in /prompts for version control and iteration.
-- Use zod to validate AI output when expecting structured JSON.
-- Implement exponential backoff and retry handling for rate limits.
-- Track token usage and latency for performance monitoring.
+## Project Structure
 
-### Testing & QA
-- Use vitest for unit tests, @testing-library/react for UI tests.
-- Co-locate test files with components/hooks.
-- Mock AI/API responses in tests to remove network dependency.
-- For full workflows, use Playwright or Cypress for end-to-end testing.
-- Aim for minimum coverage on critical paths (auth, data flow, key features).
+### File Organization
+```
+[Replace with your project's folder structure]
+/src
+  /components  [or your equivalent]
+  /utils       [or your equivalent]  
+  /tests       [or your equivalent]
+```
 
-### Performance & Optimization
-- Measure before optimizing — use the React Profiler or Lighthouse.
-- Use React.memo/useCallback only after profiler shows re-render issues.
-- Lazy-load non-critical components (dynamic(import(...))).
+### Naming Patterns
+- Files: [your file naming convention]
+- Directories: [your directory naming convention]
+- [Add other naming patterns specific to your project]
 
-### Styling Conventions (TailwindCSS)
-- Use clsx or tailwind-variants for conditional classes.
-- Keep design tokens centralized in tailwind.config.js.
-- Follow the existing design system when creating new components.
-- Use @apply only in component-scoped CSS files (avoid globals unless theming).
+---
 
-### Version Control & Change Management
-- Maintain CHANGELOG.md and automate release notes.
+## Dependencies & Libraries
+
+### Dependency Selection
+- Research alternatives before adding new dependencies
+- Consider maintenance status and community support
+- Document why each major dependency was chosen
+- [List your approved/preferred libraries here]
+
+### Version Management
+- [Specify your dependency update strategy]
+- [Document any version pinning policies]
+- [Add dependency security scanning practices]
+
+---
+
+## Testing Strategy
+
+### Testing Framework
+- Primary testing tool: [your testing framework]
+- Test file naming: [your convention, e.g., .test.js, .spec.js]
+- Test organization: [co-located, separate folder, etc.]
+
+### Testing Guidelines
+- Test critical business logic and user flows
+- [Specify minimum coverage requirements if any]
+- [Document mocking strategies for external services]
+- [Add performance testing approach if applicable]
+
+---
+
+## Error Handling & Logging
+
+### Error Management
+- [Document your error handling patterns]
+- [Specify logging tools and practices]
+- [Add error reporting/monitoring setup]
+
+### Security Practices
+- Never commit secrets or API keys
+- Use environment variables for configuration
+- [Document your secret management approach]
+- [Add authentication/authorization patterns]
+
+---
+
+## Version Control
+
+### Commit Messages
+Format: [your commit message format]
+Example: `feat: add user authentication`
+
+### Branch Strategy
+- Main branch: [your main branch name]
+- Feature branches: [your naming convention]
+- [Document your branching workflow]
+
+### Code Reviews
+- [Specify review requirements]
+- [Document review checklist if you have one]
+- [Add merge/rebase preferences]
+
+---
+
+## Performance & Optimization
+
+### Performance Guidelines
+- Measure before optimizing
+- [Document performance testing tools]
+- [Add specific performance targets if applicable]
+- [List optimization strategies for your tech stack]
+
+---
+
+## Your Custom Practices
+
+*Add project-specific practices here as your team establishes them...*
+
+### [Custom Section 1]
+- [Your practice]
+- [Your guideline]
+
+### [Custom Section 2] 
+- [Your practice]
+- [Your guideline]
+
+---
+
+**Tips for Maintaining This File:**
+- Update practices as your project evolves
+- Remove sections that don't apply to your project
+- Add examples specific to your codebase
+- Review and refine these practices regularly with your team

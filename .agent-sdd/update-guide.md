@@ -20,8 +20,7 @@ This guide tells you which files you should customize for your project and which
 ## 📋 **Files You Should LEAVE AS DEFAULT**
 
 ### **Standards**
-- ❌ **code-style.md**: Keep default unless your team has specific conventions
-- ❌ **best-practices.md**: Keep default unless your workflow requires changes
+- ❌ **best-practices.md**: Keep default unless your workflow requires changes (now includes code style guidelines)
 - ❌ **task-schema.md**: Never modify - this ensures consistency across projects
 
 ### **System Files**
