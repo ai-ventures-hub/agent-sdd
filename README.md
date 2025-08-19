@@ -165,7 +165,7 @@ Claude Code understands your intent, so don't worry about exact syntax!
 ## 🧪 Testing
 - **Plan Product**: Updates product docs with mission and roadmap.
 - **Next Phase**: Automatically creates specs for next roadmap items with `/sdd-next-phase`.
-- **Create Spec**: Creates `sdd.md` and `tasks.json` under `.agent-sdd/specs/create-spec-[task-id]-[date]/`.
+- **Create Spec**: Creates `spec.md` and `tasks.json` under `.agent-sdd/specs/create-spec-[task-id]-[date]/`.
 - **Execute Task**: Implements feature code and runs `/sdd-review-code` (optionally `--fix-style`).
 - **Vibe Task**: Quick task creation for rapid development.
 - **Review Code**: Ensures accessibility, responsive utilities, dark mode pairing (`dark:`), and theme color usage.

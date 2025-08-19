@@ -15,7 +15,7 @@ Automatically identify and create a spec for the next pending task in the roadma
 2. **Find current active phase**: Identify the phase with pending `[ ]` tasks (phases are processed sequentially).
 3. **Select next task**: Get the first incomplete task in the current phase.
 4. **Create spec**: Automatically trigger `.agent-sdd/instructions/sdd-create-spec.md` using the roadmap task description as the feature name.
-5. **Generate spec files**: Create `sdd.md` and `tasks.json` in the spec directory, with `tasks.json` following the schema defined in `.agent-sdd/standards/task-schema.md`.
+5. **Generate spec files**: Create `spec.md` and `tasks.json` in the spec directory, with `tasks.json` following the schema defined in `.agent-sdd/standards/task-schema.md`.
 6. **Update roadmap progress**: Add entry to Progress Log section:
    ```
    **[YYYY-MM-DD] – [Task Name]**
@@ -49,7 +49,7 @@ Automatically identify and create a spec for the next pending task in the roadma
 # "Found next task in Phase 1: 'Create Text Display component'"
 # "Creating spec..."
 # "Spec created at .agent-sdd/specs/create-spec-text-display-component-20250819/"
-# "Created sdd.md and tasks.json following .agent-sdd/standards/task-schema.md"
+# "Created spec.md and tasks.json following .agent-sdd/standards/task-schema.md"
 # "Updated roadmap progress log"
 ```
 

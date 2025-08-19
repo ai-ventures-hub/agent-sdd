@@ -26,7 +26,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
    - If not found, report "Task not found".
 2. **Check spec folder structure**:
    - Verify folder follows naming convention: `<action>-<task-id>-[date]`.
-   - Check for presence of `sdd.md` and `tasks.json`.
+   - Check for presence of `spec.md` and `tasks.json`.
 3. **Validate task schema**:
    - Ensure task object in `tasks.json` conforms to `.agent-sdd/standards/task-schema.md`.
    - Check required fields: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
@@ -40,7 +40,7 @@ Tasks in `tasks.json` follow `.agent-sdd/standards/task-schema.md`:
    - Verify modifications align with `description` and `acceptance_criteria`.
    - Look for `.bak` backup files if applicable (e.g., from `/sdd-update`).
 6. **Check documentation**:
-   - Verify `sdd.md` contains:
+   - Verify `spec.md` contains:
      - Overview with goal and success criteria.
      - Technical specs with implementation details.
      - Theme Standards compliance notes.

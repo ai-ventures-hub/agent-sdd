@@ -16,12 +16,17 @@ Create a Software Design Document (SDD) for a new feature or task.
 
 ---
 
-## Task Schema
-Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-schema.md`:
-- **Required**: `id`, `type: "feature"`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
-- **Optional**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`, `theme_name`.
+## Task Schema Enforcement
+**CRITICAL**: ALL tasks MUST be created in `tasks.json` format following `.agent-sdd/standards/task-schema.md`.
 
-**Defaults for vibe coders**:
+### Required Schema Compliance
+Tasks in `tasks.json` MUST follow the unified schema in `.agent-sdd/standards/task-schema.md`:
+- **Required Fields**: `id`, `type: "feature"`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
+- **Optional Fields**: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+- **Schema Validation**: Use `file-creator` agent to validate ALL tasks against schema before file creation.
+- **No Manual Task Creation**: Tasks MUST NOT be created manually - only through `tasks.json` structure.
+
+### Schema Defaults for Vibe Coders
 - `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: false`.
 - Theme compliance checked against `.agent-sdd/standards/theme-standards.md` if `theme_changes: true`.
 - `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`: Default to `null` or `[]` unless specified in the SDD.
@@ -48,8 +53,8 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
 2. **Get current date** using **date-checker** agent (e.g., "2025-08-18").
 3. **Create spec folder**:
    - `.agent-sdd/specs/create-spec-[task-id]-[CURRENT-DATE]/` (where task-id is kebab-case, max 5 words, derived from feature name).
-4. **Generate `sdd.md`**:
-   - Use `file-creator` agent to create `sdd.md` with the following content:
+4. **Generate `spec.md`**:
+   - Use `file-creator` agent to create `spec.md` with the following content:
    - **Overview**: Goal, user story, success criteria.
    - **Technical Specs**:
      - UI requirements (skip if `--lite`).
@@ -61,24 +66,60 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
    - **Test Scenarios** (skip if `--lite` or `--ui-only`).
    - **Theme Standards Compliance**:
      - Colors, typography, spacing, and accessibility from `.agent-sdd/standards/theme-standards.md`.
-5. **Create `tasks.json`**:
-   - Use `file-creator` to generate `tasks.json` with the feature name and tasks derived from the **Tasks** section.
-   - For each task:
-     - Set required fields: `id` (e.g., `[FEATURE_NAME]-feature-[N]`), `type: "feature"`, `title` (from task description), `description` (detailed task details), `status: "pending"`, `priority` (from SDD or default "medium"), `created_date` (from `date-checker`), `ux_ui_reviewed: false`, `theme_changes` (true for `--ui-only`, else false).
-     - Set optional fields: `target_files` (from Technical Specs or user input), `dependencies` (from SDD), `linked_task` (if task is a follow-up), `acceptance_criteria` (from SDD's success criteria or Test Scenarios).
-   - Validate against `.agent-sdd/standards/task-schema.md`.
-6. **If `--lite`**: Only include Overview and Tasks, set `theme_changes: false` unless specified.
-7. **If `--ui-only`**: Focus on UI Requirements and Theme Standards, set `theme_changes: true` for tasks.
-8. **Check alignment** with `.agent-sdd/product/*` (e.g., `roadmap.md`); update `decisions.md` if needed.
-9. **Prompt user**: `"Proceed with Task 1? (yes/no)"`.
+5. **Create `tasks.json` (MANDATORY)**:
+   - **CRITICAL**: Use `file-creator` agent to generate `tasks.json` - this is the ONLY way to create tasks.
+   - **Schema Reference**: Tasks MUST reference and validate against `.agent-sdd/standards/task-schema.md`.
+   - **Pre-Validation**: Before creating tasks.json, file-creator MUST validate each task object against the schema.
+   - **Required Task Structure**: For each task:
+     - **Required Fields** (MUST be present): 
+       - `id`: Format `[FEATURE_NAME]-feature-[N]` (e.g., "hero-section-cta-feature-1")
+       - `type`: "feature" (for new functionality)
+       - `title`: Short descriptive title from task description
+       - `description`: Detailed task implementation details
+       - `status`: "pending" (always for new tasks)
+       - `priority`: From SDD analysis or default "medium"
+       - `created_date`: Current date from `date-checker` agent
+       - `ux_ui_reviewed`: false (default for new tasks)
+       - `theme_changes`: true for `--ui-only`, false for `--lite`, analyze content for default
+     - **Optional Fields** (set if applicable):
+       - `target_files`: Array of file paths from Technical Specs
+       - `dependencies`: Array of task IDs this task depends on
+       - `linked_task`: Original task ID if this is a fix/tweak
+       - `acceptance_criteria`: Array from SDD success criteria or Test Scenarios
+       - `completed_date`: null (only set when task completed)
+   - **Validation Failure**: If schema validation fails, STOP and report specific validation errors.
+   - **No Fallback**: Do NOT create tasks outside of tasks.json format.
+6. **Schema Validation (MANDATORY)**:
+   - **Pre-Creation Check**: Before writing `tasks.json`, validate ALL task objects against `.agent-sdd/standards/task-schema.md`.
+   - **Validation Process**: Use `file-creator` agent's built-in schema validation.
+   - **Error Handling**: If validation fails:
+     - Report specific schema violations (missing required fields, invalid values, etc.)
+     - Do NOT create `tasks.json` file
+     - Provide corrective guidance to fix schema issues
+     - Re-attempt validation after corrections
+   - **Success Confirmation**: Only proceed if ALL tasks pass schema validation.
+7. **Flag-Specific Handling**:
+   - **If `--lite`**: Only include Overview and Tasks, set `theme_changes: false` unless UI changes detected.
+   - **If `--ui-only`**: Focus on UI Requirements and Theme Standards, set `theme_changes: true` for ALL tasks.
+8. **Integration Checks**:
+   - **Roadmap Alignment**: Check alignment with `.agent-sdd/product/roadmap.md`; update `decisions.md` if needed.
+   - **Task Dependencies**: Validate any referenced task IDs exist in the project.
+9. **User Confirmation**: `"Tasks validated against schema. Proceed with Task 1? (yes/no)"`.
 
 ---
 
-## Notes
+## Schema Enforcement Notes
+- **MANDATORY JSON Structure**: All tasks MUST be created in `tasks.json` format - no exceptions.
+- **Schema Reference**: Always validate against `.agent-sdd/standards/task-schema.md` before file creation.
+- **Field Validation**: Ensure all required fields are present and valid before creating tasks.json.
+- **Type Safety**: Validate data types (strings, arrays, booleans, null) match schema requirements.
+- **ID Format**: Task IDs must follow kebab-case format: `[feature-name]-[type]-[number]`.
+- **Vibe Coder Simplification**: Prompt only for feature name and description; apply schema defaults for other fields.
+
+## UI/UX Standards
 - Keep touch targets ≥ 40px and maintain WCAG 2.1 AA compliance.
 - Use spacing in 4px multiples (`p-1`, `m-2`, `gap-3`, etc.).
 - Always provide `dark:` variants for themed colors where applicable.
-- For vibe coders, prompt only for feature name and description; defaults are applied for other fields to simplify task creation.
 
 ---
 

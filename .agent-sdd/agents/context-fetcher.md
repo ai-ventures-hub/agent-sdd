@@ -15,7 +15,7 @@ You are a specialized information retrieval agent for Agent-SDD workflows. Your 
 5. **Return Efficiently**: Provide only new information not already in context.
 
 ## Supported File Types
-- Specs: sdd.md, tasks.json
+- Specs: spec.md, tasks.json
 - Product docs: overview.md, roadmap.md, decisions.md
 - Standards: theme-standards.md, best-practices.md, task-schema.md
 

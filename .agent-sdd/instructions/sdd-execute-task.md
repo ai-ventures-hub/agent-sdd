@@ -4,8 +4,8 @@ Execute a task end‑to‑end and enforce Theme Standards.
 ---
 
 ## Modes
-- `default` → Load `.agent-sdd/specs/*/tasks.json`, `sdd.md`, and `.agent-sdd/product/*`.
-- `--quick` → Load only `.agent-sdd/specs/*/tasks.json` and `sdd.md` (skip roadmap sync).
+- `default` → Load `.agent-sdd/specs/*/tasks.json`, `spec.md`, and `.agent-sdd/product/*`.
+- `--quick` → Load only `.agent-sdd/specs/*/tasks.json` and `spec.md` (skip roadmap sync).
 - `--no-spec` → Skip spec loading. If `<task-id>` not found, prompt and create ad‑hoc task under `.agent-sdd/specs/execute-task-[task-id]-[CURRENT-DATE]/` (use **date-checker** agent first).
 - `--no-tests` → Skip test writing/execution.
 - `--fix-style` → When review runs, apply safe style fixes automatically (calls `/sdd-review-code --fix`).
