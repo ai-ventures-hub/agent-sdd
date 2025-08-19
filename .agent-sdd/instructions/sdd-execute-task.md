@@ -12,6 +12,20 @@ Execute a task end‑to‑end and enforce Theme Standards.
 
 ---
 
+## Root Directory Detection
+**CRITICAL**: Before any file operations, locate the root `.agent-sdd` directory to prevent duplicate installations:
+
+1. **Check current directory first**: If `.agent-sdd/` exists in current directory, use it.
+2. **Search up the tree**: If not found, search parent directories up to root:
+   - Check `../.agent-sdd/`, `../../.agent-sdd/`, etc.
+   - Stop at first `.agent-sdd/` directory found.
+3. **Use absolute paths**: Once found, use that directory for ALL `.agent-sdd/` references.
+4. **Never create duplicate**: If no `.agent-sdd/` found, error and tell user to run setup script.
+
+**Example**: If `.agent-sdd/` is found at `/project-root/.agent-sdd/`, ALL references should use that path.
+
+---
+
 ## Workflow (what the agent does)
 1. **Detect mode** (default / `--quick` / `--no-spec`) and **resolve task**:
    - `default`/`--quick`: look up `<task-id>` in `.agent-sdd/specs/*/tasks.json`. Error if missing.

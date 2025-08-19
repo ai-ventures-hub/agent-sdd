@@ -25,9 +25,28 @@ SYSTEM_FILES=(
   ".agent-sdd/standards/best-practices.md"
 )
 
-# Check if this is a fresh install or update
-if [ ! -d ".agent-sdd" ]; then
+# Function to find the root .agent-sdd directory
+find_agent_sdd_root() {
+  local dir="$PWD"
+  while [ "$dir" != "/" ]; do
+    if [ -d "$dir/.agent-sdd" ]; then
+      echo "$dir"
+      return 0
+    fi
+    dir=$(dirname "$dir")
+  done
+  return 1
+}
+
+# Check if .agent-sdd exists anywhere up the tree
+AGENT_SDD_ROOT=$(find_agent_sdd_root)
+FRESH_INSTALL=false
+
+if [ -z "$AGENT_SDD_ROOT" ]; then
+  FRESH_INSTALL=true
+  # Fresh install - create in current directory
   echo "📦 Fresh install detected - downloading Agent-SDD..."
+  AGENT_SDD_ROOT="$PWD"
   
   # Download from GitHub
   TEMP_DIR=$(mktemp -d)
@@ -44,8 +63,11 @@ if [ ! -d ".agent-sdd" ]; then
   
   echo "✅ Fresh install complete!"
 else
-  echo "🔄 Existing installation detected - smart update mode..."
-  echo "   (Your customizations will be preserved)"
+  echo "🔄 Existing installation found at: $AGENT_SDD_ROOT"
+  echo "   Smart update mode (Your customizations will be preserved)"
+  
+  # Change to the root directory where .agent-sdd exists
+  cd "$AGENT_SDD_ROOT"
   
   # Download to temp directory
   TEMP_DIR=$(mktemp -d)
@@ -177,7 +199,7 @@ echo "   /sdd-update"
 echo ""
 
 # Different messages for fresh install vs update
-if [ ! -d ".agent-sdd" ]; then
+if [ "$FRESH_INSTALL" = true ]; then
   echo "💡 Next steps (fresh install):"
   echo "   1. Customize files marked with ✅ in .agent-sdd/update-guide.md"
   echo "   2. Update .agent-sdd/standards/theme-standards.md with your design system"

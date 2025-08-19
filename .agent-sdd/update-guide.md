@@ -76,3 +76,17 @@ The `setup-agent-sdd.sh` script now intelligently handles updates:
 - The `.agent-sdd` folder is detected by the desktop app for visual progress tracking
 - Task schema compliance ensures compatibility with future Agent-SDD versions
 - Theme standards are defined in `standards/theme-standards.md` and persist across updates
+
+## 🚨 **Preventing Duplicate .agent-sdd Directories**
+
+**Issue**: Agents may create duplicate `.agent-sdd` directories in subdirectories instead of using the root one.
+
+**Solution**: All agents now search upward from current directory to find existing `.agent-sdd`:
+- If you have: `root/.agent-sdd`, `root/my-app/` 
+- Running agents from `root/my-app/` will find and use `root/.agent-sdd`
+- **Never** creates duplicates
+
+**Setup Script Enhancement**: 
+- `setup-agent-sdd.sh` now searches for existing `.agent-sdd` directories
+- Prevents multiple installations
+- Always updates the root installation
