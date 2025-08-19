@@ -23,7 +23,7 @@
 - **Text:** `#111827` (`text-gray-900`)
 
 ### Dark Mode
-- **Primary:** `#9CA3AF` (`dark:text-gray-400`)
+- **Primary:** `#9CA3AF` (`dark:bg-gray-400`)
 - **Secondary:** `#374151` (`dark:bg-gray-700`)
 - **Accent:** `#60A5FA` (`dark:bg-blue-400`)
 - **Success:** `#34D399` (`dark:bg-green-400`)
@@ -34,8 +34,13 @@
 
 **Allowed Tailwind Color Classes:**
 ```txt
-bg-gray-600 bg-gray-200 bg-blue-500 bg-green-500 bg-yellow-500 bg-red-500 text-gray-900
-dark:text-gray-400 dark:bg-gray-700 dark:bg-blue-400 dark:bg-green-400 dark:bg-yellow-400 dark:bg-red-400 dark:bg-gray-900 dark:text-gray-100
+# Light Mode
+bg-gray-600 bg-gray-200 bg-blue-500 bg-green-500 bg-yellow-500 bg-red-500 bg-white
+text-gray-900
+
+# Dark Mode  
+dark:bg-gray-400 dark:bg-gray-700 dark:bg-blue-400 dark:bg-green-400 dark:bg-yellow-400 dark:bg-red-400 dark:bg-gray-900
+dark:text-gray-400 dark:text-gray-100
 ```
 
 **Rule:** Always use Tailwind color utilities — no raw hex unless not available.
@@ -68,8 +73,13 @@ dark:text-gray-400 dark:bg-gray-700 dark:bg-blue-400 dark:bg-green-400 dark:bg-y
 
 **Allowed Typography Classes:**
 ```txt
-text-sm leading-relaxed text-3xl font-bold text-2xl font-semibold text-xl font-medium
-dark:text-gray-100
+# Font Sizes & Weights
+text-sm text-xl text-2xl text-3xl
+font-medium font-semibold font-bold
+leading-relaxed
+
+# Colors (use with text colors from approved list above)
+text-gray-900 dark:text-gray-100
 ```
 
 ✅ **Correct**  
@@ -134,14 +144,14 @@ theme: {
 
 ### Cards
 ```tsx
-<Card className="p-4 bg-white shadow-md dark:bg-gray-800 dark:text-gray-100">
+<Card className="p-4 bg-white shadow-md dark:bg-gray-900 dark:text-gray-100">
   <CardContent>Your content here</CardContent>
 </Card>
 ```
 
 ### Alerts
 ```tsx
-<Alert className="bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100 p-4 rounded-md">
+<Alert className="bg-yellow-500 text-gray-900 dark:bg-yellow-400 dark:text-gray-900 p-4 rounded-md">
   <AlertDescription>Warning message here</AlertDescription>
 </Alert>
 ```
