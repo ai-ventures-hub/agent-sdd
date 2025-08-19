@@ -48,7 +48,8 @@ Tasks in `tasks.json` follow the unified schema in `.agent-sdd/standards/task-sc
 2. **Get current date** using **date-checker** agent (e.g., "2025-08-18").
 3. **Create spec folder**:
    - `.agent-sdd/specs/create-spec-[task-id]-[CURRENT-DATE]/` (where task-id is kebab-case, max 5 words, derived from feature name).
-4. **Generate `sdd.md`** with:
+4. **Generate `sdd.md`**:
+   - Use `file-creator` agent to create `sdd.md` with the following content:
    - **Overview**: Goal, user story, success criteria.
    - **Technical Specs**:
      - UI requirements (skip if `--lite`).
