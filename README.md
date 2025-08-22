@@ -1,13 +1,13 @@
-# Agent-SDD
+# Claude Code Project Structure
 
-A lightweight, Claude‑first system for structured software development. Uses a `.agent-sdd/` folder to manage specs, standards, tasks, and theme assets.
+A lightweight, Claude‑first system for structured software development. Uses a `.claude/` folder to manage specs, standards, tasks, and theme assets.
 
 ---
 
 ## ✨ Features
-- **Project‑Specific**: All files live in `.agent-sdd/`, initialized by `setup-agent-sdd.sh`.
+- **Project‑Specific**: All files live in `.claude/` folder for better integration with Claude Code.
 - **Claude Commands**: `/sdd-plan-product`, `/sdd-next-phase`, `/sdd-create-spec [--lite | --ui-only]`, `/sdd-execute-task [--fix-style]`, `/sdd-analyze`, `/sdd-review-code`, `/sdd-check-task <task-id>`, `/sdd-vibe-task`, `/sdd-update`.
-- **Theme Standards**: Unified design system defined in `.agent-sdd/standards/theme-standards.md`.
+- **Theme Standards**: Unified design system defined in `.claude/standards/theme-standards.md`.
 - **Sub‑agents**: `context-fetcher`, `date-checker`, `file-creator`, `git-workflow`, `test-runner`, `code-reviewer` (UX/UI focus).
 - **UX/UI Enforcement**: Automatic style reviews after task execution with accessibility, responsive, and dark‑mode checks.
 - **Theme Enforcement**: Design tokens and styling rules enforced via `code-reviewer` using `theme-standards.md`.
@@ -15,17 +15,14 @@ A lightweight, Claude‑first system for structured software development. Uses a
 ---
 
 ## 🧰 Installation
-Use the setup script (remote) or a local copy.
+Create the `.claude/` directory structure in your project:
 
 ```bash
-# Remote (from your repo)
-curl -s -o setup-agent-sdd.sh https://raw.githubusercontent.com/ai-ventures-hub/agent-sdd/main/setup-agent-sdd.sh
-bash setup-agent-sdd.sh
+# Create the directory structure
+mkdir -p .claude/{standards,product,specs,instructions,agents,commands}
 
-# OR: Local (if the script is already in your project)
-bash setup-agent-sdd.sh
-
-# Note: Customize theme-standards.md with your design system.
+# Add your project files to the appropriate directories
+# Then customize theme-standards.md with your design system
 ```
 
 ---
@@ -35,12 +32,10 @@ bash setup-agent-sdd.sh
 ### Getting Started
 
 1) **Initialize**
-```bash
-bash setup-agent-sdd.sh
-```
+Ensure the `.claude/` directory structure exists in your project root.
 
 2) **Theme Configuration**
-Update `.agent-sdd/standards/theme-standards.md` with your design tokens, colors, and component styles. Reference the approved Tailwind utilities in your components.
+Update `.claude/standards/theme-standards.md` with your design tokens, colors, and component styles. Reference the approved Tailwind utilities in your components.
 
 ### Natural Language Commands
 Claude Code understands natural language! You can use formal commands or just describe what you want:
@@ -137,7 +132,7 @@ Claude Code understands natural language! You can use formal commands or just de
 /sdd-update
 
 # Or simply request:
-"update agent-sdd"
+"update the project structure"
 "migrate to latest schema"
 "update the system"
 ```
@@ -156,7 +151,7 @@ Claude Code understands your intent, so don't worry about exact syntax!
 
 ## 🎨 Theme Standards (Important)
 - The **single source of truth** for theme information is:  
-  `.agent-sdd/standards/theme-standards.md`  
+  `.claude/standards/theme-standards.md`  
 - Contains design tokens, approved color utilities, typography, spacing, and component guidelines.
 - All agents that enforce UI rules (**/sdd-review-code**, **/sdd-execute-task**, **/sdd-analyze**) reference `theme-standards.md` for compliance.
 
@@ -165,26 +160,32 @@ Claude Code understands your intent, so don't worry about exact syntax!
 ## 🧪 Testing
 - **Plan Product**: Updates product docs with mission and roadmap.
 - **Next Phase**: Automatically creates specs for next roadmap items with `/sdd-next-phase`.
-- **Create Spec**: Creates `spec.md` and `tasks.json` under `.agent-sdd/specs/create-spec-[task-id]-[date]/`.
+- **Create Spec**: Creates `spec.md` and `tasks.json` under `.claude/specs/create-spec-[task-id]-[date]/`.
 - **Execute Task**: Implements feature code and runs `/sdd-review-code` (optionally `--fix-style`).
 - **Vibe Task**: Quick task creation for rapid development.
 - **Review Code**: Ensures accessibility, responsive utilities, dark mode pairing (`dark:`), and theme color usage.
 - **Analyze**: Broad scan for drift and opportunities.
 - **Check Task**: Validates task completion, documentation, and theme compliance.
-- **Update**: Updates Agent-SDD system to latest standards and migrates existing tasks to current schema.
+- **Update**: Updates system to latest standards and migrates existing tasks to current schema.
 - **Note**: Test runner requires a `package.json` and Jest/Vitest to execute tests.
 
 ---
 
 ## 📁 Directory Structure
 ```
-.agent-sdd/
-├── agents/              # Subagents (context-fetcher.md, code-reviewer.md, etc.)
-├── instructions/        # Commands (sdd-create-spec.md, etc.)
-├── product/             # Product docs (overview.md, roadmap.md, decisions.md)
+.claude/
+├── standards/           # Tech stack, theme standards, best practices
+│   ├── tech-stack.md
+│   ├── theme-standards.md
+│   └── best-practices.md
+├── product/             # Product docs
+│   ├── overview.md
+│   ├── roadmap.md
+│   └── decisions.md
 ├── specs/               # SDDs and tasks
-├── standards/           # Tech stack and theme standards
-│   └── theme-standards.md
+├── instructions/        # Commands (sdd-*.md files)
+├── agents/              # Subagents (context-fetcher.md, task-schema-validator.md, etc.)
+├── commands/            # Claude Code command directory
 └── update-guide.md      # Guidance on which files users should customize
 src/                     # Application code
 ```
