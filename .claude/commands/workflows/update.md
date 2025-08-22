@@ -1,0 +1,103 @@
+# /sdd-task --update Workflow
+
+Applies a UI/UX tweak or fix to existing code when `/sdd-task --update <target>` is invoked, ensuring compliance with Theme Standards. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
+
+## Purpose
+- Apply UI/UX improvements or fixes (e.g., bugs, styling, accessibility) to a target file or component.
+- Ensure changes align with `.claude/standards/theme-standards.md`.
+- Generate and validate `tasks.json` using the 12-field schema.
+
+## Directory Context
+Uses the `.claude/` structure:
+- **Standards**: `.claude/standards/` (theme-standards.md, best-practices.md)
+- **Specs**: `.claude/specs/update-[task-id]-[date]/` (spec.md, tasks.json)
+- **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, file-creator.md, code-reviewer.md, test-runner.md, date-checker.md)
+
+## Command Syntax
+```
+/sdd-task --update <target>
+```
+- **Arguments**: Required `target` (file or component, e.g., `src/components/Button/Button.tsx`).
+
+## Workflow
+1. **Parse Input**:
+   - Read `target` from `/sdd-task --update <target>` via CLI or dashboard.
+2. **Prompt for Details**:
+   - Via dashboard or CLI, prompt for a short description (e.g., "Increase button padding" or "Fix login error").
+   - Confirm `target` file(s) or component(s) if unclear.
+3. **Generate Task ID**:
+   - Create a unique `task-id` (e.g., `BTN-012`) based on `target` and description.
+4. **Create Spec Directory**:
+   - Use `.claude/agents/file-creator.md` to create `.claude/specs/update-[task-id]-[date]/` with `spec.md` and `tasks.json`.
+   - Set `created_date` via `.claude/agents/date-checker.md`.
+5. **Generate `tasks.json`**:
+   - Populate with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+   - Defaults: `type: "update"`, `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: true`.
+   - Set `target_files` from `target`, `title` and `description` from user input, `acceptance_criteria` inferred if needed.
+   - Validate using `.claude/agents/task-schema-validator.md`.
+6. **Locate and Backup Target**:
+   - Use `.claude/agents/context-fetcher.md` to locate `target` in `src/`.
+   - Create `.bak` copies of target files.
+7. **Implement Update**:
+   - Apply UI/UX tweak or fix (e.g., adjust padding, add ARIA labels) while preserving business logic.
+   - Ensure compliance with `.claude/standards/theme-standards.md` (e.g., colors, spacing in 4px multiples, WCAG 2.1 AA).
+8. **Theme Review**:
+   - Use `.claude/agents/code-reviewer.md` to verify `target_files` against `.claude/standards/theme-standards.md`.
+9. **Run Tests**:
+   - Use `.claude/agents/test-runner.md` to write and run minimal tests for the update.
+10. **Commit Suggestion**:
+    - Suggest commit message: `update(scope): <description> (UPDATE-ID)` (e.g., `update(Button): increase padding (BTN-012)`).
+11. **Generate Report**:
+    - Output changes, theme review results, test outcomes, and schema validation status to console or dashboard.
+
+## Dashboard Integration
+- The dashboard provides inputs for `target` and description, with a confirmation prompt for the target.
+- Displays the generated spec path, test results, and validation status.
+
+## Error Handling
+- **Missing Target**: Return "Error: --update requires target file or component."
+- **Invalid Target**: Return "Error: Target not found in `src/`."
+- **Missing Standards**: Return "Error: `.claude/standards/theme-standards.md` not found."
+- **Schema Validation Failure**: Return errors from `.claude/agents/task-schema-validator.md`.
+- **Test Failure**: Return "Error: Tests failed for updated files."
+
+## Example Usage
+```
+/sdd-task --update src/components/Button/Button.tsx
+```
+**Example Output**:
+```
+Update spec created at .claude/specs/update-BTN-012-2025-08-22/
+Applied changes to src/components/Button/Button.tsx
+Tasks.json validated
+Tests passed
+Commit suggestion: update(Button): increase padding (BTN-012)
+```
+
+## Output Examples
+### Successful Update:
+```
+Update Report: BTN-012
+============================
+Spec Path: .claude/specs/update-BTN-012-2025-08-22/
+Task ID: BTN-012
+Changes: Increased button padding
+Theme Compliance: Compliant
+Tests: Passed
+Schema: Valid
+Overall: PASSED
+```
+
+### Issues Found:
+```
+Update Report: AUTH-001
+============================
+Spec Path: .claude/specs/update-AUTH-001-2025-08-22/
+Task ID: AUTH-001
+Changes: Fixed login error
+Theme Compliance: Non-compliant (invalid color)
+Tests: Failed
+Schema: Valid
+Overall: NEEDS ATTENTION
+Action: Run /sdd-task --review src/lib/auth.ts
+```

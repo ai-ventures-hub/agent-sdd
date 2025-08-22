@@ -1,180 +1,74 @@
-# Claude Code Project Structure
+# Agent-SDD: Claude-First Structured Software Development
 
-A lightweight, Claude‑first system for structured software development. Uses a `.claude/` folder to manage specs, standards, tasks, and theme assets.
+A streamlined system for structured software development in Claude Code, using a `.claude/` folder for specs, standards, tasks, and agents. Integrated with the Agent-SDD Dashboard at claude.agent-sdd.com for visual workflow management.
 
----
+## Features
+- **Single Command**: `/sdd-task` with 8 flags for all operations.
+- **Flags**: --roadmap, --next, --spec, --execute, --update, --review, --analyze, --check.
+- **Theme Standards**: Defined in `.claude/standards/theme-standards.md` for consistent design.
+- **Agents**: `.claude/agents/` with task-schema-validator, context-fetcher, file-creator, date-checker, test-runner, code-reviewer, git-workflow.
+- **UX/UI Enforcement**: Automatic reviews for accessibility, responsive design, dark mode, and theme compliance via code-reviewer.
+- **Dashboard Integration**: Flag selector, prompts (e.g., UI focus for --spec), and task visualization.
+- **Task Schema**: 12-field validation for tasks.json via task-schema-validator.
 
-## ✨ Features
-- **Project‑Specific**: All files live in `.claude/` folder for better integration with Claude Code.
-- **Claude Commands**: `/sdd-plan-product`, `/sdd-next-phase`, `/sdd-create-spec [--lite | --ui-only]`, `/sdd-execute-task [--fix-style]`, `/sdd-analyze`, `/sdd-review-code`, `/sdd-check-task <task-id>`, `/sdd-vibe-task`, `/sdd-update`.
-- **Theme Standards**: Unified design system defined in `.claude/standards/theme-standards.md`.
-- **Sub‑agents**: `context-fetcher`, `date-checker`, `file-creator`, `git-workflow`, `test-runner`, `code-reviewer` (UX/UI focus).
-- **UX/UI Enforcement**: Automatic style reviews after task execution with accessibility, responsive, and dark‑mode checks.
-- **Theme Enforcement**: Design tokens and styling rules enforced via `code-reviewer` using `theme-standards.md`.
+## Installation
+Use the Agent-SDD Dashboard wizard to create `.claude/`, or clone `ai-ventures-hub/agent-sdd-template` and customize.
 
----
-
-## 🧰 Installation
-Create the `.claude/` directory structure in your project:
-
-```bash
-# Create the directory structure
-mkdir -p .claude/{standards,product,specs,instructions,agents,commands}
-
-# Add your project files to the appropriate directories
-# Then customize theme-standards.md with your design system
-```
-
----
-
-## 🚀 Usage
-
+## Usage
 ### Getting Started
+1. Create `.claude/` via dashboard or template.
+2. Update `.claude/standards/tech-stack.md` and `theme-standards.md`.
+3. Update `.claude/product/overview.md` and `roadmap.md`.
+4. Use `/sdd-task --roadmap` to plan milestones.
+5. Use `/sdd-task --next` for next spec.
+6. Use `/sdd-task --spec <feature>` for new SDDs (dashboard prompts for UI focus).
+7. Use `/sdd-task --execute <task-id>` or `--update <target>` for implementation with tests and style fixes.
 
-1) **Initialize**
-Ensure the `.claude/` directory structure exists in your project root.
+### Command Syntax
+```
+/sdd-task --<flag> [arguments]
+```
+See `.claude/commands/sdd-task.md` for details.
 
-2) **Theme Configuration**
-Update `.claude/standards/theme-standards.md` with your design tokens, colors, and component styles. Reference the approved Tailwind utilities in your components.
+### Flag Reference
+- --roadmap: Plan roadmap and milestones.
+- --next: Create spec for next roadmap task.
+- --spec: Create SDD for feature name.
+- --execute: Execute task with tests and style fixes for task ID.
+- --update: Apply tweak/fix with tests and style fixes for target file.
+- --review: Review for theme compliance for modified paths.
+- --analyze: Analyze project for issues.
+- --check: Verify task completion for task ID.
 
 ### Natural Language Commands
-Claude Code understands natural language! You can use formal commands or just describe what you want:
+Claude Code supports natural language:
+- "Plan the roadmap" → /sdd-task --roadmap
+- "Create spec for next task" → /sdd-task --next
+- "Create a spec for user login" → /sdd-task --spec
+- "Execute task T123" → /sdd-task --execute
+- "Update button component" → /sdd-task --update
+- "Review code" → /sdd-task --review
+- "Analyze project" → /sdd-task --analyze
+- "Check task completion" → /sdd-task --check
 
-**Formal Command** → **Natural Language Alternatives**
-- `/sdd-next-phase` → "what's next on the roadmap" or "create spec for next item"
-- `/sdd-create-spec` → "create a spec for user login" or "I need a spec"
-- `/sdd-execute-task BTN-001` → "implement task BTN-001" or "execute the button task"
-- `/sdd-review-code` → "review my code for theme compliance" or "check styling"
-- `/sdd-vibe-task` → "quick task" or "create a simple task"
+## Theme Standards
+Single source: `.claude/standards/theme-standards.md`.
+Enforced by code-reviewer during --execute, --update, and --review.
 
-### Command Reference
+## Testing
+- Use /sdd-task --roadmap to update product docs.
+- Use /sdd-task --next to generate specs.
+- Use /sdd-task --spec to create SDDs and tasks.json (validated by task-schema-validator).
+- Use /sdd-task --execute or --update for implementation with tests (via test-runner) and style fixes (via code-reviewer).
+- Use /sdd-task --review for compliance checks.
+- Use /sdd-task --analyze for project issues.
+- Use /sdd-task --check for task verification.
+- Test-runner requires package.json with Jest/Vitest.
 
-3) **Next Phase** (Roadmap Integration)
-```bash
-# Formal command
-/sdd-next-phase
-
-# Or just ask naturally:
-"what's next on the roadmap?"
-"create spec for the next phase"
-```
-
-4) **Create a Spec**
-```bash
-# Formal commands
-/sdd-create-spec --lite "Add text display component"
-/sdd-create-spec --ui-only "Update modal styling"
-
-# Or describe naturally:
-"create a lite spec for adding user authentication"
-"I need a UI-only spec for the dashboard redesign"
-"make a spec for the payment flow"
-```
-
-5) **Execute a Task**
-```bash
-# Formal command
-/sdd-execute-task TDC-002 --fix-style
-
-# Or ask naturally:
-"implement task TDC-002"
-"execute the text display task and fix any style issues"
-"let's work on TDC-002"
-```
-
-6) **Vibe Task** (Quick Development)
-```bash
-# Formal command
-/sdd-vibe-task
-
-# Or simply say:
-"quick task for fixing the header"
-"create a simple task"
-"vibe mode: add a loading spinner"
-```
-
-7) **Review Code**
-```bash
-# Formal command
-/sdd-review-code components/TextDisplay/TextDisplay.tsx --fix
-
-# Or request naturally:
-"review the TextDisplay component for theme compliance"
-"check if my code follows the style guide and fix issues"
-"fix styling in components folder"
-```
-
-8) **Analyze**
-```bash
-# Formal command
-/sdd-analyze src/components
-
-# Or describe what you need:
-"analyze the components folder"
-"check for code drift in src"
-"scan for improvement opportunities"
-```
-
-9) **Check Task Completion**
-```bash
-# Formal command
-/sdd-check-task BTN-012
-
-# Or ask naturally:
-"is task BTN-012 complete?"
-"check the button task status"
-"verify BTN-012 was done properly"
-```
-
-10) **Update System**
-```bash
-# Formal command
-/sdd-update
-
-# Or simply request:
-"update the project structure"
-"migrate to latest schema"
-"update the system"
-```
-
-### 💡 Pro Tips for Natural Language
-
-- **Be conversational**: "Hey, can you create a spec for the user dashboard?"
-- **Combine actions**: "Create and execute a lite spec for adding a footer"
-- **Ask questions**: "What tasks are pending?" or "Show me the roadmap"
-- **Use context**: After viewing a task, just say "execute it" or "implement this"
-- **Request help**: "How do I create a UI-focused spec?" or "What's the next step?"
-
-Claude Code understands your intent, so don't worry about exact syntax!
-
----
-
-## 🎨 Theme Standards (Important)
-- The **single source of truth** for theme information is:  
-  `.claude/standards/theme-standards.md`  
-- Contains design tokens, approved color utilities, typography, spacing, and component guidelines.
-- All agents that enforce UI rules (**/sdd-review-code**, **/sdd-execute-task**, **/sdd-analyze**) reference `theme-standards.md` for compliance.
-
----
-
-## 🧪 Testing
-- **Plan Product**: Updates product docs with mission and roadmap.
-- **Next Phase**: Automatically creates specs for next roadmap items with `/sdd-next-phase`.
-- **Create Spec**: Creates `spec.md` and `tasks.json` under `.claude/specs/create-spec-[task-id]-[date]/`.
-- **Execute Task**: Implements feature code and runs `/sdd-review-code` (optionally `--fix-style`).
-- **Vibe Task**: Quick task creation for rapid development.
-- **Review Code**: Ensures accessibility, responsive utilities, dark mode pairing (`dark:`), and theme color usage.
-- **Analyze**: Broad scan for drift and opportunities.
-- **Check Task**: Validates task completion, documentation, and theme compliance.
-- **Update**: Updates system to latest standards and migrates existing tasks to current schema.
-- **Note**: Test runner requires a `package.json` and Jest/Vitest to execute tests.
-
----
-
-## 📁 Directory Structure
+## Directory Structure
 ```
 .claude/
-├── standards/           # Tech stack, theme standards, best practices
+├── standards/           # Tech stack, theme, best practices
 │   ├── tech-stack.md
 │   ├── theme-standards.md
 │   └── best-practices.md
@@ -182,23 +76,20 @@ Claude Code understands your intent, so don't worry about exact syntax!
 │   ├── overview.md
 │   ├── roadmap.md
 │   └── decisions.md
-├── specs/               # SDDs and tasks
-├── instructions/        # Commands (sdd-*.md files)
-├── agents/              # Subagents (context-fetcher.md, task-schema-validator.md, etc.)
-├── commands/            # Claude Code command directory
-└── update-guide.md      # Guidance on which files users should customize
+├── specs/               # SDDs and tasks.json
+│   └── create-spec-[task-id]-[date]/
+│       ├── spec.md
+│       └── tasks.json
+├── commands/            # Command dispatcher and workflows
+│   ├── sdd-task.md
+│   └── workflows/       # Workflow files (roadmap.md, spec.md, etc.)
+├── agents/              # Sub-agents (task-schema-validator.md, etc.)
+└── update-guide.md      # Customization guide
 src/                     # Application code
 ```
 
----
+## Contributing
+Fork the repo, create feature branch, commit with "feat(scope): message (TASK-ID)", push, open PR.
 
-## 🤝 Contributing
-- Fork the repo.
-- Create a feature branch: `git checkout -b feature-name`.
-- Commit using `[type]: [description] (TASK-ID)` format, e.g., `git commit -m "feat: add theme validation (TDC-002)"`.
-- Push and open a PR.
-
----
-
-## 📄 License
+## License
 MIT
