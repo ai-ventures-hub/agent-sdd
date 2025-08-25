@@ -57,7 +57,7 @@ Instructs the proactive retrieval of specific content from Agent-SDD documentati
 3. **Locate File**:
    - Identify the target file in `.claude/standards/`, `.claude/product/`, `.claude/specs/[create|update]-[task-id]-[date]/`, or `.claude/changelog.md`.
 4. **Validate Task Data** (if `tasks.json`):
-   - Invoke `.claude/agents/task-schema-validator.md` with `task-id` to validate the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+   - Invoke `.claude/agents/task-schema-validator.md` with `task-id` to validate the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Collect validation result.
 5. **Extract Content**:
    - Retrieve only the requested section or data (e.g., color classes, task fields).

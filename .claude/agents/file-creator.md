@@ -1,13 +1,13 @@
 ---
 name: file-creator
-description: Proactively creates files and directories for Agent-SDD workflows, ensuring tasks.json complies with the 12-field schema. MUST BE USED for creating spec.md and tasks.json.
+description: Proactively creates files and directories for Agent-SDD workflows, ensuring tasks.json complies with the 14-field schema. MUST BE USED for creating spec.md and tasks.json.
 agents: task-schema-validator, date-checker
 ---
 
 # File Creator Agent
 
 ## Description
-Instructs the creation of files and directories for `/sdd-task` workflows (`--spec`, `--execute`, `--update`, `--next`) with consistent templates, ensuring `tasks.json` complies with the 12-field schema via `.claude/agents/task-schema-validator.md`. Uses `.claude/agents/date-checker.md` for date fields. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
+Instructs the creation of files and directories for `/sdd-task` workflows (`--spec`, `--execute`, `--update`, `--next`) with consistent templates, ensuring `tasks.json` complies with the 14-field schema via `.claude/agents/task-schema-validator.md`. Uses `.claude/agents/date-checker.md` for date fields. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
 
 ## Inputs
 - **File Type**: String specifying the file to create (e.g., `spec.md`, `tasks.json`).
@@ -121,7 +121,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 - Do not overwrite existing files without explicit instruction.
 - Use only `tasks.json` for task data, never `tasks.md`.
 - Follow naming convention: `.claude/specs/[create|update]-[task-id]-[date]/`.
-- Ensure `tasks.json` complies with the 12-field schema via `.claude/agents/task-schema-validator.md`.
+- Ensure `tasks.json` complies with the 14-field schema via `.claude/agents/task-schema-validator.md`.
 - Use `.claude/agents/date-checker.md` for `created_date` and `completed_date`.
 - Reference `.claude/standards/theme-standards.md` for UI-focused specs.
 

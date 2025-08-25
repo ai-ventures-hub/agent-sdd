@@ -87,7 +87,7 @@ Uses the `.claude/` structure:
      - Standalone: `.claude/specs/fix-standalone-[fix-id]-[date]/`
    - Set `created_date` via `.claude/agents/date-checker.md`
 7. **Generate `tasks.json`**:
-   - Populate with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`
+   - Populate with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`
    - Defaults: `type: "fix"`, `status: "pending"`, `priority` based on severity, `ux_ui_reviewed: false`, `theme_changes: false` (unless UI-related)
    - Set `linked_task` to `task-id` if provided
    - Validate using `.claude/agents/task-schema-validator.md`
@@ -177,5 +177,5 @@ Overall: PASSED
 - **Differentiation from --update**: `--fix` addresses bugs/issues, while `--update` applies enhancements
 - **Task Linking**: When `<task-id>` provided, the fix inherits context and can reference original requirements
 - **Rollback Support**: `.bak` files enable easy rollback if fix causes regressions
-- **Schema Compliance**: All fix tasks validated using the unified 12-field schema
-- **Git Integration**: Commit messages follow format: `fix(scope): <description> (FIX-ID)`
+- **Schema Compliance**: All fix tasks validated using the unified 14-field schema
+- **Git Integration**: Commit messages follow format: `fix(scope): description (TASK-ID)`

@@ -18,13 +18,13 @@ Manages git operations for `/sdd-task` workflows (`--execute`, `--update`, `--ch
 ## Outputs
 - **Task Update**: Updated `tasks.json` with `status` and `completed_date` (if applicable).
 - **Commit Instruction**: Object with:
-  - `message`: String in format `[type](scope): [description] ([task-id])` (e.g., `update(Button): increase padding (BTN-012)`).
+  - `message`: String in format `type(scope): description (TASK-ID)` where type is feat|fix|update|chore|docs|style|refactor|test (e.g., `update(Button): increase padding (BTN-012)`).
   - `files`: Array of staged file paths.
 - **Report**: Object for console or dashboard:
   ```
   {
     "status": "success",
-    "commit_message": "[type](scope): [description] ([task-id])",
+    "commit_message": "type(scope): description (TASK-ID)",
     "files": ["[file1]", "[file2]"],
     "task_updated": "[path/tasks.json]"
   }
@@ -56,7 +56,7 @@ Manages git operations for `/sdd-task` workflows (`--execute`, `--update`, `--ch
    - If `status: completed`, use `.claude/agents/date-checker.md` to obtain `completed_date`.
    - Use `.claude/agents/file-creator.md` to update `tasks.json` in `.claude/specs/[create|update]-[task-id]-[date]/` with `status` and `completed_date`.
 4. **Execute Git Operations**:
-   - Generate commit message: `[type](scope): [commit_description] ([task_id])`.
+   - Generate commit message: `type(scope): description (TASK-ID)` where type is feat|fix|update|chore|docs|style|refactor|test.
    - Stage modified files using `git add` or GitHub Desktop.
    - Commit with the generated message.
    - Optionally push to remote repository (only if explicitly requested).
@@ -65,7 +65,7 @@ Manages git operations for `/sdd-task` workflows (`--execute`, `--update`, `--ch
      ```
      {
        "status": "success",
-       "commit_message": "[type](scope): [description] ([task-id])",
+       "commit_message": "type(scope): description (TASK-ID)",
        "files": ["[file1]", "[file2]"],
        "task_updated": "[path/tasks.json]"
      }

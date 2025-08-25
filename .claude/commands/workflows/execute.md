@@ -36,7 +36,7 @@ Execute a task end-to-end and enforce Theme Standards.
 3. **Implement code** per the spec/task and ensure **WCAG 2.1 AA**.
 4. **Git commit (if repo exists)**:
    - Check if `.git` directory exists.
-   - If yes: Suggest message: `"[task-id]: <short description>"` (e.g., `feat(Button): add disabled state (BTN-012)`).
+   - If yes: Suggest message: `feat(scope): description (TASK-ID)` (e.g., `feat(Button): add disabled state (BTN-012)`).
    - If no: Show message "ℹ️ No git repository - changes saved locally. Run 'git init' to enable version control".
 5. **Tests**:
    - If not `--no-tests` and a `package.json` exists, write task-level tests for critical paths and run tests via the **test-runner** agent.
@@ -61,8 +61,8 @@ Execute a task end-to-end and enforce Theme Standards.
 
 ## Notes & Conventions
 - **A11y**: Keep focus visible; touch targets ≥ 40px. Use ARIA roles/labels where appropriate.
-- **Commits**: Prefer conventional style: `feat|fix|chore(scope): message (TASK-ID)`.
-- **Schema Validation**: Always validate `tasks.json` updates using `task-schema-validator.md` to ensure compliance with the unified 12-field schema.
+- **Commits**: Use conventional commit format: `type(scope): description (TASK-ID)` where type is feat|fix|update|chore|docs|style|refactor|test.
+- **Schema Validation**: Always validate `tasks.json` updates using `task-schema-validator.md` to ensure compliance with the unified 14-field schema.
 
 ---
 
@@ -71,7 +71,7 @@ Execute a task end-to-end and enforce Theme Standards.
 - **test-runner** is invoked unless `--no-tests`.
 - **git-workflow**: Only use if git repo exists and user opts to commit changes.
 - **file-creator**: Used for creating ad-hoc `tasks.json` in `--no-spec` mode, with validation by `task-schema-validator.md`.
-- **task-schema-validator**: Ensures all task updates comply with the unified 12-field schema.
+- **task-schema-validator**: Ensures all task updates comply with the unified 14-field schema.
 
 ---
 

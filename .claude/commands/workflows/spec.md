@@ -5,7 +5,7 @@ Creates a Software Design Document (lightweight or UI-focused) when `/sdd-task -
 ## Purpose
 - Generate a structured spec with `spec.md` and `tasks.json` for a given feature.
 - Support lightweight specs for non-UI tasks or UI-focused specs with theme compliance.
-- Ensure `tasks.json` conforms to the 12-field schema using `.claude/agents/task-schema-validator.md`.
+- Ensure `tasks.json` conforms to the 14-field schema using `.claude/agents/task-schema-validator.md`.
 
 ## Directory Context
 Uses the `.claude/` structure:
@@ -41,7 +41,7 @@ Uses the `.claude/` structure:
      - Theme Compliance: Notes from `.claude/standards/theme-standards.md` (if `theme_changes: true`).
      - Acceptance Criteria: Derived from `feature-name` and context.
 8. **Generate `tasks.json`**:
-   - Create `tasks.json` with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+   - Create `tasks.json` with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Set `status: pending`, `created_date` via `.claude/agents/date-checker.md`, `theme_changes` based on UI prompt.
    - Validate `tasks.json` using `.claude/agents/task-schema-validator.md`.
 9. **Output Result**:

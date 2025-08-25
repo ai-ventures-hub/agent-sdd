@@ -10,7 +10,7 @@ Executes project analysis for potential issues, improvements, or alignment with 
 ## Directory Context
 Uses the `.claude/` structure:
 - **Standards**: `.claude/standards/` (theme-standards.md for theme compliance)
-- **Agents**: `.claude/agents/` (context-fetcher.md, code-reviewer.md)
+- **Agents**: `.claude/agents/` (code-reviewer.md, logger.md)
 
 ## Command Syntax
 ```
@@ -22,19 +22,24 @@ Uses the `.claude/` structure:
 1. **Parse Input**:
    - Read paths from `/sdd-task --analyze [paths...]` via CLI or dashboard.
    - If no paths provided, default to the project root.
-2. **Fetch Context**:
-   - Use `.claude/agents/context-fetcher.md` to load `.claude/standards/theme-standards.md` and specified paths.
-3. **Analyze Files**:
+2. **Read Changelog Context**:
+   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
+3. **Load Theme Standards**:
+   - Read `.claude/standards/theme-standards.md` directly for theme compliance checking.
+   - Note: context-fetcher only supports .md/.json files in .claude directories, not arbitrary project paths.
+4. **Analyze Files**:
    - Use `.claude/agents/code-reviewer.md` to:
      - Check colors, typography, and spacing against `.claude/standards/theme-standards.md`.
      - Identify missing dark mode variants.
      - Detect unused or duplicate utility classes.
      - Flag accessibility issues (e.g., focus, ARIA, touch target size).
      - Highlight overly complex or duplicated code.
-4. **Generate Report**:
+5. **Generate Report**:
    - Summarize issues by severity (critical, warning, info).
    - Include suggestions with references to `.claude/standards/theme-standards.md` or `.claude/standards/best-practices.md`.
    - Output report to console or dashboard.
+6. **Log Analysis Completion**:
+   - Use `.claude/agents/logger.md` in write mode to record analysis results in `.claude/changelog.md`.
 
 ## Dashboard Integration
 - The dashboard provides a path selector for `--analyze` (e.g., file picker or text input).

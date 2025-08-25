@@ -121,8 +121,17 @@
 ## Version Control
 
 ### Commit Messages
-Format: [your commit message format]
-Example: `feat: add user authentication`
+Format: `type(scope): description (TASK-ID)`
+- Type: feat|fix|update|chore|docs|style|refactor|test
+- Scope: Component or module name (optional but recommended)
+- Description: Present tense, lowercase, no period
+- TASK-ID: Reference to task identifier from tasks.json
+
+Examples:
+- `feat(auth): add user authentication (AUTH-001)`
+- `fix(button): resolve click handler issue (BTN-012)`
+- `update(nav): improve mobile responsiveness (NAV-003)`
+- `chore(deps): update dependencies (MAINT-007)`
 
 ### Branch Strategy
 - Main branch: [your main branch name]

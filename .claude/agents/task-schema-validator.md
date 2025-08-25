@@ -1,13 +1,13 @@
 ---
 name: task-schema-validator
-description: Proactively validates task objects in tasks.json against the 12-field schema for Agent-SDD consistency. MUST BE USED for creating or modifying tasks in workflows.
+description: Proactively validates task objects in tasks.json against the 14-field schema for Agent-SDD consistency. MUST BE USED for creating or modifying tasks in workflows.
 agents: date-checker
 ---
 
 # Task Schema Validator Agent
 
 ## Description
-Instructs the validation of task objects in `tasks.json` against the 12-field schema to ensure consistency in `/sdd-task` workflows (`--spec`, `--execute`, `--update`, `--check`). Collaborates with `.claude/agents/date-checker.md` for date validation. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
+Instructs the validation of task objects in `tasks.json` against the 14-field schema to ensure consistency in `/sdd-task` workflows (`--spec`, `--execute`, `--update`, `--check`). Collaborates with `.claude/agents/date-checker.md` for date validation. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
 
 ## Inputs
 - **Task Object**: JSON object from `tasks.json` with fields: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.

@@ -6,7 +6,7 @@ Applies UI/UX enhancements, tweaks, or improvements to existing code when `/sdd-
 - Apply UI/UX enhancements, styling improvements, or accessibility upgrades to a target file or component.
 - **Enhancement-focused**: Improves existing functionality rather than fixing broken behavior (use `--fix` for bugs).
 - Ensure changes align with `.claude/standards/theme-standards.md`.
-- Generate and validate `tasks.json` using the 12-field schema.
+- Generate and validate `tasks.json` using the 14-field schema.
 
 ## --update vs --fix Distinction
 - **--update**: Use for enhancements, improvements, styling changes, or feature additions to working code
@@ -71,7 +71,7 @@ Uses the `.claude/` structure:
    - Use `.claude/agents/file-creator.md` to create `.claude/specs/update-[task-id]-[date]/` with `spec.md` and `tasks.json`.
    - Set `created_date` via `.claude/agents/date-checker.md`.
 6. **Generate `tasks.json`**:
-   - Populate with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+   - Populate with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Defaults: `type: "update"`, `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: true`.
    - Set `target_files` from `target`, `title` and `description` from user input, `acceptance_criteria` inferred if needed.
    - Validate using `.claude/agents/task-schema-validator.md`.
@@ -86,7 +86,7 @@ Uses the `.claude/` structure:
 10. **Run Tests**:
     - Use `.claude/agents/test-runner.md` to write and run minimal tests for the update.
 11. **Commit Suggestion**:
-    - Suggest commit message: `update(scope): <description> (UPDATE-ID)` (e.g., `update(Button): increase padding (BTN-012)`).
+    - Suggest commit message: `update(scope): description (TASK-ID)` (e.g., `update(Button): increase padding (BTN-012)`).
 12. **Generate Report**:
     - Output changes, theme review results, test outcomes, and schema validation status to console or dashboard.
 13. **Log Update Completion**:

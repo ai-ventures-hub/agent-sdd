@@ -4,7 +4,7 @@ Verifies task completion and documentation quality when `/sdd-task --check <task
 
 ## Purpose
 - Validate task execution, documentation, and theme compliance.
-- Ensure `tasks.json` conforms to the 12-field schema using `.claude/agents/task-schema-validator.md`.
+- Ensure `tasks.json` conforms to the 14-field schema using `.claude/agents/task-schema-validator.md`.
 - Generate a report summarizing task status and issues.
 
 ## Directory Context
@@ -27,7 +27,7 @@ Uses the `.claude/` structure:
    - Verify folder follows naming convention: `create-spec-[task-id]-[date]`.
    - Check for `spec.md` and `tasks.json`.
 3. **Validate Task Schema**:
-   - Use `.claude/agents/task-schema-validator.md` to ensure `tasks.json` conforms to the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+   - Use `.claude/agents/task-schema-validator.md` to ensure `tasks.json` conforms to the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Required fields: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`.
    - Optional fields: `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 4. **Verify Task Status**:
@@ -44,7 +44,7 @@ Uses the `.claude/` structure:
 7. **Validate Theme Compliance**:
    - For tasks with `theme_changes: true`, use `.claude/agents/code-reviewer.md` to verify `target_files` comply with `.claude/standards/theme-standards.md` (e.g., colors, WCAG 2.1 AA, dark mode).
 8. **Check Commit History**:
-   - Verify commits include `task-id` in messages (format: `feat|fix|tweak(scope): message (TASK-ID)`).
+   - Verify commits include task ID in messages (format: `type(scope): description (TASK-ID)` where type is feat|fix|update|chore|docs|style|refactor|test).
 9. **Generate Report**:
    - Output to console or dashboard:
      ```

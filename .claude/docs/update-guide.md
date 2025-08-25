@@ -20,7 +20,7 @@ Guides customization of files in `.claude/` and updates to align with `/sdd-task
 ### System Files
 - **commands/workflows/*.md**: Keep default unless custom workflows are required.
 - **agents/*.md**: Keep default unless agent behavior changes are needed.
-- **agents/task-schema-validator.md**: Never modify; ensures 12-field task schema compliance.
+- **agents/task-schema-validator.md**: Never modify; ensures 14-field task schema compliance.
 
 ## Initial Setup Checklist
 1. Use Agent-SDD Dashboard wizard or clone `ai-ventures-hub/agent-sdd-template` to create `.claude/`.
