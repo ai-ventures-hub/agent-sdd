@@ -39,7 +39,7 @@ Notes: [Description of accomplishment, challenges, or next steps]
 ```
 [2025-08-22] – Create User Login Page
 Status: completed
-Spec: .claude/specs/create-spec-LGN-001-2025-08-22/
+Spec: .claude/specs/create-a-login-page_feature_08-22-2025/
 Notes: Implemented login form with auth API integration.
 
 [2025-08-23] – Increase Button Padding

@@ -1,0 +1,319 @@
+{
+  "feature": "Centralized Reference System",
+  "tasks": [
+    {
+      "id": "REF-001",
+      "type": "feature",
+      "title": "Create central reference directory structure",
+      "description": "Establish the .claude/references/ and .claude/templates/ directory structure with initial reference files for agents, standards, schemas, patterns, errors, and directories.",
+      "status": "pending",
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/references/agents.md",
+        ".claude/references/standards.md", 
+        ".claude/references/schemas.md",
+        ".claude/references/patterns.md",
+        ".claude/references/errors.md",
+        ".claude/references/directories.md",
+        ".claude/templates/agent-template.md",
+        ".claude/templates/workflow-template.md",
+        ".claude/templates/spec-template.md"
+      ],
+      "dependencies": [],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Directory structure .claude/references/ exists with all 6 reference files",
+        "Directory structure .claude/templates/ exists with all 3 template files", 
+        "All reference files follow YAML frontmatter + structured markdown format",
+        "Initial content populated based on current system analysis"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-002",
+      "type": "feature",
+      "title": "Audit and extract duplicated agent references",
+      "description": "Systematically audit all Agent-SDD files to extract agent references and create the central agents.md registry with metadata, dependencies, and usage patterns.",
+      "status": "pending", 
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/references/agents.md"
+      ],
+      "dependencies": ["REF-001"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "All 7 core agents documented with descriptions, inputs, outputs, and usage",
+        "Inter-agent dependencies mapped and documented",
+        "Common invocation patterns identified and standardized",
+        "Agent registry validates against current system structure"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-003", 
+      "type": "feature",
+      "title": "Centralize standards references",
+      "description": "Extract all references to .claude/standards/ files and create a central standards.md registry with metadata, application contexts, and validation rules.",
+      "status": "pending",
+      "priority": "high", 
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/references/standards.md"
+      ],
+      "dependencies": ["REF-001"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "All 3 standards files documented with purposes and usage contexts",
+        "theme-standards.md references consolidated from 16+ files",
+        "best-practices.md and tech-stack.md references centralized", 
+        "Validation rules for standards compliance defined"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-004",
+      "type": "feature", 
+      "title": "Resolve schema inconsistencies and centralize definitions",
+      "description": "Resolve the 12-field vs 14-field task schema inconsistency by creating a canonical schema definition and centralizing all schema references in schemas.md.",
+      "status": "pending",
+      "priority": "critical",
+      "created_date": "2025-08-25", 
+      "completed_date": null,
+      "target_files": [
+        ".claude/references/schemas.md",
+        ".claude/agents/task-schema-validator.md",
+        ".claude/agents/file-creator.md"
+      ],
+      "dependencies": ["REF-001"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Single canonical task schema definition established (resolve 12-field vs 14-field)",
+        "All schema references across 8+ files unified",
+        "JSON Schema format with comprehensive validation rules",
+        "Field definitions, examples, and defaults documented",
+        "task-schema-validator.md updated to reference central schema"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-005",
+      "type": "feature",
+      "title": "Standardize workflow patterns and error codes",
+      "description": "Extract common workflow patterns and standardize error codes (ERR_001-ERR_007) into central reference files to eliminate duplication across 12+ workflow files.",
+      "status": "pending", 
+      "priority": "medium",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/references/patterns.md",
+        ".claude/references/errors.md"
+      ],
+      "dependencies": ["REF-001"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Common workflow step patterns documented and standardized",
+        "Dashboard integration patterns centralized",
+        "All error codes ERR_001-ERR_007 defined with standard messages",
+        "Error handling patterns consistent across all workflows",
+        "Validation patterns for common operations documented"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-006",
+      "type": "feature",
+      "title": "Centralize directory structure conventions",
+      "description": "Document and standardize all directory structure conventions, naming patterns, and path specifications in a central directories.md reference file.",
+      "status": "pending",
+      "priority": "medium", 
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/references/directories.md"
+      ],
+      "dependencies": ["REF-001"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Spec directory naming convention standardized (.claude/specs/[create|update]-[task-id]-[date]/)",
+        "All path patterns documented with examples",
+        "Directory purposes and structures clearly defined",
+        "File naming conventions consistent across system"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-007",
+      "type": "feature",
+      "title": "Implement reference syntax and resolution system",
+      "description": "Design and implement the standardized reference syntax (<!-- REF:type:name -->) and the system for resolving references at build/validation time.",
+      "status": "pending",
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/agents/reference-resolver.md",
+        ".claude/commands/workflows/validate-references.md"
+      ],
+      "dependencies": ["REF-002", "REF-003", "REF-004", "REF-005", "REF-006"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Reference syntax defined and documented",
+        "Reference resolution mechanism implemented",
+        "Circular reference detection system in place", 
+        "Automated validation of reference integrity",
+        "Version tracking for reference updates"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-008",
+      "type": "feature",
+      "title": "Create standardized file templates",
+      "description": "Develop templates for new agents, workflows, and specs that incorporate the centralized reference system and ensure consistency across new files.",
+      "status": "pending",
+      "priority": "medium",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/templates/agent-template.md",
+        ".claude/templates/workflow-template.md", 
+        ".claude/templates/spec-template.md"
+      ],
+      "dependencies": ["REF-007"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Agent template includes standard structure with reference integration",
+        "Workflow template incorporates common patterns from patterns.md",
+        "Spec template follows standardized format with schema compliance",
+        "All templates use centralized reference syntax",
+        "Templates validated against existing file structures"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-009",
+      "type": "update",
+      "title": "Migrate agent files to use centralized references",
+      "description": "Update all agent files in .claude/agents/ to replace duplicated content with references to the centralized system, starting with the most referenced agents.",
+      "status": "pending",
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/agents/task-schema-validator.md",
+        ".claude/agents/file-creator.md", 
+        ".claude/agents/code-reviewer.md",
+        ".claude/agents/context-fetcher.md",
+        ".claude/agents/test-runner.md",
+        ".claude/agents/date-checker.md",
+        ".claude/agents/logger.md",
+        ".claude/agents/git-workflow.md"
+      ],
+      "dependencies": ["REF-007"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "All agent files updated to use centralized references",
+        "Duplicated content removed and replaced with REF: syntax",
+        "Agent interdependencies properly referenced",
+        "Backward compatibility maintained during transition",
+        "All agent files validate against reference system"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-010",
+      "type": "update", 
+      "title": "Migrate workflow files to use centralized references",
+      "description": "Update all workflow files in .claude/commands/workflows/ to use centralized patterns, error codes, and references instead of duplicated content.",
+      "status": "pending",
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/commands/workflows/update.md",
+        ".claude/commands/workflows/execute.md",
+        ".claude/commands/workflows/spec.md", 
+        ".claude/commands/workflows/check.md",
+        ".claude/commands/workflows/review.md",
+        ".claude/commands/workflows/fix.md",
+        ".claude/commands/workflows/next.md",
+        ".claude/commands/workflows/roadmap.md",
+        ".claude/commands/workflows/analyze.md"
+      ],
+      "dependencies": ["REF-009"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "All workflow files use centralized error codes and patterns",
+        "Standards references consolidated using central system",
+        "Common workflow steps reference patterns.md",
+        "Error handling standardized across all workflows",
+        "Dashboard integration patterns unified"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-011",
+      "type": "feature",
+      "title": "Implement reference validation and linting system", 
+      "description": "Create automated validation and linting system to ensure reference integrity, detect broken references, and validate reference syntax across all files.",
+      "status": "pending",
+      "priority": "medium",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/commands/workflows/lint-references.md",
+        ".claude/agents/reference-linter.md"
+      ],
+      "dependencies": ["REF-010"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Automated reference validation system implemented",
+        "Broken reference detection and reporting",
+        "Reference syntax validation and enforcement", 
+        "Pre-commit hooks for reference integrity checking",
+        "Continuous integration testing for reference system"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "REF-012",
+      "type": "feature",
+      "title": "Comprehensive testing and validation of new system",
+      "description": "Conduct comprehensive testing of the centralized reference system including workflow validation, reference resolution testing, and performance verification.",
+      "status": "pending", 
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        ".claude/specs/create-spec-REF-001-2025-08-25/test-results.md"
+      ],
+      "dependencies": ["REF-011"],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "All workflows tested and verified to function with new system",
+        "Reference resolution performance meets requirements",
+        "No broken references or circular dependencies detected", 
+        "Schema validation works correctly across all task files",
+        "System reliability verified through comprehensive testing"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    }
+  ]
+}

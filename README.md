@@ -81,7 +81,7 @@ Enforced by code-reviewer during --execute, --update, and --review.
 │   ├── roadmap.md
 │   └── decisions.md
 ├── specs/               # SDDs and tasks.json
-│   └── create-spec-[task-id]-[date]/
+│   └── [feature-name]_[type]_[date]/
 │       ├── spec.md
 │       └── tasks.json
 ├── commands/            # Command dispatcher and workflows

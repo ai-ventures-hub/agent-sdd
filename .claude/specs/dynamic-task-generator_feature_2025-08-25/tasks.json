@@ -1,0 +1,89 @@
+{
+  "feature": "Dynamic Task Generator",
+  "tasks": [
+    {
+      "id": "DTG-001",
+      "type": "feature",
+      "title": "Create Dynamic Task Input Component",
+      "description": "Design and implement a React component that provides an intuitive interface for users to input task descriptions in natural language. The component should include text area, suggestion dropdown, and real-time preview functionality.",
+      "status": "pending",
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        "src/components/TaskGenerator/TaskInput.tsx",
+        "src/components/TaskGenerator/TaskInput.styles.ts",
+        "src/components/TaskGenerator/TaskPreview.tsx"
+      ],
+      "dependencies": [],
+      "linked_task": null,
+      "acceptance_criteria": [
+        "Component renders without errors",
+        "Text area accepts natural language input",
+        "Real-time preview shows structured task format",
+        "Suggestion dropdown appears for categories and priorities",
+        "Component follows theme standards for consistent styling",
+        "Input validation prevents empty or invalid submissions"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": true
+    },
+    {
+      "id": "DTG-002",
+      "type": "feature",
+      "title": "Implement Natural Language Processing Service",
+      "description": "Develop a backend service that analyzes natural language task descriptions and extracts structured information including task type, priority, category, and potential dependencies. The service should integrate with the existing API architecture.",
+      "status": "pending",
+      "priority": "high",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        "src/services/nlp/TaskParser.ts",
+        "src/services/nlp/CategoryDetector.ts",
+        "src/services/nlp/PriorityAnalyzer.ts",
+        "src/api/routes/taskGenerator.ts"
+      ],
+      "dependencies": ["DTG-001"],
+      "linked_task": "DTG-001",
+      "acceptance_criteria": [
+        "Service correctly parses natural language input",
+        "Extracts task components with 85% accuracy",
+        "Returns structured JSON matching 14-field schema",
+        "Handles edge cases and invalid input gracefully",
+        "API endpoint responds within 2 seconds",
+        "Integration tests pass for common use cases"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": false
+    },
+    {
+      "id": "DTG-003",
+      "type": "feature",
+      "title": "Build Task Generation Workflow Integration",
+      "description": "Create the complete workflow that connects the UI component with the NLP service and integrates the generated tasks into the existing task management system. Include validation, error handling, and user feedback mechanisms.",
+      "status": "pending",
+      "priority": "medium",
+      "created_date": "2025-08-25",
+      "completed_date": null,
+      "target_files": [
+        "src/hooks/useTaskGenerator.ts",
+        "src/utils/taskValidation.ts",
+        "src/components/TaskGenerator/GeneratorWorkflow.tsx",
+        "src/stores/taskGeneratorStore.ts"
+      ],
+      "dependencies": ["DTG-001", "DTG-002"],
+      "linked_task": "DTG-002",
+      "acceptance_criteria": [
+        "End-to-end workflow from input to task creation works smoothly",
+        "Generated tasks validate against task-schema-validator",
+        "Error states are handled with appropriate user feedback",
+        "Loading states provide clear progress indicators",
+        "Successfully generated tasks appear in main task list",
+        "User can edit generated tasks before final creation",
+        "Workflow integrates with existing notification system"
+      ],
+      "ux_ui_reviewed": false,
+      "theme_changes": true
+    }
+  ]
+}
