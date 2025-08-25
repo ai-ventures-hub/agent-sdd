@@ -48,8 +48,8 @@ Uses the `.claude/` structure:
 - Displays the updated roadmap for review before saving.
 
 ## Error Handling
-- **Missing Files**: Return "Error: Required file (e.g., `.claude/product/overview.md`) not found."
-- **Invalid Theme Standards**: Return "Error: `.claude/standards/theme-standards.md` not found."
+- **Missing Files** [ERR_004]: Return "Error [ERR_004]: Required file (e.g., `.claude/product/overview.md`) not found."
+- **Invalid Theme Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
 
 ## Example Usage
 ```

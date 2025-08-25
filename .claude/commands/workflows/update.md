@@ -97,11 +97,11 @@ Uses the `.claude/` structure:
 - Displays the generated spec path, test results, and validation status.
 
 ## Error Handling
-- **Missing Target**: Return "Error: --update requires target file or component."
+- **Missing Target** [ERR_002]: Return "Error [ERR_002]: --update requires target file or component."
 - **Invalid Target**: Return "Error: Target not found in `src/`."
-- **Missing Standards**: Return "Error: `.claude/standards/theme-standards.md` not found."
-- **Schema Validation Failure**: Return errors from `.claude/agents/task-schema-validator.md`.
-- **Test Failure**: Return "Error: Tests failed for updated files."
+- **Missing Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
+- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
+- **Test Failure** [ERR_007]: Return "Error [ERR_007]: Tests failed for updated files."
 
 ## Example Usage
 ```

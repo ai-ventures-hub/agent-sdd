@@ -51,10 +51,10 @@ Uses the `.claude/` structure:
 - Displays the selected task and generated spec path in the interface.
 
 ## Error Handling
-- **Missing Roadmap**: Return "Error: `.claude/product/roadmap.md` not found. Run /sdd-task --roadmap first."
+- **Missing Roadmap** [ERR_004]: Return "Error [ERR_004]: `.claude/product/roadmap.md` not found. Run /sdd-task --roadmap first."
 - **No Pending Tasks**: Return "Error: No pending tasks in roadmap."
 - **Empty Phases**: Skip to the next phase with pending tasks or return "Error: No active phases with pending tasks."
-- **Schema Validation Failure**: Return errors from `.claude/agents/task-schema-validator.md`.
+- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
 
 ## Example Usage
 ```

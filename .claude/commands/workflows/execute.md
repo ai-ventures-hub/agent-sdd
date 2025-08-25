@@ -41,9 +41,8 @@ Execute a task end-to-end and enforce Theme Standards.
 5. **Tests**:
    - If not `--no-tests` and a `package.json` exists, write task-level tests for critical paths and run tests via the **test-runner** agent.
 6. **Theme review (always run)**:
-   - Execute theme review using: `/sdd-task --review <modified-paths> [--fix]` (via command dispatcher, NOT as bash command).
-     - Pass `--fix` automatically if `--fix-style` was provided.
-   - Use code-reviewer agent for theme compliance checking.
+   - Use `.claude/agents/code-reviewer.md` agent for theme compliance checking.
+   - Pass `--fix` flag behavior if `--fix-style` was provided to auto-apply safe style fixes.
    - **Source of truth**: `.claude/standards/theme-standards.md`.
    - Ensure code follows the guidelines in `.claude/standards/theme-standards.md`.
 7. **Update task state**:

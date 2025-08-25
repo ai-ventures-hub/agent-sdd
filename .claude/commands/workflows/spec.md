@@ -54,9 +54,9 @@ Uses the `.claude/` structure:
 - Displays the generated spec path and `tasks.json` validation status.
 
 ## Error Handling
-- **Missing Feature Name**: Return "Error: --spec requires feature name."
-- **Missing Standards Files**: Return "Error: Required file (e.g., `.claude/standards/theme-standards.md`) not found."
-- **Schema Validation Failure**: Return errors from `.claude/agents/task-schema-validator.md`.
+- **Missing Feature Name** [ERR_002]: Return "Error [ERR_002]: --spec requires feature name."
+- **Missing Standards Files** [ERR_004]: Return "Error [ERR_004]: Required file (e.g., `.claude/standards/theme-standards.md`) not found."
+- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
 - **Directory Creation Failure**: Return "Error: Failed to create `.claude/specs/create-spec-[task-id]-[date]/`."
 
 ## Example Usage

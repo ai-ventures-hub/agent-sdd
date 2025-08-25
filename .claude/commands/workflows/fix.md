@@ -56,23 +56,23 @@ Uses the `.claude/` structure:
 
 ## Command Syntax
 ```
-/sdd-task --fix [<task-id>]
+/sdd-task --fix [task-id]
 ```
-- **Arguments**: Optional `<task-id>` (e.g., `BTN-012`) to provide context from existing task. If omitted, creates a standalone fix.
-- **CLI Parsing**: The optional parameter uses square brackets `[<task-id>]` syntax, similar to `--analyze [paths...]`. Parser should handle both forms:
+- **Arguments**: Optional `task-id` (e.g., `BTN-012`) to provide context from existing task. If omitted, creates a standalone fix.
+- **CLI Parsing**: The optional parameter uses square brackets `[task-id]` syntax, similar to `--analyze [paths...]`. Parser should handle both forms:
   - `/sdd-task --fix` → Standalone fix mode
   - `/sdd-task --fix BTN-012` → Context-aware fix mode
 
 ## Workflow
 1. **Parse Input**:
-   - Read optional `<task-id>` from `/sdd-task --fix [<task-id>]` via CLI or dashboard.
+   - Read optional `task-id` from `/sdd-task --fix [task-id]` via CLI or dashboard.
    - **Parameter Detection**: Check if argument following `--fix` exists and is not another flag.
-   - **Validation**: If `<task-id>` provided, validate format (e.g., alphanumeric with dashes).
+   - **Validation**: If `task-id` provided, validate format (e.g., alphanumeric with dashes).
 2. **Read Changelog Context**:
    - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
 3. **Determine Fix Context**:
-   - If `<task-id>` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/create-spec-[task-id]-*/` or `.claude/specs/update-[task-id]-*/`.
-   - If no `<task-id>`: Work as standalone fix without existing task context.
+   - If `task-id` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/create-spec-[task-id]-*/` or `.claude/specs/update-[task-id]-*/`.
+   - If no `task-id`: Work as standalone fix without existing task context.
 4. **Prompt for Fix Details**:
    - Via dashboard or CLI, prompt for:
      - **Issue Description**: What needs to be fixed? (e.g., "Login button not responding on mobile")
@@ -80,7 +80,7 @@ Uses the `.claude/` structure:
      - **Severity**: Critical, High, Medium, Low
 5. **Generate Fix ID**:
    - If `<task-id>` provided: Create `FIX-[task-id]-001` (increment if multiple fixes for same task)
-   - If standalone: Create `FIX-[YYYYMMDD]-001` based on date
+   - If standalone: Create `FIX-[date]-001` based on date
 6. **Create Fix Spec Directory**:
    - Use `.claude/agents/file-creator.md` to create:
      - With task-id: `.claude/specs/fix-[task-id]-[date]/`
@@ -89,7 +89,7 @@ Uses the `.claude/` structure:
 7. **Generate `tasks.json`**:
    - Populate with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`
    - Defaults: `type: "fix"`, `status: "pending"`, `priority` based on severity, `ux_ui_reviewed: false`, `theme_changes: false` (unless UI-related)
-   - Set `linked_task` to `<task-id>` if provided
+   - Set `linked_task` to `task-id` if provided
    - Validate using `.claude/agents/task-schema-validator.md`
 8. **Analyze Affected Code**:
    - If files specified, use `.claude/agents/context-fetcher.md` to examine current state
@@ -108,7 +108,7 @@ Uses the `.claude/` structure:
     - Update `target_files` with actually modified files
     - Set `ux_ui_reviewed: true` if theme review passed
 13. **Link to Original Task** (if applicable):
-    - If `<task-id>` was provided, add reference to fix in original task's spec directory
+    - If `task-id` was provided, add reference to fix in original task's spec directory
 14. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
 15. **Log Fix Completion**:
@@ -129,14 +129,14 @@ Uses the `.claude/` structure:
 - **Ambiguous Parameters**: Return "Error: --fix accepts one optional task-id. Multiple arguments not supported."
 
 ### Task Context Errors  
-- **Invalid Task ID**: Return "Error: Task ID not found in `.claude/specs/`."
-- **Missing Fix Description**: Return "Error: --fix requires issue description."
+- **Invalid Task ID** [ERR_005]: Return "Error [ERR_005]: Task ID not found in `.claude/specs/`."
+- **Missing Fix Description** [ERR_002]: Return "Error [ERR_002]: --fix requires issue description."
 - **No Files to Fix**: Return "Error: Unable to locate files to fix. Please specify target files."
 
 ### Execution Errors
-- **Test Failures**: Return "Error: Fix validation failed. Tests must pass before completion."
-- **Schema Validation Failure**: Return errors from `.claude/agents/task-schema-validator.md`
-- **Missing Standards**: Return "Error: `.claude/standards/theme-standards.md` not found."
+- **Test Failures** [ERR_007]: Return "Error [ERR_007]: Fix validation failed. Tests must pass before completion."
+- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`
+- **Missing Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
 
 ## Example Usage
 ```

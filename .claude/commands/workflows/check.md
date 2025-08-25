@@ -64,11 +64,11 @@ Uses the `.claude/` structure:
 - Displays the report with clickable links to `spec.md` or `.claude/standards/theme-standards.md` for issues.
 
 ## Error Handling
-- **Invalid Task ID**: Return "Error: Task ID not found in `.claude/specs/`."
+- **Invalid Task ID** [ERR_005]: Return "Error [ERR_005]: Task ID not found in `.claude/specs/`."
 - **Invalid Folder Structure**: Return "Error: Spec folder does not follow `create-spec-[task-id]-[date]` naming."
-- **Missing Files**: Return "Error: `spec.md` or `tasks.json` not found."
-- **Schema Validation Failure**: Return errors from `.claude/agents/task-schema-validator.md`.
-- **Non-Compliant Theme**: Suggest running `/sdd-task --review <paths>` for fixes.
+- **Missing Files** [ERR_004]: Return "Error [ERR_004]: `spec.md` or `tasks.json` not found."
+- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
+- **Theme Compliance** [ERR_008]: Suggest running `/sdd-task --review <paths>` for fixes.
 
 ## Example Usage
 ```

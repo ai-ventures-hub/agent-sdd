@@ -46,7 +46,7 @@ Uses the `.claude/` structure:
 
 ## Error Handling
 - **Invalid Paths**: Return "Error: Specified path(s) not found."
-- **Missing Theme Standards**: Return "Error: `.claude/standards/theme-standards.md` not found."
+- **Missing Theme Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
 - **No Tasks Found**: Return "Error: No associated task found in `.claude/specs/` for status update."
 
 ## Example Usage

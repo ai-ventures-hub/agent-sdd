@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Reviews code for UX/UI compliance with theme standards, accessibility (WCAG 2.1 AA), and style consistency. Supports `/sdd-task --review`, `--execute`, and `--update` workflows, updating `tasks.json` and generating reports for the Agent-SDD Dashboard.
-agents: [context-fetcher, file-creator]
+agents: context-fetcher, file-creator
 ---
 
 # Code Reviewer Agent

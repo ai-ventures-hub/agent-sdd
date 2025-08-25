@@ -32,7 +32,7 @@ Instructs the validation of task objects in `tasks.json` against the 12-field sc
   "id": String,              // Regex: ^[A-Z]{2,5}-[0-9]{1,4}(-[a-z]+(-[0-9]+)?)?$
                              // Examples: BTN-012, API-001, BTN-012-feature-1
                              // Max length: 50 characters
-  "type": String,            // Enum: "feature" | "update"
+  "type": String,            // Enum: "feature" | "update" | "fix"
   "title": String,           // Min length: 3, Max length: 200
   "description": String,     // Min length: 10, Max length: 2000
   "status": String,          // Enum: "pending" | "in_progress" | "completed"
@@ -76,7 +76,7 @@ Instructs the validation of task objects in `tasks.json` against the 12-field sc
    - Validate `id` format: `/^[A-Z]{2,5}-[0-9]{1,4}(-[a-z]+(-[0-9]+)?)?$/` (max 50 chars).
    - Validate `title`: min 3, max 200 characters.
    - Validate `description`: min 10, max 2000 characters.
-   - Ensure `type` is "feature" or "update".
+   - Ensure `type` is "feature", "update", or "fix".
    - Ensure `status` is "pending", "in_progress", or "completed".
    - Ensure `priority` is "low", "medium", "high", or "critical".
 4. **Validate Dates**:

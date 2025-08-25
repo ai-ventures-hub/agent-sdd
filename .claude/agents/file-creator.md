@@ -120,7 +120,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 ## Constraints
 - Do not overwrite existing files without explicit instruction.
 - Use only `tasks.json` for task data, never `tasks.md`.
-- Follow naming convention: `.claude/specs/[create|update]-[task-id]-[YYYYMMDD]/`.
+- Follow naming convention: `.claude/specs/[create|update]-[task-id]-[date]/`.
 - Ensure `tasks.json` complies with the 12-field schema via `.claude/agents/task-schema-validator.md`.
 - Use `.claude/agents/date-checker.md` for `created_date` and `completed_date`.
 - Reference `.claude/standards/theme-standards.md` for UI-focused specs.
@@ -182,3 +182,4 @@ Triggered by workflows:
   "reason": "No file creation needed for this operation",
   "message": "Task does not require new file generation"
 }
+```
