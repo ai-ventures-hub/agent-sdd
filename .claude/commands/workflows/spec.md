@@ -23,27 +23,31 @@ Uses the `.claude/` structure:
 ## Workflow
 1. **Parse Input**:
    - Read `feature-name` from `/sdd-task --spec <feature-name>` via CLI or dashboard.
-2. **Prompt for UI Focus**:
-   - Via dashboard, prompt: “Is this a UI task?” to set `theme_changes: true` for UI-focused specs.
+2. **Read Changelog Context**:
+   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
+3. **Prompt for UI Focus**:
+   - Via dashboard, prompt: "Is this a UI task?" to set `theme_changes: true` for UI-focused specs.
    - CLI assumes lightweight spec unless `--spec` is invoked via dashboard with UI selection.
-3. **Fetch Context**:
+4. **Fetch Context**:
    - Use `.claude/agents/context-fetcher.md` to load `.claude/product/overview.md`, `.claude/product/roadmap.md`, and `.claude/standards/` (theme-standards.md, tech-stack.md, best-practices.md).
-4. **Generate Task ID**:
+5. **Generate Task ID**:
    - Create a unique `task-id` (e.g., `LGN-001`) based on `feature-name` and project context.
-5. **Create Spec Directory**:
+6. **Create Spec Directory**:
    - Use `.claude/agents/file-creator.md` to create `.claude/specs/create-spec-[task-id]-[date]/`.
-6. **Generate `spec.md`**:
+7. **Generate `spec.md`**:
    - Write `spec.md` with:
      - Overview: Goal and success criteria based on `feature-name`.
      - Technical Specs: Implementation details from `.claude/standards/tech-stack.md`.
      - Theme Compliance: Notes from `.claude/standards/theme-standards.md` (if `theme_changes: true`).
      - Acceptance Criteria: Derived from `feature-name` and context.
-7. **Generate `tasks.json`**:
+8. **Generate `tasks.json`**:
    - Create `tasks.json` with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Set `status: pending`, `created_date` via `.claude/agents/date-checker.md`, `theme_changes` based on UI prompt.
    - Validate `tasks.json` using `.claude/agents/task-schema-validator.md`.
-8. **Output Result**:
+9. **Output Result**:
    - Return spec path and validation status to console or dashboard.
+10. **Log Task Creation**:
+    - Use `.claude/agents/logger.md` in write mode to record spec creation in `.claude/changelog.md`.
 
 ## Dashboard Integration
 - The dashboard provides a text input for `feature-name` and a UI task prompt (“Is this a UI task?”).

@@ -7,7 +7,8 @@ This document maps the dependencies and interactions between agents in the Agent
 
 ```mermaid
 graph TD
-    CMD["/sdd-task Command Dispatcher"] --> WF[Workflow Files]
+    CMD["/sdd-task Command Dispatcher"] --> LOG[logger]
+    CMD --> WF[Workflow Files]
     
     WF --> TSV[task-schema-validator]
     WF --> CF[context-fetcher]
@@ -16,6 +17,7 @@ graph TD
     WF --> TR[test-runner]
     WF --> CR[code-reviewer]
     WF --> GW[git-workflow]
+    WF --> LOG
     
     CF --> TSV
     FC --> DC
@@ -25,9 +27,25 @@ graph TD
     TR --> TSV
     CR --> CF
     GW --> TSV
+    LOG --> DC
 ```
 
 ## Agent Interaction Patterns
+
+### 0. Logger Flow (Context Awareness)
+**Primary Agent**: `logger`
+**Dependencies**:
+- `date-checker` (for timestamp formatting)
+
+**Error Handling**:
+- If `date-checker` fails → Continue with fallback timestamp
+- If changelog.md missing → Create new file automatically
+- If write fails → Continue execution (non-critical)
+- Success → Update changelog with brief summary
+
+**Phases**:
+1. **Pre-Task**: Read changelog for context (read mode)
+2. **Post-Task**: Write task completion summary (write mode)
 
 ### 1. File Creation Flow
 **Primary Agent**: `file-creator`

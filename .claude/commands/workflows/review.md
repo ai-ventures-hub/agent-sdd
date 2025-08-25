@@ -22,19 +22,23 @@ Uses the `.claude/` structure:
 ## Workflow
 1. **Parse Input**:
    - Read paths from `/sdd-task --review <paths...>` via CLI or dashboard.
-2. **Fetch Context**:
+2. **Read Changelog Context**:
+   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
+3. **Fetch Context**:
    - Use `.claude/agents/context-fetcher.md` to load `.claude/standards/theme-standards.md` and specified paths.
-3. **Analyze Files**:
+4. **Analyze Files**:
    - Use `.claude/agents/code-reviewer.md` to:
      - Flag disallowed hardcoded hex/RGB colors conflicting with `.claude/standards/theme-standards.md`.
      - Flag typography, spacing, or shadow usage outside allowed values.
      - Verify dark mode variants for themed colors.
      - Check for missing focus states, ARIA attributes, or inadequate touch target sizes (WCAG 2.1 AA).
-4. **Generate Report**:
+5. **Generate Report**:
    - Output issues (errors, warnings) with file:line references to console or dashboard.
    - Include suggestions referencing `.claude/standards/theme-standards.md` or `.claude/standards/best-practices.md`.
-5. **Update Task Status**:
+6. **Update Task Status**:
    - If no critical issues, use `.claude/agents/file-creator.md` to update `ux_ui_reviewed: true` in the relevant `tasks.json` in `.claude/specs/`.
+7. **Log Review Completion**:
+   - Use `.claude/agents/logger.md` in write mode to record review results in `.claude/changelog.md`.
 
 ## Dashboard Integration
 - The dashboard provides a path selector for `--review` (e.g., file picker or text input).

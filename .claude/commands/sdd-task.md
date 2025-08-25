@@ -14,7 +14,7 @@ Operates within the `.claude/` structure:
 - **Product**: `.claude/product/` (overview.md, roadmap.md, decisions.md)
 - **Specs**: `.claude/specs/create-spec-[task-id]-[date]/` (spec.md, tasks.json)
 - **Commands**: `.claude/commands/` (sdd-task.md, workflows/)
-- **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, file-creator.md, date-checker.md, test-runner.md, code-reviewer.md)
+- **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, file-creator.md, date-checker.md, test-runner.md, code-reviewer.md, logger.md)
 
 ## Command Syntax
 /sdd-task --<flag> [arguments]
@@ -67,13 +67,15 @@ For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`
    - **Optional Parameter Handling**: Flags with optional parameters (`--fix [<task-id>]`, `--analyze [paths...]`) use square bracket syntax.
    - **CLI Parser Requirements**: Must distinguish between optional arguments and subsequent flags.
    - **Validation**: Check argument format and count for each flag type.
-2. **Validate Task (if applicable)**: For `--spec`, `--execute`, `--update`, `--fix`, `--check`, run `.claude/agents/task-schema-validator.md` to ensure valid `tasks.json`.
-3. **Fetch Context**: Use `.claude/agents/context-fetcher.md` to gather relevant files (e.g., `.claude/standards/theme-standards.md` for `--review`).
-4. **Execute Workflow**: Call the corresponding `workflows/<flag>.md` script.
-5. **Create/Update Files**: Use `.claude/agents/file-creator.md` to generate or update files (e.g., `spec.md`, `tasks.json`).
-6. **Run Tests/Checks**: For `--execute` and `--update`, invoke `.claude/agents/test-runner.md` and `.claude/agents/code-reviewer.md` for tests and style fixes.
-7. **Verify Dates**: Use `.claude/agents/date-checker.md` to ensure valid `created_date` and `completed_date` in `tasks.json`.
-8. **Output Result**: Return success/failure message and update relevant files (e.g., `.claude/specs/`, `.claude/product/roadmap.md`).
+2. **Read Changelog Context**: Use `.claude/agents/logger.md` in read mode to gather recent project changes and context for informed decision-making.
+3. **Validate Task (if applicable)**: For `--spec`, `--execute`, `--update`, `--fix`, `--check`, run `.claude/agents/task-schema-validator.md` to ensure valid `tasks.json`.
+4. **Fetch Context**: Use `.claude/agents/context-fetcher.md` to gather relevant files (e.g., `.claude/standards/theme-standards.md` for `--review`).
+5. **Execute Workflow**: Call the corresponding `workflows/<flag>.md` script.
+6. **Create/Update Files**: Use `.claude/agents/file-creator.md` to generate or update files (e.g., `spec.md`, `tasks.json`).
+7. **Run Tests/Checks**: For `--execute` and `--update`, invoke `.claude/agents/test-runner.md` and `.claude/agents/code-reviewer.md` for tests and style fixes.
+8. **Verify Dates**: Use `.claude/agents/date-checker.md` to ensure valid `created_date` and `completed_date` in `tasks.json`.
+9. **Output Result**: Return success/failure message and update relevant files (e.g., `.claude/specs/`, `.claude/product/roadmap.md`).
+10. **Log Task Completion**: Use `.claude/agents/logger.md` in write mode to record a brief summary of the completed task in `.claude/changelog.md`.
 
 ## Error Handling
 - **Invalid Flag** [ERR_001]: Return "Error [ERR_001]: Invalid flag. Use /sdd-task --help for options."

@@ -60,33 +60,37 @@ Uses the `.claude/` structure:
 ## Workflow
 1. **Parse Input**:
    - Read `target` from `/sdd-task --update <target>` via CLI or dashboard.
-2. **Prompt for Details**:
+2. **Read Changelog Context**:
+   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
+3. **Prompt for Details**:
    - Via dashboard or CLI, prompt for a short description (e.g., "Increase button padding" or "Fix login error").
    - Confirm `target` file(s) or component(s) if unclear.
-3. **Generate Task ID**:
+4. **Generate Task ID**:
    - Create a unique `task-id` (e.g., `BTN-012`) based on `target` and description.
-4. **Create Spec Directory**:
+5. **Create Spec Directory**:
    - Use `.claude/agents/file-creator.md` to create `.claude/specs/update-[task-id]-[date]/` with `spec.md` and `tasks.json`.
    - Set `created_date` via `.claude/agents/date-checker.md`.
-5. **Generate `tasks.json`**:
+6. **Generate `tasks.json`**:
    - Populate with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Defaults: `type: "update"`, `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: true`.
    - Set `target_files` from `target`, `title` and `description` from user input, `acceptance_criteria` inferred if needed.
    - Validate using `.claude/agents/task-schema-validator.md`.
-6. **Locate and Backup Target**:
+7. **Locate and Backup Target**:
    - Use `.claude/agents/context-fetcher.md` to locate `target` in `src/`.
    - Create `.bak` copies of target files.
-7. **Implement Update**:
+8. **Implement Update**:
    - Apply UI/UX tweak or fix (e.g., adjust padding, add ARIA labels) while preserving business logic.
    - Ensure compliance with `.claude/standards/theme-standards.md` (e.g., colors, spacing in 4px multiples, WCAG 2.1 AA).
-8. **Theme Review**:
+9. **Theme Review**:
    - Use `.claude/agents/code-reviewer.md` to verify `target_files` against `.claude/standards/theme-standards.md`.
-9. **Run Tests**:
-   - Use `.claude/agents/test-runner.md` to write and run minimal tests for the update.
-10. **Commit Suggestion**:
+10. **Run Tests**:
+    - Use `.claude/agents/test-runner.md` to write and run minimal tests for the update.
+11. **Commit Suggestion**:
     - Suggest commit message: `update(scope): <description> (UPDATE-ID)` (e.g., `update(Button): increase padding (BTN-012)`).
-11. **Generate Report**:
+12. **Generate Report**:
     - Output changes, theme review results, test outcomes, and schema validation status to console or dashboard.
+13. **Log Update Completion**:
+    - Use `.claude/agents/logger.md` in write mode to record update completion in `.claude/changelog.md`.
 
 ## Dashboard Integration
 - The dashboard provides inputs for `target` and description, with a confirmation prompt for the target.

@@ -10,8 +10,8 @@ agents: task-schema-validator
 Instructs the proactive retrieval of specific content from Agent-SDD documentation files to support `/sdd-task` workflows (`--spec`, `--execute`, `--update`, `--review`, `--check`, `--next`, `--roadmap`, `--analyze`). Ensures minimal data extraction and triggers task schema validation for `tasks.json` via `.claude/agents/task-schema-validator.md`. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
 
 ## Inputs
-- **File Path**: String specifying a file or directory (e.g., `.claude/standards/theme-standards.md`, `.claude/specs/`).
-- **Section or Data**: String specifying the content to extract (e.g., "Allowed Tailwind Color Classes", task fields from `tasks.json`).
+- **File Path**: String specifying a file or directory (e.g., `.claude/standards/theme-standards.md`, `.claude/specs/`, `.claude/changelog.md`).
+- **Section or Data**: String specifying the content to extract (e.g., "Allowed Tailwind Color Classes", "Recent Changes", task fields from `tasks.json`).
 - **Task ID** (optional): String identifier (e.g., `BTN-012`) for locating `tasks.json` in `.claude/specs/[create|update]-[task-id]-[date]/`.
 - **Context**: Object containing existing workflow data to avoid duplication.
 
@@ -43,7 +43,7 @@ Instructs the proactive retrieval of specific content from Agent-SDD documentati
 
 ## Workflow
 1. **Validate Inputs**:
-   - Confirm `file_path` exists in `.claude/standards/`, `.claude/product/`, or `.claude/specs/`.
+   - Confirm `file_path` exists in `.claude/standards/`, `.claude/product/`, `.claude/specs/`, or `.claude/changelog.md`.
    - Ensure `section` or `data` is specified.
 2. **Check Existing Context**:
    - Compare requested `file_path` and `section` against `context` object.
@@ -55,7 +55,7 @@ Instructs the proactive retrieval of specific content from Agent-SDD documentati
      }
      ```
 3. **Locate File**:
-   - Identify the target file in `.claude/standards/`, `.claude/product/`, or `.claude/specs/[create|update]-[task-id]-[date]/`.
+   - Identify the target file in `.claude/standards/`, `.claude/product/`, `.claude/specs/[create|update]-[task-id]-[date]/`, or `.claude/changelog.md`.
 4. **Validate Task Data** (if `tasks.json`):
    - Invoke `.claude/agents/task-schema-validator.md` with `task-id` to validate the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Collect validation result.
@@ -77,7 +77,7 @@ Instructs the proactive retrieval of specific content from Agent-SDD documentati
 ## Constraints
 - Extract only the specified section or data.
 - Do not modify files or store data.
-- Support only `.md` and `.json` files in `.claude/standards/`, `.claude/product/`, and `.claude/specs/`.
+- Support only `.md` and `.json` files in `.claude/standards/`, `.claude/product/`, `.claude/specs/`, and `.claude/changelog.md`.
 - Invoke `.claude/agents/task-schema-validator.md` for all `tasks.json` interactions.
 - Avoid duplicating content in the workflow’s context.
 
@@ -126,6 +126,17 @@ Triggered by workflows:
 {
   "file_path": ".claude/standards/theme-standards.md",
   "content": "Allowed Tailwind Color Classes: bg-primary, bg-secondary",
+  "validation": {
+    "status": "valid",
+    "errors": []
+  }
+}
+```
+**Changelog Context Output**:
+```
+{
+  "file_path": ".claude/changelog.md",
+  "content": "Recent Changes: Added sortable Rating column, Updated button themes",
   "validation": {
     "status": "valid",
     "errors": []

@@ -41,7 +41,8 @@ All operations use `/sdd-task` with flags:
 - `--next`: Create spec for next roadmap task.
 - `--spec`: Create SDD (lightweight or UI-focused) for feature name.
 - `--execute`: Execute task end-to-end with tests and style fixes for task ID.
-- `--update`: Apply UI/UX tweak or fix with tests and style fixes for target file.
+- `--update`: Apply UI/UX enhancements or improvements with tests and style fixes for target file.
+- `--fix`: Apply bug fixes and corrections with optional task context.
 - `--review`: Review code for theme compliance for modified paths.
 - `--analyze`: Analyze project for issues and improvements.
 - `--check`: Verify task completion for task ID.
@@ -49,8 +50,10 @@ All operations use `/sdd-task` with flags:
 ## Pro Tips
 - Dashboard detects `.claude/` for flag selection and task visualization.
 - Schema compliance enforced by `.claude/agents/task-schema-validator.md`.
+- Logger system automatically tracks all changes in `.claude/changelog.md` for context awareness.
 - Theme standards in `theme-standards.md` persist across updates.
 - For existing projects, `/sdd-task --next` is the best start.
+- Use `--fix` for bug fixes and `--update` for enhancements to distinguish task types.
 
 ## Preventing Duplicate Directories
 Agents search upward from the current directory to find existing `.claude/`, preventing duplicates.

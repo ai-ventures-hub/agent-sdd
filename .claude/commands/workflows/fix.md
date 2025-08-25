@@ -68,47 +68,51 @@ Uses the `.claude/` structure:
    - Read optional `<task-id>` from `/sdd-task --fix [<task-id>]` via CLI or dashboard.
    - **Parameter Detection**: Check if argument following `--fix` exists and is not another flag.
    - **Validation**: If `<task-id>` provided, validate format (e.g., alphanumeric with dashes).
-2. **Determine Fix Context**:
+2. **Read Changelog Context**:
+   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
+3. **Determine Fix Context**:
    - If `<task-id>` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/create-spec-[task-id]-*/` or `.claude/specs/update-[task-id]-*/`.
    - If no `<task-id>`: Work as standalone fix without existing task context.
-3. **Prompt for Fix Details**:
+4. **Prompt for Fix Details**:
    - Via dashboard or CLI, prompt for:
      - **Issue Description**: What needs to be fixed? (e.g., "Login button not responding on mobile")
      - **Affected Files/Components**: If known (e.g., `src/components/LoginButton.tsx`)
      - **Severity**: Critical, High, Medium, Low
-4. **Generate Fix ID**:
+5. **Generate Fix ID**:
    - If `<task-id>` provided: Create `FIX-[task-id]-001` (increment if multiple fixes for same task)
    - If standalone: Create `FIX-[YYYYMMDD]-001` based on date
-5. **Create Fix Spec Directory**:
+6. **Create Fix Spec Directory**:
    - Use `.claude/agents/file-creator.md` to create:
      - With task-id: `.claude/specs/fix-[task-id]-[date]/`
      - Standalone: `.claude/specs/fix-standalone-[fix-id]-[date]/`
    - Set `created_date` via `.claude/agents/date-checker.md`
-6. **Generate `tasks.json`**:
+7. **Generate `tasks.json`**:
    - Populate with the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`
    - Defaults: `type: "fix"`, `status: "pending"`, `priority` based on severity, `ux_ui_reviewed: false`, `theme_changes: false` (unless UI-related)
    - Set `linked_task` to `<task-id>` if provided
    - Validate using `.claude/agents/task-schema-validator.md`
-7. **Analyze Affected Code**:
+8. **Analyze Affected Code**:
    - If files specified, use `.claude/agents/context-fetcher.md` to examine current state
    - If task-id provided, cross-reference with `target_files` from original task
-8. **Implement Fix**:
+9. **Implement Fix**:
    - Apply targeted fix while preserving existing functionality
    - Ensure compliance with `.claude/standards/theme-standards.md` for UI-related fixes
    - Create `.bak` copies of modified files for rollback capability
-9. **Run Tests**:
-   - Use `.claude/agents/test-runner.md` to run relevant tests
-   - Write new tests if the fix addresses a previously untested scenario
-10. **Theme Review** (if applicable):
+10. **Run Tests**:
+    - Use `.claude/agents/test-runner.md` to run relevant tests
+    - Write new tests if the fix addresses a previously untested scenario
+11. **Theme Review** (if applicable):
     - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
-11. **Update Task State**:
+12. **Update Task State**:
     - Mark status `"completed"` and set `completed_date` using `.claude/agents/date-checker.md`
     - Update `target_files` with actually modified files
     - Set `ux_ui_reviewed: true` if theme review passed
-12. **Link to Original Task** (if applicable):
+13. **Link to Original Task** (if applicable):
     - If `<task-id>` was provided, add reference to fix in original task's spec directory
-13. **Generate Report**:
+14. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
+15. **Log Fix Completion**:
+    - Use `.claude/agents/logger.md` in write mode to record fix completion in `.claude/changelog.md`
 
 ## Dashboard Integration
 - The dashboard provides:

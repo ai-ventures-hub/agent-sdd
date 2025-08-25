@@ -23,24 +23,28 @@ Uses the `.claude/` structure:
 ## Workflow
 1. **Parse Input**:
    - Read `/sdd-task --next` via CLI or dashboard.
-2. **Read Roadmap**:
+2. **Read Changelog Context**:
+   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
+3. **Read Roadmap**:
    - Load `.claude/product/roadmap.md` using `.claude/agents/context-fetcher.md`.
-3. **Identify Active Phase**:
+4. **Identify Active Phase**:
    - Scan roadmap for phases (e.g., Phase 1, Phase 2) and identify the first phase with pending `[ ]` tasks.
-4. **Select Next Task**:
+5. **Select Next Task**:
    - Pick the first incomplete task (marked `[ ]`) in the active phase.
-   - Use the task’s description as the feature name for spec creation.
-5. **Create Spec**:
-   - Trigger `.claude/commands/workflows/spec.md` with the task’s description as the feature name.
+   - Use the task's description as the feature name for spec creation.
+6. **Create Spec**:
+   - Trigger `.claude/commands/workflows/spec.md` with the task's description as the feature name.
    - Use `.claude/agents/file-creator.md` to generate `spec.md` and `tasks.json` in `.claude/specs/create-spec-[task-id]-[date]/`.
    - Validate `tasks.json` using `.claude/agents/task-schema-validator.md` to ensure the 12-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
-6. **Update Roadmap**:
+7. **Update Roadmap**:
    - Append to the Progress Log in `.claude/product/roadmap.md`:
      ```
      [YYYY-MM-DD] – [Task Name]
      Status: in_progress
      Spec: .claude/specs/create-spec-[task-id]-[date]/
      ```
+8. **Log Next Task Selection**:
+   - Use `.claude/agents/logger.md` in write mode to record task selection in `.claude/changelog.md`.
 
 ## Dashboard Integration
 - The dashboard triggers `--next` via a button or menu option.
