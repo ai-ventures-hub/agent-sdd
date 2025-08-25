@@ -31,7 +31,7 @@ Log task completions and milestones with date and notes.
 ```
 [YYYY-MM-DD] – [Task Name]
 Status: completed / in_progress / blocked
-Spec: .claude/specs/[spec_name]-[spec_type]-[spec_date]/
+Spec: .claude/specs/[spec-name]_[spec-type]_[spec-date]/
 Notes: [Description of accomplishment, challenges, or next steps]
 ```
 

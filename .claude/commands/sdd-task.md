@@ -47,7 +47,7 @@ Each flag triggers a corresponding workflow in `.claude/commands/workflows/`:
 ## Task Schema Validation
 For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`):
 - Invokes `.claude/agents/task-schema-validator.md` to validate `tasks.json` in the relevant spec directory.
-- Ensures the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
+- Ensure the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 
 ## Dashboard Integration
 - The dashboard detects `.claude/` and provides a flag selector (e.g., dropdown for `--spec`, `--execute`).

@@ -1,4 +1,4 @@
-# Product Overview for Agent SDD Dashboard
+# Product Overview for Agent-SDD Dashboard
 
 ## Purpose
 Defines the project’s mission, target users, and goals to guide `/sdd-task --roadmap` and `/sdd-task --spec` workflows. Stored in `.claude/product/overview.md` for reference by `.claude/agents/context-fetcher.md`.
