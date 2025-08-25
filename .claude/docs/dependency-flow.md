@@ -3,6 +3,26 @@
 ## Overview
 This document maps the dependencies and interactions between agents in the Agent-SDD framework, ensuring proper error handling and workflow continuity.
 
+## Current Agent Dependencies
+
+**Updated**: 2025-08-25 - Based on actual agent frontmatter declarations
+
+**Core Dependencies (no dependencies)**:
+- `date-checker` → none
+
+**Primary Dependencies**:
+- `task-schema-validator` → date-checker
+- `logger` → date-checker
+
+**Secondary Dependencies**:
+- `context-fetcher` → task-schema-validator
+- `file-creator` → task-schema-validator, date-checker
+
+**Complex Dependencies**:
+- `code-reviewer` → context-fetcher, file-creator
+- `test-runner` → context-fetcher, file-creator, task-schema-validator
+- `git-workflow` → file-creator, date-checker
+
 ## Agent Dependency Map
 
 ```mermaid
@@ -20,13 +40,16 @@ graph TD
     WF --> LOG
     
     CF --> TSV
-    FC --> DC
     FC --> TSV
+    FC --> DC
     TR --> CF
     TR --> FC
     TR --> TSV
     CR --> CF
-    GW --> TSV
+    CR --> FC
+    GW --> FC
+    GW --> DC
+    TSV --> DC
     LOG --> DC
 ```
 
@@ -58,7 +81,7 @@ graph TD
 - If `task-schema-validator` fails → Return error [ERR_003]
 - Success → Create files and return confirmation
 
-### 2. Task Validation Flow
+### 2. Task Schema Validation Flow
 **Primary Agent**: `task-schema-validator`
 **Dependencies**:
 - `date-checker` (for date field validation)
@@ -67,6 +90,16 @@ graph TD
 - If date validation fails → Include in errors array
 - If schema validation fails → Return detailed error list
 - Success → Mark as valid
+
+### 2a. Context Fetching Flow
+**Primary Agent**: `context-fetcher`
+**Dependencies**:
+- `task-schema-validator` (for tasks.json validation)
+
+**Error Handling**:
+- If file not found → Return error [ERR_004]
+- If task validation fails → Include validation errors
+- Success → Return extracted content with validation status
 
 ### 3. Test Execution Flow
 **Primary Agent**: `test-runner`
@@ -85,21 +118,23 @@ graph TD
 **Primary Agent**: `code-reviewer`
 **Dependencies**:
 - `context-fetcher` (to get theme standards)
+- `file-creator` (to update task status and create backups)
 
 **Error Handling**:
 - If standards file missing → Return error [ERR_004]
 - If compliance issues found → Return error [ERR_008] with report
-- Success → Mark as compliant
+- Success → Mark as compliant and update task status
 
 ### 5. Git Operations Flow
 **Primary Agent**: `git-workflow`
 **Dependencies**:
-- `task-schema-validator` (to validate task updates)
+- `file-creator` (to update task status in tasks.json)
+- `date-checker` (to set completed_date)
 
 **Error Handling**:
 - If no git repo → Return informational message (not error)
 - If commit fails → Return error [ERR_006]
-- Success → Return commit details
+- Success → Return commit details and update task status
 
 ## Error Recovery Strategies
 

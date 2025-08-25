@@ -31,7 +31,7 @@ Log task completions and milestones with date and notes.
 ```
 [YYYY-MM-DD] – [Task Name]
 Status: completed / in_progress / blocked
-Spec: .claude/specs/[create|update]-[task-id]-[date]/
+Spec: .claude/specs/[spec_name]-[spec_type]-[spec_date]/
 Notes: [Description of accomplishment, challenges, or next steps]
 ```
 
@@ -39,7 +39,7 @@ Notes: [Description of accomplishment, challenges, or next steps]
 ```
 [2025-08-22] – Create User Login Page
 Status: completed
-Spec: .claude/specs/create-a-login-page_feature_08-22-2025/
+Spec: .claude/specs/create-a-login-page_feature_2025_08_25/
 Notes: Implemented login form with auth API integration.
 
 [2025-08-23] – Increase Button Padding

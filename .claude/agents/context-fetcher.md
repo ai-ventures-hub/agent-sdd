@@ -12,7 +12,7 @@ Instructs the proactive retrieval of specific content from Agent-SDD documentati
 ## Inputs
 - **File Path**: String specifying a file or directory (e.g., `.claude/standards/theme-standards.md`, `.claude/specs/`, `.claude/changelog.md`).
 - **Section or Data**: String specifying the content to extract (e.g., "Allowed Tailwind Color Classes", "Recent Changes", task fields from `tasks.json`).
-- **Task ID** (optional): String identifier (e.g., `BTN-012`) for locating `tasks.json` in `.claude/specs/[create|update]-[task-id]-[date]/`.
+- **Task ID** (optional): String identifier (e.g., `BTN-012`) for locating `tasks.json` in `.claude/specs/[feature-name]_[type]_[date]/`.
 - **Context**: Object containing existing workflow data to avoid duplication.
 
 ## Outputs
@@ -55,7 +55,7 @@ Instructs the proactive retrieval of specific content from Agent-SDD documentati
      }
      ```
 3. **Locate File**:
-   - Identify the target file in `.claude/standards/`, `.claude/product/`, `.claude/specs/[create|update]-[task-id]-[date]/`, or `.claude/changelog.md`.
+   - Identify the target file in `.claude/standards/`, `.claude/product/`, `.claude/specs/[feature-name]_[type]_[date]/`, or `.claude/changelog.md`.
 4. **Validate Task Data** (if `tasks.json`):
    - Invoke `.claude/agents/task-schema-validator.md` with `task-id` to validate the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
    - Collect validation result.

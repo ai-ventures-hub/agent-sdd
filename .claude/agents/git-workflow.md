@@ -54,7 +54,7 @@ Manages git operations for `/sdd-task` workflows (`--execute`, `--update`, `--ch
      ```
 3. **Update Task Status**:
    - If `status: completed`, use `.claude/agents/date-checker.md` to obtain `completed_date`.
-   - Use `.claude/agents/file-creator.md` to update `tasks.json` in `.claude/specs/[create|update]-[task-id]-[date]/` with `status` and `completed_date`.
+   - Use `.claude/agents/file-creator.md` to update `tasks.json` in `.claude/specs/[feature-name]_[type]_[date]/` with `status` and `completed_date`.
 4. **Execute Git Operations**:
    - Generate commit message: `type(scope): description (TASK-ID)` where type is feat|fix|update|chore|docs|style|refactor|test.
    - Stage modified files using `git add` or GitHub Desktop.

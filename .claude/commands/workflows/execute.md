@@ -1,14 +1,5 @@
-# /sdd-task --execute <task-id> [--no-tests] [--quick | --no-spec] [--fix-style]
+# /sdd-task --execute <task-id>
 Execute a task end-to-end and enforce Theme Standards.
-
----
-
-## Modes
-- `default` → Load `.claude/specs/*/tasks.json`, `spec.md`, and `.claude/product/*`.
-- `--quick` → Load only `.claude/specs/*/tasks.json` and `spec.md` (skip roadmap sync).
-- `--no-spec` → Skip spec loading. If `<task-id>` not found, prompt and create ad-hoc task under `.claude/specs/execute-task-[task-id]-[CURRENT-DATE]/` (use **date-checker** agent first).
-- `--no-tests` → Skip test writing/execution.
-- `--fix-style` → When review runs, apply safe style fixes automatically (passes `--fix` to review workflow).
 
 ---
 
@@ -27,9 +18,8 @@ Execute a task end-to-end and enforce Theme Standards.
 ---
 
 ## Workflow (what the agent does)
-1. **Detect mode** (default / `--quick` / `--no-spec`) and **resolve task**:
-   - `default`/`--quick`: Look up `<task-id>` in `.claude/specs/*/tasks.json`. Error if missing.
-   - `--no-spec`: If `<task-id>` not present, use **date-checker** agent to get current date, then prompt for details and create new ad-hoc `tasks.json` under `.claude/specs/execute-task-[task-id]-[CURRENT-DATE]/` using the `file-creator` agent.
+1. **Resolve task**:
+   - Look up `<task-id>` in `.claude/specs/*/tasks.json`. Error if missing.
 2. **Confirm target paths** with the user (examples):
    - UI: `src/components/Button/Button.tsx`
    - Logic: `src/lib/fileMonitor.ts`
@@ -39,10 +29,9 @@ Execute a task end-to-end and enforce Theme Standards.
    - If yes: Suggest message: `feat(scope): description (TASK-ID)` (e.g., `feat(Button): add disabled state (BTN-012)`).
    - If no: Show message "ℹ️ No git repository - changes saved locally. Run 'git init' to enable version control".
 5. **Tests**:
-   - If not `--no-tests` and a `package.json` exists, write task-level tests for critical paths and run tests via the **test-runner** agent.
+   - If a `package.json` exists, write task-level tests for critical paths and run tests via the **test-runner** agent.
 6. **Theme review (always run)**:
    - Use `.claude/agents/code-reviewer.md` agent for theme compliance checking.
-   - Pass `--fix` flag behavior if `--fix-style` was provided to auto-apply safe style fixes.
    - **Source of truth**: `.claude/standards/theme-standards.md`.
    - Ensure code follows the guidelines in `.claude/standards/theme-standards.md`.
 7. **Update task state**:
@@ -68,18 +57,15 @@ Execute a task end-to-end and enforce Theme Standards.
 
 ## Integration
 - **Theme standards** defined in `.claude/standards/theme-standards.md` are enforced.
-- **test-runner** is invoked unless `--no-tests`.
+- **test-runner** is invoked for all executions.
 - **git-workflow**: Only use if git repo exists and user opts to commit changes.
-- **file-creator**: Used for creating ad-hoc `tasks.json` in `--no-spec` mode, with validation by `task-schema-validator.md`.
+- **file-creator**: Used for updating task status, with validation by `task-schema-validator.md`.
 - **task-schema-validator**: Ensures all task updates comply with the unified 14-field schema.
 
 ---
 
 ## Example
 ```sh
-# Standard flow with auto style fixes
-/sdd-task --execute BTN-012 --fix-style
-
-# Ad-hoc fix without tests
-/sdd-task --execute HOTFIX-1 --no-spec --no-tests --fix-style
+# Execute a task
+/sdd-task --execute BTN-012
 ```

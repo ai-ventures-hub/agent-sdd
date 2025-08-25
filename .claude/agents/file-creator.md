@@ -91,13 +91,13 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
            "status": "pending",
            "priority": "medium",
            "created_date": "[date from date-checker]",
+           "ux_ui_reviewed": false,
+           "theme_changes": [true if UI-focused, else false],
            "completed_date": null,
            "target_files": [task_data.target_files or []],
            "dependencies": [task_data.dependencies or []],
            "linked_task": [task_data.linked_task or null],
-           "acceptance_criteria": [task_data.acceptance_criteria or []],
-           "ux_ui_reviewed": false,
-           "theme_changes": [true if UI-focused, else false]
+           "acceptance_criteria": [task_data.acceptance_criteria or []]
          }
        ]
      }

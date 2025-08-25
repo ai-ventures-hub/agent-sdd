@@ -10,7 +10,7 @@ A streamlined system for structured software development in Claude Code, using a
 - **Agents**: `.claude/agents/` with task-schema-validator, context-fetcher, file-creator, date-checker, test-runner, code-reviewer, git-workflow, logger.
 - **UX/UI Enforcement**: Automatic reviews for accessibility, responsive design, dark mode, and theme compliance via code-reviewer.
 - **Dashboard Integration**: Flag selector, prompts (e.g., UI focus for --spec), and task visualization.
-- **Task Schema**: 12-field validation for tasks.json via task-schema-validator.
+- **Task Schema**: 14-field validation for tasks.json via task-schema-validator.
 
 ## Installation
 Use the Agent-SDD Dashboard wizard to create `.claude/`, or clone `ai-ventures-hub/agent-sdd-template` and customize.
@@ -23,7 +23,7 @@ Use the Agent-SDD Dashboard wizard to create `.claude/`, or clone `ai-ventures-h
 4. Use `/sdd-task --roadmap` to plan milestones.
 5. Use `/sdd-task --next` for next spec.
 6. Use `/sdd-task --spec <feature>` for new SDDs (dashboard prompts for UI focus).
-7. Use `/sdd-task --execute <task-id>` or `--update <target>` for implementation with tests and style fixes.
+7. Use `/sdd-task --execute <task-id>` or `--update <target>` for implementation with tests and theme compliance.
 
 ### Command Syntax
 ```
@@ -35,8 +35,8 @@ See `.claude/commands/sdd-task.md` for details.
 - --roadmap: Plan roadmap and milestones.
 - --next: Create spec for next roadmap task.
 - --spec: Create SDD for feature name.
-- --execute: Execute task with tests and style fixes for task ID.
-- --update: Apply enhancements/improvements with tests and style fixes for target file.
+- --execute: Execute task with tests and theme compliance for task ID.
+- --update: Apply enhancements/improvements with tests and theme compliance for target file.
 - --fix: Apply bug fixes and corrections with optional task context.
 - --review: Review for theme compliance for modified paths.
 - --analyze: Analyze project for issues.
@@ -62,11 +62,11 @@ Enforced by code-reviewer during --execute, --update, and --review.
 - Use /sdd-task --roadmap to update product docs.
 - Use /sdd-task --next to generate specs.
 - Use /sdd-task --spec to create SDDs and tasks.json (validated by task-schema-validator).
-- Use /sdd-task --execute, --update, or --fix for implementation with tests (via test-runner) and style fixes (via code-reviewer).
+- Use /sdd-task --execute, --update, or --fix for implementation with tests (via test-runner) and theme compliance (via code-reviewer).
 - Use /sdd-task --review for compliance checks.
 - Use /sdd-task --analyze for project issues.
 - Use /sdd-task --check for task verification.
-- Test-runner requires package.json with Jest/Vitest.
+- Test-runner requires package.json with Jest (or other testing framework).
 - Logger system automatically tracks all changes in `.claude/changelog.md`.
 
 ## Directory Structure

@@ -11,7 +11,7 @@ The Code Reviewer Agent scans code files for compliance with `.claude/standards/
 
 ## Inputs
 - **File Paths**: Array of strings specifying files or directories (e.g., `src/components/Button/Button.tsx`) from `/sdd-task --review <paths>` or `target_files` in `tasks.json` for `--execute` or `--update`.
-- **Task ID** (optional): String identifier (e.g., `BTN-012`) to locate `tasks.json` in `.claude/specs/[create|update]-[task-id]-[date]/`.
+- **Task ID** (optional): String identifier (e.g., `BTN-012`) to locate `tasks.json` in `.claude/specs/[feature-name]_[type]_[date]/`.
 - **Theme Standards**: Content from `.claude/standards/theme-standards.md`, retrieved via `context-fetcher` agent.
 
 ## Outputs
@@ -38,7 +38,7 @@ The Code Reviewer Agent scans code files for compliance with `.claude/standards/
 ## Workflow
 1. **Validate Inputs**:
    - Confirm file paths exist and are valid (e.g., `*.tsx`, `*.css`).
-   - For `--execute` or `--update`, validate `task-id` and locate `tasks.json` in `.claude/specs/[create|update]-[task-id]-[date]/`.
+   - For `--execute` or `--update`, validate `task-id` and locate `tasks.json` in `.claude/specs/[feature-name]_[type]_[date]/`.
 2. **Retrieve Theme Standards**:
    - Invoke `context-fetcher` agent to extract content from `.claude/standards/theme-standards.md` (e.g., "Allowed Tailwind Color Classes", Design Tokens).
 3. **Analyze Files**:
