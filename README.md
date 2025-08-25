@@ -22,7 +22,7 @@ Use the Agent-SDD Dashboard wizard to create `.claude/`, or clone `ai-ventures-h
 3. Update `.claude/product/overview.md` and `roadmap.md`.
 4. Use `/sdd-task --roadmap` to plan milestones.
 5. Use `/sdd-task --next` for next spec.
-6. Use `/sdd-task --spec <feature>` for new SDDs (dashboard prompts for UI focus).
+6. Use `/sdd-task --spec <feature> <description>` for new SDDs (dashboard prompts for UI focus).
 7. Use `/sdd-task --execute <task-id>` or `--update <target>` for implementation with tests and theme compliance.
 
 ### Command Syntax
@@ -34,7 +34,7 @@ See `.claude/commands/sdd-task.md` for details.
 ### Flag Reference
 - --roadmap: Plan roadmap and milestones.
 - --next: Create spec for next roadmap task.
-- --spec: Create SDD for feature name.
+- --spec: Create SDD for feature name and description.
 - --execute: Execute task with tests and theme compliance for task ID.
 - --update: Apply enhancements/improvements with tests and theme compliance for target file.
 - --fix: Apply bug fixes and corrections with optional task context.
@@ -46,7 +46,7 @@ See `.claude/commands/sdd-task.md` for details.
 Claude Code supports natural language:
 - "Plan the roadmap" → /sdd-task --roadmap
 - "Create spec for next task" → /sdd-task --next
-- "Create a spec for user login" → /sdd-task --spec
+- "Create a spec for user login" → /sdd-task --spec "User Login" "Create responsive login form with validation"
 - "Execute task T123" → /sdd-task --execute
 - "Update button component" → /sdd-task --update
 - "Fix login bug" → /sdd-task --fix
@@ -61,7 +61,7 @@ Enforced by code-reviewer during --execute, --update, and --review.
 ## Testing
 - Use /sdd-task --roadmap to update product docs.
 - Use /sdd-task --next to generate specs.
-- Use /sdd-task --spec to create SDDs and tasks.json (validated by task-schema-validator).
+- Use /sdd-task --spec <feature> <description> to create SDDs and tasks.json (validated by task-schema-validator).
 - Use /sdd-task --execute, --update, or --fix for implementation with tests (via test-runner) and theme compliance (via code-reviewer).
 - Use /sdd-task --review for compliance checks.
 - Use /sdd-task --analyze for project issues.

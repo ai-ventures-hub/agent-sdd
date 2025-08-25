@@ -24,7 +24,7 @@ Operates within the `.claude/` structure:
 |-------------|----------------------------------------------------------|-------------------------------|
 | `--roadmap` | Plan product roadmap and milestones                      | None                          |
 | `--next`    | Create spec for the next roadmap task                    | None                          |
-| `--spec`    | Create a Software Design Document (lightweight or UI-focused) | Feature name                 |
+| `--spec`    | Create a Software Design Document | Feature name and description |
 | `--execute` | Execute a task end-to-end (includes tests, auto style fixes) | Task ID                     |
 | `--update`  | Apply UI/UX enhancements or improvements to working code | Target file/component        |
 | `--fix`     | Apply targeted fixes to resolve bugs or broken functionality | Optional task ID              |
@@ -36,7 +36,7 @@ Operates within the `.claude/` structure:
 Each flag triggers a corresponding workflow in `.claude/commands/workflows/`:
 1. **--roadmap**: Executes `workflows/roadmap.md` to update `.claude/product/roadmap.md` with milestones and tasks.
 2. **--next**: Executes `workflows/next.md` to identify the next task from `.claude/product/roadmap.md` and create a spec in `.claude/specs/`.
-3. **--spec**: Executes `workflows/spec.md` to create a lightweight or UI-focused spec in `.claude/specs/[feature-name]_[type]_[date]/`. The dashboard prompts for UI focus (sets `theme_changes: true` in tasks.json if UI-focused).
+3. **--spec**: Executes `workflows/spec.md` to create a spec in `.claude/specs/[feature-name]_[type]_[date]/` using the provided feature name and description. The dashboard prompts for UI focus (sets `theme_changes: true` in tasks.json if UI-focused).
 4. **--execute**: Executes `workflows/execute.md` to implement a task from a spec, running tests via `.claude/agents/test-runner.md` and applying style fixes via `.claude/agents/code-reviewer.md`.
 5. **--update**: Executes `workflows/update.md` to apply UI/UX enhancements or improvements to working code, including tests and style fixes.
 6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter.
@@ -79,7 +79,7 @@ For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`
 
 ## Error Handling
 - **Invalid Flag** [ERR_001]: Return "Error [ERR_001]: Invalid flag. Use /sdd-task --help for options."
-- **Missing Arguments** [ERR_002]: Prompt for required arguments (e.g., "Error [ERR_002]: --spec requires feature name").
+- **Missing Arguments** [ERR_002]: Prompt for required arguments (e.g., "Error [ERR_002]: --spec requires feature name and description").
 - **Parameter Parsing** [ERR_002A]: Return "Error [ERR_002A]: Invalid optional parameter format for --fix. Expected task-id or no arguments."
 - **Invalid Task Schema** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
 - **File Not Found** [ERR_004]: Return "Error [ERR_004]: Required file (e.g., `.claude/standards/theme-standards.md`) not found."
@@ -89,7 +89,7 @@ For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`
 - **Theme Compliance** [ERR_008]: Return "Error [ERR_008]: Theme compliance check failed. See report for violations."
 
 ## Example Usage
-/sdd-task --spec "User Login Page"
+/sdd-task --spec "User Login Page" "Create responsive login form with validation"
 /sdd-task --execute T123
 /sdd-task --update src/components/Button.js
 /sdd-task --fix BTN-012          # Context-aware fix

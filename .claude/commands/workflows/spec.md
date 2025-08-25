@@ -1,6 +1,6 @@
 # /sdd-task --spec Workflow
 
-Creates a Software Design Document (lightweight or UI-focused) when `/sdd-task --spec <feature-name>` is invoked. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
+Creates a Software Design Document when `/sdd-task --spec <feature-name> <description>` is invoked. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
 
 ## Purpose
 - Generate a structured spec with `spec.md` and `tasks.json` for a given feature.
@@ -16,13 +16,13 @@ Uses the `.claude/` structure:
 
 ## Command Syntax
 ```
-/sdd-task --spec <feature-name>
+/sdd-task --spec <feature-name> <description>
 ```
-- **Arguments**: Required `feature-name` (e.g., "User Login Page").
+- **Arguments**: Required `feature-name` (e.g., "User Login Page") and `description` (e.g., "Create responsive login form with validation").
 
 ## Workflow
 1. **Parse Input**:
-   - Read `feature-name` from `/sdd-task --spec <feature-name>` via CLI or dashboard.
+   - Read `feature-name` and `description` from `/sdd-task --spec <feature-name> <description>` via CLI or dashboard.
 2. **Read Changelog Context**:
    - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
 3. **Prompt for UI Focus**:
@@ -38,13 +38,13 @@ Uses the `.claude/` structure:
    - Use `.claude/agents/file-creator.md` to create `.claude/specs/[feature-name]_[type]_[date]/`.
 7. **Generate `spec.md`**:
    - Write `spec.md` with:
-     - Overview: Goal and success criteria based on `feature-name`.
+     - Overview: Goal and success criteria based on `feature-name` and `description`.
      - Technical Specs: Implementation details from `.claude/standards/tech-stack.md`.
      - Theme Compliance: Notes from `.claude/standards/theme-standards.md` (if `theme_changes: true`).
-     - Acceptance Criteria: Derived from `feature-name` and context.
+     - Acceptance Criteria: Derived from `feature-name`, `description`, and context.
 8. **Generate `tasks.json`**:
    - Create `tasks.json` with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
-   - Set `status: pending`, `created_date` via `.claude/agents/date-checker.md`, `theme_changes` based on UI prompt.
+   - Set `title` to `feature-name`, `description` to the provided `description` parameter, `status: pending`, `created_date` via `.claude/agents/date-checker.md`, `theme_changes` based on UI prompt.
    - Validate `tasks.json` using `.claude/agents/task-schema-validator.md`.
 9. **Output Result**:
    - Return spec path and validation status to console or dashboard.
@@ -52,18 +52,18 @@ Uses the `.claude/` structure:
     - Use `.claude/agents/logger.md` in write mode to record spec creation in `.claude/changelog.md`.
 
 ## Dashboard Integration
-- The dashboard provides a text input for `feature-name` and a UI task prompt (“Is this a UI task?”).
+- The dashboard provides text inputs for `feature-name` and `description`, plus a UI task prompt ("Is this a UI task?").
 - Displays the generated spec path and `tasks.json` validation status.
 
 ## Error Handling
-- **Missing Feature Name** [ERR_002]: Return "Error [ERR_002]: --spec requires feature name."
+- **Missing Feature Name or Description** [ERR_002]: Return "Error [ERR_002]: --spec requires feature name and description."
 - **Missing Standards Files** [ERR_004]: Return "Error [ERR_004]: Required file (e.g., `.claude/standards/theme-standards.md`) not found."
 - **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
 - **Directory Creation Failure**: Return "Error: Failed to create `.claude/specs/[feature-name]_[type]_[date]/`."
 
 ## Example Usage
 ```
-/sdd-task --spec "User Login Page"
+/sdd-task --spec "User Login Page" "Create responsive login form with validation"
 ```
 **Example Output**:
 ```
