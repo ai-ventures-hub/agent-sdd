@@ -66,7 +66,6 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 
      Title: [feature_name]
      Created: [date from date-checker]
-     Status: Draft
 
      ## Overview
      [task_data.description or feature_name]
