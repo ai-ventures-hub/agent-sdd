@@ -12,7 +12,7 @@ The `/sdd-task` command is the primary interface for the Agent-SDD framework, st
 Operates within the `.claude/` structure:
 - **Standards**: `.claude/standards/` (tech-stack.md, theme-standards.md, best-practices.md)
 - **Product**: `.claude/product/` (overview.md, roadmap.md, decisions.md)
-- **Specs**: `.claude/specs/create-spec-[task-id]-[date]/` (spec.md, tasks.json)
+- **Specs**: `.claude/specs/[feature-name]_[type]_[date]/` (spec.md, tasks.json)
 - **Commands**: `.claude/commands/` (sdd-task.md, workflows/)
 - **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, file-creator.md, date-checker.md, test-runner.md, code-reviewer.md, logger.md)
 
@@ -36,7 +36,7 @@ Operates within the `.claude/` structure:
 Each flag triggers a corresponding workflow in `.claude/commands/workflows/`:
 1. **--roadmap**: Executes `workflows/roadmap.md` to update `.claude/product/roadmap.md` with milestones and tasks.
 2. **--next**: Executes `workflows/next.md` to identify the next task from `.claude/product/roadmap.md` and create a spec in `.claude/specs/`.
-3. **--spec**: Executes `workflows/spec.md` to create a lightweight or UI-focused spec in `.claude/specs/create-spec-[task-id]-[date]/`. The dashboard prompts for UI focus (sets `theme_changes: true` in tasks.json if UI-focused).
+3. **--spec**: Executes `workflows/spec.md` to create a lightweight or UI-focused spec in `.claude/specs/[feature-name]_[type]_[date]/`. The dashboard prompts for UI focus (sets `theme_changes: true` in tasks.json if UI-focused).
 4. **--execute**: Executes `workflows/execute.md` to implement a task from a spec, running tests via `.claude/agents/test-runner.md` and applying style fixes via `.claude/agents/code-reviewer.md`.
 5. **--update**: Executes `workflows/update.md` to apply UI/UX enhancements or improvements to working code, including tests and style fixes.
 6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter.

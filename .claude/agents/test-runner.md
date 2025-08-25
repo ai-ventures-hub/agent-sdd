@@ -13,7 +13,7 @@ Instructs the execution and analysis of tests for `/sdd-task` workflows (`--exec
 - **Task ID**: String identifier (e.g., `BTN-012`) to locate `tasks.json`.
 - **Test Files**: Array of file paths (e.g., `["src/components/Button/Button.test.tsx"]`) from workflow or `tasks.json` (`target_files`).
 - **Acceptance Criteria**: Array of strings from `tasks.json` (e.g., `["Button padding increased", "Meets WCAG 2.1 AA"]`).
-- **Tasks JSON Path**: String specifying the `tasks.json` location (e.g., `.claude/specs/update-BTN-012-2025-08-22/tasks.json`).
+- **Tasks JSON Path**: String specifying the `tasks.json` location (e.g., `.claude/specs/button-component_update_2025-08-22/tasks.json`).
 
 ## Outputs
 - **Test Results**: Object with:
@@ -114,7 +114,7 @@ Instructs the execution and analysis of tests for `/sdd-task` workflows (`--exec
 
 ## Dashboard Integration
 - Displays test results (`passing`, `failing`, `details`) and task update status.
-- Provides clickable links to `tasks.json` (e.g., `.claude/specs/update-BTN-012-2025-08-22/tasks.json`) and test files.
+- Provides clickable links to `tasks.json` (e.g., `.claude/specs/button-component_update_2025-08-22/tasks.json`) and test files.
 
 ## Example Usage
 Triggered by workflows:
@@ -131,7 +131,7 @@ Triggered by workflows:
     "failing": 0,
     "details": []
   },
-  "task_updated": ".claude/specs/update-BTN-012-2025-08-22/tasks.json",
+  "task_updated": ".claude/specs/button-component_update_2025-08-22/tasks.json",
   "status": "valid"
 }
 ```
@@ -152,7 +152,7 @@ Triggered by workflows:
       }
     ]
   },
-  "task_updated": ".claude/specs/update-BTN-012-2025-08-22/tasks.json",
+  "task_updated": ".claude/specs/button-component_update_2025-08-22/tasks.json",
   "status": "invalid"
 }
 ```

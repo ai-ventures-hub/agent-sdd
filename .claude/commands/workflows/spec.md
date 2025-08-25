@@ -11,7 +11,7 @@ Creates a Software Design Document (lightweight or UI-focused) when `/sdd-task -
 Uses the `.claude/` structure:
 - **Standards**: `.claude/standards/` (theme-standards.md, tech-stack.md, best-practices.md)
 - **Product**: `.claude/product/` (overview.md, roadmap.md)
-- **Specs**: `.claude/specs/create-spec-[task-id]-[date]/` (spec.md, tasks.json)
+- **Specs**: `.claude/specs/[feature-name]_[type]_[date]/` (spec.md, tasks.json)
 - **Agents**: `.claude/agents/` (task-schema-validator.md, file-creator.md, context-fetcher.md, date-checker.md)
 
 ## Command Syntax
@@ -33,7 +33,9 @@ Uses the `.claude/` structure:
 5. **Generate Task ID**:
    - Create a unique `task-id` (e.g., `LGN-001`) based on `feature-name` and project context.
 6. **Create Spec Directory**:
-   - Use `.claude/agents/file-creator.md` to create `.claude/specs/create-spec-[task-id]-[date]/`.
+   - Convert `feature-name` to lowercase, replace spaces with hyphens.
+   - Determine `type` from task data (feature/update/fix).
+   - Use `.claude/agents/file-creator.md` to create `.claude/specs/[feature-name]_[type]_[date]/`.
 7. **Generate `spec.md`**:
    - Write `spec.md` with:
      - Overview: Goal and success criteria based on `feature-name`.
@@ -57,7 +59,7 @@ Uses the `.claude/` structure:
 - **Missing Feature Name** [ERR_002]: Return "Error [ERR_002]: --spec requires feature name."
 - **Missing Standards Files** [ERR_004]: Return "Error [ERR_004]: Required file (e.g., `.claude/standards/theme-standards.md`) not found."
 - **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
-- **Directory Creation Failure**: Return "Error: Failed to create `.claude/specs/create-spec-[task-id]-[date]/`."
+- **Directory Creation Failure**: Return "Error: Failed to create `.claude/specs/[feature-name]_[type]_[date]/`."
 
 ## Example Usage
 ```
@@ -65,14 +67,14 @@ Uses the `.claude/` structure:
 ```
 **Example Output**:
 ```
-Spec created at .claude/specs/create-spec-LGN-001-2025-08-22/
+Spec created at .claude/specs/user-login-page_feature_2025-08-22/
 Created spec.md and tasks.json (validated)
 ```
 
 ## Output Examples
 ### Lightweight Spec:
 ```
-Spec Path: .claude/specs/create-spec-API-001-2025-08-22/
+Spec Path: .claude/specs/api-integration_feature_2025-08-22/
 Task ID: API-001
 Theme Changes: false
 Schema: Valid
@@ -80,7 +82,7 @@ Schema: Valid
 
 ### UI-Focused Spec:
 ```
-Spec Path: .claude/specs/create-spec-LGN-001-2025-08-22/
+Spec Path: .claude/specs/user-login-page_feature_2025-08-22/
 Task ID: LGN-001
 Theme Changes: true
 Schema: Valid

@@ -10,7 +10,7 @@ Identifies and creates a spec for the next pending task in the roadmap when `/sd
 ## Directory Context
 Uses the `.claude/` structure:
 - **Product**: `.claude/product/` (roadmap.md)
-- **Specs**: `.claude/specs/create-spec-[task-id]-[date]/` (spec.md, tasks.json)
+- **Specs**: `.claude/specs/[feature-name]_[type]_[date]/` (spec.md, tasks.json)
 - **Commands**: `.claude/commands/workflows/` (spec.md for spec creation)
 - **Agents**: `.claude/agents/` (task-schema-validator.md, file-creator.md, context-fetcher.md)
 
@@ -34,14 +34,14 @@ Uses the `.claude/` structure:
    - Use the task's description as the feature name for spec creation.
 6. **Create Spec**:
    - Trigger `.claude/commands/workflows/spec.md` with the task's description as the feature name.
-   - Use `.claude/agents/file-creator.md` to generate `spec.md` and `tasks.json` in `.claude/specs/create-spec-[task-id]-[date]/`.
+   - Use `.claude/agents/file-creator.md` to generate `spec.md` and `tasks.json` in `.claude/specs/[feature-name]_[type]_[date]/`.
    - Validate `tasks.json` using `.claude/agents/task-schema-validator.md` to ensure the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 7. **Update Roadmap**:
    - Append to the Progress Log in `.claude/product/roadmap.md`:
      ```
      [YYYY-MM-DD] – [Task Name]
      Status: in_progress
-     Spec: .claude/specs/create-spec-[task-id]-[date]/
+     Spec: .claude/specs/[feature-name]_[type]_[date]/
      ```
 8. **Log Next Task Selection**:
    - Use `.claude/agents/logger.md` in write mode to record task selection in `.claude/changelog.md`.
@@ -64,7 +64,7 @@ Uses the `.claude/` structure:
 ```
 Found next task in Phase 1: 'Create Text Display component'
 Creating spec...
-Spec created at .claude/specs/create-spec-TXT-001-2025-08-22/
+Spec created at .claude/specs/text-display-component_feature_2025-08-22/
 Created spec.md and tasks.json (validated)
 Updated roadmap progress log
 ```

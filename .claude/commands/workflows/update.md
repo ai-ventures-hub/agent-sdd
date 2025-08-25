@@ -48,7 +48,7 @@ Applies UI/UX enhancements, tweaks, or improvements to existing code when `/sdd-
 ## Directory Context
 Uses the `.claude/` structure:
 - **Standards**: `.claude/standards/` (theme-standards.md, best-practices.md)
-- **Specs**: `.claude/specs/update-[task-id]-[date]/` (spec.md, tasks.json)
+- **Specs**: `.claude/specs/[feature-name]_[type]_[date]/` (spec.md, tasks.json)
 - **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, file-creator.md, code-reviewer.md, test-runner.md, date-checker.md)
 
 ## Command Syntax
@@ -68,7 +68,7 @@ Uses the `.claude/` structure:
 4. **Generate Task ID**:
    - Create a unique `task-id` (e.g., `BTN-012`) based on `target` and description.
 5. **Create Spec Directory**:
-   - Use `.claude/agents/file-creator.md` to create `.claude/specs/update-[task-id]-[date]/` with `spec.md` and `tasks.json`.
+   - Use `.claude/agents/file-creator.md` to create `.claude/specs/[feature-name]_[type]_[date]/` with `spec.md` and `tasks.json`.
    - Set `created_date` via `.claude/agents/date-checker.md`.
 6. **Generate `tasks.json`**:
    - Populate with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
@@ -109,7 +109,7 @@ Uses the `.claude/` structure:
 ```
 **Example Output**:
 ```
-Update spec created at .claude/specs/update-BTN-012-2025-08-22/
+Update spec created at .claude/specs/button-component_update_2025-08-22/
 Applied changes to src/components/Button/Button.tsx
 Tasks.json validated
 Tests passed
@@ -121,7 +121,7 @@ Commit suggestion: update(Button): increase padding (BTN-012)
 ```
 Update Report: BTN-012
 ============================
-Spec Path: .claude/specs/update-BTN-012-2025-08-22/
+Spec Path: .claude/specs/button-component_update_2025-08-22/
 Task ID: BTN-012
 Changes: Increased button padding
 Theme Compliance: Compliant
@@ -134,7 +134,7 @@ Overall: PASSED
 ```
 Update Report: AUTH-001
 ============================
-Spec Path: .claude/specs/update-AUTH-001-2025-08-22/
+Spec Path: .claude/specs/authentication-module_update_2025-08-22/
 Task ID: AUTH-001
 Changes: Fixed login error
 Theme Compliance: Non-compliant (invalid color)

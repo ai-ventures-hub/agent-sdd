@@ -11,7 +11,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 
 ## Inputs
 - **File Type**: String specifying the file to create (e.g., `spec.md`, `tasks.json`).
-- **Directory Path**: String for the target directory (e.g., `.claude/specs/create-spec-BTN-012-2025-08-22/`).
+- **Directory Path**: String for the target directory (e.g., `.claude/specs/button-component_update_2025-08-22/`).
 - **Task Data** (for `tasks.json`): Object with fields: `feature_name`, `task_id`, `type` (`feature|update`), `title`, `description`, `target_files` (optional), `acceptance_criteria` (optional), `dependencies` (optional), `linked_task` (optional).
 - **Context**: Object containing existing workflow data to avoid overwriting files.
 
@@ -43,7 +43,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 ## Workflow
 1. **Validate Inputs**:
    - Confirm `file_type` is `spec.md` or `tasks.json`.
-   - Validate `directory_path` follows `.claude/specs/[create|update]-[task-id]-[date]/`.
+   - Validate `directory_path` follows `.claude/specs/[feature-name]_[type]_[date]/`.
    - Ensure `task_data` includes required fields for `tasks.json`.
 2. **Check Existing Files**:
    - Verify if `directory_path` or files exist in `context` or file system.
@@ -56,13 +56,15 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
      }
      ```
 3. **Create Directory**:
-   - Instruct creation of `directory_path` (e.g., `.claude/specs/create-spec-BTN-012-2025-08-22/`).
+   - Instruct creation of `directory_path` (e.g., `.claude/specs/button-component_update_2025-08-22/`).
 4. **Generate Date**:
    - Use `.claude/agents/date-checker.md` to obtain `created_date` in YYYY-MM-DD format.
 5. **Create `spec.md`** (if requested):
    - Generate with structure:
      ```
-     # Software Design Document: [feature_name]
+     # Software Design Document
+
+     Title: [feature_name]
      Created: [date from date-checker]
      Status: Draft
 
@@ -120,7 +122,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 ## Constraints
 - Do not overwrite existing files without explicit instruction.
 - Use only `tasks.json` for task data, never `tasks.md`.
-- Follow naming convention: `.claude/specs/[create|update]-[task-id]-[date]/`.
+- Follow naming convention: `.claude/specs/[feature-name]_[type]_[date]/`.
 - Ensure `tasks.json` complies with the 14-field schema via `.claude/agents/task-schema-validator.md`.
 - Use `.claude/agents/date-checker.md` for `created_date` and `completed_date`.
 - Reference `.claude/standards/theme-standards.md` for UI-focused specs.
@@ -135,7 +137,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 - **Invalid Directory Path**:
   ```
   {
-    "error": "Invalid directory path: must follow .claude/specs/[create|update]-[task-id]-[date]/"
+    "error": "Invalid directory path: must follow .claude/specs/[feature-name]_[type]_[date]/"
   }
   ```
 - **Missing Task Data**:
@@ -156,7 +158,7 @@ Instructs the creation of files and directories for `/sdd-task` workflows (`--sp
 
 ## Dashboard Integration
 - Displays `directory`, `files_created`, and `validation` results.
-- Provides clickable links to created files (e.g., `.claude/specs/create-spec-BTN-012-2025-08-22/spec.md`).
+- Provides clickable links to created files (e.g., `.claude/specs/button-component_update_2025-08-22/spec.md`).
 
 ## Example Usage
 Triggered by workflows:
@@ -167,7 +169,7 @@ Triggered by workflows:
 **Example Output**:
 ```
 {
-  "directory": ".claude/specs/create-spec-LGN-001-2025-08-22",
+  "directory": ".claude/specs/user-login-page_feature_2025-08-22",
   "files_created": ["spec.md", "tasks.json"],
   "validation": {
     "status": "valid",

@@ -100,7 +100,7 @@ Manages git operations for `/sdd-task` workflows (`--execute`, `--update`, `--ch
 
 ## Dashboard Integration
 - Displays commit message, staged files, and task update status.
-- Provides clickable links to `tasks.json` (e.g., `.claude/specs/update-BTN-012-2025-08-22/tasks.json`).
+- Provides clickable links to `tasks.json` (e.g., `.claude/specs/button-component_update_2025-08-22/tasks.json`).
 
 ## Example Usage
 Triggered by workflows:
@@ -114,7 +114,7 @@ Triggered by workflows:
   "status": "success",
   "commit_message": "update(Button): increase padding (BTN-012)",
   "files": ["src/components/Button/Button.tsx"],
-  "task_updated": ".claude/specs/update-BTN-012-2025-08-22/tasks.json"
+  "task_updated": ".claude/specs/button-component_update_2025-08-22/tasks.json"
 }
 ```
 **No Git Output**:
@@ -122,6 +122,6 @@ Triggered by workflows:
 {
   "status": "no_git",
   "message": "No git repository detected; changes saved locally",
-  "task_updated": ".claude/specs/update-BTN-012-2025-08-22/tasks.json"
+  "task_updated": ".claude/specs/button-component_update_2025-08-22/tasks.json"
 }
 ```

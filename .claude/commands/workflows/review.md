@@ -10,7 +10,7 @@ Reviews code for compliance with Theme Standards, accessibility, and style consi
 ## Directory Context
 Uses the `.claude/` structure:
 - **Standards**: `.claude/standards/` (theme-standards.md for theme compliance)
-- **Specs**: `.claude/specs/create-spec-[task-id]-[date]/` (tasks.json for status updates)
+- **Specs**: `.claude/specs/[feature-name]_[type]_[date]/` (tasks.json for status updates)
 - **Agents**: `.claude/agents/` (context-fetcher.md, code-reviewer.md, file-creator.md)
 
 ## Command Syntax

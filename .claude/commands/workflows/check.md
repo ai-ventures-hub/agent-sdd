@@ -10,7 +10,7 @@ Verifies task completion and documentation quality when `/sdd-task --check <task
 ## Directory Context
 Uses the `.claude/` structure:
 - **Standards**: `.claude/standards/` (theme-standards.md for theme compliance)
-- **Specs**: `.claude/specs/create-spec-[task-id]-[date]/` (spec.md, tasks.json)
+- **Specs**: `.claude/specs/[feature-name]_[type]_[date]/` (spec.md, tasks.json)
 - **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, code-reviewer.md)
 
 ## Command Syntax
@@ -24,7 +24,7 @@ Uses the `.claude/` structure:
    - Read `task-id` from `/sdd-task --check <task-id>` via CLI or dashboard.
 2. **Locate Task Spec**:
    - Search `.claude/specs/*/tasks.json` for the given `task-id`.
-   - Verify folder follows naming convention: `create-spec-[task-id]-[date]`.
+   - Verify folder follows naming convention: `[feature-name]_[type]_[date]`.
    - Check for `spec.md` and `tasks.json`.
 3. **Validate Task Schema**:
    - Use `.claude/agents/task-schema-validator.md` to ensure `tasks.json` conforms to the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
@@ -65,7 +65,7 @@ Uses the `.claude/` structure:
 
 ## Error Handling
 - **Invalid Task ID** [ERR_005]: Return "Error [ERR_005]: Task ID not found in `.claude/specs/`."
-- **Invalid Folder Structure**: Return "Error: Spec folder does not follow `create-spec-[task-id]-[date]` naming."
+- **Invalid Folder Structure**: Return "Error: Spec folder does not follow `[feature-name]_[type]_[date]` naming."
 - **Missing Files** [ERR_004]: Return "Error [ERR_004]: `spec.md` or `tasks.json` not found."
 - **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
 - **Theme Compliance** [ERR_008]: Suggest running `/sdd-task --review <paths>` for fixes.
@@ -80,7 +80,7 @@ Uses the `.claude/` structure:
 ```
 Task Check Report: BTN-012
 ============================
-Spec folder: .claude/specs/create-spec-BTN-012-2025-08-18/
+Spec folder: .claude/specs/button-component_feature_2025-08-18/
 Task schema: Valid
 Task status: completed
 UX/UI reviewed: true
@@ -93,7 +93,7 @@ Overall: PASSED
 ```
 Task Check Report: CARD-005
 ============================
-Spec folder: .claude/specs/create-spec-CARD-005-2025-08-18/
+Spec folder: .claude/specs/card-component_feature_2025-08-18/
 Task schema: Invalid (Missing 'priority')
 Task status: in_progress
 UX/UI reviewed: false

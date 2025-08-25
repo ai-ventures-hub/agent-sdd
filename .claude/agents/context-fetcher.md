@@ -146,7 +146,7 @@ Triggered by workflows:
 **Task-Related Output**:
 ```
 {
-  "file_path": ".claude/specs/create-spec-BTN-012-2025-08-22/tasks.json",
+  "file_path": ".claude/specs/button-component_feature_2025-08-22/tasks.json",
   "content": {
     "id": "BTN-012",
     "title": "Increase button padding"

@@ -71,7 +71,7 @@ Uses the `.claude/` structure:
 2. **Read Changelog Context**:
    - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
 3. **Determine Fix Context**:
-   - If `task-id` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/create-spec-[task-id]-*/` or `.claude/specs/update-[task-id]-*/`.
+   - If `task-id` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/[feature-name]_[type]_*/`.
    - If no `task-id`: Work as standalone fix without existing task context.
 4. **Prompt for Fix Details**:
    - Via dashboard or CLI, prompt for:

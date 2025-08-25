@@ -83,7 +83,7 @@ Instructs the determination of the current date in YYYY-MM-DD format to support 
 
 ## Dashboard Integration
 - Displays the determined `date` and `purpose` in the interface.
-- Links to `tasks.json` in relevant specs (e.g., `.claude/specs/create-spec-BTN-012-2025-08-22/tasks.json`).
+- Links to `tasks.json` in relevant specs (e.g., `.claude/specs/button-component_feature_2025-08-22/tasks.json`).
 
 ## Example Usage
 Triggered by workflows:

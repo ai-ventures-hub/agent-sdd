@@ -11,7 +11,7 @@ Instructs the validation of task objects in `tasks.json` against the 14-field sc
 
 ## Inputs
 - **Task Object**: JSON object from `tasks.json` with fields: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
-- **File Path**: String specifying the `tasks.json` location (e.g., `.claude/specs/create-spec-BTN-012-2025-08-22/tasks.json`).
+- **File Path**: String specifying the `tasks.json` location (e.g., `.claude/specs/button-component_update_2025-08-22/tasks.json`).
 
 ## Outputs
 - **Validation Result**: Object with:
@@ -102,7 +102,7 @@ Instructs the validation of task objects in `tasks.json` against the 14-field sc
 - Enforce exact schema structure and enum values.
 - Use `.claude/agents/date-checker.md` for date validation.
 - Support minimal tasks by auto-filling defaults.
-- Validate only tasks in `.claude/specs/[create|update]-[task-id]-[date]/tasks.json`.
+- Validate only tasks in `.claude/specs/[feature-name]_[type]_[date]/tasks.json`.
 
 ## Error Handling
 - **Missing Required Field**:
@@ -138,7 +138,7 @@ Instructs the validation of task objects in `tasks.json` against the 14-field sc
 
 ## Dashboard Integration
 - Displays `file_path`, `status`, and `errors` for validation results.
-- Provides clickable links to `tasks.json` (e.g., `.claude/specs/create-spec-BTN-012-2025-08-22/tasks.json`).
+- Provides clickable links to `tasks.json` (e.g., `.claude/specs/button-component_update_2025-08-22/tasks.json`).
 
 ## Example Usage
 Triggered by workflows:
@@ -150,7 +150,7 @@ Triggered by workflows:
 **Example Output**:
 ```
 {
-  "file_path": ".claude/specs/create-spec-BTN-012-2025-08-22/tasks.json",
+  "file_path": ".claude/specs/button-component_update_2025-08-22/tasks.json",
   "status": "valid",
   "errors": []
 }
@@ -158,7 +158,7 @@ Triggered by workflows:
 **Error Output**:
 ```
 {
-  "file_path": ".claude/specs/create-spec-BTN-012-2025-08-22/tasks.json",
+  "file_path": ".claude/specs/button-component_update_2025-08-22/tasks.json",
   "status": "invalid",
   "errors": ["Missing required field: priority", "Invalid id format"]
 }
