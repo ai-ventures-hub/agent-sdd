@@ -1,11 +1,49 @@
 # /sdd-task --update Workflow
 
-Applies a UI/UX tweak or fix to existing code when `/sdd-task --update <target>` is invoked, ensuring compliance with Theme Standards. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
+Applies UI/UX enhancements, tweaks, or improvements to existing code when `/sdd-task --update <target>` is invoked, ensuring compliance with Theme Standards. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
 
 ## Purpose
-- Apply UI/UX improvements or fixes (e.g., bugs, styling, accessibility) to a target file or component.
+- Apply UI/UX enhancements, styling improvements, or accessibility upgrades to a target file or component.
+- **Enhancement-focused**: Improves existing functionality rather than fixing broken behavior (use `--fix` for bugs).
 - Ensure changes align with `.claude/standards/theme-standards.md`.
 - Generate and validate `tasks.json` using the 12-field schema.
+
+## --update vs --fix Distinction
+- **--update**: Use for enhancements, improvements, styling changes, or feature additions to working code
+- **--fix**: Use for resolving bugs, errors, or broken functionality
+
+### When to Use --update
+- ✅ **Styling improvements**: Better colors, spacing, typography
+- ✅ **Accessibility enhancements**: Adding ARIA labels, improving focus states
+- ✅ **Performance optimizations**: Reducing bundle size, lazy loading
+- ✅ **UX improvements**: Better animations, smoother interactions
+- ✅ **Feature additions**: Adding new props, extending functionality
+- ✅ **Code refactoring**: Cleaner code structure while maintaining behavior
+
+### When to Use --fix Instead
+- ❌ **Broken functionality**: Button doesn't click, form doesn't submit
+- ❌ **Runtime errors**: JavaScript errors, crashes, exceptions  
+- ❌ **Visual bugs**: Layout breaks, elements overlap incorrectly
+- ❌ **Logic errors**: Wrong calculations, incorrect data flow
+- ❌ **Integration failures**: API calls fail, database connections break
+
+## Examples
+
+### Typical --update Scenarios:
+```
+"Increase button padding from 8px to 12px for better touch targets"
+"Add hover animation to navigation links"  
+"Implement dark mode variant for the card component"
+"Add loading spinner to improve user feedback"
+"Refactor component to use CSS modules instead of styled-components"
+```
+
+### Use --fix Instead For:
+```
+"Login button throws error when clicked" → Use /sdd-task --fix
+"Form validation doesn't work on mobile" → Use /sdd-task --fix  
+"Navigation menu disappears on window resize" → Use /sdd-task --fix
+```
 
 ## Directory Context
 Uses the `.claude/` structure:
