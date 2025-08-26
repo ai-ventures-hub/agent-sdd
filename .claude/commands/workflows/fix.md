@@ -58,61 +58,81 @@ Uses the `.claude/` structure:
 ```
 /sdd-task --fix [task-id]
 ```
-- **Arguments**: Optional `task-id` (e.g., `BTN-012`) to provide context from existing task. If omitted, creates a standalone fix.
-- **CLI Parsing**: The optional parameter uses square brackets `[task-id]` syntax, similar to `--analyze [paths...]`. Parser should handle both forms:
-  - `/sdd-task --fix` → Standalone fix mode
-  - `/sdd-task --fix BTN-012` → Context-aware fix mode
+- **Arguments**: Optional parameter that can be either:
+  - A `task-id` (e.g., `BTN-012`) to provide context from existing task
+  - A description string (e.g., `"Login button error"`) for immediate standalone fix
+  - Omitted entirely, which will prompt for description
+- **CLI Parsing**: The optional parameter uses square brackets `[parameter]` syntax. Parser intelligently handles:
+  - `/sdd-task --fix` → Standalone fix mode (prompts for description)
+  - `/sdd-task --fix BTN-012` → Context-aware fix mode (task-id detected)
+  - `/sdd-task --fix "Login button throws error"` → Standalone fix with description
+
+## Critical Workflow Requirements
+**IMPORTANT**: The workflow MUST start with logger.md invocation and end with logger.md completion. These are not optional steps - they are critical for maintaining workflow continuity and context awareness across the Agent-SDD system.
 
 ## Workflow
-1. **Parse Input**:
-   - Read optional `task-id` from `/sdd-task --fix [task-id]` via CLI or dashboard.
-   - **Parameter Detection**: Check if argument following `--fix` exists and is not another flag.
-   - **Validation**: If `task-id` provided, validate format (e.g., alphanumeric with dashes).
-2. **Read Changelog Context**:
-   - Use `.claude/agents/logger.md` in read mode to gather recent project changes and context.
-3. **Determine Fix Context**:
-   - If `task-id` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/[feature-name]_[type]_*/`.
-   - If no `task-id`: Work as standalone fix without existing task context.
-4. **Prompt for Fix Details**:
+1. **Initialize Logger Context**:
+   - **MUST INVOKE**: Use `.claude/agents/logger.md` in read mode to gather recent project changes and establish context awareness.
+   - This step is CRITICAL and must execute before any other operations.
+2. **Parse Input**:
+   - Read optional parameter from `/sdd-task --fix [parameter]` via CLI or dashboard.
+   - **Parameter Detection Logic**:
+     a. Check if argument following `--fix` exists and is not another flag (starts with `--`).
+     b. If parameter exists, check format:
+        - If matches task-id pattern (e.g., `BTN-012`, alphanumeric with dashes): Treat as task-id
+        - If contains spaces or doesn't match task-id pattern: Treat as issue description for standalone mode
+     c. If no parameter: Proceed in standalone mode, will prompt for description later.
+   - **Validation**: 
+     - Task-id format: Must match pattern like `[A-Z]{2,5}-[0-9]{1,4}`
+     - Description: Any text string accepted, used for standalone fix
+3. **Read Changelog Context** (if not already loaded):
+   - Ensure `.claude/agents/logger.md` context is available for informed decision-making.
+4. **Determine Fix Context**:
+   - If valid `task-id` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/[feature-name]_[type]_*/`.
+   - If description provided or no parameter: Work as standalone fix without existing task context.
+   - Store any provided description for use in step 5.
+5. **Prompt for Fix Details**:
    - Via dashboard or CLI, prompt for:
-     - **Issue Description**: What needs to be fixed? (e.g., "Login button not responding on mobile")
+     - **Issue Description**: What needs to be fixed? (Skip if description already provided as parameter)
      - **Affected Files/Components**: If known (e.g., `src/components/LoginButton.tsx`)
      - **Severity**: Critical, High, Medium, Low
-5. **Generate Fix ID**:
+6. **Generate Fix ID**:
    - If `<task-id>` provided: Create `FIX-[task-id]-001` (increment if multiple fixes for same task)
    - If standalone: Create `FIX-[date]-001` based on date
-6. **Create Fix Spec Directory**:
+7. **Create Fix Spec Directory**:
    - Use `.claude/agents/file-creator.md` to create:
      - With task-id: `.claude/specs/fix-[task-id]-[date]/`
      - Standalone: `.claude/specs/fix-standalone-[fix-id]-[date]/`
    - Set `created_date` via `.claude/agents/date-checker.md`
-7. **Generate `tasks.json`**:
+8. **Generate `tasks.json`**:
    - Populate with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`
    - Defaults: `type: "fix"`, `status: "pending"`, `priority` based on severity, `ux_ui_reviewed: false`, `theme_changes: false` (unless UI-related)
    - Set `linked_task` to `task-id` if provided
    - Validate using `.claude/agents/task-schema-validator.md`
-8. **Analyze Affected Code**:
+9. **Analyze Affected Code**:
    - If files specified, use `.claude/agents/context-fetcher.md` to examine current state
    - If task-id provided, cross-reference with `target_files` from original task
-9. **Implement Fix**:
+10. **Implement Fix**:
    - Apply targeted fix while preserving existing functionality
    - Ensure compliance with `.claude/standards/theme-standards.md` for UI-related fixes
    - Create `.bak` copies of modified files for rollback capability
-10. **Run Tests**:
+11. **Run Tests**:
     - Use `.claude/agents/test-runner.md` to run relevant tests
     - Write new tests if the fix addresses a previously untested scenario
-11. **Theme Review** (if applicable):
+12. **Theme Review** (if applicable):
     - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
-12. **Update Task State**:
+13. **Update Task State**:
     - Mark status `"completed"` and set `completed_date` using `.claude/agents/date-checker.md`
     - Update `target_files` with actually modified files
     - Set `ux_ui_reviewed: true` if theme review passed
-13. **Link to Original Task** (if applicable):
+14. **Link to Original Task** (if applicable):
     - If `task-id` was provided, add reference to fix in original task's spec directory
-14. **Generate Report**:
+15. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
-15. **Log Fix Completion**:
-    - Use `.claude/agents/logger.md` in write mode to record fix completion in `.claude/changelog.md`
+16. **Complete Logger Cycle**:
+    - **MUST INVOKE**: Use `.claude/agents/logger.md` in write mode to record fix completion in `.claude/changelog.md`
+    - Include fix ID, description, affected files, and resolution status
+    - This step is CRITICAL for maintaining workflow continuity
 
 ## Dashboard Integration
 - The dashboard provides:
@@ -124,9 +144,9 @@ Uses the `.claude/` structure:
 ## Error Handling
 
 ### CLI Parameter Parsing Errors
-- **Malformed Task ID**: Return "Error: Invalid task-id format. Use alphanumeric with dashes (e.g., BTN-012)."
-- **Flag Confusion**: Return "Error: Expected task-id or no arguments after --fix. Found flag: [flag]."
-- **Ambiguous Parameters**: Return "Error: --fix accepts one optional task-id. Multiple arguments not supported."
+- **Invalid Task ID Format**: When parameter doesn't match task-id pattern but isn't a description, inform: "Note: '[parameter]' doesn't match task-id format (e.g., BTN-012). Treating as issue description for standalone fix."
+- **Flag Confusion**: Return "Error: Unexpected flag after --fix. Found: [flag]. Use '/sdd-task --fix' for standalone or '/sdd-task --fix TASK-ID' for context-aware fix."
+- **Multiple Arguments**: Return "Error: --fix accepts one optional parameter (task-id or description). Multiple arguments not supported."
 
 ### Task Context Errors  
 - **Invalid Task ID** [ERR_005]: Return "Error [ERR_005]: Task ID not found in `.claude/specs/`."
@@ -140,10 +160,13 @@ Uses the `.claude/` structure:
 
 ## Example Usage
 ```
-# Fix linked to existing task
+# Fix linked to existing task (task-id format detected)
 /sdd-task --fix BTN-012
 
-# Standalone fix
+# Standalone fix with description provided
+/sdd-task --fix "Login button throws error on mobile devices"
+
+# Standalone fix (will prompt for description)
 /sdd-task --fix
 ```
 
