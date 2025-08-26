@@ -31,13 +31,19 @@ All workflows are located in: `.claude/commands/workflows/`
 - `/sdd-task --update` → `workflows/update.md`
 - `/sdd-task --execute` → `workflows/execute.md`
 - `/sdd-task --spec` → `workflows/spec.md`
+- `/sdd-task --edit` → `workflows/edit.md`
 - etc.
 
 ## Command Parsing Rules
-For optional parameters like `--fix [<task-id>]`:
+For optional parameters like `--fix [<task-id>]` or `--edit [<description>]`:
 - **Task-ID Pattern**: `[A-Z]{2,5}-[0-9]{1,4}` (e.g., BTN-012)
 - **Description Pattern**: Any other string is treated as a description
 - **No Parameter**: Prompts user for details
+
+### Special Command Notes
+- **--edit**: Lightweight workflow using only logger agents (read at start, write at end)
+- **--fix**: Full workflow with spec creation and extensive validation
+- **--update**: Full workflow with theme compliance and testing
 
 ## Directory Structure
 ```
