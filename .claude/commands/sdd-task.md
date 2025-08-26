@@ -28,6 +28,7 @@ Operates within the `.claude/` structure:
 | `--execute` | Execute a task end-to-end (includes tests, auto style fixes) | Task ID                     |
 | `--update`  | Apply UI/UX enhancements or improvements to working code | Target file/component        |
 | `--fix`     | Apply targeted fixes to resolve bugs or broken functionality | Optional task ID              |
+| `--edit`    | Apply simple, lightweight edits without full spec overhead | Optional description         |
 | `--review`  | Review code for theme compliance                        | Modified paths                |
 | `--analyze` | Analyze project for issues and improvements              | None                          |
 | `--check`   | Verify task completion                                   | Task ID                       |
@@ -40,9 +41,10 @@ Each flag triggers a corresponding workflow in `.claude/commands/workflows/`:
 4. **--execute**: Executes `workflows/execute.md` to implement a task from a spec, running tests via `.claude/agents/test-runner.md` and applying style fixes via `.claude/agents/code-reviewer.md`.
 5. **--update**: Executes `workflows/update.md` to apply UI/UX enhancements or improvements to working code, including tests and style fixes.
 6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter.
-7. **--review**: Executes `workflows/review.md` to check modified paths against `.claude/standards/theme-standards.md` using `.claude/agents/code-reviewer.md`.
-8. **--analyze**: Executes `workflows/analyze.md` to scan the project for issues and suggest improvements.
-9. **--check**: Executes `workflows/check.md` to verify task completion against `tasks.json` using `.claude/agents/task-schema-validator.md`.
+7. **--edit**: Executes `workflows/edit.md` to apply simple, lightweight edits with minimal overhead - only uses logger agents at start and end.
+8. **--review**: Executes `workflows/review.md` to check modified paths against `.claude/standards/theme-standards.md` using `.claude/agents/code-reviewer.md`.
+9. **--analyze**: Executes `workflows/analyze.md` to scan the project for issues and suggest improvements.
+10. **--check**: Executes `workflows/check.md` to verify task completion against `tasks.json` using `.claude/agents/task-schema-validator.md`.
 
 ## Task Schema Validation
 For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`):
@@ -58,6 +60,7 @@ For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`
 ## Flag Purpose Quick Reference
 - **--update**: Enhance working code (styling, features, improvements)
 - **--fix**: Resolve broken code (bugs, errors, failures)
+- **--edit**: Simple, lightweight edits (typos, formatting, minor changes)
 - **--execute**: Implement new features from specs
 - **--review**: Check code for theme/accessibility compliance
 - **--analyze**: Scan project for potential issues
@@ -94,6 +97,8 @@ For flags involving tasks (`--spec`, `--execute`, `--update`, `--fix`, `--check`
 /sdd-task --update src/components/Button.js
 /sdd-task --fix BTN-012          # Context-aware fix
 /sdd-task --fix                  # Standalone fix
+/sdd-task --edit "Fix typo in welcome message"
+/sdd-task --edit                 # Prompt for edit description
 /sdd-task --analyze src/         # Optional paths
 /sdd-task --analyze              # Analyze entire project
 /sdd-task --roadmap

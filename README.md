@@ -3,8 +3,8 @@
 A streamlined system for structured software development in Claude Code, using a `.claude/` folder for specs, standards, tasks, and agents. Integrated with the Agent-SDD Dashboard at claude.agent-sdd.com for visual workflow management.
 
 ## Features
-- **Single Command**: `/sdd-task` with 9 flags for all operations.
-- **Flags**: --roadmap, --next, --spec, --execute, --update, --fix, --review, --analyze, --check.
+- **Single Command**: `/sdd-task` with 10 flags for all operations.
+- **Flags**: --roadmap, --next, --spec, --execute, --update, --fix, --edit, --review, --analyze, --check.
 - **Context Awareness**: Logger system tracks all changes in `.claude/changelog.md` for informed decisions.
 - **Theme Standards**: Defined in `.claude/standards/theme-standards.md` for consistent design.
 - **Agents**: `.claude/agents/` with task-schema-validator, context-fetcher, file-creator, date-checker, test-runner, code-reviewer, git-workflow, logger.
@@ -38,6 +38,7 @@ See `.claude/commands/sdd-task.md` for details.
 - --execute: Execute task with tests and theme compliance for task ID.
 - --update: Apply enhancements/improvements with tests and theme compliance for target file.
 - --fix: Apply bug fixes and corrections with optional task context.
+- --edit: Apply simple, lightweight edits (typos, formatting) without full spec overhead.
 - --review: Review for theme compliance for modified paths.
 - --analyze: Analyze project for issues.
 - --check: Verify task completion for task ID.
@@ -50,6 +51,7 @@ Claude Code supports natural language:
 - "Execute task T123" → /sdd-task --execute
 - "Update button component" → /sdd-task --update
 - "Fix login bug" → /sdd-task --fix
+- "Fix typo in welcome message" → /sdd-task --edit
 - "Review code" → /sdd-task --review
 - "Analyze project" → /sdd-task --analyze
 - "Check task completion" → /sdd-task --check
@@ -63,6 +65,7 @@ Enforced by code-reviewer during --execute, --update, and --review.
 - Use /sdd-task --next to generate specs.
 - Use /sdd-task --spec <feature> <description> to create SDDs and tasks.json (validated by task-schema-validator).
 - Use /sdd-task --execute, --update, or --fix for implementation with tests (via test-runner) and theme compliance (via code-reviewer).
+- Use /sdd-task --edit for simple changes without full spec overhead (only logger agents).
 - Use /sdd-task --review for compliance checks.
 - Use /sdd-task --analyze for project issues.
 - Use /sdd-task --check for task verification.
