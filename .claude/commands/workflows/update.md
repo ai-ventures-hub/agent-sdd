@@ -65,42 +65,31 @@ Uses the `.claude/` structure:
 3. **Prompt for Details**:
    - Via dashboard or CLI, prompt for a short description (e.g., "Increase button padding" or "Fix login error").
    - Confirm `target` file(s) or component(s) if unclear.
-4. **Generate Task ID**:
-   - Create a unique `task-id` (e.g., `BTN-012`) based on `target` and description.
-5. **Create Spec Directory**:
-   - Use `.claude/agents/file-creator.md` to create `.claude/specs/[feature-name]_[type]_[date]/` with `spec.md` and `tasks.json`.
-   - Set `created_date` via `.claude/agents/date-checker.md`.
-6. **Generate `tasks.json`**:
-   - Populate with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
-   - Defaults: `type: "update"`, `status: "pending"`, `priority: "medium"`, `ux_ui_reviewed: false`, `theme_changes: true`.
-   - Set `target_files` from `target`, `title` and `description` from user input, `acceptance_criteria` inferred if needed.
-   - Validate using `.claude/agents/task-schema-validator.md`.
-7. **Locate and Backup Target**:
+4. **Locate and Backup Target**:
    - Use `.claude/agents/context-fetcher.md` to locate `target` in `src/`.
    - Create `.bak` copies of target files.
-8. **Implement Update**:
+5. **Implement Update**:
    - Apply UI/UX tweak or fix (e.g., adjust padding, add ARIA labels) while preserving business logic.
    - Ensure compliance with `.claude/standards/theme-standards.md` (e.g., colors, spacing in 4px multiples, WCAG 2.1 AA).
-9. **Theme Review**:
+6. **Theme Review**:
    - Use `.claude/agents/code-reviewer.md` to verify `target_files` against `.claude/standards/theme-standards.md`.
-10. **Run Tests**:
-    - Use `.claude/agents/test-runner.md` to write and run minimal tests for the update.
-11. **Commit Suggestion**:
-    - Suggest commit message: `update(scope): description (TASK-ID)` (e.g., `update(Button): increase padding (BTN-012)`).
-12. **Generate Report**:
-    - Output changes, theme review results, test outcomes, and schema validation status to console or dashboard.
-13. **Log Update Completion**:
+7. **Run Tests**:
+   - Use `.claude/agents/test-runner.md` to write and run minimal tests for the update.
+8. **Commit Suggestion**:
+   - Suggest commit message: `update(scope): description` (e.g., `update(Button): increase padding`).
+9. **Generate Report**:
+   - Output changes, theme review results, and test outcomes to console or dashboard.
+10. **Log Update Completion**:
     - Use `.claude/agents/logger.md` in write mode to record update completion in `.claude/changelog.md`.
 
 ## Dashboard Integration
 - The dashboard provides inputs for `target` and description, with a confirmation prompt for the target.
-- Displays the generated spec path, test results, and validation status.
+- Displays test results and theme compliance status.
 
 ## Error Handling
 - **Missing Target** [ERR_002]: Return "Error [ERR_002]: --update requires target file or component."
 - **Invalid Target**: Return "Error: Target not found in `src/`."
 - **Missing Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
-- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`.
 - **Test Failure** [ERR_007]: Return "Error [ERR_007]: Tests failed for updated files."
 
 ## Example Usage
@@ -109,37 +98,32 @@ Uses the `.claude/` structure:
 ```
 **Example Output**:
 ```
-Update spec created at .claude/specs/button-component_update_2025-08-22/
 Applied changes to src/components/Button/Button.tsx
-Tasks.json validated
 Tests passed
-Commit suggestion: update(Button): increase padding (BTN-012)
+Theme compliance: Compliant
+Commit suggestion: update(Button): increase padding
 ```
 
 ## Output Examples
 ### Successful Update:
 ```
-Update Report: BTN-012
+Update Report
 ============================
-Spec Path: .claude/specs/button-component_update_2025-08-22/
-Task ID: BTN-012
+Target: src/components/Button/Button.tsx
 Changes: Increased button padding
 Theme Compliance: Compliant
 Tests: Passed
-Schema: Valid
 Overall: PASSED
 ```
 
 ### Issues Found:
 ```
-Update Report: AUTH-001
+Update Report
 ============================
-Spec Path: .claude/specs/authentication-module_update_2025-08-22/
-Task ID: AUTH-001
+Target: src/lib/auth.ts
 Changes: Fixed login error
 Theme Compliance: Non-compliant (invalid color)
 Tests: Failed
-Schema: Valid
 Overall: NEEDS ATTENTION
 Action: Run /sdd-task --review src/lib/auth.ts
 ```

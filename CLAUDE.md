@@ -43,7 +43,7 @@ For optional parameters like `--fix [<task-id>]` or `--edit [<description>]`:
 ### Special Command Notes
 - **--edit**: Lightweight workflow using only logger agents (read at start, write at end)
 - **--fix**: Full workflow with spec creation and extensive validation
-- **--update**: Full workflow with theme compliance and testing
+- **--update**: Lightweight workflow with theme compliance and testing (no spec creation)
 
 ## Directory Structure
 ```
