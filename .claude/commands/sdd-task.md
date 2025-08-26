@@ -39,9 +39,9 @@ Each flag triggers a corresponding workflow in `.claude/commands/workflows/`:
 2. **--next**: Executes `workflows/next.md` to identify the next task from `.claude/product/roadmap.md` and create a spec in `.claude/specs/`.
 3. **--spec**: Executes `workflows/spec.md` to create a spec in `.claude/specs/[feature-name]_[type]_[date]/` using the provided feature name and description. The dashboard prompts for UI focus (sets `theme_changes: true` in tasks.json if UI-focused).
 4. **--execute**: Executes `workflows/execute.md` to implement a task from a spec, running tests via `.claude/agents/test-runner.md` and applying style fixes via `.claude/agents/code-reviewer.md`.
-5. **--update**: Executes `workflows/update.md` to apply UI/UX enhancements or improvements to working code, including tests and style fixes (lightweight workflow - no spec creation).
-6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter (lightweight workflow - no spec creation).
-7. **--edit**: Executes `workflows/edit.md` to apply simple, lightweight edits with minimal overhead - only uses logger agents at start and end.
+5. **--update**: Executes `workflows/update.md` to apply UI/UX enhancements or improvements to working code, including tests and style fixes, with required user verification before completion (lightweight workflow - no spec creation).
+6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter and required user verification before completion (lightweight workflow - no spec creation).
+7. **--edit**: Executes `workflows/edit.md` to apply simple, lightweight edits with minimal overhead and required user verification before completion - uses logger agents at start and end only.
 8. **--review**: Executes `workflows/review.md` to check modified paths against `.claude/standards/theme-standards.md` using `.claude/agents/code-reviewer.md`.
 9. **--analyze**: Executes `workflows/analyze.md` to scan the project for issues and suggest improvements.
 10. **--check**: Executes `workflows/check.md` to verify task completion against `tasks.json` using `.claude/agents/task-schema-validator.md`.
@@ -76,9 +76,10 @@ For flags involving task specs (`--spec`, `--execute`, `--check`):
 5. **Execute Workflow**: Call the corresponding `workflows/<flag>.md` script.
 6. **Create/Update Files**: Use `.claude/agents/file-creator.md` to generate or update files (e.g., `spec.md`, `tasks.json`).
 7. **Run Tests/Checks**: For `--execute`, `--update`, and `--fix`, invoke `.claude/agents/test-runner.md` and `.claude/agents/code-reviewer.md` for tests and style fixes.
-8. **Verify Dates**: Use `.claude/agents/date-checker.md` to ensure valid `created_date` and `completed_date` in `tasks.json`.
-9. **Output Result**: Return success/failure message and update relevant files (e.g., `.claude/specs/`, `.claude/product/roadmap.md`).
-10. **Log Task Completion**: Use `.claude/agents/logger.md` in write mode to record a brief summary of the completed task in `.claude/changelog.md`.
+8. **User Verification**: For `--update`, `--fix`, and `--edit`, prompt user to verify changes work as expected before proceeding to completion.
+9. **Verify Dates**: Use `.claude/agents/date-checker.md` to ensure valid `created_date` and `completed_date` in `tasks.json`.
+10. **Output Result**: Return success/failure message and update relevant files (e.g., `.claude/specs/`, `.claude/product/roadmap.md`).
+11. **Log Task Completion**: Use `.claude/agents/logger.md` in write mode to record a brief summary of the completed task in `.claude/changelog.md` - only after user verification for applicable workflows.
 
 ## Error Handling
 - **Invalid Flag** [ERR_001]: Return "Error [ERR_001]: Invalid flag. Use /sdd-task --help for options."

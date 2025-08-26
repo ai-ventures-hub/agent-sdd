@@ -79,7 +79,15 @@ Uses the `.claude/` structure:
    - Suggest commit message: `update(scope): description` (e.g., `update(Button): increase padding`).
 9. **Generate Report**:
    - Output changes, theme review results, and test outcomes to console or dashboard.
-10. **Log Update Completion**:
+10. **User Verification**:
+    - **REQUIRED**: Prompt user to test and verify the update is working as expected
+    - Ask: "Please test the changes. Do they work correctly and meet your requirements?"
+    - **If "Good" or confirmed working**: Proceed to step 11
+    - **If issues found**: 
+      - Gather additional details about problems or needed adjustments
+      - Return to step 5 (Implement Update) with new information
+      - Do not proceed to logger completion until update is verified
+11. **Log Update Completion**:
     - Use `.claude/agents/logger.md` in write mode to record update completion in `.claude/changelog.md`.
 
 ## Dashboard Integration
@@ -105,7 +113,7 @@ Commit suggestion: update(Button): increase padding
 ```
 
 ## Output Examples
-### Successful Update:
+### During Update Process:
 ```
 Update Report
 ============================
@@ -113,10 +121,20 @@ Target: src/components/Button/Button.tsx
 Changes: Increased button padding
 Theme Compliance: Compliant
 Tests: Passed
-Overall: PASSED
+Overall: AWAITING USER VERIFICATION
+
+Please test the changes. Do they work correctly and meet your requirements?
 ```
 
-### Issues Found:
+### After User Confirmation:
+```
+Update Complete
+============================
+User Verification: CONFIRMED - Changes work as expected
+Status: COMPLETED and logged to changelog
+```
+
+### Issues Found During Development:
 ```
 Update Report
 ============================

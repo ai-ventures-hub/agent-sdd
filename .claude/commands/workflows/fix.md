@@ -109,7 +109,15 @@ Uses the `.claude/` structure:
    - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
 10. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
-11. **Complete Logger Cycle**:
+11. **User Verification**:
+    - **REQUIRED**: Prompt user to test and verify the fix is working as expected
+    - Ask: "Please test the fix. Does it resolve the issue completely?"
+    - **If "Fixed" or confirmed working**: Proceed to step 12
+    - **If issue persists**: 
+      - Gather additional details about remaining problems
+      - Return to step 7 (Implement Fix) with new information
+      - Do not proceed to logger completion until fix is verified
+12. **Complete Logger Cycle**:
     - **MUST INVOKE**: Use `.claude/agents/logger.md` in write mode to record fix completion in `.claude/changelog.md`
     - Include description, affected files, and resolution status
     - This step is CRITICAL for maintaining workflow continuity
@@ -159,7 +167,9 @@ Issue: Login button not responding on mobile
 Files Modified: src/components/LoginButton.tsx
 Tests: Passed
 Theme Compliance: N/A (non-UI fix)
-Overall: PASSED
+Overall: AWAITING USER VERIFICATION
+
+Please test the fix. Does it resolve the issue completely?
 ```
 
 ### Standalone Fix:
@@ -170,7 +180,17 @@ Issue: Navigation menu overlapping content
 Files Modified: src/components/Navigation.tsx, src/styles/navigation.css
 Tests: Passed
 Theme Compliance: Compliant
-Overall: PASSED
+Overall: AWAITING USER VERIFICATION
+
+Please test the fix. Does it resolve the issue completely?
+```
+
+### After User Confirmation:
+```
+Fix Completion
+============================
+User Verification: CONFIRMED - Fix working as expected
+Status: COMPLETED and logged to changelog
 ```
 
 ## Integration Notes

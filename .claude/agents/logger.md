@@ -158,5 +158,6 @@ Output: {
 ## Integration Notes
 - **Pre-Task Context**: Called at the start of all `/sdd-task` workflows to provide historical context
 - **Post-Task Logging**: Called at the end of successful task completions to record changes
+- **User Verification**: For `--update`, `--fix`, and `--edit` workflows, logging only occurs after user confirms changes work as expected
 - **Workflow Triggers**: Should be invoked by the main `/sdd-task` dispatcher, not individual workflows
 - **Context Awareness**: Helps Claude understand project evolution and make more informed decisions

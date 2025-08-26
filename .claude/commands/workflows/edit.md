@@ -49,7 +49,16 @@ A lightweight workflow for simple edits that don't require a full specification 
    - Apply changes using appropriate tools (Edit, MultiEdit, Write, etc.)
    - Focus on the specific change requested without extensive validation
 
-4. **Complete Logger Cycle**:
+4. **User Verification**:
+   - **REQUIRED**: Prompt user to verify the edit is correct and working as expected
+   - Ask: "Please review the changes. Are they correct and working as intended?"
+   - **If "Correct" or confirmed working**: Proceed to step 5
+   - **If issues found**: 
+     - Gather additional details about problems
+     - Return to step 3 (Execute Edit) with corrections
+     - Do not proceed to logger completion until edit is verified
+
+5. **Complete Logger Cycle**:
    - **MUST INVOKE**: Use `.claude/agents/logger.md` in write mode to record the edit in `.claude/changelog.md`
    - Include brief description of changes made
    - This step maintains workflow continuity for future operations
@@ -68,13 +77,24 @@ A lightweight workflow for simple edits that don't require a full specification 
 /sdd-task --edit
 ```
 
-## Output Example
+## Output Examples
+### During Edit Process:
 ```
-Edit Complete
+Edit Report
 =============
 Description: Fix typo in welcome message
 Files Modified: src/components/Welcome.tsx
-Status: completed
+Status: AWAITING USER VERIFICATION
+
+Please review the changes. Are they correct and working as intended?
+```
+
+### After User Confirmation:
+```
+Edit Complete
+=============
+User Verification: CONFIRMED - Changes are correct
+Status: COMPLETED and logged to changelog
 ```
 
 ## Integration Notes

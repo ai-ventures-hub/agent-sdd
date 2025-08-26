@@ -36,9 +36,9 @@ See `.claude/commands/sdd-task.md` for details.
 - --next: Create spec for next roadmap task.
 - --spec: Create SDD for feature name and description.
 - --execute: Execute task with tests and theme compliance for task ID.
-- --update: Apply enhancements/improvements with tests and theme compliance for target file.
-- --fix: Apply bug fixes and corrections with optional task context.
-- --edit: Apply simple, lightweight edits (typos, formatting) without full spec overhead.
+- --update: Apply enhancements/improvements with tests and theme compliance for target file (requires user verification).
+- --fix: Apply bug fixes and corrections with optional task context (requires user verification).
+- --edit: Apply simple, lightweight edits (typos, formatting) without full spec overhead (requires user verification).
 - --review: Review for theme compliance for modified paths.
 - --analyze: Analyze project for issues.
 - --check: Verify task completion for task ID.
@@ -66,6 +66,7 @@ Enforced by code-reviewer during --execute, --update, and --review.
 - Use /sdd-task --spec <feature> <description> to create SDDs and tasks.json (validated by task-schema-validator).
 - Use /sdd-task --execute, --update, or --fix for implementation with tests (via test-runner) and theme compliance (via code-reviewer).
 - Use /sdd-task --edit for simple changes without full spec overhead (only logger agents).
+- Note: --update, --fix, and --edit require user verification before completion logging.
 - Use /sdd-task --review for compliance checks.
 - Use /sdd-task --analyze for project issues.
 - Use /sdd-task --check for task verification.
