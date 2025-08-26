@@ -51,8 +51,7 @@ Applies targeted fixes to resolve bugs, issues, or inconsistencies when `/sdd-ta
 ## Directory Context
 Uses the `.claude/` structure:
 - **Standards**: `.claude/standards/` (theme-standards.md, best-practices.md)
-- **Specs**: `.claude/specs/fix-[task-id]-[date]/` or `.claude/specs/fix-standalone-[fix-id]-[date]/` (spec.md, tasks.json)
-- **Agents**: `.claude/agents/` (task-schema-validator.md, context-fetcher.md, file-creator.md, code-reviewer.md, test-runner.md, date-checker.md)
+- **Agents**: `.claude/agents/` (context-fetcher.md, code-reviewer.md, test-runner.md, date-checker.md, logger.md)
 
 ## Command Syntax
 ```
@@ -96,42 +95,23 @@ Uses the `.claude/` structure:
      - **Issue Description**: What needs to be fixed? (Skip if description already provided as parameter)
      - **Affected Files/Components**: If known (e.g., `src/components/LoginButton.tsx`)
      - **Severity**: Critical, High, Medium, Low
-6. **Generate Fix ID**:
-   - If `<task-id>` provided: Create `FIX-[task-id]-001` (increment if multiple fixes for same task)
-   - If standalone: Create `FIX-[date]-001` based on date
-7. **Create Fix Spec Directory**:
-   - Use `.claude/agents/file-creator.md` to create:
-     - With task-id: `.claude/specs/fix-[task-id]-[date]/`
-     - Standalone: `.claude/specs/fix-standalone-[fix-id]-[date]/`
-   - Set `created_date` via `.claude/agents/date-checker.md`
-8. **Generate `tasks.json`**:
-   - Populate with the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`
-   - Defaults: `type: "fix"`, `status: "pending"`, `priority` based on severity, `ux_ui_reviewed: false`, `theme_changes: false` (unless UI-related)
-   - Set `linked_task` to `task-id` if provided
-   - Validate using `.claude/agents/task-schema-validator.md`
-9. **Analyze Affected Code**:
+6. **Analyze Affected Code**:
    - If files specified, use `.claude/agents/context-fetcher.md` to examine current state
-   - If task-id provided, cross-reference with `target_files` from original task
-10. **Implement Fix**:
+   - If task-id provided, cross-reference with existing task context
+7. **Implement Fix**:
    - Apply targeted fix while preserving existing functionality
    - Ensure compliance with `.claude/standards/theme-standards.md` for UI-related fixes
    - Create `.bak` copies of modified files for rollback capability
-11. **Run Tests**:
-    - Use `.claude/agents/test-runner.md` to run relevant tests
-    - Write new tests if the fix addresses a previously untested scenario
-12. **Theme Review** (if applicable):
-    - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
-13. **Update Task State**:
-    - Mark status `"completed"` and set `completed_date` using `.claude/agents/date-checker.md`
-    - Update `target_files` with actually modified files
-    - Set `ux_ui_reviewed: true` if theme review passed
-14. **Link to Original Task** (if applicable):
-    - If `task-id` was provided, add reference to fix in original task's spec directory
-15. **Generate Report**:
+8. **Run Tests**:
+   - Use `.claude/agents/test-runner.md` to run relevant tests
+   - Write new tests if the fix addresses a previously untested scenario
+9. **Theme Review** (if applicable):
+   - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
+10. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
-16. **Complete Logger Cycle**:
+11. **Complete Logger Cycle**:
     - **MUST INVOKE**: Use `.claude/agents/logger.md` in write mode to record fix completion in `.claude/changelog.md`
-    - Include fix ID, description, affected files, and resolution status
+    - Include description, affected files, and resolution status
     - This step is CRITICAL for maintaining workflow continuity
 
 ## Dashboard Integration
@@ -155,7 +135,6 @@ Uses the `.claude/` structure:
 
 ### Execution Errors
 - **Test Failures** [ERR_007]: Return "Error [ERR_007]: Fix validation failed. Tests must pass before completion."
-- **Schema Validation Failure** [ERR_003]: Return validation errors from `.claude/agents/task-schema-validator.md`
 - **Missing Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
 
 ## Example Usage
@@ -173,26 +152,24 @@ Uses the `.claude/` structure:
 ## Output Examples
 ### Fix with Task Context:
 ```
-Fix Report: FIX-BTN-012-001
+Fix Report
 ============================
 Linked Task: BTN-012 (User Login Button)
 Issue: Login button not responding on mobile
 Files Modified: src/components/LoginButton.tsx
 Tests: Passed
 Theme Compliance: N/A (non-UI fix)
-Status: completed
 Overall: PASSED
 ```
 
 ### Standalone Fix:
 ```
-Fix Report: FIX-20250825-001
+Fix Report
 ============================
 Issue: Navigation menu overlapping content
 Files Modified: src/components/Navigation.tsx, src/styles/navigation.css
 Tests: Passed
 Theme Compliance: Compliant
-Status: completed
 Overall: PASSED
 ```
 
@@ -200,5 +177,4 @@ Overall: PASSED
 - **Differentiation from --update**: `--fix` addresses bugs/issues, while `--update` applies enhancements
 - **Task Linking**: When `<task-id>` provided, the fix inherits context and can reference original requirements
 - **Rollback Support**: `.bak` files enable easy rollback if fix causes regressions
-- **Schema Compliance**: All fix tasks validated using the unified 14-field schema
-- **Git Integration**: Commit messages follow format: `fix(scope): description (TASK-ID)`
+- **Git Integration**: Commit messages follow format: `fix(scope): description`

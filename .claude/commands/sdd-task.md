@@ -40,14 +40,14 @@ Each flag triggers a corresponding workflow in `.claude/commands/workflows/`:
 3. **--spec**: Executes `workflows/spec.md` to create a spec in `.claude/specs/[feature-name]_[type]_[date]/` using the provided feature name and description. The dashboard prompts for UI focus (sets `theme_changes: true` in tasks.json if UI-focused).
 4. **--execute**: Executes `workflows/execute.md` to implement a task from a spec, running tests via `.claude/agents/test-runner.md` and applying style fixes via `.claude/agents/code-reviewer.md`.
 5. **--update**: Executes `workflows/update.md` to apply UI/UX enhancements or improvements to working code, including tests and style fixes (lightweight workflow - no spec creation).
-6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter.
+6. **--fix**: Executes `workflows/fix.md` to apply targeted fixes for bugs or broken functionality, with optional task context via `<task-id>` parameter (lightweight workflow - no spec creation).
 7. **--edit**: Executes `workflows/edit.md` to apply simple, lightweight edits with minimal overhead - only uses logger agents at start and end.
 8. **--review**: Executes `workflows/review.md` to check modified paths against `.claude/standards/theme-standards.md` using `.claude/agents/code-reviewer.md`.
 9. **--analyze**: Executes `workflows/analyze.md` to scan the project for issues and suggest improvements.
 10. **--check**: Executes `workflows/check.md` to verify task completion against `tasks.json` using `.claude/agents/task-schema-validator.md`.
 
 ## Task Schema Validation
-For flags involving task specs (`--spec`, `--execute`, `--fix`, `--check`):
+For flags involving task specs (`--spec`, `--execute`, `--check`):
 - Invokes `.claude/agents/task-schema-validator.md` to validate `tasks.json` in the relevant spec directory.
 - Ensure the 14-field schema: `id`, `type`, `title`, `description`, `status`, `priority`, `created_date`, `ux_ui_reviewed`, `theme_changes`, `completed_date`, `target_files`, `dependencies`, `linked_task`, `acceptance_criteria`.
 
@@ -71,11 +71,11 @@ For flags involving task specs (`--spec`, `--execute`, `--fix`, `--check`):
    - **CLI Parser Requirements**: Must distinguish between optional arguments and subsequent flags.
    - **Validation**: Check argument format and count for each flag type.
 2. **Read Changelog Context**: Use `.claude/agents/logger.md` in read mode to gather recent project changes and context for informed decision-making.
-3. **Validate Task (if applicable)**: For `--spec`, `--execute`, `--fix`, `--check`, run `.claude/agents/task-schema-validator.md` to ensure valid `tasks.json`.
+3. **Validate Task (if applicable)**: For `--spec`, `--execute`, `--check`, run `.claude/agents/task-schema-validator.md` to ensure valid `tasks.json`.
 4. **Fetch Context**: Use `.claude/agents/context-fetcher.md` to gather relevant files (e.g., `.claude/standards/theme-standards.md` for `--review`).
 5. **Execute Workflow**: Call the corresponding `workflows/<flag>.md` script.
 6. **Create/Update Files**: Use `.claude/agents/file-creator.md` to generate or update files (e.g., `spec.md`, `tasks.json`).
-7. **Run Tests/Checks**: For `--execute` and `--update`, invoke `.claude/agents/test-runner.md` and `.claude/agents/code-reviewer.md` for tests and style fixes.
+7. **Run Tests/Checks**: For `--execute`, `--update`, and `--fix`, invoke `.claude/agents/test-runner.md` and `.claude/agents/code-reviewer.md` for tests and style fixes.
 8. **Verify Dates**: Use `.claude/agents/date-checker.md` to ensure valid `created_date` and `completed_date` in `tasks.json`.
 9. **Output Result**: Return success/failure message and update relevant files (e.g., `.claude/specs/`, `.claude/product/roadmap.md`).
 10. **Log Task Completion**: Use `.claude/agents/logger.md` in write mode to record a brief summary of the completed task in `.claude/changelog.md`.
