@@ -31,36 +31,30 @@ Manages the final validation phase of Agent-SDD workflows by presenting changes 
 
 ## Workflow
 
-### Phase 1: Present Changes to User
-1. **Generate Change Summary**:
-   - Display files modified with clear before/after context
-   - Show git diff output in readable format
-   - Highlight key changes and their expected impact
-
-2. **Present Clear Validation Request**:
+### Phase 1: Collect and Process Feedback
+1. **Present Clear Validation Request**:
    - Ask: "Please test the changes. Do they work correctly and meet your requirements?"
    - Provide specific testing instructions if applicable
    - Show expected outcomes vs actual results
 
-### Phase 2: Collect and Process Feedback
-3. **User Response Handling**:
-   - **"Yes"/"Approved"/"Working"/"Good"** → Proceed to Phase 3 (Success Path)
-   - **"No"/"Issues"/"Not working"** → Proceed to iterative feedback (Phase 4)
+2. **User Response Handling**:
+   - **"Yes"/"Approved"/"Working"/"Good"** → Proceed to Phase 2 (Success Path)
+   - **"No"/"Issues"/"Not working"** → Proceed to iterative feedback (Phase 3)
    - **Unclear response** → Ask for clarification with specific yes/no question
 
-### Phase 3: Success Path
-4. **Invoke Logger for Completion**:
+### Phase 2: Success Path
+3. **Invoke Logger for Completion**:
    - Use `.claude/agents/logger.md` in write mode
    - Pass task data with confirmed success status
    - Include user approval confirmation in logger entry
 
-5. **Return Success Report**:
+4. **Return Success Report**:
    - Confirm task validation completed successfully
    - Provide summary of changes that were approved
    - Include final logger response
 
-### Phase 4: Iterative Feedback Loop
-6. **Gather Specific Issues**:
+### Phase 3: Iterative Feedback Loop
+5. **Gather Specific Issues**:
    - Ask: "What specifically isn't working as expected?"
    - Collect details about:
      - Specific functionality that's broken
@@ -68,55 +62,21 @@ Manages the final validation phase of Agent-SDD workflows by presenting changes 
      - Performance problems
      - Any other concerns
 
-7. **Provide Improvement Instructions**:
+6. **Provide Improvement Instructions**:
    - Return detailed feedback to Claude with specific action items
    - Include original task context for reference
    - Suggest next steps based on user feedback
 
-8. **Track Iteration Count**:
+7. **Track Iteration Count**:
    - Increment iteration counter
    - If iterations exceed 3, ask user if they want to:
      - Continue attempting fixes
      - Revert to previous state
      - Try a different approach
 
-9. **Return to Phase 1**:
+8. **Return to Phase 1**:
    - After Claude implements changes, repeat validation cycle
    - Continue until user approval or explicit cancellation
-
-## Change Presentation Format
-
-### File Changes Display
-```
-Changes Made
-============
-Files Modified: 3
-
-📝 src/components/Button.tsx
-   • Line 15: Added hover state styling
-   • Line 23: Fixed accessibility props
-   • Line 31: Updated button padding
-
-📝 src/styles/button.css  
-   • Added hover transition animation
-   • Increased padding from 8px to 12px
-
-📝 tests/Button.test.tsx
-   • Added test for hover state
-```
-
-### Git Diff Summary
-```
-Git Diff Summary
-================
-+12 -4 lines changed across 3 files
-
-Key Changes:
-• Button hover state now includes smooth transition
-• Padding increased for better touch targets
-• Added accessibility improvements
-• New test coverage for hover behavior
-```
 
 ## Validation Questions
 
