@@ -21,6 +21,7 @@ Guides customization of files in `.claude/` and updates to align with `/sdd-task
 - **commands/workflows/*.md**: Keep default unless custom workflows are required.
 - **agents/*.md**: Keep default unless agent behavior changes are needed.
 - **agents/task-schema-validator.md**: Never modify; ensures 14-field task schema compliance.
+- **agents/task-validator.md**: Keep default; manages user validation and completion logging for code changes.
 
 ## Initial Setup Checklist
 1. Use Agent-SDD Dashboard wizard or clone `ai-ventures-hub/agent-sdd-template` to create `.claude/`.
@@ -52,10 +53,11 @@ All operations use `/sdd-task` with flags:
 - Dashboard detects `.claude/` for flag selection and task visualization.
 - Schema compliance enforced by `.claude/agents/task-schema-validator.md`.
 - Logger system automatically tracks all changes in `.claude/changelog.md` for context awareness.
+- Task-validator agent ensures code changes are user-approved before completion logging.
 - Theme standards in `theme-standards.md` persist across updates.
 - For existing projects, `/sdd-task --next` is the best start.
 - Use `--fix` for bug fixes, `--update` for enhancements, and `--edit` for simple changes to distinguish task types.
-- Note: `--fix`, `--update`, and `--edit` all require user verification before logging completion.
+- Note: `--fix`, `--update`, and `--edit` use task-validator agent for user verification and iterative improvement cycles.
 
 ## Preventing Duplicate Directories
 Agents search upward from the current directory to find existing `.claude/`, preventing duplicates.

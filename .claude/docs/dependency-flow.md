@@ -13,6 +13,7 @@ This document maps the dependencies and interactions between agents in the Agent
 **Primary Dependencies**:
 - `task-schema-validator` → date-checker
 - `logger` → date-checker
+- `task-validator` → logger, date-checker
 
 **Secondary Dependencies**:
 - `context-fetcher` → task-schema-validator
@@ -21,7 +22,6 @@ This document maps the dependencies and interactions between agents in the Agent
 **Complex Dependencies**:
 - `code-reviewer` → context-fetcher, file-creator
 - `test-runner` → context-fetcher, file-creator, task-schema-validator
-- `git-workflow` → file-creator, date-checker
 
 ## Agent Dependency Map
 
@@ -36,7 +36,7 @@ graph TD
     WF --> DC[date-checker]
     WF --> TR[test-runner]
     WF --> CR[code-reviewer]
-    WF --> GW[git-workflow]
+    WF --> TV[task-validator]
     WF --> LOG
     
     CF --> TSV
@@ -47,15 +47,35 @@ graph TD
     TR --> TSV
     CR --> CF
     CR --> FC
-    GW --> FC
-    GW --> DC
     TSV --> DC
     LOG --> DC
+    TV --> LOG
+    TV --> DC
 ```
 
 ## Agent Interaction Patterns
 
-### 0. Logger Flow (Context Awareness)
+### 0. Task Validation Flow (User Verification)
+**Primary Agent**: `task-validator`
+**Dependencies**:
+- `logger` (for completion logging after user approval)
+- `date-checker` (for completion timestamps)
+
+**Error Handling**:
+- If user rejects changes → Return feedback for iteration
+- If logger fails after approval → Mark as validation_approved_but_logging_failed
+- If max iterations exceeded → Suggest rollback or different approach
+- Success → Complete validation with logged entry
+
+**Phases**:
+1. **Present Changes**: Show git diffs and file modifications to user
+2. **Collect Feedback**: Process user approval/rejection responses
+3. **Handle Iteration**: Manage improvement cycles for rejected changes
+4. **Complete Logging**: Invoke logger agent only upon user approval
+
+**Usage**: Only invoked at end of `--fix`, `--update`, and `--edit` workflows
+
+### 1. Logger Flow (Context Awareness)
 **Primary Agent**: `logger`
 **Dependencies**:
 - `date-checker` (for timestamp formatting)
@@ -69,8 +89,9 @@ graph TD
 **Phases**:
 1. **Pre-Task**: Read changelog for context (read mode)
 2. **Post-Task**: Write task completion summary (write mode)
+3. **Via Task-Validator**: Invoked by task-validator upon user approval for `--fix`, `--update`, `--edit`
 
-### 1. File Creation Flow
+### 2. File Creation Flow
 **Primary Agent**: `file-creator`
 **Dependencies**: 
 - `date-checker` (for directory naming)
@@ -81,7 +102,7 @@ graph TD
 - If `task-schema-validator` fails → Return error [ERR_003]
 - Success → Create files and return confirmation
 
-### 2. Task Schema Validation Flow
+### 3. Task Schema Validation Flow
 **Primary Agent**: `task-schema-validator`
 **Dependencies**:
 - `date-checker` (for date field validation)
@@ -91,7 +112,7 @@ graph TD
 - If schema validation fails → Return detailed error list
 - Success → Mark as valid
 
-### 2a. Context Fetching Flow
+### 4. Context Fetching Flow
 **Primary Agent**: `context-fetcher`
 **Dependencies**:
 - `task-schema-validator` (for tasks.json validation)
@@ -101,7 +122,7 @@ graph TD
 - If task validation fails → Include validation errors
 - Success → Return extracted content with validation status
 
-### 3. Test Execution Flow
+### 5. Test Execution Flow
 **Primary Agent**: `test-runner`
 **Dependencies**:
 - `context-fetcher` (to get tasks.json)
@@ -114,7 +135,7 @@ graph TD
 - If validation fails → Return error [ERR_003]
 - Success → Update task status to completed
 
-### 4. Code Review Flow
+### 6. Code Review Flow
 **Primary Agent**: `code-reviewer`
 **Dependencies**:
 - `context-fetcher` (to get theme standards)
@@ -125,16 +146,6 @@ graph TD
 - If compliance issues found → Return error [ERR_008] with report
 - Success → Mark as compliant and update task status
 
-### 5. Git Operations Flow
-**Primary Agent**: `git-workflow`
-**Dependencies**:
-- `file-creator` (to update task status in tasks.json)
-- `date-checker` (to set completed_date)
-
-**Error Handling**:
-- If no git repo → Return informational message (not error)
-- If commit fails → Return error [ERR_006]
-- Success → Return commit details and update task status
 
 ## Error Recovery Strategies
 

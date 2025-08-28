@@ -109,18 +109,21 @@ Uses the `.claude/` structure:
    - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
 10. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
-11. **User Verification**:
-    - **REQUIRED**: Prompt user to test and verify the fix is working as expected
-    - Ask: "Please test the fix. Does it resolve the issue completely?"
-    - **If "Fixed" or confirmed working**: Proceed to step 12
-    - **If issue persists**: 
-      - Gather additional details about remaining problems
-      - Return to step 7 (Implement Fix) with new information
-      - Do not proceed to logger completion until fix is verified
-12. **Complete Logger Cycle**:
-    - **MUST INVOKE**: Use `.claude/agents/logger.md` in write mode to record fix completion in `.claude/changelog.md`
-    - Include description, affected files, and resolution status
-    - This step is CRITICAL for maintaining workflow continuity
+11. **Validate and Complete**:
+    - **MUST INVOKE**: Use `.claude/agents/task-validator.md` to manage user validation and completion logging
+    - Provide task data including:
+      - Command executed (e.g., "/sdd-task --fix BTN-012")
+      - Task ID (if applicable)
+      - Description of fix applied
+      - Files modified
+      - Changes summary
+    - Include git data (diff output, status)
+    - Task-validator agent handles:
+      - Presenting changes to user with clear before/after context
+      - Collecting user feedback on fix effectiveness
+      - Managing iterative improvement cycles if issues found
+      - Invoking logger.md only upon confirmed user approval
+    - This step is CRITICAL for ensuring fix quality and maintaining workflow continuity
 
 ## Dashboard Integration
 - The dashboard provides:

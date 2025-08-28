@@ -23,7 +23,8 @@ Every Agent-SDD workflow MUST include these agents in the specified order:
 - **file-creator.md**: For creating spec directories and files
 
 ### End of Workflow (MANDATORY):
-- **logger.md**: MUST be invoked in WRITE mode at the end of every `/sdd-task` command to record completion
+- **task-validator.md**: MUST be invoked at the end of `--fix`, `--update`, and `--edit` workflows to manage user validation and completion logging
+- **logger.md**: MUST be invoked in WRITE mode at the end of other `/sdd-task` commands to record completion, or invoked by task-validator upon user approval
 
 ## Workflow Files Location
 All workflows are located in: `.claude/commands/workflows/`
@@ -41,9 +42,9 @@ For optional parameters like `--fix [<task-id>]` or `--edit [<description>]`:
 - **No Parameter**: Prompts user for details
 
 ### Special Command Notes
-- **--edit**: Lightweight workflow using only logger agents (read at start, write at end) with required user verification
-- **--fix**: Lightweight workflow with theme compliance and testing (no spec creation) with required user verification
-- **--update**: Lightweight workflow with theme compliance and testing (no spec creation) with required user verification
+- **--edit**: Lightweight workflow using logger agent (read at start) and task-validator agent (for validation and completion logging)
+- **--fix**: Lightweight workflow with theme compliance and testing (no spec creation) using task-validator for user verification and completion
+- **--update**: Lightweight workflow with theme compliance and testing (no spec creation) using task-validator for user verification and completion
 
 ## Directory Structure
 ```

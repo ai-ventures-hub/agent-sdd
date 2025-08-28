@@ -49,19 +49,21 @@ A lightweight workflow for simple edits that don't require a full specification 
    - Apply changes using appropriate tools (Edit, MultiEdit, Write, etc.)
    - Focus on the specific change requested without extensive validation
 
-4. **User Verification**:
-   - **REQUIRED**: Prompt user to verify the edit is correct and working as expected
-   - Ask: "Please review the changes. Are they correct and working as intended?"
-   - **If "Correct" or confirmed working**: Proceed to step 5
-   - **If issues found**: 
-     - Gather additional details about problems
-     - Return to step 3 (Execute Edit) with corrections
-     - Do not proceed to logger completion until edit is verified
-
-5. **Complete Logger Cycle**:
-   - **MUST INVOKE**: Use `.claude/agents/logger.md` in write mode to record the edit in `.claude/changelog.md`
-   - Include brief description of changes made
-   - This step maintains workflow continuity for future operations
+4. **Validate and Complete**:
+   - **MUST INVOKE**: Use `.claude/agents/task-validator.md` to manage user validation and completion logging
+   - Provide task data including:
+     - Command executed (e.g., "/sdd-task --edit Fix typo in welcome message")
+     - Task ID (null for edits)
+     - Description of edit applied
+     - Files modified
+     - Changes summary
+   - Include git data (diff output, status)
+   - Task-validator agent handles:
+     - Presenting changes to user with clear before/after context
+     - Collecting user feedback on edit correctness
+     - Managing iterative correction cycles if issues found
+     - Invoking logger.md only upon confirmed user approval
+   - This step maintains workflow continuity while ensuring edit accuracy
 
 ## Error Handling
 - **Missing Description**: Prompt user for edit details if not provided

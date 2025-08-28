@@ -7,7 +7,7 @@ A streamlined system for structured software development in Claude Code, using a
 - **Flags**: --roadmap, --next, --spec, --execute, --update, --fix, --edit, --review, --analyze, --check.
 - **Context Awareness**: Logger system tracks all changes in `.claude/changelog.md` for informed decisions.
 - **Theme Standards**: Defined in `.claude/standards/theme-standards.md` for consistent design.
-- **Agents**: `.claude/agents/` with task-schema-validator, context-fetcher, file-creator, date-checker, test-runner, code-reviewer, git-workflow, logger.
+- **Agents**: `.claude/agents/` with task-schema-validator, context-fetcher, file-creator, date-checker, test-runner, code-reviewer, task-validator, logger.
 - **UX/UI Enforcement**: Automatic reviews for accessibility, responsive design, dark mode, and theme compliance via code-reviewer.
 - **Dashboard Integration**: Flag selector, prompts (e.g., UI focus for --spec), and task visualization.
 - **Task Schema**: 14-field validation for tasks.json via task-schema-validator.

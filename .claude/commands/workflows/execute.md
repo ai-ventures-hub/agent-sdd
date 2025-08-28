@@ -58,7 +58,6 @@ Execute a task end-to-end and enforce Theme Standards.
 ## Integration
 - **Theme standards** defined in `.claude/standards/theme-standards.md` are enforced.
 - **test-runner** is invoked for all executions.
-- **git-workflow**: Only use if git repo exists and user opts to commit changes.
 - **file-creator**: Used for updating task status, with validation by `task-schema-validator.md`.
 - **task-schema-validator**: Ensures all task updates comply with the unified 14-field schema.
 

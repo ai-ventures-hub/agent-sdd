@@ -79,16 +79,21 @@ Uses the `.claude/` structure:
    - Suggest commit message: `update(scope): description` (e.g., `update(Button): increase padding`).
 9. **Generate Report**:
    - Output changes, theme review results, and test outcomes to console or dashboard.
-10. **User Verification**:
-    - **REQUIRED**: Prompt user to test and verify the update is working as expected
-    - Ask: "Please test the changes. Do they work correctly and meet your requirements?"
-    - **If "Good" or confirmed working**: Proceed to step 11
-    - **If issues found**: 
-      - Gather additional details about problems or needed adjustments
-      - Return to step 5 (Implement Update) with new information
-      - Do not proceed to logger completion until update is verified
-11. **Log Update Completion**:
-    - Use `.claude/agents/logger.md` in write mode to record update completion in `.claude/changelog.md`.
+10. **Validate and Complete**:
+    - **MUST INVOKE**: Use `.claude/agents/task-validator.md` to manage user validation and completion logging
+    - Provide task data including:
+      - Command executed (e.g., "/sdd-task --update src/components/Button.tsx")
+      - Task ID (null for updates)
+      - Description of update applied
+      - Files modified
+      - Changes summary
+    - Include git data (diff output, status)
+    - Task-validator agent handles:
+      - Presenting changes to user with clear before/after context
+      - Collecting user feedback on update quality and functionality
+      - Managing iterative improvement cycles if adjustments needed
+      - Invoking logger.md only upon confirmed user approval
+    - This step ensures update quality and maintains workflow continuity
 
 ## Dashboard Integration
 - The dashboard provides inputs for `target` and description, with a confirmation prompt for the target.

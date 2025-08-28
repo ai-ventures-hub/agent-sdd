@@ -42,12 +42,13 @@ The Code Reviewer Agent scans code files for compliance with `.claude/standards/
 2. **Retrieve Theme Standards**:
    - Invoke `context-fetcher` agent to extract content from `.claude/standards/theme-standards.md` (e.g., "Allowed Tailwind Color Classes", Design Tokens).
 3. **Analyze Files**:
-   - Scan `*.tsx` and `*.css` files for:
+   - Scan supported file types for:
      - **Colors**: Match against approved Tailwind classes or Design Tokens.
      - **Typography/Spacing**: Validate against approved class lists (e.g., 4px multiples).
      - **Accessibility**: Check WCAG 2.1 AA compliance (e.g., ARIA labels, focus states, touch targets ≥ 40px).
      - **Responsive Design**: Verify Tailwind prefixes (e.g., `sm:`, `md:`, `dark:`).
      - **Animations**: Add `animate-in` class (if defined) where applicable.
+     - **Performance**: Basic style performance checks (unused CSS class detection, large CSS bundle warnings, inefficient selector patterns).
 4. **Apply Fixes** (for `--execute`, `--update`):
    - Replace non-compliant styles (e.g., hardcoded hex/RGB) with approved utilities.
    - Use `file-creator` agent to create `.bak` backups and update files.
@@ -64,7 +65,7 @@ The Code Reviewer Agent scans code files for compliance with `.claude/standards/
 - Create `.bak` backups before modifying files.
 - Validate all changes against `.claude/standards/theme-standards.md`.
 - Use `context-fetcher` for file content retrieval and `file-creator` for file updates and backups.
-- Support only `*.tsx` and `*.css` files for review and modification.
+- Support only `*.tsx`, `*.ts`, `*.jsx`, `*.js`, `*.css`, `*.scss`, and `*.sass` files for review and modification.
 
 ## Error Handling
 - **Invalid File Paths**:
