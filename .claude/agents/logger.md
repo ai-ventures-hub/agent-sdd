@@ -94,7 +94,9 @@ Brief summary of changes made (1-2 sentences)
    - Move entries beyond position 30 to archive file
    - Archive filename: `changelog-archive-YYYY-MM.md`
    - Ensure `.claude/changelog-archive/` directory exists
-   - Append to existing archive or create new
+   - Append archived entries to existing archive or create new
+   - **CRITICAL**: Update main changelog.md to keep ONLY the most recent 30 entries
+   - Clear out all old entries from main file after archiving
 4. **Get Current Date**:
    - Use `.claude/agents/date-checker.md` for YYYY-MM-DD format
 5. **Generate Entry**:
@@ -102,8 +104,9 @@ Brief summary of changes made (1-2 sentences)
    - Add brief summary (auto-truncate if > 200 chars)
    - List modified files (max 5, truncate with "..." if more)
 6. **Update Changelog**:
-   - Prepend new entry to `.claude/changelog.md`
+   - Prepend new entry to `.claude/changelog.md` (which now contains max 30 entries if archiving occurred)
    - Maintain chronological order (newest first)
+   - Total entries after this step: max 31 if archiving occurred, or current + 1 if no archiving
    - Keep reference to archive if archiving occurred
 7. **Return Output**:
    - Confirm entry was added
@@ -133,7 +136,8 @@ Brief summary of changes made (1-2 sentences)
 - Never modify existing entries, only append new ones
 - Use `.claude/agents/date-checker.md` for consistent date formatting
 - Main changelog limited to 50 entries maximum
-- Auto-archive triggers at 40 entries (keeps 30 after archiving)
+- Auto-archive triggers at 40 entries (archives old entries and resets main file to 30 entries)
+- After archiving, main changelog.md is REPLACED with only the 30 most recent entries
 - Use tail reading for efficiency (never load full file in read mode)
 - Archive files named: `changelog-archive-YYYY-MM.md`
 
