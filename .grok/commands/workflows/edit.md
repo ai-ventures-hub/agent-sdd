@@ -37,7 +37,7 @@ A lightweight workflow for simple edits that don't require a full specification 
 
 ## Workflow
 1. **Initialize Logger Context**:
-   - **MUST INVOKE**: Use `.claude/agents/logger.md` in read mode to gather recent project changes and establish context awareness.
+   - **MUST INVOKE**: Use `.grok/agents/logger.md` in read mode to gather recent project changes and establish context awareness.
    - This step ensures continuity with recent changes and prevents conflicts.
 
 2. **Parse Input**:
@@ -50,7 +50,7 @@ A lightweight workflow for simple edits that don't require a full specification 
    - Focus on the specific change requested without extensive validation
 
 4. **Validate and Complete**:
-   - **MUST INVOKE**: Use `.claude/agents/task-validator.md` to manage user validation and completion logging
+   - **MUST INVOKE**: Use `.grok/agents/task-validator.md` to manage user validation and completion logging
    - Provide task data including:
      - Command executed (e.g., "/sdd-task --edit Fix typo in welcome message")
      - Task ID (null for edits)

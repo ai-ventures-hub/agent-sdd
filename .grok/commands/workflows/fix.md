@@ -1,13 +1,13 @@
 # /sdd-task --fix [<task-id>] Workflow
 
-Applies targeted fixes to resolve bugs, issues, or inconsistencies when `/sdd-task --fix [<task-id>]` is invoked. Operates within the `.claude/` directory structure and integrates with the Agent-SDD Dashboard.
+Applies targeted fixes to resolve bugs, issues, or inconsistencies when `/sdd-task --fix [<task-id>]` is invoked. Operates within the `.grok/` directory structure and integrates with the Agent-SDD Dashboard.
 
 ## Purpose
 - Address bugs, errors, or inconsistencies in existing code.
 - **Bug-focused**: Resolves broken functionality rather than enhancing working code (use `--update` for enhancements).
 - Provide contextual fixes when linked to an existing task via `<task-id>`.
 - Create standalone fix specifications when no `<task-id>` is provided.
-- Ensure fixes align with `.claude/standards/theme-standards.md` and maintain code quality.
+- Ensure fixes align with `.grok/standards/theme-standards.md` and maintain code quality.
 
 ## --fix vs --update Distinction
 - **--fix**: Use for bugs, errors, broken functionality, or inconsistencies that need correction
@@ -49,9 +49,9 @@ Applies targeted fixes to resolve bugs, issues, or inconsistencies when `/sdd-ta
 ```
 
 ## Directory Context
-Uses the `.claude/` structure:
-- **Standards**: `.claude/standards/` (theme-standards.md, best-practices.md)
-- **Agents**: `.claude/agents/` (context-fetcher.md, code-reviewer.md, test-runner.md, date-checker.md, logger.md)
+Uses the `.grok/` structure:
+- **Standards**: `.grok/standards/` (theme-standards.md, best-practices.md)
+- **Agents**: `.grok/agents/` (context-fetcher.md, code-reviewer.md, test-runner.md, date-checker.md, logger.md)
 
 ## Command Syntax
 ```
@@ -71,7 +71,7 @@ Uses the `.claude/` structure:
 
 ## Workflow
 1. **Initialize Logger Context**:
-   - **MUST INVOKE**: Use `.claude/agents/logger.md` in read mode to gather recent project changes and establish context awareness.
+   - **MUST INVOKE**: Use `.grok/agents/logger.md` in read mode to gather recent project changes and establish context awareness.
    - This step is CRITICAL and must execute before any other operations.
 2. **Parse Input**:
    - Read optional parameter from `/sdd-task --fix [parameter]` via CLI or dashboard.
@@ -85,9 +85,9 @@ Uses the `.claude/` structure:
      - Task-id format: Must match pattern like `[A-Z]{2,5}-[0-9]{1,4}`
      - Description: Any text string accepted, used for standalone fix
 3. **Read Changelog Context** (if not already loaded):
-   - Ensure `.claude/agents/logger.md` context is available for informed decision-making.
+   - Ensure `.grok/agents/logger.md` context is available for informed decision-making.
 4. **Determine Fix Context**:
-   - If valid `task-id` provided: Use `.claude/agents/context-fetcher.md` to load related spec from `.claude/specs/[feature-name]_[type]_*/`.
+   - If valid `task-id` provided: Use `.grok/agents/context-fetcher.md` to load related spec from `.grok/specs/[feature-name]_[type]_*/`.
    - If description provided or no parameter: Work as standalone fix without existing task context.
    - Store any provided description for use in step 5.
 5. **Prompt for Fix Details**:
@@ -96,21 +96,21 @@ Uses the `.claude/` structure:
      - **Affected Files/Components**: If known (e.g., `src/components/LoginButton.tsx`)
      - **Severity**: Critical, High, Medium, Low
 6. **Analyze Affected Code**:
-   - If files specified, use `.claude/agents/context-fetcher.md` to examine current state
+   - If files specified, use `.grok/agents/context-fetcher.md` to examine current state
    - If task-id provided, cross-reference with existing task context
 7. **Implement Fix**:
    - Apply targeted fix while preserving existing functionality
-   - Ensure compliance with `.claude/standards/theme-standards.md` for UI-related fixes
+   - Ensure compliance with `.grok/standards/theme-standards.md` for UI-related fixes
    - Create `.bak` copies of modified files for rollback capability
 8. **Run Tests**:
-   - Use `.claude/agents/test-runner.md` to run relevant tests
+   - Use `.grok/agents/test-runner.md` to run relevant tests
    - Write new tests if the fix addresses a previously untested scenario
 9. **Theme Review** (if applicable):
-   - For UI-related fixes, use `.claude/agents/code-reviewer.md` to verify compliance
+   - For UI-related fixes, use `.grok/agents/code-reviewer.md` to verify compliance
 10. **Generate Report**:
     - Output fix results, test outcomes, and any recommendations to console or dashboard
 11. **Validate and Complete**:
-    - **MUST INVOKE**: Use `.claude/agents/task-validator.md` to manage user validation and completion logging
+    - **MUST INVOKE**: Use `.grok/agents/task-validator.md` to manage user validation and completion logging
     - Provide task data including:
       - Command executed (e.g., "/sdd-task --fix BTN-012")
       - Task ID (if applicable)
@@ -140,13 +140,13 @@ Uses the `.claude/` structure:
 - **Multiple Arguments**: Return "Error: --fix accepts one optional parameter (task-id or description). Multiple arguments not supported."
 
 ### Task Context Errors  
-- **Invalid Task ID** [ERR_005]: Return "Error [ERR_005]: Task ID not found in `.claude/specs/`."
+- **Invalid Task ID** [ERR_005]: Return "Error [ERR_005]: Task ID not found in `.grok/specs/`."
 - **Missing Fix Description** [ERR_002]: Return "Error [ERR_002]: --fix requires issue description."
 - **No Files to Fix**: Return "Error: Unable to locate files to fix. Please specify target files."
 
 ### Execution Errors
 - **Test Failures** [ERR_007]: Return "Error [ERR_007]: Fix validation failed. Tests must pass before completion."
-- **Missing Standards** [ERR_004]: Return "Error [ERR_004]: `.claude/standards/theme-standards.md` not found."
+- **Missing Standards** [ERR_004]: Return "Error [ERR_004]: `.grok/standards/theme-standards.md` not found."
 
 ## Example Usage
 ```

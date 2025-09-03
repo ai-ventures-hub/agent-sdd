@@ -1,25 +1,25 @@
-# /sdd-task --execute <task-id>
+# grok_sdd_execute(task_id)
 Execute a task end-to-end and enforce Theme Standards.
 
 ---
 
 ## Root Directory Detection
-**CRITICAL**: Before any file operations, locate the root `.claude` directory to prevent duplicate installations:
+**CRITICAL**: Before any file operations, locate the root `.grok` directory to prevent duplicate installations:
 
-1. **Check current directory first**: If `.claude/` exists in current directory, use it.
+1. **Check current directory first**: If `.grok/` exists in current directory, use it.
 2. **Search up the tree**: If not found, search parent directories up to root:
-   - Check `../.claude/`, `../../.claude/`, etc.
-   - Stop at first `.claude/` directory found.
-3. **Use absolute paths**: Once found, use that directory for ALL `.claude/` references.
-4. **Never create duplicate**: If no `.claude/` found, error and tell user to create the `.claude` directory structure.
+   - Check `../.grok/`, `../../.grok/`, etc.
+   - Stop at first `.grok/` directory found.
+3. **Use absolute paths**: Once found, use that directory for ALL `.grok/` references.
+4. **Never create duplicate**: If no `.grok/` found, error and tell user to create the `.grok` directory structure.
 
-**Example**: If `.claude/` is found at `/project-root/.claude/`, ALL references should use that path.
+**Example**: If `.grok/` is found at `/project-root/.grok/`, ALL references should use that path.
 
 ---
 
 ## Workflow (what the agent does)
 1. **Resolve task**:
-   - Look up `<task-id>` in `.claude/specs/*/tasks.json`. Error if missing.
+   - Look up `<task-id>` in `.grok/specs/*/tasks.json`. Error if missing.
 2. **Confirm target paths** with the user (examples):
    - UI: `src/components/Button/Button.tsx`
    - Logic: `src/lib/fileMonitor.ts`
@@ -31,14 +31,14 @@ Execute a task end-to-end and enforce Theme Standards.
 5. **Tests**:
    - If a `package.json` exists, write task-level tests for critical paths and run tests via the **test-runner** agent.
 6. **Theme review (always run)**:
-   - Use `.claude/agents/code-reviewer.md` agent for theme compliance checking.
-   - **Source of truth**: `.claude/standards/theme-standards.md`.
-   - Ensure code follows the guidelines in `.claude/standards/theme-standards.md`.
+   - Use `.grok/agents/code-reviewer.md` agent for theme compliance checking.
+   - **Source of truth**: `.grok/standards/theme-standards.md`.
+   - Ensure code follows the guidelines in `.grok/standards/theme-standards.md`.
 7. **Update task state**:
    - Mark status `"completed"` and set `completed_date` using **date-checker** agent.
    - Set `ux_ui_reviewed: true` after successful theme review.
    - Update `target_files` array with actually modified files.
-   - Validate final task object against the `task-schema-validator.md` sub-agent (in `.claude/agents/`).
+   - Validate final task object against the `task-schema-validator.md` sub-agent (in `.grok/agents/`).
 8. **Final git operations (if repo exists)**:
    - If git repo exists, ask: "Would you like to commit and push changes? (y/n)".
    - If yes: Guide through commit/push process.
@@ -56,7 +56,7 @@ Execute a task end-to-end and enforce Theme Standards.
 ---
 
 ## Integration
-- **Theme standards** defined in `.claude/standards/theme-standards.md` are enforced.
+- **Theme standards** defined in `.grok/standards/theme-standards.md` are enforced.
 - **test-runner** is invoked for all executions.
 - **file-creator**: Used for updating task status, with validation by `task-schema-validator.md`.
 - **task-schema-validator**: Ensures all task updates comply with the unified 14-field schema.

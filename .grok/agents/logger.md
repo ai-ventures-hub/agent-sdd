@@ -1,19 +1,18 @@
 ---
 name: logger
-description: Proactively reads and writes changelog.md to provide context awareness for Agent-SDD workflows. MUST BE USED before and after all /sdd-task command executions.
-agents: date-checker
+description: Documentation for changelog management in Grok-SDD workflows. Provides context awareness patterns for Grok to follow.
 ---
 
-# Logger Agent
+# Logger Documentation
 
-## Description
-Manages the `.claude/changelog.md` file to provide context awareness across all Agent-SDD workflows. Reads historical changes before task execution to inform decision-making and writes brief summaries after task completion. Essential for maintaining continuity and context in iterative development workflows using `/sdd-task` commands.
+## Purpose
+This document describes how Grok should manage the `.grok/changelog.md` file to provide context awareness across all Grok-SDD workflows. Grok reads this documentation to understand the patterns for tracking changes and maintaining development continuity.
 
 ## Inputs
 - **Mode**: String specifying operation ("read", "write", or "archive").
 - **Task Data** (for write mode): Object containing:
-  - `command`: String (e.g., "/sdd-task --execute BTN-012")
-  - `task_id`: String (e.g., "BTN-012") 
+  - `function_call`: String (e.g., "grok_sdd_execute(task_id: 'BTN-012')")
+  - `task_id`: String (e.g., "BTN-012")
   - `summary`: String (brief description of what was accomplished)
   - `files_modified`: Array of strings (file paths that were changed)
 - **Context Limit** (for read mode): Number (default: 10, max: 50) for how many recent entries to return
@@ -49,7 +48,7 @@ Manages the `.claude/changelog.md` file to provide context awareness across all 
 ## Changelog Entry Format
 Each entry follows this structure:
 ```
-### 2025-08-25 | /sdd-task --execute BTN-012
+### 2025-08-25 | grok_sdd_execute(task_id: 'BTN-012')
 Brief summary of changes made (1-2 sentences)
 - Files: src/components/Button.tsx, src/styles/button.css
 ```
@@ -60,7 +59,7 @@ Brief summary of changes made (1-2 sentences)
   "max_entries": 50,          // Maximum entries in main changelog
   "archive_threshold": 40,    // Archive when this many entries reached
   "tail_read_lines": 200,     // Lines to read with tail for efficiency
-  "archive_dir": ".claude/changelog-archive/"
+  "archive_dir": ".grok/changelog-archive/"
 }
 ```
 
@@ -68,7 +67,7 @@ Brief summary of changes made (1-2 sentences)
 
 ### Read Mode (Context Gathering - Optimized)
 1. **Validate File**:
-   - Check if `.claude/changelog.md` exists
+   - Check if `.grok/changelog.md` exists
    - If missing, return empty context (no error)
 2. **Efficient Reading**:
    - Use `tail -n 200` to read only recent entries (avoids full file load)
@@ -93,18 +92,18 @@ Brief summary of changes made (1-2 sentences)
 3. **Auto-Archive if Needed**:
    - Move entries beyond position 30 to archive file
    - Archive filename: `changelog-archive-YYYY-MM.md`
-   - Ensure `.claude/changelog-archive/` directory exists
+   - Ensure `.grok/changelog-archive/` directory exists
    - Append archived entries to existing archive or create new
    - **CRITICAL**: Update main changelog.md to keep ONLY the most recent 30 entries
    - Clear out all old entries from main file after archiving
 4. **Get Current Date**:
-   - Use `.claude/agents/date-checker.md` for YYYY-MM-DD format
+   - Use `.grok/agents/date-checker.md` for YYYY-MM-DD format
 5. **Generate Entry**:
-   - Format: `### [date] | [command]`
+   - Format: `### [date] | [function_call]`
    - Add brief summary (auto-truncate if > 200 chars)
    - List modified files (max 5, truncate with "..." if more)
 6. **Update Changelog**:
-   - Prepend new entry to `.claude/changelog.md` (which now contains max 30 entries if archiving occurred)
+   - Prepend new entry to `.grok/changelog.md` (which now contains max 30 entries if archiving occurred)
    - Maintain chronological order (newest first)
    - Total entries after this step: max 31 if archiving occurred, or current + 1 if no archiving
    - Keep reference to archive if archiving occurred
@@ -131,10 +130,10 @@ Brief summary of changes made (1-2 sentences)
 ## Constraints
 - Keep summaries under 200 characters for readability
 - Maintain reverse chronological order (newest entries first)
-- Limit file lists to 5 files max (use "and X more..." if needed)  
-- Auto-create `.claude/changelog.md` if it doesn't exist
+- Limit file lists to 5 files max (use "and X more..." if needed)
+- Auto-create `.grok/changelog.md` if it doesn't exist
 - Never modify existing entries, only append new ones
-- Use `.claude/agents/date-checker.md` for consistent date formatting
+- Use `.grok/agents/date-checker.md` for consistent date formatting
 - Main changelog limited to 50 entries maximum
 - Auto-archive triggers at 40 entries (archives old entries and resets main file to 30 entries)
 - After archiving, main changelog.md is REPLACED with only the 30 most recent entries
@@ -167,11 +166,11 @@ Brief summary of changes made (1-2 sentences)
   }
   ```
 
-## Dashboard Integration
-- Displays recent changelog entries in a collapsible panel
-- Shows context summary before task execution
-- Confirms new entries after task completion
-- Provides link to view full `.claude/changelog.md`
+## Grok Integration
+- Provides recent changelog entries through function call responses
+- Shows context summary before task execution via read mode
+- Confirms new entries after task completion via write mode
+- Provides access to full `.grok/changelog.md` through file operations
 
 ## Example Usage
 
@@ -182,13 +181,13 @@ Output: {
   "recent_changes": [
     {
       "date": "2025-08-25",
-      "command": "/sdd-task --execute BTN-012", 
+      "function_call": "grok_sdd_execute(task_id: 'BTN-012')",
       "summary": "Added sortable Rating column in Leads table using ChevronsUpDown icon",
       "files": ["src/components/LeadsTable.tsx", "src/lib/sorting.ts"]
     },
     {
       "date": "2025-08-24",
-      "command": "/sdd-task --update Button.tsx",
+      "function_call": "grok_sdd_update(target_file: 'Button.tsx')",
       "summary": "Fixed button hover states and accessibility",
       "files": ["src/components/Button.tsx"]
     }
@@ -202,21 +201,21 @@ Output: {
 Input: {
   "mode": "write",
   "task_data": {
-    "command": "/sdd-task --execute BTN-012",
-    "task_id": "BTN-012", 
+    "function_call": "grok_sdd_execute(task_id: 'BTN-012')",
+    "task_id": "BTN-012",
     "summary": "Added sortable Rating column in Leads table using ChevronsUpDown icon",
     "files_modified": ["src/components/LeadsTable.tsx", "src/lib/sorting.ts", "src/types/leads.ts"]
   }
 }
 Output: {
-  "entry_added": "### 2025-08-25 | /sdd-task --execute BTN-012\nAdded sortable Rating column in Leads table using ChevronsUpDown icon\n- Files: src/components/LeadsTable.tsx, src/lib/sorting.ts, src/types/leads.ts",
+  "entry_added": "### 2025-08-25 | grok_sdd_execute(task_id: 'BTN-012')\nAdded sortable Rating column in Leads table using ChevronsUpDown icon\n- Files: src/components/LeadsTable.tsx, src/lib/sorting.ts, src/types/leads.ts",
   "total_entries": 15
 }
 ```
 
 ## Integration Notes
-- **Pre-Task Context**: Called at the start of all `/sdd-task` workflows to provide historical context
+- **Pre-Task Context**: Called at the start of all function call workflows to provide historical context
 - **Post-Task Logging**: Called at the end of successful task completions to record changes
-- **User Verification**: For `--update`, `--fix`, and `--edit` workflows, logging only occurs after user confirms changes work as expected
-- **Workflow Triggers**: Should be invoked by the main `/sdd-task` dispatcher, not individual workflows
-- **Context Awareness**: Helps Claude understand project evolution and make more informed decisions
+- **User Verification**: For `update`, `fix`, and `edit` workflows, logging only occurs after user confirms changes work as expected
+- **Workflow Triggers**: Should be invoked by the main function call dispatcher, not individual workflows
+- **Context Awareness**: Helps Grok understand project evolution and make more informed decisions

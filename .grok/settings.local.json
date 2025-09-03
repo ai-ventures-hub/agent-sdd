@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(chmod:*)",
+      "Bash(mkdir:*)",
+      "Bash(find:*)",
+      "Bash(sed:*)",
+      "Bash(tree:*)",
+      "Bash(for:*)",
+      "Bash(do)",
+      "Bash(echo \"=== $file ===\")",
+      "Bash(done)",
+      "Bash(grep:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/cjm/Local"
+    ]
+  }
+}
