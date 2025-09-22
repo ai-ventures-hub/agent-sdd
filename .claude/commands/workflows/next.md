@@ -7,9 +7,9 @@ WORKFLOW_STEPS:
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 STEP_1_ROADMAP_ANALYSIS:
 - READ {{paths.product_dir}}/roadmap.md
@@ -35,19 +35,19 @@ STEP_4_TASK_DECOMPOSITION:
 
 STEP_5_SCHEMA_VALIDATION:
 - CREATE tasks.json with full 14-field schema compliance
-- ENFORCE task_id regex `^[A-Z]+-[0-9]{3}$`
-- REJECT invalid formats with [ERR_003]
+- ENFORCE task_id regex `{{constraints.task_id_regex}}`
+- REJECT invalid formats with {{errors.shared.ERR_003}}
 
 ERROR_HANDLING:
-- MISSING_ROADMAP [ERR_004]
-- MISSING_OVERVIEW [ERR_005]
-- MISSING_TECH_STACK [ERR_006]
-- MISSING_BEST_PRACTICES [ERR_007]
+- MISSING_ROADMAP {{errors.next_spec_docs.ERR_004}}
+- MISSING_OVERVIEW {{errors.next_spec_docs.ERR_005}}
+- MISSING_TECH_STACK {{errors.next_spec_docs.ERR_006}}
+- MISSING_BEST_PRACTICES {{errors.next_spec_docs.ERR_007}}
 
 STEP_6_DIRECTORY_CREATION:
-- CREATE specification directory `{slug}_{type}_{YYYY-MM-DD}`
+- CREATE specification directory `{{constraints.spec_dir_pattern}}`
 - ENFORCE exact pattern; REJECT legacy formats
-- RETURN [ERR_003] on mismatch
+- RETURN {{errors.shared.ERR_003}} on mismatch
 
 STEP_7_FINAL_VALIDATION:
 - VALIDATE content completeness, consistency, technical feasibility

@@ -48,6 +48,43 @@ agents:
   # Quality assurance agents
   test_runner: "{{paths.agents_dir}}/test-runner.md"
   code_reviewer: "{{paths.agents_dir}}/code-reviewer.md"
+  analytics_collector: "{{paths.agents_dir}}/analytics-collector.md"
+  framework_improver: "{{paths.agents_dir}}/framework-improver.md"
+
+constraints:
+  task_id_regex: "^[A-Z]+-[0-9]{3}$"
+  spec_dir_pattern: "{slug}_{type}_{YYYY-MM-DD}"
+
+errors:
+  shared:
+    ERR_003: "[ERR_003]"
+    ERR_010: "[ERR_010]"
+    ERR_011: "[ERR_011]"
+    ERR_012: "[ERR_012]"
+    ERR_013: "[ERR_013]"
+    ERR_014: "[ERR_014]"
+  next_spec_docs:
+    ERR_004: "[ERR_004]"
+    ERR_005: "[ERR_005]"
+    ERR_006: "[ERR_006]"
+    ERR_007: "[ERR_007]"
+  bootstrap:
+    ERR_015: "[ERR_015]"
+    ERR_016: "[ERR_016]"
+    ERR_017: "[ERR_017]"
+    ERR_018: "[ERR_018]"
+    ERR_019: "[ERR_019]"
+    ERR_020: "[ERR_020]"
+  improve:
+    ERR_021: "[ERR_021]"
+    ERR_022: "[ERR_022]"
+    ERR_023: "[ERR_023]"
+    ERR_024: "[ERR_024]"
+  evolve:
+    ERR_025: "[ERR_025]"
+    ERR_026: "[ERR_026]"
+    ERR_027: "[ERR_027]"
+    ERR_028: "[ERR_028]"
 
 # Command Configuration
 commands:

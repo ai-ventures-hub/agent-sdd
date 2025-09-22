@@ -13,17 +13,17 @@ WORKFLOW_STEPS:
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - AGENT_GATES:
   - REQUIRE logger (read) invoked before modifications
-  - REQUIRE context-manager invoked before implementation
-  - IF missing → RETURN [ERR_011] (logger) / [ERR_013] (context)
+  - REQUIRE context_manager invoked before implementation
+  - IF missing → RETURN {{errors.shared.ERR_011}} (logger) / {{errors.shared.ERR_013}} (context)
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 2. TASK_RESOLVE: locate_validate(task_id) → specs_dir
-  - VALIDATE task_id against `^[A-Z]+-[0-9]{3}$`; REJECT invalid with [ERR_003]
-  - VALIDATE specs_dir name conforms to `{slug}_{type}_{YYYY-MM-DD}`; REJECT legacy with [ERR_003]
+  - VALIDATE task_id against `{{constraints.task_id_regex}}`; REJECT invalid with {{errors.shared.ERR_003}}
+  - VALIDATE specs_dir name conforms to `{{constraints.spec_dir_pattern}}`; REJECT legacy with {{errors.shared.ERR_003}}
 
 3. DEPENDENCY_CHECK: validate(dependent_tasks[]) → all_completed
 

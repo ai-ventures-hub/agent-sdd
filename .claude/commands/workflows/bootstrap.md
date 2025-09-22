@@ -32,12 +32,12 @@ WORKFLOW_STEPS:
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 - FLAG_GUARDS:
   - IF --shadcn absent → SKIP SHADCN steps
-  - IF shadcn steps attempted without flag → RETURN [ERR_016]
+  - IF shadcn steps attempted without flag → RETURN {{errors.bootstrap.ERR_016}}
 
 VALIDATION_CHECKS:
 - package.json exists
@@ -69,9 +69,9 @@ AGENT_INVOCATIONS:
 - {{agents.project_analyzer}} - update tech-stack.md when changing technology stacks via --shadcn
 
 ERROR_HANDLING:
-- MCP_UNREACHABLE [ERR_015]: Retry failed MCP connectivity
-- MCP_COMMAND_FAILED [ERR_016]: Fallback to manual installation
-- NETWORK_TIMEOUT [ERR_017]: Retry network operations
-- FILE_WRITE_FAILED [ERR_018]: Generate installation scripts for failed components
-- PERMISSION_DENIED [ERR_020]: Document permission requirements
-- DIR_CREATION_FAILED [ERR_019]: Document completion status with manual steps
+- MCP_UNREACHABLE {{errors.bootstrap.ERR_015}}: Retry failed MCP connectivity
+- MCP_COMMAND_FAILED {{errors.bootstrap.ERR_016}}: Fallback to manual installation
+- NETWORK_TIMEOUT {{errors.bootstrap.ERR_017}}: Retry network operations
+- FILE_WRITE_FAILED {{errors.bootstrap.ERR_018}}: Generate installation scripts for failed components
+- PERMISSION_DENIED {{errors.bootstrap.ERR_020}}: Document permission requirements
+- DIR_CREATION_FAILED {{errors.bootstrap.ERR_019}}: Document completion status with manual steps

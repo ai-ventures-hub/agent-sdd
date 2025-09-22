@@ -7,12 +7,12 @@ WORKFLOW_STEPS:
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - AGENT_GATES:
   - REQUIRE project_analyzer/context_manager invoked before recommendations
-  - IF missing → RETURN [ERR_013]
+  - IF missing → RETURN {{errors.shared.ERR_013}}
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 1. PROJECT_STATE_ANALYSIS:
    - CHECK {{paths.product_dir}}/overview.md existence

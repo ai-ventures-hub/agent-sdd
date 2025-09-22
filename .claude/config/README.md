@@ -7,7 +7,7 @@ A conflict-free, streamlined system for structured software development in Claud
 - **Single command surface**: `/sdd-task` with {{system_counts.workflows}} optimized flags for complete development lifecycle
 - **Automated variable system**: Project-agnostic variable resolution with intelligent auto-discovery
 - **Workflow dependency enforcement**: Automatic sequencing validation prevents execution errors
-- **Comprehensive error handling**: 24 categorized error codes for clear failure diagnosis
+- **Comprehensive error handling**: Centralized error codes via `config/variables.yml` for clear failure diagnosis
 - **Self-evolving framework**: `--evolve` command enables continuous framework improvement and optimization
 - **Analytics-driven insights**: Built-in metrics collection and performance monitoring
 - **Flexible bootstrap options**: Standards-based or MCP-powered component library setup
@@ -88,6 +88,18 @@ A conflict-free, streamlined system for structured software development in Claud
     └── wireframe-templates.md
 ```
 
+## Centralized Variables
+- constraints:
+  - task_id_regex: `{{constraints.task_id_regex}}`
+  - spec_dir_pattern: `{{constraints.spec_dir_pattern}}`
+- errors:
+  - shared: `{{errors.shared.ERR_003}}`, `{{errors.shared.ERR_010}}`–`{{errors.shared.ERR_014}}`
+  - next/spec docs: `{{errors.next_spec_docs.ERR_004}}`–`{{errors.next_spec_docs.ERR_007}}`
+  - bootstrap: `{{errors.bootstrap.ERR_015}}`–`{{errors.bootstrap.ERR_020}}`
+  - improve: `{{errors.improve.ERR_021}}`–`{{errors.improve.ERR_024}}`
+  - evolve: `{{errors.evolve.ERR_025}}`–`{{errors.evolve.ERR_028}}`
+- agents: All agent paths are defined under `agents.*` in `variables.yml` and referenced as `{{agents.NAME}}` in workflows.
+
 ## Commands ({{system_counts.workflows}} optimized flags)
 - --init: Initialize project with intelligent analysis and roadmap generation
 - --bootstrap: Setup development foundation (standards-based or --shadcn for MCP-powered)
@@ -103,8 +115,8 @@ A conflict-free, streamlined system for structured software development in Claud
 - **Unmapped flag**: If flag not found in `variables.yml.commands` → return `ERR_001` (no inference)
 - **Agent gates**: Missing logger/context-manager at required gates → `ERR_011`/`ERR_013`
 - **Pre-flight/order**: Missing pre-flight → `ERR_014`; steps out of order → `ERR_012`
-- **Task ID format**: Enforce regex `^[A-Z]+-[0-9]{3}$` (reject underscores) → `ERR_003`
-- **Spec dir naming**: Enforce `{slug}_{type}_{YYYY-MM-DD}` (reject legacy patterns) → `ERR_003`
+- **Task ID format**: Enforce regex `{{constraints.task_id_regex}}` (reject underscores) → {{errors.shared.ERR_003}}
+- **Spec dir naming**: Enforce `{{constraints.spec_dir_pattern}}` (reject legacy patterns) → {{errors.shared.ERR_003}}
 
 ## Agent Architecture
 

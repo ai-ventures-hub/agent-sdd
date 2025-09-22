@@ -9,13 +9,13 @@ WORKFLOW_STEPS:
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - AGENT_GATES:
   - REQUIRE context_manager invoked before apply
   - REQUIRE logger (read) invoked before modifications
-  - IF missing → RETURN [ERR_013] (context) / [ERR_011] (logger)
+  - IF missing → RETURN {{errors.shared.ERR_013}} (context) / {{errors.shared.ERR_011}} (logger)
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 0. LOGGER_READ: {{agents.logger}}(mode="read") → recent_changes
 
@@ -57,7 +57,7 @@ VALIDATION_LEVELS:
 - ACCESSIBILITY: High (syntax, WCAG, screen reader, keyboard navigation)
 
 ERROR_HANDLING:
-- INVALID_WORKFLOW_TYPE [ERR_021]: Type must be enhancement|fix|refactor|performance|accessibility
-- TARGET_NOT_FOUND [ERR_023]: Cannot locate target file or directory
-- HIGH_RISK_REJECTED [ERR_022]: High-risk change requires --execute workflow
-- VALIDATION_FAILED [ERR_024]: Improvement failed validation, changes reverted
+- INVALID_WORKFLOW_TYPE {{errors.improve.ERR_021}}: Type must be enhancement|fix|refactor|performance|accessibility
+- TARGET_NOT_FOUND {{errors.improve.ERR_023}}: Cannot locate target file or directory
+- HIGH_RISK_REJECTED {{errors.improve.ERR_022}}: High-risk change requires --execute workflow
+- VALIDATION_FAILED {{errors.improve.ERR_024}}: Improvement failed validation, changes reverted

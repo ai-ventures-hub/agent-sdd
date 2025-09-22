@@ -13,7 +13,7 @@ For `/sdd-task` commands:
 4. Follow exact workflow in `.claude/commands/workflows/[flag].md`
 
 ### Agent Requirements
-- Invoke all agents via Task tool with subagent_type parameter
+- Invoke all agents via {{agents.*}} references (centralized in variables.yml)
 - No direct file operations without prior agent invocation
 - Mandatory context gathering before file modifications
 - Mandatory logging before and after operations
@@ -23,12 +23,12 @@ For `/sdd-task` commands:
 - Use task-schema-validator agent for task operations
 
 ### Enforcement
-Framework bypass returns ERR_010-ERR_014
+Framework bypass returns {{errors.shared.ERR_010}}-{{errors.shared.ERR_014}}
 
 ## Command Syntax
 `/sdd-task --<flag> [arguments]`
 
-Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit
+Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit, --evolve
 
 Reference: `.claude/commands/sdd-task.md`
 
@@ -36,9 +36,18 @@ Reference: `.claude/commands/sdd-task.md`
 
 Project-agnostic variable system with auto-discovery:
 
-Categories: paths, agents, commands, config
+Categories: paths, agents, commands, constraints, errors, config
 
 Reference: `.claude/config/variables.yml`
+
+Centralized keys used by workflows:
+- constraints.task_id_regex → `{{constraints.task_id_regex}}`
+- constraints.spec_dir_pattern → `{{constraints.spec_dir_pattern}}`
+- errors.shared.* → `{{errors.shared.ERR_003}}`, `{{errors.shared.ERR_010}}`-`{{errors.shared.ERR_014}}`
+- errors.next_spec_docs.* → `{{errors.next_spec_docs.ERR_004}}`-`{{errors.next_spec_docs.ERR_007}}`
+- errors.bootstrap.* → `{{errors.bootstrap.ERR_015}}`-`{{errors.bootstrap.ERR_020}}`
+- errors.improve.* → `{{errors.improve.ERR_021}}`-`{{errors.improve.ERR_024}}`
+- errors.evolve.* → `{{errors.evolve.ERR_025}}`-`{{errors.evolve.ERR_028}}`
 
 ## Directory Structure
 ```
@@ -81,11 +90,11 @@ For `/sdd-task` commands:
 
 ### Global Rules
 - Unmapped flag → ERR_001
-- Missing agent gates → ERR_011/ERR_013
-- Pre-flight missing → ERR_014
-- Steps out of order → ERR_012
-- Invalid task ID format → ERR_003
-- Invalid spec directory naming → ERR_003
+- Missing agent gates → {{errors.shared.ERR_011}}/{{errors.shared.ERR_013}}
+- Pre-flight missing → {{errors.shared.ERR_014}}
+- Steps out of order → {{errors.shared.ERR_012}}
+- Invalid task ID format ({{constraints.task_id_regex}}) → {{errors.shared.ERR_003}}
+- Invalid spec directory naming ({{constraints.spec_dir_pattern}}) → {{errors.shared.ERR_003}}
 
 ### Initial State
 Keep product/, specs/, standards/ directories empty initially.

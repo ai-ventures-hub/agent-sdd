@@ -7,9 +7,9 @@ WORKFLOW_STEPS:
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 DEPENDENCIES:
 - Requires active Agent-SDD framework
@@ -32,10 +32,10 @@ WORKFLOW_SUCCESS_CRITERIA:
 - Documentation updated and accurate
 
 ERROR_HANDLING:
-- ERR_025: Framework health check failed
-- ERR_026: Optimization application failed
-- ERR_027: Validation tests failed
-- ERR_028: Documentation update failed
+- {{errors.evolve.ERR_025}}: Framework health check failed
+- {{errors.evolve.ERR_026}}: Optimization application failed
+- {{errors.evolve.ERR_027}}: Validation tests failed
+- {{errors.evolve.ERR_028}}: Documentation update failed
 
 EXECUTION_FREQUENCY:
 - Trigger conditions: Error rate spikes, performance degradation, user feedback

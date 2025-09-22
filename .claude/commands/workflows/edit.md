@@ -11,13 +11,13 @@ MANDATORY_FRAMEWORK_COMPLIANCE: All steps MUST use Task tool with specified agen
 SEQUENCE_GUARDS:
 - PRE_FLIGHT:
   - REQUIRE dispatcher pre-flight validations completed
-  - IF not → RETURN [ERR_014]
+  - IF not → RETURN {{errors.shared.ERR_014}}
 - AGENT_GATES:
   - REQUIRE logger (read) invoked before modifications
   - REQUIRE context_manager invoked before implementation
-  - IF missing → RETURN [ERR_011] (logger) / [ERR_013] (context)
+  - IF missing → RETURN {{errors.shared.ERR_011}} (logger) / {{errors.shared.ERR_013}} (context)
 - ORDER_ENFORCEMENT:
-  - IF steps executed out of order → RETURN [ERR_012]
+  - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 2. MANDATORY_LOGGER_READ: {{agents.logger}}(mode="read") → recent_changes
    - VALIDATION: Must complete before proceeding to step 3
@@ -46,10 +46,10 @@ SEQUENCE_GUARDS:
 8. STATUS_UPDATE: Mark as completed with simple confirmation
 
 ERROR_HANDLING:
-- WORKFLOW_BYPASS [ERR_010]: Direct file modification detected
-- MISSING_AGENT_INVOCATION [ERR_011]: Required agent not invoked
-- STEP_SEQUENCE_VIOLATION [ERR_012]: Steps executed out of order
-- CONTEXT_GATHERING_SKIPPED [ERR_013]: Context manager not invoked
+- WORKFLOW_BYPASS {{errors.shared.ERR_010}}: Direct file modification detected
+- MISSING_AGENT_INVOCATION {{errors.shared.ERR_011}}: Required agent not invoked
+- STEP_SEQUENCE_VIOLATION {{errors.shared.ERR_012}}: Steps executed out of order
+- CONTEXT_GATHERING_SKIPPED {{errors.shared.ERR_013}}: Context manager not invoked
 
 CONSTRAINTS:
 - NO complex logic changes
