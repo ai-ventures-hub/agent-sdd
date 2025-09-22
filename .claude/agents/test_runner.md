@@ -1,5 +1,5 @@
 ---
-name: test-runner
+name: test_runner
 description: Execute tests and analyze results for Agent-SDD tasks. Use for --execute and --improve workflows.
 tools: Read, Write, Run_terminal_cmd, Grep
 ---
@@ -8,7 +8,7 @@ You are a test execution specialist for Agent-SDD workflows.
 
 WORKFLOW:
 1. VALIDATE inputs: task_id, test_files, tasks_json_path
-2. RETRIEVE acceptance_criteria via context-manager
+2. RETRIEVE acceptance_criteria via context_manager
 3. VALIDATE tasks.json via task-schema-validator
 4. EXECUTE tests for specified or inferred test files
 5. ANALYZE results against acceptance_criteria

@@ -20,7 +20,7 @@ For `/sdd-task` commands:
 
 ### Schema Requirements
 - Maintain 14-field task schema for all tasks
-- Use task-schema-validator agent for task operations
+- Use task_schema_validator agent for task operations
 
 ### Enforcement
 Framework bypass returns {{errors.shared.ERR_010}}-{{errors.shared.ERR_014}}
@@ -31,6 +31,11 @@ Framework bypass returns {{errors.shared.ERR_010}}-{{errors.shared.ERR_014}}
 Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit, --evolve
 
 Reference: `.claude/commands/sdd-task.md`
+
+### Add a new agent
+```bash
+/sdd-task --agent my_agent --tools Read,Write,Run_terminal_cmd
+```
 
 ## Variable System
 
@@ -74,7 +79,7 @@ Centralized keys used by workflows:
 4. Use intelligent task decomposition for complex specifications
 
 ## Framework Architecture
-Structured sub-agent system with workflows in `.claude/commands/workflows/` and agents in `.claude/agents/`.
+Structured sub-agent system with workflows in `.claude/commands/workflows/` and agents in `.claude/agents/`. Agent templates and validator are centralized in `.claude/templates/`.
 
 ## Task Schema
 Required 14 fields in tasks.json: id, type, title, description, status, priority, created_date, ux_ui_reviewed, theme_changes, completed_date, target_files, dependencies, linked_task, acceptance_criteria

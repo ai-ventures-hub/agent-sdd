@@ -1,5 +1,5 @@
 ---
-name: project-analyzer
+name: project_analyzer
 description: Analyze existing project structure and gather overview context. Use for --init workflow to profile established projects or capture required overview fields when code is absent.
 tools: Read, Grep, Glob, Run_terminal_cmd
 ---
@@ -11,7 +11,7 @@ WORKFLOW:
 2. DETECT project state: empty/new project vs existing project with code (ignore .claude/ when counting source files)
 3. IF EMPTY PROJECT:
    a. PROMPT user for overview.md required fields (see OVERVIEW_FIELD_PROMPTS)
-   b. CAPTURE responses and pass to downstream agents (context-manager → file-creator)
+   b. CAPTURE responses and pass to downstream agents (context_manager → file-creator)
    c. RETURN collected metadata for overview generation; SKIP code analysis
 4. FOR EXISTING PROJECTS: Analyze current tech stack from package.json and file structure
 5. SCAN existing code organization and patterns (if any)

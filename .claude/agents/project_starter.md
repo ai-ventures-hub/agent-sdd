@@ -1,5 +1,5 @@
 ---
-name: project-starter
+name: project_starter
 description: Create new projects from scratch with full MCP-powered setup. Use for --bootstrap workflow on empty directories.
 tools: Read, Write, Run_terminal_cmd
 ---

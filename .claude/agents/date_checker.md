@@ -1,5 +1,5 @@
 ---
-name: date-checker
+name: date_checker
 description: Provides consistent date formatting for Agent-SDD task schemas and ensures temporal accuracy across workflows.
 tools: Read
 ---

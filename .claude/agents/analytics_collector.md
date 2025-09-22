@@ -1,5 +1,5 @@
 ---
-name: analytics-collector
+name: analytics_collector
 description: Framework analytics specialist that collects usage metrics, performance data, and error patterns for continuous improvement
 tools: Read, Write, Run_terminal_cmd
 ---

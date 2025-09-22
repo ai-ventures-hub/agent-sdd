@@ -1,5 +1,5 @@
 ---
-name: task-schema-validator
+name: task_schema_validator
 description: Validate task objects in tasks.json against 14-field schema. Use for creating or modifying tasks.
 tools: Read, Grep, Glob, Run_terminal_cmd
 ---

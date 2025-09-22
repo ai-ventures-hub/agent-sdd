@@ -29,27 +29,28 @@ paths:
 # Agent Registry
 agents:
   # Core initialization agents
-  project_analyzer: "{{paths.agents_dir}}/project-analyzer.md"
-  project_starter: "{{paths.agents_dir}}/project-starter.md"
+  project_analyzer: "{{paths.agents_dir}}/project_analyzer.md"
+  project_starter: "{{paths.agents_dir}}/project_starter.md"
 
   # Task management agents
-  task_decomposer: "{{paths.agents_dir}}/task-decomposer.md"
-  task_schema_validator: "{{paths.agents_dir}}/task-schema-validator.md"
+  task_decomposer: "{{paths.agents_dir}}/task_decomposer.md"
+  task_schema_validator: "{{paths.agents_dir}}/task_schema_validator.md"
 
   # Content creation agents
-  file_creator: "{{paths.agents_dir}}/file-creator.md"
+  file_creator: "{{paths.agents_dir}}/file_creator.md"
   designer: "{{paths.agents_dir}}/designer.md"
 
   # Utility agents
-  context_manager: "{{paths.agents_dir}}/context-manager.md"
-  date_checker: "{{paths.agents_dir}}/date-checker.md"
+  context_manager: "{{paths.agents_dir}}/context_manager.md"
+  date_checker: "{{paths.agents_dir}}/date_checker.md"
   logger: "{{paths.agents_dir}}/logger.md"
 
   # Quality assurance agents
-  test_runner: "{{paths.agents_dir}}/test-runner.md"
-  code_reviewer: "{{paths.agents_dir}}/code-reviewer.md"
-  analytics_collector: "{{paths.agents_dir}}/analytics-collector.md"
-  framework_improver: "{{paths.agents_dir}}/framework-improver.md"
+  test_runner: "{{paths.agents_dir}}/test_runner.md"
+  code_reviewer: "{{paths.agents_dir}}/code_reviewer.md"
+  analytics_collector: "{{paths.agents_dir}}/analytics_collector.md"
+  framework_improver: "{{paths.agents_dir}}/framework_improver.md"
+  agent_registry_validator: "{{paths.templates_dir}}/agent-registry-validator.md"
 
 constraints:
   task_id_regex: "^[A-Z]+-[0-9]{3}$"
@@ -122,6 +123,10 @@ commands:
     flag: "--evolve"
     description: "Run framework self-improvement and analytics cycle"
     workflow: "{{paths.workflows_dir}}/evolve.md"
+  agent:
+    flag: "--agent"
+    description: "Scaffold and register a new agent"
+    workflow: "{{paths.workflows_dir}}/agent.md"
 
 # Runtime Configuration (See config.json)
 # Configuration values are now centralized in config.json for runtime use
@@ -162,6 +167,9 @@ templates:
     roadmap: "{{paths.templates_dir}}/roadmap.md"
     standards: "{{paths.templates_dir}}/standards/"
 
+  agents:
+    agent_template: "{{paths.templates_dir}}/agent-template.md"
+
   # MCP-powered UI components (replaces custom templates)
   ui_components:
     source: "shadcn-registry"  # Use MCP instead of local templates
@@ -197,3 +205,4 @@ output_styles:
     improve: "executor-strict"
     edit: "surgical-edit"
     evolve: "evolve-ops"
+    agent: "ai-to-ai-strict"

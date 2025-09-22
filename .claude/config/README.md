@@ -39,6 +39,11 @@ A conflict-free, streamlined system for structured software development in Claud
 /sdd-task --evolve  # Run self-improvement and analytics cycle
 ```
 
+### Add a new agent
+```bash
+/sdd-task --agent my_agent --tools Read,Write,Run_terminal_cmd
+```
+
 ## Directory Layout (Claude workspace)
 ```
 .claude/
@@ -78,7 +83,9 @@ A conflict-free, streamlined system for structured software development in Claud
 ├── settings.local.json # Local configuration overrides
 ├── specs/            # Generated: task specifications (from --spec/--next)
 ├── standards/        # Generated: tech-stack.md, theme-standards.md, best-practices.md
-└── templates/        # Template files for generation
+└── templates/        # Template files for generation (centralized)
+    ├── agent-registry-validator.md
+    ├── agent-template.md
     ├── best-practices.md
     ├── overview.md
     ├── roadmap.md
@@ -109,6 +116,7 @@ A conflict-free, streamlined system for structured software development in Claud
 - --improve: Apply enhancements, fixes, refactors, accessibility, performance
 - --edit: Lightweight edits without full spec overhead
 - --evolve: Run framework self-improvement and analytics cycle
+- --agent: Scaffold and register a new agent
 
 ## Enforcement (hard rules)
 - **Workflow Dependencies**: Automatic validation of required files and execution order

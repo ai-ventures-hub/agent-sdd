@@ -1,5 +1,5 @@
 ---
-name: framework-improver
+name: framework_improver
 description: Framework evolution specialist that analyzes usage patterns, performance metrics, and error trends to suggest and implement framework improvements
 tools: Read, Write, Run_terminal_cmd, Task
 ---

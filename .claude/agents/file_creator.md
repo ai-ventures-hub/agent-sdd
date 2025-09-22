@@ -1,5 +1,5 @@
 ---
-name: file-creator
+name: file_creator
 description: Create files and directories for Agent-SDD workflows. Handle spec.md/tasks.json for development, wireframe.md/user-journey.md for design.
 tools: Read, Write, Run_terminal_cmd
 ---

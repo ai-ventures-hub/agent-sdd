@@ -11,6 +11,7 @@ SUPPORTED_FLAGS:
 - --improve: Apply enhancements, fixes, or refactoring
 - --edit: Apply simple, lightweight edits
 - --evolve: Run framework self-improvement and analytics cycle
+- --agent: Scaffold and register a new agent
 
 WORKFLOW_DISPATCH:
 - READ .claude/config/variables.yml → commands map
@@ -52,12 +53,13 @@ PRE_FLIGHT_VALIDATION:
 - CONFIRM Agent-SDD framework active
 - READ dispatcher file first
 - USE Task tool for ALL agent invocations
+- VALIDATE agent registry: {{agents.agent_registry_validator}}(mode="validate") → violations|OK; IF violations → RETURN {{errors.shared.ERR_014}}
 
 EXECUTION_FLOW:
 1. PARSE input: /sdd-task --<flag> [arguments]
 2. MANDATORY: Task tool subagent_type="logger" read mode
 3. VALIDATE task: Task tool subagent_type="task-schema-validator"
-4. MANDATORY: Task tool subagent_type="context-manager"
+4. MANDATORY: Task tool subagent_type="context_manager"
 5. EXECUTE corresponding workflows/<flag>.md
 6. CREATE files: Task tool subagent_type="file-creator"
 7. RUN tests: Task tool subagent_type="test-runner"

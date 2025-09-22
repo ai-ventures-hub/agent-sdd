@@ -1,5 +1,5 @@
 ---
-name: code-reviewer
+name: code_reviewer
 description: Expert code review specialist for theme compliance, accessibility, and code quality. Proactively reviews code after modifications and enforces Agent-SDD standards.
 tools: Read, Grep, Glob, Run_terminal_cmd
 ---
@@ -12,7 +12,7 @@ The Code Reviewer Agent scans code files for compliance with `{{paths.standards_
 ## Inputs
 - **File Paths**: Array of strings specifying files or directories (e.g., `src/components/Button/Button.tsx`) from `/sdd-task --audit <paths>` or `target_files` in `tasks.json` for `--execute` or `--improve`.
 - **Task ID** (optional): String identifier (e.g., `BTN-012`) to locate `tasks.json` in `{{paths.specs_dir}}/[feature-name]_[type]_[date]/`.
-- **Theme Standards**: Content from `{{paths.standards_dir}}/theme-standards.md`, retrieved via `context-manager` agent.
+- **Theme Standards**: Content from `{{paths.standards_dir}}/theme-standards.md`, retrieved via `context_manager` agent.
  - **Config** (optional): Values from `{{paths.config_dir}}/config.json` affecting review, e.g., `review.enable_animations` and `review.font_family_from_theme_tokens`.
 
 ## Outputs
@@ -41,7 +41,7 @@ The Code Reviewer Agent scans code files for compliance with `{{paths.standards_
    - Confirm file paths exist and are valid (e.g., `*.tsx`, `*.css`).
    - For `--execute` or `--improve`, validate `task-id` and locate `tasks.json` in `{{paths.specs_dir}}/[feature-name]_[type]_[date]/`.
 2. **Retrieve Theme Standards**:
-   - Invoke `context-manager` agent (batch_read) to extract content from `{{paths.standards_dir}}/theme-standards.md` (e.g., "Allowed Tailwind Color Classes", Design Tokens).
+   - Invoke `context_manager` agent (batch_read) to extract content from `{{paths.standards_dir}}/theme-standards.md` (e.g., "Allowed Tailwind Color Classes", Design Tokens).
 3. **Analyze Files**:
    - Scan supported file types for:
      - **Colors**: Match against approved Tailwind classes or Design Tokens.
@@ -68,7 +68,7 @@ The Code Reviewer Agent scans code files for compliance with `{{paths.standards_
 - Do not modify business logic or functionality.
 - Create `.bak` backups before modifying files.
 - Validate all changes against `{{paths.standards_dir}}/theme-standards.md`.
-- Use `context-manager` for optimized file content retrieval and `file-creator` (mode=update) for file updates and backups.
+- Use `context_manager` for optimized file content retrieval and `file-creator` (mode=update) for file updates and backups.
 - Supported file types for review/modification: `*.tsx`, `*.ts`, `*.jsx`, `*.js`, `*.css`, `*.scss`, `*.sass`, `*.vue`, `*.svelte`.
 
 ## Error Handling
