@@ -1,4 +1,6 @@
-# /sdd-task --next Workflow
+# sdd-task --next
+
+PURPOSE: Determine and scaffold the next actionable task from roadmap and standards.
 
 WORKFLOW_STEPS:
 

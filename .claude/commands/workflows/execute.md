@@ -1,4 +1,6 @@
-# /sdd-task --execute <task-id>
+# sdd-task --execute <task-id>
+
+PURPOSE: Execute a specific SDD task end-to-end with guardrails, design consultation, implementation, testing, and logging.
 
 AGENT_EXECUTION_WORKFLOW: Task implementation with proactive theme guidance and quality assurance
 

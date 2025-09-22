@@ -1,4 +1,6 @@
-# /sdd-task --init Workflow
+# sdd-task --init
+
+PURPOSE: Initialize SDD for a new or existing project; analyze state, generate overview, recommend tech stack, plan roadmap, and validate setup.
 
 WORKFLOW_STEPS:
 

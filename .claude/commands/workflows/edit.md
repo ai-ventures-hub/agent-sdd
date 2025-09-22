@@ -1,4 +1,6 @@
-# /sdd-task --edit [<description>] Workflow
+# sdd-task --edit [<description>]
+
+PURPOSE: Quickly apply safe, single-responsibility edits with minimal context and logging.
 
 WORKFLOW_STEPS:
 

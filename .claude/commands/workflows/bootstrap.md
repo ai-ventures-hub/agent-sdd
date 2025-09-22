@@ -1,4 +1,6 @@
-# /sdd-task --bootstrap [--shadcn] Workflow
+# sdd-task --bootstrap [--shadcn]
+
+PURPOSE: Bootstrap a project with a Next.js + TypeScript + Tailwind setup, optionally with shadcn/ui; validate structure and document theme standards.
 
 WORKFLOW_STEPS:
 

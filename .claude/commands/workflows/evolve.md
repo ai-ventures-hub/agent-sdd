@@ -1,4 +1,6 @@
-# Agent-SDD Evolution Workflow: --evolve
+# sdd-task --evolve
+
+PURPOSE: Evolve and optimize the Agent-SDD framework via analytics-driven improvements and validation.
 
 WORKFLOW_DESCRIPTION: Framework self-improvement and optimization cycle. Analyzes usage patterns, identifies bottlenecks, and implements automated improvements.
 

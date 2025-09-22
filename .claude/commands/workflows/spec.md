@@ -1,4 +1,6 @@
-# /sdd-task --spec Workflow
+# sdd-task --spec
+
+PURPOSE: Generate a full SDD task specification from product docs and standards.
 
 WORKFLOW_STEPS:
 

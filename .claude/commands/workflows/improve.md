@@ -1,4 +1,6 @@
-# /sdd-task --improve <type> <description> [target] Workflow
+# sdd-task --improve <type> <description> [target]
+
+PURPOSE: Implement targeted enhancements or fixes with risk-based validation and logging.
 
 SUPPORTED_TYPES: enhancement, fix, refactor, performance, accessibility
 
