@@ -15,7 +15,7 @@ SUPPORTED_FLAGS:
 
 WORKFLOW_DISPATCH:
 - READ .claude/config/variables.yml → commands map
-- IF flag ∉ commands map → RETURN [ERR_001]
+- IF flag ∉ commands map → RETURN {{errors.shared.ERR_001}}
 - ELSE:
   - SELECT output style:
     - style_name := variables.output_styles.by_flag[flag] || variables.output_styles.default
@@ -33,14 +33,21 @@ WORKFLOW_DEPENDENCY_MATRIX:
 - --evolve: Independent (can run anytime to improve framework health)
 
 WORKFLOW_DEPENDENCY_VALIDATION:
+- DETECT_PROJECT_STATE: Check if --init has been run
 - VALIDATE_REQUIRED_FILES: Check existence of dependency files before execution
-- SEQUENCE_ENFORCEMENT: Prevent out-of-order workflow execution
+- PROVIDE_GUIDANCE: Suggest correct workflow sequence for missing dependencies
 - DEPENDENCY_CHAIN_CHECK: Verify complete dependency chain is satisfied
 
 SEQUENCE_GUARD:
-- IF pre-flight validations not completed → RETURN [ERR_014] or [ERR_012]
-- IF workflow dependencies not met → RETURN [ERR_004] with dependency list
-- IF sequence violation detected → RETURN [ERR_012] with correct order
+- IF pre-flight validations not completed → RETURN {{errors.shared.ERR_014}}
+- IF --spec|--next|--execute without --init → RETURN workflow_guidance_message
+- IF workflow dependencies not met → RETURN dependency_help_with_commands
+- IF sequence violation detected → RETURN {{errors.shared.ERR_012}} with workflow_sequence
+
+WORKFLOW_GUIDANCE_MESSAGES:
+- init_required: "Run '/sdd-task --init' first to set up your project. This creates overview.md, roadmap.md, tech-stack.md, and best-practices.md."
+- sequence_help: "Correct workflow sequence: --init → --spec → --execute"
+- dependency_list: "Missing files: {files}. Run --init to generate required project documentation."
 
 TASK_SCHEMA_VALIDATION:
 - FOR --spec, --execute: analyze complexity using task-decomposer.md
@@ -77,11 +84,11 @@ FILE_LOCKING_PROTOCOL:
 - FAIL if lock cannot be acquired
 
 ERROR_HANDLING:
-- WORKFLOW_BYPASS [ERR_010]: Direct file modification detected
-- MISSING_AGENT_INVOCATION [ERR_011]: Required agent not invoked
-- STEP_SEQUENCE_VIOLATION [ERR_012]: Steps executed out of order
-- CONTEXT_GATHERING_SKIPPED [ERR_013]: Context manager not invoked
-- PRE_FLIGHT_FAILED [ERR_014]: Pre-flight validation failed
+- WORKFLOW_BYPASS {{errors.shared.ERR_010}}: Direct file modification detected
+- MISSING_AGENT_INVOCATION {{errors.shared.ERR_011}}: Required agent not invoked
+- STEP_SEQUENCE_VIOLATION {{errors.shared.ERR_012}}: Steps executed out of order
+- CONTEXT_GATHERING_SKIPPED {{errors.shared.ERR_013}}: Context manager not invoked
+- PRE_FLIGHT_FAILED {{errors.shared.ERR_014}}: Pre-flight validation failed
 - MCP_UNREACHABLE [ERR_015]: MCP server connectivity failed
 - MCP_COMMAND_FAILED [ERR_016]: MCP command execution failed
 - NETWORK_TIMEOUT [ERR_017]: Network operation timed out
@@ -92,10 +99,10 @@ ERROR_HANDLING:
 - HIGH_RISK_REJECTED [ERR_022]: High-risk change rejected
 - TARGET_NOT_FOUND [ERR_023]: Target file/directory not found
 - DATE_FORMAT_ERROR [ERR_024]: Invalid date format
-- INVALID_FLAG [ERR_001]: Invalid flag provided
-- MISSING_ARGUMENTS [ERR_002]: Required arguments missing
-- PARAMETER_PARSING [ERR_002A]: Invalid parameter format
-- INVALID_TASK_SCHEMA [ERR_003]: Schema validation failed
+- INVALID_FLAG {{errors.shared.ERR_001}}: Invalid flag provided
+- MISSING_ARGUMENTS {{errors.shared.ERR_002}}: Required arguments missing
+- PARAMETER_PARSING {{errors.shared.ERR_002A}}: Invalid parameter format
+- INVALID_TASK_SCHEMA {{errors.shared.ERR_003}}: Schema validation failed
 - FILE_NOT_FOUND [ERR_004]: Required file not found
 - TASK_NOT_FOUND [ERR_005]: Task ID not found
 - GIT_OPERATION_FAILED [ERR_006]: Git operation failed

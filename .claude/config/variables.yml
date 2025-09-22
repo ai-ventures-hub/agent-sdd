@@ -58,6 +58,9 @@ constraints:
 
 errors:
   shared:
+    ERR_001: "[ERR_001]"
+    ERR_002: "[ERR_002]"
+    ERR_002A: "[ERR_002A]"
     ERR_003: "[ERR_003]"
     ERR_010: "[ERR_010]"
     ERR_011: "[ERR_011]"
@@ -69,6 +72,7 @@ errors:
     ERR_005: "[ERR_005]"
     ERR_006: "[ERR_006]"
     ERR_007: "[ERR_007]"
+    ERR_008: "[ERR_008]"
   bootstrap:
     ERR_015: "[ERR_015]"
     ERR_016: "[ERR_016]"
@@ -86,6 +90,20 @@ errors:
     ERR_026: "[ERR_026]"
     ERR_027: "[ERR_027]"
     ERR_028: "[ERR_028]"
+  agent:
+    ERR_030: "[ERR_030]"
+    ERR_031: "[ERR_031]"
+    ERR_032: "[ERR_032]"
+    ERR_033: "[ERR_033]"
+    ERR_034: "[ERR_034]"
+  init:
+    ERR_035: "[ERR_035]"
+    ERR_036: "[ERR_036]"
+    ERR_040: "[ERR_040]"
+    ERR_041: "[ERR_041]"
+    ERR_042: "[ERR_042]"
+    ERR_043: "[ERR_043]"
+    ERR_044: "[ERR_044]"
 
 # Command Configuration
 commands:
@@ -132,28 +150,10 @@ commands:
 # Configuration values are now centralized in config.json for runtime use
 # This file focuses on variable definitions and command routing only
 
-# Framework Settings (Development Enhanced)
+# Framework Settings (Reference Only - Runtime in config.json)
 framework:
-  # Supported testing frameworks (all available for development)
-  testing_frameworks: ["jest", "vitest", "mocha", "cypress"]
-  config_files:
-    jest: "jest.config.js"
-    vitest: "vitest.config.js"
-    mocha: "mocha.opts"
-    cypress: "cypress.config.js"
-
-  # Supported boilerplate types (all available for development)
-  boilerplate_types: ["shadcn", "antd", "mui", "chakra", "tailwind", "mantine"]
-
-  # File extensions for different languages (expanded for development)
-  extensions:
-    typescript: [".ts", ".tsx"]
-    javascript: [".js", ".jsx"]
-    python: [".py"]
-    go: [".go"]
-    rust: [".rs"]
-    java: [".java"]
-    csharp: [".cs"]
+  supported_types: ["shadcn", "antd", "mui", "chakra", "tailwind", "mantine"]
+  extensions: [".ts", ".tsx", ".js", ".jsx", ".py", ".go", ".rs", ".java", ".cs"]
 
 # Error Code Registry - See .claude/docs/error-codes.md
 
@@ -180,19 +180,11 @@ templates:
 # System Counts (Single Source of Truth)
 system_counts:
   agents: 13        # Number of active sub-agents
-  workflows: 8      # Number of workflow flags
+  workflows: 9      # Number of workflow flags
   templates: 7      # Number of template files
   error_codes: 24   # Total error codes defined
 
-# Development-Specific Settings
-development:
-  debug_mode: true
-  verbose_logging: true
-  skip_confirmation_prompts: false
-  enable_experimental_features: true
-  allow_unsafe_operations: false
-  auto_save_frequency: 30  # Auto-save every 30 seconds
-  max_concurrent_tasks: 5  # Allow more concurrent development tasks
+# Development Settings Reference (Runtime in config.json)
 
 output_styles:
   default: "ai-to-ai-strict"

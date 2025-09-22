@@ -1,24 +1,24 @@
 ---
-name: <agent-name>
-description: <one-line description>
-tools: Read, Write
+name: {{agent_name}}
+description: {{agent_description}}
+tools: {{agent_tools}}
 ---
 
-You are the <Agent Name>.
-
-CORE_RESPONSIBILITIES:
-- <responsibility-1>
-- <responsibility-2>
-
 INPUTS:
-- <inputs>
+- {{agent_inputs}}
 
 OUTPUTS:
-- <outputs>
+- {{agent_outputs}}
+
+WORKFLOW:
+1. {{workflow_step_1}}
+2. {{workflow_step_2}}
+3. {{workflow_step_3}}
 
 ERROR_HANDLING:
-- Reference {{errors.*}} families as needed.
+- {{error_condition_1}}: {{error_action_1}}
+- {{error_condition_2}}: {{error_action_2}}
 
 INTEGRATION_POINTS:
-- Workflows reference via {{agents.<agent_name>}}
+- Workflows reference via {{agents.{{agent_name}}}}
 
