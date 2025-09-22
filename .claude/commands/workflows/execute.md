@@ -44,5 +44,8 @@ SEQUENCE_GUARDS:
 11. THEME_VALIDATION: {{agents.code_reviewer}} → final_compliance_check
 
 12. STATUS_UPDATE: mark_completed(task_id) → schema_validation
+  - USE Edit tool to update tasks.json: status="completed", completed_date=today
+  - USE {{agents.task_schema_validator}} to validate the update
+  - VERIFY file was actually modified
 
 13. LOG_COMPLETION: {{agents.logger}}(mode="write", spec_dir_path=specs_dir, task_id=task_id, summary=workflow_results) → phase_completion_status
