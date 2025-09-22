@@ -4,6 +4,13 @@ PURPOSE: Determine and scaffold the next actionable task from roadmap and standa
 
 WORKFLOW_STEPS:
 
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
+
 STEP_1_ROADMAP_ANALYSIS:
 - READ {{paths.product_dir}}/roadmap.md
 - IDENTIFY current phase and task completion status
@@ -30,6 +37,12 @@ STEP_5_SCHEMA_VALIDATION:
 - CREATE tasks.json with full 14-field schema compliance
 - ENFORCE task_id regex `^[A-Z]+-[0-9]{3}$`
 - REJECT invalid formats with [ERR_003]
+
+ERROR_HANDLING:
+- MISSING_ROADMAP [ERR_004]
+- MISSING_OVERVIEW [ERR_005]
+- MISSING_TECH_STACK [ERR_006]
+- MISSING_BEST_PRACTICES [ERR_007]
 
 STEP_6_DIRECTORY_CREATION:
 - CREATE specification directory `{slug}_{type}_{YYYY-MM-DD}`

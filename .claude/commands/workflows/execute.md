@@ -4,9 +4,9 @@ PURPOSE: Execute a specific SDD task end-to-end with guardrails, design consulta
 
 AGENT_EXECUTION_WORKFLOW: Task implementation with proactive theme guidance and quality assurance
 
----
-
 WORKFLOW_STEPS:
+
+0. LOGGER_READ: {{agents.logger}}(mode="read") → recent_changes
 
 1. CONTEXT_INIT: {{agents.context_manager}} → workflow_context, caching
 

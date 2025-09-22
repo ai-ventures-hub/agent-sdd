@@ -4,10 +4,20 @@ PURPOSE: Initialize SDD for a new or existing project; analyze state, generate o
 
 WORKFLOW_STEPS:
 
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- AGENT_GATES:
+  - REQUIRE project_analyzer/context_manager invoked before recommendations
+  - IF missing → RETURN [ERR_013]
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
+
 1. PROJECT_STATE_ANALYSIS:
    - CHECK {{paths.product_dir}}/overview.md existence
    - DETECT project type: empty vs existing
-   - FOR EMPTY PROJECTS: Invoke project-analyzer in prompt mode to gather overview fields before documentation generation
+   - FOR EMPTY PROJECTS: {{agents.project_analyzer}}(mode="prompt") → overview_fields
    - FOR EXISTING PROJECTS: SCAN project files (package.json, src/, components/) EXCLUDING .claude/
    - DETECT existing tech stack and frameworks
    - DETERMINE routing strategy
@@ -58,7 +68,7 @@ WORKFLOW_STEPS:
 AGENT_INVOCATIONS:
 - {{agents.project_analyzer}} - analyze existing projects; prompt for overview fields when project lacks source files
 - {{agents.file_creator}} - create overview.md, roadmap.md, tech-stack.md, best-practices.md files
-- FOR EMPTY PROJECTS: Use project-analyzer responses to populate overview template before continuing
+- FOR EMPTY PROJECTS: Use project_analyzer responses to populate overview template before continuing
 
 ERROR_RECOVERY:
 - MISSING_OVERVIEW: Use basic template

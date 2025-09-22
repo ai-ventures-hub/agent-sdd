@@ -4,6 +4,13 @@ PURPOSE: Generate a full SDD task specification from product docs and standards.
 
 WORKFLOW_STEPS:
 
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
+
 STEP_1_PROJECT_VALIDATION:
 - VERIFY {{paths.product_dir}}/overview.md exists and approved
 - VERIFY {{paths.product_dir}}/roadmap.md exists with phases
@@ -48,4 +55,10 @@ STEP_7_DIRECTORY_CREATION:
 
 STEP_8_FINAL_VALIDATION:
 - VALIDATE content completeness, consistency, technical feasibility
+
+ERROR_HANDLING:
+- MISSING_OVERVIEW [ERR_005]
+- MISSING_ROADMAP [ERR_004]
+- MISSING_TECH_STACK [ERR_006]
+- MISSING_BEST_PRACTICES [ERR_007]
 

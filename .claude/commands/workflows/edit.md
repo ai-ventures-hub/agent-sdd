@@ -8,28 +8,27 @@ MANDATORY_FRAMEWORK_COMPLIANCE: All steps MUST use Task tool with specified agen
 
 1. PARSE_DESCRIPTION: Extract optional edit description for context
 
-2. MANDATORY_LOGGER_READ:
-   <invoke name="Task">
-   <parameter name="subagent_type">logger</parameter>
-   <parameter name="description">Read recent changes</parameter>
-   <parameter name="prompt">Read recent project changes from changelog for edit context: [description].</parameter>
-   </invoke>
-   ```
-   VALIDATION: Must complete before proceeding to step 3
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- AGENT_GATES:
+  - REQUIRE logger (read) invoked before modifications
+  - REQUIRE context_manager invoked before implementation
+  - IF missing → RETURN [ERR_011] (logger) / [ERR_013] (context)
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
+
+2. MANDATORY_LOGGER_READ: {{agents.logger}}(mode="read") → recent_changes
+   - VALIDATION: Must complete before proceeding to step 3
 
 3. TARGET_RESOLUTION: Determine files requiring modification
    - IF --file flag provided: use specified file
    - IF no file specified: prompt user to select target
    - SUPPORT multiple files for batch edits
 
-4. MANDATORY_CONTEXT_GATHERING:
-   <invoke name="Task">
-   <parameter name="subagent_type">context-manager</parameter>
-   <parameter name="description">Gather minimal context</parameter>
-   <parameter name="prompt">Gather minimal context for edit: [description]. Target files: [file_list]</parameter>
-   </invoke>
-   ```
-   VALIDATION: Must complete before proceeding to step 5
+4. MANDATORY_CONTEXT_GATHERING: {{agents.context_manager}} → minimal_context(target_files=[file_list])
+   - VALIDATION: Must complete before proceeding to step 5
 
 5. APPLY_CHANGES: Execute simple code modifications using file modification tools
    - SUPPORT common edit patterns (typos, formatting, simple refactoring)
@@ -41,14 +40,8 @@ MANDATORY_FRAMEWORK_COMPLIANCE: All steps MUST use Task tool with specified agen
    - SKIP comprehensive testing for small edits
    - SKIP theme compliance checks
 
-7. MANDATORY_LOGGER_WRITE:
-   <invoke name="Task">
-   <parameter name="subagent_type">logger</parameter>
-   <parameter name="description">Log edit completion</parameter>
-   <parameter name="prompt">Record edit completion in changelog: [description]. Files modified: [file_list]. Changes: [summary].</parameter>
-   </invoke>
-   ```
-   VALIDATION: Must complete to finalize workflow
+7. MANDATORY_LOGGER_WRITE: {{agents.logger}}(mode="write", files=[file_list], summary=[summary])
+   - VALIDATION: Must complete to finalize workflow
 
 8. STATUS_UPDATE: Mark as completed with simple confirmation
 

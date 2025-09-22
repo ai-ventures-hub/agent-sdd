@@ -6,6 +6,19 @@ SUPPORTED_TYPES: enhancement, fix, refactor, performance, accessibility
 
 WORKFLOW_STEPS:
 
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- AGENT_GATES:
+  - REQUIRE context_manager invoked before apply
+  - REQUIRE logger (read) invoked before modifications
+  - IF missing → RETURN [ERR_013] (context) / [ERR_011] (logger)
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
+
+0. LOGGER_READ: {{agents.logger}}(mode="read") → recent_changes
+
 1. PARSE_ARGUMENTS: Extract improvement type, description, optional target
 
 2. CONTEXT_GATHERING: {{agents.context_manager}} → collect relevant standards and codebase context
@@ -47,4 +60,4 @@ ERROR_HANDLING:
 - INVALID_WORKFLOW_TYPE [ERR_021]: Type must be enhancement|fix|refactor|performance|accessibility
 - TARGET_NOT_FOUND [ERR_023]: Cannot locate target file or directory
 - HIGH_RISK_REJECTED [ERR_022]: High-risk change requires --execute workflow
-- VALIDATION_FAILED: Improvement failed validation, changes reverted
+- VALIDATION_FAILED [ERR_024]: Improvement failed validation, changes reverted

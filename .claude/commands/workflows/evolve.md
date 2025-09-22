@@ -2,80 +2,27 @@
 
 PURPOSE: Evolve and optimize the Agent-SDD framework via analytics-driven improvements and validation.
 
-WORKFLOW_DESCRIPTION: Framework self-improvement and optimization cycle. Analyzes usage patterns, identifies bottlenecks, and implements automated improvements.
+WORKFLOW_STEPS:
+
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
 
 DEPENDENCIES:
 - Requires active Agent-SDD framework
-- No specific file dependencies (can run anytime)
 - May reference changelog.md and analytics data
 
-WORKFLOW_PHASES:
-
-## PHASE 1: Analytics Collection & Analysis
-**Duration**: 2-5 minutes
-**Agents**: analytics-collector, framework-improver
-
-1. **COLLECT_METRICS**
-   - Task tool subagent_type="analytics-collector" mode="collect"
-   - Gather usage statistics, performance data, error patterns
-   - Analyze recent framework activity and health indicators
-
-2. **ANALYZE_PATTERNS**
-   - Task tool subagent_type="framework-improver" mode="analyze"
-   - Identify performance bottlenecks and optimization opportunities
-   - Review error trends and systemic issues
-   - Assess workflow efficiency and agent performance
-
-## PHASE 2: Framework Health Assessment
-**Duration**: 1-3 minutes
-**Agents**: framework-improver
-
-3. **VALIDATE_FRAMEWORK**
-   - Task tool subagent_type="framework-improver" mode="validate"
-   - Run comprehensive framework self-tests
-   - Check configuration consistency and integrity
-   - Validate agent availability and performance
-   - Verify workflow dependencies and error handling
-
-4. **GENERATE_REPORTS**
-   - Task tool subagent_type="analytics-collector" mode="report"
-   - Create framework health and performance reports
-   - Generate optimization recommendations
-   - Produce trend analysis and forecasting
-
-## PHASE 3: Automated Improvements
-**Duration**: 3-10 minutes
-**Agents**: framework-improver, file-creator
-
-5. **APPLY_OPTIMIZATIONS**
-   - Task tool subagent_type="framework-improver" mode="optimize"
-   - Implement performance optimizations (caching, parallelization)
-   - Streamline workflows and reduce unnecessary dependencies
-   - Update agent configurations for better performance
-   - Apply automated fixes for common issues
-
-6. **EVOLVE_FEATURES**
-   - Task tool subagent_type="framework-improver" mode="evolve"
-   - Analyze usage patterns to identify feature gaps
-   - Propose incremental improvements based on user behavior
-   - Implement safe, low-risk enhancements
-   - Update framework documentation and configurations
-
-## PHASE 4: Validation & Documentation
-**Duration**: 1-2 minutes
-**Agents**: code-reviewer, logger
-
-7. **VALIDATE_CHANGES**
-   - Task tool subagent_type="code-reviewer" mode="framework_review"
-   - Verify framework integrity after changes
-   - Ensure backward compatibility and stability
-   - Test critical workflows and agent functions
-
-8. **UPDATE_DOCUMENTATION**
-   - Task tool subagent_type="file-creator" mode="framework_docs"
-   - Update framework version and changelog
-   - Document implemented improvements and their impact
-   - Generate evolution summary and recommendations
+1. COLLECT_METRICS: {{agents.analytics_collector}}(mode="collect") → usage_stats, perf_data, error_patterns
+2. ANALYZE_PATTERNS: {{agents.framework_improver}}(mode="analyze") → bottlenecks, opportunities
+3. VALIDATE_FRAMEWORK: {{agents.framework_improver}}(mode="validate") → self_test_report
+4. GENERATE_REPORTS: {{agents.analytics_collector}}(mode="report") → health_report, recommendations
+5. APPLY_OPTIMIZATIONS: {{agents.framework_improver}}(mode="optimize") → changes_applied
+6. EVOLVE_FEATURES: {{agents.framework_improver}}(mode="evolve") → enhancements
+7. VALIDATE_CHANGES: {{agents.code_reviewer}}(mode="framework_review") → review_ok
+8. UPDATE_DOCUMENTATION: {{agents.file_creator}}(mode="framework_docs") → version_bump, changelog_updates
 
 WORKFLOW_SUCCESS_CRITERIA:
 - Framework health score >= 90
@@ -91,7 +38,6 @@ ERROR_HANDLING:
 - ERR_028: Documentation update failed
 
 EXECUTION_FREQUENCY:
-- Recommended: Weekly or after significant usage periods
 - Trigger conditions: Error rate spikes, performance degradation, user feedback
 - Automated: Can be scheduled or triggered by analytics thresholds
 
@@ -121,15 +67,7 @@ FRAMEWORK_EVOLUTION_METRICS:
 - Adoption rate of new features
 
 SUCCESS_OUTPUT:
-```
-Framework Evolution Complete
-==========================
-Health Score: 95 (+5 points)
-Improvements Applied: 3
-Performance Gains: 15% faster execution
-Error Reduction: 20% fewer failures
-New Features: 1 automated optimization
-
-Next Evolution: Scheduled in 7 days
-Recommendations: Monitor cache performance, consider workflow parallelization
-```
+- health_score: number
+- improvements_applied: number
+- performance_gain_pct: number
+- error_reduction_pct: number

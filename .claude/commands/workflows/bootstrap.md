@@ -8,28 +8,36 @@ WORKFLOW_STEPS:
    - Check for --shadcn flag
    - Branch to BRANCH_A if --shadcn present, BRANCH_B if not
 
-PROJECT_STARTER_ACTIVATION:
-   - Execute `{{agents.project_starter}}`
+2. PROJECT_STARTER_ACTIVATION: {{agents.project_starter}} → initial_structure
    - Generate initial project structure
 
-2. PROJECT_INITIALIZATION:
+3. PROJECT_INITIALIZATION:
    - `npm init -y`
 
-3. NEXTJS_SETUP:
+4. NEXTJS_SETUP:
    - `npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"`
 
-4. DEPENDENCIES_INSTALL:
+5. DEPENDENCIES_INSTALL:
    - `npm install next@latest react@latest react-dom@latest`
    - `npm install -D typescript @types/react @types/node`
 
-5. SHADCN_INIT:
+6. SHADCN_INIT:
    - `npx shadcn-ui@latest init --yes`
 
-6. ESSENTIAL_COMPONENTS:
+7. ESSENTIAL_COMPONENTS:
    - `npx shadcn-ui@latest add button --yes`
    - `npx shadcn-ui@latest add input --yes`
    - `npx shadcn-ui@latest add card --yes`
    - `npx shadcn-ui@latest add dialog --yes`
+SEQUENCE_GUARDS:
+- PRE_FLIGHT:
+  - REQUIRE dispatcher pre-flight validations completed
+  - IF not → RETURN [ERR_014]
+- ORDER_ENFORCEMENT:
+  - IF steps executed out of order → RETURN [ERR_012]
+- FLAG_GUARDS:
+  - IF --shadcn absent → SKIP SHADCN steps
+  - IF shadcn steps attempted without flag → RETURN [ERR_016]
 
 VALIDATION_CHECKS:
 - package.json exists
