@@ -185,3 +185,15 @@ development:
   allow_unsafe_operations: false
   auto_save_frequency: 30  # Auto-save every 30 seconds
   max_concurrent_tasks: 5  # Allow more concurrent development tasks
+
+output_styles:
+  default: "ai-to-ai-strict"
+  by_flag:
+    init: "ai-to-ai-strict"
+    bootstrap: "bootstrap-ops"
+    next: "spec-author"
+    spec: "spec-author"
+    execute: "executor-strict"
+    improve: "executor-strict"
+    edit: "surgical-edit"
+    evolve: "evolve-ops"

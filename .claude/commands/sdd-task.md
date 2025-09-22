@@ -15,7 +15,11 @@ SUPPORTED_FLAGS:
 WORKFLOW_DISPATCH:
 - READ .claude/config/variables.yml → commands map
 - IF flag ∉ commands map → RETURN [ERR_001]
-- ELSE route to commands[flag].workflow
+- ELSE:
+  - SELECT output style:
+    - style_name := variables.output_styles.by_flag[flag] || variables.output_styles.default
+    - APPLY `/output-style ${style_name}` (project-level)
+  - ROUTE to commands[flag].workflow
 
 WORKFLOW_DEPENDENCY_MATRIX:
 - --init: Can run first on any project (no dependencies)
