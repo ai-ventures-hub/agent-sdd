@@ -1,0 +1,150 @@
+# Agent-SDD Variable Configuration (Local Development Optimized)
+# Framework optimized for local development workflows
+# Auto-discovers project structure and adapts paths accordingly
+
+# Directory Structure Variables (Project-Agnostic)
+paths:
+  # Base directory (auto-discovered, defaults to .claude if not found)
+  base_dir: "{{CLAUDE_DIR}}"
+
+  # Subdirectories (relative to base_dir)
+  product_dir: "{{paths.base_dir}}/product"
+  standards_dir: "{{paths.base_dir}}/standards"
+  specs_dir: "{{paths.base_dir}}/specs"
+  agents_dir: "{{paths.base_dir}}/agents"
+  templates_dir: "{{paths.base_dir}}/templates"
+  commands_dir: "{{paths.base_dir}}/commands"
+  workflows_dir: "{{paths.commands_dir}}/workflows"
+  config_dir: "{{paths.base_dir}}/config"
+
+  # Core files
+  overview_file: "{{paths.product_dir}}/overview.md"
+  roadmap_file: "{{paths.product_dir}}/roadmap.md"
+  changelog_file: "{{paths.base_dir}}/changelog.md"
+
+  # Project-aware paths
+  project_root: "{{PROJECT_ROOT}}"
+  current_dir: "{{CURRENT_DIR}}"
+
+# Agent Registry
+agents:
+  # Core initialization agents
+  project_analyzer: "{{paths.agents_dir}}/project-analyzer.md"
+  project_starter: "{{paths.agents_dir}}/project-starter.md"
+
+  # Task management agents
+  task_decomposer: "{{paths.agents_dir}}/task-decomposer.md"
+  task_schema_validator: "{{paths.agents_dir}}/task-schema-validator.md"
+
+  # Content creation agents
+  file_creator: "{{paths.agents_dir}}/file-creator.md"
+  designer: "{{paths.agents_dir}}/designer.md"
+
+  # Utility agents
+  context_manager: "{{paths.agents_dir}}/context-manager.md"
+  date_checker: "{{paths.agents_dir}}/date-checker.md"
+  logger: "{{paths.agents_dir}}/logger.md"
+
+  # Quality assurance agents
+  test_runner: "{{paths.agents_dir}}/test-runner.md"
+  code_reviewer: "{{paths.agents_dir}}/code-reviewer.md"
+
+# Command Configuration
+commands:
+  base_command: "/sdd-task"
+  init:
+    flag: "--init"
+    description: "Initialize project with intelligent analysis & roadmap"
+    workflow: "{{paths.workflows_dir}}/init.md"
+  spec:
+    flag: "--spec"
+    description: "Create Software Design Document with task decomposition"
+    workflow: "{{paths.workflows_dir}}/spec.md"
+  execute:
+    flag: "--execute"
+    description: "Execute task with automated testing and quality checks"
+    workflow: "{{paths.workflows_dir}}/execute.md"
+  improve:
+    flag: "--improve"
+    description: "Apply enhancements, fixes, refactors, accessibility, performance"
+    workflow: "{{paths.workflows_dir}}/improve.md"
+  edit:
+    flag: "--edit"
+    description: "Lightweight edits without full spec overhead"
+    workflow: "{{paths.workflows_dir}}/edit.md"
+  bootstrap:
+    flag: "--bootstrap"
+    description: "Project bootstrap and component initialization"
+    workflow: "{{paths.workflows_dir}}/bootstrap.md"
+  next:
+    flag: "--next"
+    description: "Analyze roadmap for next task and generate spec sheet"
+    workflow: "{{paths.workflows_dir}}/next.md"
+
+  evolve:
+    flag: "--evolve"
+    description: "Run framework self-improvement and analytics cycle"
+    workflow: "{{paths.workflows_dir}}/evolve.md"
+
+# Runtime Configuration (See config.json)
+# Configuration values are now centralized in config.json for runtime use
+# This file focuses on variable definitions and command routing only
+
+# Framework Settings (Development Enhanced)
+framework:
+  # Supported testing frameworks (all available for development)
+  testing_frameworks: ["jest", "vitest", "mocha", "cypress"]
+  config_files:
+    jest: "jest.config.js"
+    vitest: "vitest.config.js"
+    mocha: "mocha.opts"
+    cypress: "cypress.config.js"
+
+  # Supported boilerplate types (all available for development)
+  boilerplate_types: ["shadcn", "antd", "mui", "chakra", "tailwind", "mantine"]
+
+  # File extensions for different languages (expanded for development)
+  extensions:
+    typescript: [".ts", ".tsx"]
+    javascript: [".js", ".jsx"]
+    python: [".py"]
+    go: [".go"]
+    rust: [".rs"]
+    java: [".java"]
+    csharp: [".cs"]
+
+# Error Code Registry - See .claude/docs/error-codes.md
+
+# MCP Configuration - See .claude/config/mcp-config.yml
+
+# Template Configuration (Simplified with MCP)
+templates:
+  # Project initialization templates
+  project:
+    overview: "{{paths.templates_dir}}/overview.md"
+    roadmap: "{{paths.templates_dir}}/roadmap.md"
+    standards: "{{paths.templates_dir}}/standards/"
+
+  # MCP-powered UI components (replaces custom templates)
+  ui_components:
+    source: "shadcn-registry"  # Use MCP instead of local templates
+    fallback: null
+
+  # Legacy boilerplate templates removed; MCP-first approach
+
+# System Counts (Single Source of Truth)
+system_counts:
+  agents: 13        # Number of active sub-agents
+  workflows: 8      # Number of workflow flags
+  templates: 7      # Number of template files
+  error_codes: 24   # Total error codes defined
+
+# Development-Specific Settings
+development:
+  debug_mode: true
+  verbose_logging: true
+  skip_confirmation_prompts: false
+  enable_experimental_features: true
+  allow_unsafe_operations: false
+  auto_save_frequency: 30  # Auto-save every 30 seconds
+  max_concurrent_tasks: 5  # Allow more concurrent development tasks
