@@ -121,7 +121,7 @@ A conflict-free, streamlined system for structured software development in Claud
 ## Enforcement (hard rules)
 - **Workflow Dependencies**: Automatic validation of required files and execution order
 - **Unmapped flag**: If flag not found in `variables.yml.commands` → return `ERR_001` (no inference)
-- **Agent gates**: Missing logger/context-manager at required gates → `ERR_011`/`ERR_013`
+- **Agent gates**: Missing logger/context_manager at required gates → `ERR_011`/`ERR_013`
 - **Pre-flight/order**: Missing pre-flight → `ERR_014`; steps out of order → `ERR_012`
 - **Task ID format**: Enforce regex `{{constraints.task_id_regex}}` (reject underscores) → {{errors.shared.ERR_003}}
 - **Spec dir naming**: Enforce `{{constraints.spec_dir_pattern}}` (reject legacy patterns) → {{errors.shared.ERR_003}}

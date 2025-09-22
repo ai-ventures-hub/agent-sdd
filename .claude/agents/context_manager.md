@@ -1,5 +1,5 @@
 ---
-name: context-manager
+name: context_manager
 description: Manage workflow-scoped context caching to reduce redundant file I/O and ensure consistency across agent invocations.
 tools: Read, Write, Grep, Glob
 ---
