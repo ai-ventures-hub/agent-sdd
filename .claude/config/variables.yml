@@ -112,22 +112,6 @@ commands:
     flag: "--init"
     description: "Initialize project with intelligent analysis & roadmap"
     workflow: "{{paths.workflows_dir}}/init.md"
-  spec:
-    flag: "--spec"
-    description: "Create Software Design Document with task decomposition"
-    workflow: "{{paths.workflows_dir}}/spec.md"
-  execute:
-    flag: "--execute"
-    description: "Execute task with automated testing and quality checks"
-    workflow: "{{paths.workflows_dir}}/execute.md"
-  improve:
-    flag: "--improve"
-    description: "Apply enhancements, fixes, refactors, accessibility, performance"
-    workflow: "{{paths.workflows_dir}}/improve.md"
-  edit:
-    flag: "--edit"
-    description: "Lightweight edits without full spec overhead"
-    workflow: "{{paths.workflows_dir}}/edit.md"
   bootstrap:
     flag: "--bootstrap"
     description: "Project bootstrap and component initialization"
@@ -136,7 +120,22 @@ commands:
     flag: "--next"
     description: "Analyze roadmap for next task and generate spec sheet"
     workflow: "{{paths.workflows_dir}}/next.md"
-
+  execute:
+    flag: "--execute"
+    description: "Execute task with automated testing and quality checks"
+    workflow: "{{paths.workflows_dir}}/execute.md"
+  spec:
+    flag: "--spec"
+    description: "Create a new Software Design Document with task decomposition"
+    workflow: "{{paths.workflows_dir}}/spec.md"
+  improve:
+    flag: "--improve"
+    description: "Apply enhancements, fixes, refactors, accessibility, performance"
+    workflow: "{{paths.workflows_dir}}/improve.md"
+  edit:
+    flag: "--edit"
+    description: "Lightweight edits without full spec overhead"
+    workflow: "{{paths.workflows_dir}}/edit.md"
   evolve:
     flag: "--evolve"
     description: "Run framework self-improvement and analytics cycle"
