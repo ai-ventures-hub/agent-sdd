@@ -41,7 +41,7 @@
     }
   },
   "agents": {
-    "total_count": 14,
+    "total_count": 15,
     "validation_required": true,
     "auto_register": false,
     "performance_tracking": true,
@@ -62,7 +62,7 @@
     }
   },
   "workflows": {
-    "total_count": 9,
+    "total_count": 10,
     "strict_validation": true,
     "dependency_checking": true,
     "error_recovery": true,

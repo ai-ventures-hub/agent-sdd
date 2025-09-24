@@ -14,6 +14,11 @@ SEQUENCE_GUARDS:
 - ORDER_ENFORCEMENT:
   - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
+FRAMEWORK_VALIDATION:
+- VALIDATE framework integrity: {{agents.agent_registry_validator}}(mode="validate") → registry_status|paths_status|framework_status
+- IF any invalid → RETURN {{errors.shared.ERR_014}}
+- LOG validation results for framework health monitoring
+
 1. PROJECT_STATE_ANALYSIS:
    - CHECK {{paths.product_dir}}/overview.md existence
    - DETECT project type: empty vs existing

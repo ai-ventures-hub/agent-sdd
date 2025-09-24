@@ -12,6 +12,7 @@ SUPPORTED_FLAGS:
 - --edit: Apply simple, lightweight edits
 - --evolve: Run framework self-improvement and analytics cycle
 - --agent: Scaffold and register a new agent
+- --validate_system: Comprehensive framework validation and health check
 
 WORKFLOW_DISPATCH:
 - READ .claude/config/variables.yml → commands map
@@ -31,6 +32,7 @@ WORKFLOW_DEPENDENCY_MATRIX:
 - --improve: Independent (can run anytime, may reference existing files)
 - --edit: Independent (lightweight changes, no spec overhead)
 - --evolve: Independent (can run anytime to improve framework health)
+- --validate_system: Independent (can run anytime to check framework health)
 
 WORKFLOW_DEPENDENCY_VALIDATION:
 - DETECT_PROJECT_STATE: Check if --init has been run
@@ -63,7 +65,7 @@ PRE_FLIGHT_VALIDATION:
 - TEST file accessibility: Confirm key directories ({{paths.analytics_dir}}, {{paths.logs_dir}}, {{paths.product_dir}}) are writable
 - READ dispatcher file first
 - USE Task tool for ALL agent invocations
-- VALIDATE framework integrity: {{agents.agent_registry_validator}}(mode="validate") → registry_status|paths_status|framework_status; IF any invalid → RETURN {{errors.shared.ERR_014}}
+- VALIDATE command syntax and arguments
 
 EXECUTION_FLOW:
 1. PARSE input: /sdd-task --<flag> [arguments]

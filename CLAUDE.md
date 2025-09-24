@@ -30,7 +30,7 @@ Framework bypass returns {{errors.shared.ERR_010}}-{{errors.shared.ERR_014}}
 ## Command Syntax
 `/sdd-task --<flag> [arguments]`
 
-Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit, --evolve, --agent
+Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit, --evolve, --agent, --validate_system
 
 Reference: `.claude/commands/sdd-task.md`
 

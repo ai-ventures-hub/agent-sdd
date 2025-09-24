@@ -61,6 +61,7 @@ agents:
   analytics_collector: "{{paths.agents_dir}}/analytics_collector.md"
   framework_improver: "{{paths.agents_dir}}/framework_improver.md"
   agent_registry_validator: "{{paths.agents_dir}}/agent_registry_validator.md"
+  style: "{{paths.agents_dir}}/style.md"
 
 constraints:
   task_id_regex: "^[A-Z]+-[0-9]{3}$"
@@ -154,6 +155,14 @@ commands:
     flag: "--agent"
     description: "Scaffold and register a new agent"
     workflow: "{{paths.workflows_dir}}/agent.md"
+  style:
+    flag: "--style"
+    description: "Theme standards enforcement and compliance checking"
+    workflow: "{{paths.workflows_dir}}/style.md"
+  validate_system:
+    flag: "--validate_system"
+    description: "Comprehensive framework validation and health check"
+    workflow: "{{paths.workflows_dir}}/validate_system.md"
 
 # Runtime Configuration (See config.json)
 # Configuration values are now centralized in config.json for runtime use
@@ -188,8 +197,8 @@ templates:
 
 # System Counts (Single Source of Truth)
 system_counts:
-  agents: 14        # Number of active sub-agents
-  workflows: 9      # Number of workflow flags
+  agents: 15        # Number of active sub-agents
+  workflows: 11     # Number of workflow flags
   templates: 7      # Number of template files
   error_codes: 24   # Total error codes defined
 
@@ -207,3 +216,4 @@ output_styles:
     edit: "surgical-edit"
     evolve: "evolve-ops"
     agent: "ai-to-ai-strict"
+    validate_system: "ai-to-ai-strict"
