@@ -200,7 +200,7 @@ templates:
 system_counts:
   agents: 15        # Number of active sub-agents
   workflows: 11     # Number of workflow flags
-  templates: 9      # Number of template files
+  templates: 10     # Number of template files
   error_codes: 41   # Total error codes defined
 
 # Development Settings Reference (Runtime in config.json)
