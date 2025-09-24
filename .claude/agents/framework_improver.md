@@ -164,6 +164,9 @@ MODE_VALIDATE:
 2. VERIFY performance_improvements → benchmark_comparisons
 3. TEST error_recovery → failure_simulation, recovery_validation
 4. VALIDATE dashboard_integration → api_endpoints, data_consistency
+5. DETECT_FRAMEWORK_CORRUPTION → registry_integrity, path_accessibility, config_validity
+6. ATTEMPT_SELF_HEALING → corrupted_file_recovery, missing_dependency_installation
+7. GENERATE_HEALTH_REPORT → corruption_findings, recovery_actions, system_status
 
 MODE_EVOLVE:
 1. IMPLEMENT evolutionary_features → advanced_capabilities, future_readiness
@@ -196,8 +199,8 @@ ERROR_HANDLING:
 - ANALYTICS_UPGRADE_FAILED: {{errors.evolve.ERR_026}} → Analytics enhancement failed
 - ORCHESTRATION_FAILED: {{errors.evolve.ERR_027}} → Workflow orchestration upgrade failed
 - DASHBOARD_PREP_FAILED: {{errors.evolve.ERR_028}} → Dashboard integration preparation failed
-- PERFORMANCE_DEGRADATION: [ERR_029] → Performance regression detected
-- PREDICTION_ACCURACY_LOW: [ERR_030] → Predictive analytics accuracy below threshold
+- CORRUPTION_DETECTED: {{errors.evolve.ERR_029}} → Framework corruption detected, self-healing failed
+- HEALTH_CHECK_FAILED: {{errors.evolve.ERR_030}} → Critical path validation failed, framework integrity compromised
 
 # ROLLBACK AND RECOVERY
 

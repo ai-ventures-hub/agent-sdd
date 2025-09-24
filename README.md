@@ -1,6 +1,6 @@
 # Agent-SDD: Optimized Claude-First Software Development Framework
 
-A conflict-free, streamlined system for structured software development in Claude Code, featuring automated variable resolution, comprehensive error handling, workflow dependency enforcement, path validation, and {{system_counts.agents}} specialized sub-agents for reliable execution.
+Streamlined system for structured software development in Claude Code, featuring automated variable resolution, comprehensive error handling, workflow dependency enforcement, path validation, framework resilience with self-healing capabilities, and {{system_counts.agents}} specialized sub-agents for reliable execution.
 
 ## Why Agent-SDD
 - **Claude-first orchestration**: {{system_counts.agents}} specialized sub-agents execute strict workflows for repeatable results
@@ -9,6 +9,7 @@ A conflict-free, streamlined system for structured software development in Claud
 - **Workflow dependency enforcement**: Automatic sequencing validation prevents execution errors
 - **Comprehensive error handling**: Centralized error codes via `config/variables.yml` for clear failure diagnosis
 - **Self-evolving framework**: `--evolve` command enables continuous framework improvement and optimization
+- **Framework resilience**: Built-in corruption detection, self-healing, and health checkpoints
 - **Analytics-driven insights**: Built-in metrics collection and performance monitoring
 - **Flexible bootstrap options**: Standards-based or MCP-powered component library setup
 - **Dev-optimized**: No environment switching; concise, agent-focused instructions
@@ -125,11 +126,12 @@ A conflict-free, streamlined system for structured software development in Claud
 - --execute: Implement task with testing, quality checks, and phase completion tracking
 - --improve: Apply enhancements, fixes, refactors, accessibility, performance
 - --edit: Lightweight edits without full spec overhead
-- --evolve: Analyze JSON Lines logs and apply automated framework improvements
+- --evolve: Analyze JSON Lines logs, apply automated framework improvements, and provide corruption detection with self-healing capabilities
 - --agent: Scaffold and register a new agent
 
 ## Enforcement (hard rules)
-- **Pre-flight Validation**: Framework integrity, directory structure, path variable resolution, and file accessibility checks before any command execution
+- **Optimized Pre-flight Validation**: Framework integrity validated once during `--init`; subsequent commands use selective health checks for resilience
+- **Framework Health Checkpoints**: Critical commands like `--evolve` include corruption detection and self-healing capabilities
 - **Workflow Dependencies**: Automatic validation of required files and execution order
 - **Unmapped flag**: If flag not found in `variables.yml.commands` → return `ERR_001` (no inference)
 - **Agent gates**: Missing logger/context_manager at required gates → `ERR_011`/`ERR_013`
@@ -151,7 +153,7 @@ Agent-SDD uses {{system_counts.agents}} specialized sub-agents following Anthrop
 - **task-schema-validator**: Validates task objects against 14-field schema
 - **test-runner**: Executes tests and analyzes results against acceptance criteria
 - **code-reviewer**: Performs quality checks and theme compliance validation
-- **agent-registry-validator**: Validates agent registry and path variable accessibility
+- **agent-registry-validator**: Validates agent registry, path variables, and provides health checkpoints with selective validation modes
 
 ### Project Management Agents
 - **project-analyzer**: Analyzes existing projects and enhances documentation with technical insights
@@ -161,7 +163,7 @@ Agent-SDD uses {{system_counts.agents}} specialized sub-agents following Anthrop
 
 ### Analytics & Evolution Agents
 - **analytics-collector**: Collects usage metrics, performance data, and error patterns from JSON Lines logs
-- **framework-improver**: Analyzes patterns and implements automated framework improvements
+- **framework-improver**: Analyzes patterns, implements automated improvements, and provides corruption detection with self-healing capabilities
 - **logger**: Manages changelog.md and automatically logs all command executions to JSON Lines format
 
 ### JSON Lines Logging Infrastructure
@@ -176,10 +178,11 @@ Automatic usage tracking with lean, single-line JSON entries:
 - **Streamlined agent files**: Optimized content for faster processing
 - **Automated variable resolution**: Eliminates manual processing overhead
 - **Context caching**: Reduces redundant file operations by 40-60%
-- **Selective validation**: Appropriate validation levels for different operations
+- **Selective validation**: Framework validated once during `--init`; subsequent commands use health checkpoints
+- **Framework resilience**: Built-in corruption detection and self-healing for uninterrupted operation
 - **Workflow dependency validation**: Prevents execution errors before they occur
 - **Analytics-driven optimization**: Continuous performance monitoring and improvement via `--evolve`
-- **Comprehensive error handling**: 24 categorized error codes for efficient debugging
+- **Comprehensive error handling**: 26 categorized error codes for efficient debugging
 
 ## Workflow Dependencies
 
@@ -229,6 +232,10 @@ Agent-SDD enforces proper workflow execution order through comprehensive depende
 - ERR_022: High-risk change rejected
 - ERR_023: Target not found
 - ERR_024: Date format error
+
+### Framework Resilience Errors (ERR_029-030)
+- ERR_029: Framework corruption detected, self-healing failed
+- ERR_030: Critical path validation failed, framework integrity compromised
 
 ### Standard Errors (ERR_001-009)
 - ERR_001: Invalid flag

@@ -101,8 +101,9 @@ errors:
     ERR_026: "[ERR_026]"
     ERR_027: "[ERR_027]"
     ERR_028: "[ERR_028]"
-  agent:
+    ERR_029: "[ERR_029]"
     ERR_030: "[ERR_030]"
+  agent:
     ERR_031: "[ERR_031]"
     ERR_032: "[ERR_032]"
     ERR_033: "[ERR_033]"
@@ -199,8 +200,8 @@ templates:
 system_counts:
   agents: 15        # Number of active sub-agents
   workflows: 11     # Number of workflow flags
-  templates: 7      # Number of template files
-  error_codes: 24   # Total error codes defined
+  templates: 9      # Number of template files
+  error_codes: 41   # Total error codes defined
 
 # Development Settings Reference (Runtime in config.json)
 

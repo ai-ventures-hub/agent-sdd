@@ -1,6 +1,6 @@
 # Agent-SDD Framework Instructions
 
-Agent-SDD framework for structured software development with 14 specialized sub-agents and automated analytics.
+Agent-SDD framework for structured software development with 15 specialized sub-agents, automated analytics, and framework resilience capabilities.
 
 ## Framework Requirements
 
@@ -9,10 +9,11 @@ For `/sdd-task` commands:
 ### Pre-Flight Requirements
 1. Read `.claude/commands/sdd-task.md` first
 2. Confirm .claude framework active and validate directory structure
-3. Validate path variables and file accessibility for all agents
+3. Framework integrity validated once during `--init`; subsequent commands use selective health checks
 4. Use Task tool only for agent invocations
 5. Follow exact workflow in `.claude/commands/workflows/[flag].md`
 6. Logging infrastructure automatically captures usage analytics
+7. Critical commands include framework health checkpoints and self-healing capabilities
 
 ### Agent Requirements
 - Invoke all agents via {{agents.*}} references (centralized in variables.yml)
@@ -30,7 +31,7 @@ Framework bypass returns {{errors.shared.ERR_010}}-{{errors.shared.ERR_014}}
 ## Command Syntax
 `/sdd-task --<flag> [arguments]`
 
-Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit, --evolve, --agent, --validate_system
+Available flags: --init, --bootstrap, --next, --spec, --execute, --improve, --edit, --evolve, --agent, --style, --validate_system
 
 Reference: `.claude/commands/sdd-task.md`
 
@@ -81,7 +82,7 @@ Centralized keys used by workflows:
 ├── changelog.md           # Change history
 ├── commands/              # Command system
 │   ├── sdd-task.md        # Main dispatcher
-│   └── workflows/         # Workflow specs (9 workflows)
+│   └── workflows/         # Workflow specs (11 workflows)
 ├── config/                # Configuration
 │   ├── variables.yml      # Centralized path variables
 │   ├── config.json        # Runtime configuration
@@ -99,8 +100,10 @@ Centralized keys used by workflows:
 2. Use specified agents - workflows define agent invocation requirements
 3. Maintain 14-field task schema compliance
 4. Use intelligent task decomposition for complex specifications
-5. Automatic analytics logging - all commands tracked in JSON Lines format
-6. Centralized path variables - all file paths managed through variables.yml
+5. Framework resilience - corruption detection and self-healing capabilities built-in
+6. Selective validation - framework validated once during init, health checks for resilience
+7. Automatic analytics logging - all commands tracked in JSON Lines format
+8. Centralized path variables - all file paths managed through variables.yml
 
 ## Framework Architecture
 Structured sub-agent system with workflows in `.claude/commands/workflows/` and agents in `.claude/agents/`. Agent templates and validator are centralized in `.claude/templates/`.
@@ -116,9 +119,11 @@ Automatic usage tracking and framework evolution capabilities:
 
 ### Analytics Processing
 - **analytics_collector**: Aggregates JSON Lines data into metrics.json
-- **Framework Evolution**: `--evolve` analyzes usage patterns for improvements
+- **Framework Evolution**: `--evolve` analyzes usage patterns for improvements with resilience capabilities
+- **Framework Health Monitoring**: Corruption detection and self-healing metrics tracked
 - **Performance Tracking**: Execution times, error rates, agent performance metrics
 - **Trend Analysis**: Historical data preserved in analytics/history/
+- **Resilience Analytics**: Framework health checkpoints and recovery success rates
 
 ### Path Variable System
 All file paths are centralized in `variables.yml` for maintainability:
@@ -145,6 +150,8 @@ For `/sdd-task` commands:
 - Steps out of order → {{errors.shared.ERR_012}}
 - Invalid task ID format ({{constraints.task_id_regex}}) → {{errors.shared.ERR_003}}
 - Invalid spec directory naming ({{constraints.spec_dir_pattern}}) → {{errors.shared.ERR_003}}
+- Framework corruption detected → {{errors.evolve.ERR_029}}
+- Critical path validation failed → {{errors.evolve.ERR_030}}
 
 ### Initial State
 Keep product/, specs/, standards/ directories empty initially.
