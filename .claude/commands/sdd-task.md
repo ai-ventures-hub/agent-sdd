@@ -25,9 +25,9 @@ WORKFLOW_DISPATCH:
 WORKFLOW_DEPENDENCY_MATRIX:
 - --init: Can run first on any project (no dependencies)
 - --bootstrap: Can run on empty projects OR after --init on existing projects
-- --next: Requires .claude/product/overview.md and .claude/product/roadmap.md
-- --spec: Requires .claude/product/ overview.md, roadmap.md, tech-stack.md, best-practices.md + design artifacts
-- --execute: Requires .claude/specs/{task}/spec.md and tasks.json
+- --next: Requires {{paths.overview_file}} and {{paths.roadmap_file}}
+- --spec: Requires {{paths.overview_file}}, {{paths.roadmap_file}}, {{paths.standards_dir}}/tech-stack.md, {{paths.standards_dir}}/best-practices.md + design artifacts
+- --execute: Requires {{paths.specs_dir}}/{task}/spec.md and tasks.json
 - --improve: Independent (can run anytime, may reference existing files)
 - --edit: Independent (lightweight changes, no spec overhead)
 - --evolve: Independent (can run anytime to improve framework health)
@@ -57,10 +57,13 @@ TASK_SCHEMA_VALIDATION:
 
 PRE_FLIGHT_VALIDATION:
 - COMMAND must start with /sdd-task --
-- CONFIRM Agent-SDD framework active
+- CONFIRM .claude framework active
+- VALIDATE directory structure: Check {{paths.base_dir}}, {{paths.agents_dir}}, {{paths.commands_dir}} exist
+- VALIDATE path variables: Ensure {{paths.*}} resolve to accessible paths and directories
+- TEST file accessibility: Confirm key directories ({{paths.analytics_dir}}, {{paths.logs_dir}}, {{paths.product_dir}}) are writable
 - READ dispatcher file first
 - USE Task tool for ALL agent invocations
-- VALIDATE agent registry: {{agents.agent_registry_validator}}(mode="validate") → violations|OK; IF violations → RETURN {{errors.shared.ERR_014}}
+- VALIDATE framework integrity: {{agents.agent_registry_validator}}(mode="validate") → registry_status|paths_status|framework_status; IF any invalid → RETURN {{errors.shared.ERR_014}}
 
 EXECUTION_FLOW:
 1. PARSE input: /sdd-task --<flag> [arguments]

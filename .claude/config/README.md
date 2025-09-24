@@ -1,6 +1,6 @@
 # Agent-SDD: Optimized Claude-First Software Development Framework
 
-A conflict-free, streamlined system for structured software development in Claude Code, featuring automated variable resolution, comprehensive error handling, workflow dependency enforcement, and {{system_counts.agents}} specialized sub-agents for reliable execution.
+A conflict-free, streamlined system for structured software development in Claude Code, featuring automated variable resolution, comprehensive error handling, workflow dependency enforcement, path validation, and {{system_counts.agents}} specialized sub-agents for reliable execution.
 
 ## Why Agent-SDD
 - **Claude-first orchestration**: {{system_counts.agents}} specialized sub-agents execute strict workflows for repeatable results
@@ -49,9 +49,11 @@ A conflict-free, streamlined system for structured software development in Claud
 .claude/
 ├── agents/           # Sub-agent definitions ({{system_counts.agents}} specialized agents)
 ├── analytics/        # Framework analytics and metrics
-│   ├── history/      # Historical analytics data
-│   ├── logs/         # Analytics processing logs
-│   ├── metrics.json  # Current framework metrics
+│   ├── history/      # Archived JSON Lines log files
+│   ├── logs/         # Active JSON Lines log files
+│   │   ├── commands.jsonl  # Command execution logs (single-line JSON)
+│   │   └── errors.jsonl    # Error event logs (single-line JSON)
+│   ├── metrics.json  # Aggregated usage metrics
 │   └── reports/      # Generated analytics reports
 ├── changelog.md      # Development activity tracking
 ├── commands/
@@ -96,6 +98,14 @@ A conflict-free, streamlined system for structured software development in Claud
 ```
 
 ## Centralized Variables
+- paths: All file paths are centralized in `variables.yml` for maintainability:
+  - `{{paths.base_dir}}` - Root .claude directory
+  - `{{paths.product_dir}}` - Generated product docs
+  - `{{paths.specs_dir}}` - Generated specifications
+  - `{{paths.standards_dir}}` - Generated standards
+  - `{{paths.analytics_dir}}` - Analytics and metrics
+  - `{{paths.commands_log}}` - JSON Lines command logs
+  - `{{paths.errors_log}}` - JSON Lines error logs
 - constraints:
   - task_id_regex: `{{constraints.task_id_regex}}`
   - spec_dir_pattern: `{{constraints.spec_dir_pattern}}`
@@ -115,10 +125,11 @@ A conflict-free, streamlined system for structured software development in Claud
 - --execute: Implement task with testing, quality checks, and phase completion tracking
 - --improve: Apply enhancements, fixes, refactors, accessibility, performance
 - --edit: Lightweight edits without full spec overhead
-- --evolve: Run framework self-improvement and analytics cycle
+- --evolve: Analyze JSON Lines logs and apply automated framework improvements
 - --agent: Scaffold and register a new agent
 
 ## Enforcement (hard rules)
+- **Pre-flight Validation**: Framework integrity, directory structure, path variable resolution, and file accessibility checks before any command execution
 - **Workflow Dependencies**: Automatic validation of required files and execution order
 - **Unmapped flag**: If flag not found in `variables.yml.commands` → return `ERR_001` (no inference)
 - **Agent gates**: Missing logger/context_manager at required gates → `ERR_011`/`ERR_013`
@@ -140,6 +151,7 @@ Agent-SDD uses {{system_counts.agents}} specialized sub-agents following Anthrop
 - **task-schema-validator**: Validates task objects against 14-field schema
 - **test-runner**: Executes tests and analyzes results against acceptance criteria
 - **code-reviewer**: Performs quality checks and theme compliance validation
+- **agent-registry-validator**: Validates agent registry and path variable accessibility
 
 ### Project Management Agents
 - **project-analyzer**: Analyzes existing projects and enhances documentation with technical insights
@@ -148,8 +160,17 @@ Agent-SDD uses {{system_counts.agents}} specialized sub-agents following Anthrop
 - **task-decomposer**: Analyzes complexity and decomposes complex specs
 
 ### Analytics & Evolution Agents
-- **analytics-collector**: Collects usage metrics, performance data, and error patterns
+- **analytics-collector**: Collects usage metrics, performance data, and error patterns from JSON Lines logs
 - **framework-improver**: Analyzes patterns and implements automated framework improvements
+- **logger**: Manages changelog.md and automatically logs all command executions to JSON Lines format
+
+### JSON Lines Logging Infrastructure
+Automatic usage tracking with lean, single-line JSON entries:
+- **commands.jsonl**: Every command execution logged with performance metrics, agent usage, and timestamps
+- **errors.jsonl**: Error events captured with full context and error codes
+- **Auto-archiving**: Files automatically archived when exceeding size limits (1000 lines for commands, 500 for errors)
+- **Analytics aggregation**: Raw logs processed into metrics.json for --evolve analysis
+- **Historical preservation**: Archived logs maintained for trend analysis
 
 ### Performance Optimizations
 - **Streamlined agent files**: Optimized content for faster processing
@@ -167,11 +188,11 @@ Agent-SDD enforces proper workflow execution order through comprehensive depende
 ### Workflow Dependency Matrix
 - `--init`: Can run first on any project (no dependencies)
 - `--bootstrap`: Can run on empty projects OR after `--init` on existing projects
-- `--next`: Requires `.claude/product/overview.md` and `.claude/product/roadmap.md`
+- `--next`: Requires `{{paths.overview_file}}` and `{{paths.roadmap_file}}`
 - `--spec`: Requires product docs + design artifacts (wireframe.md, user-journey.md)
-- `--execute`: Requires `.claude/specs/{task}/spec.md` and `tasks.json`
+- `--execute`: Requires `{{paths.specs_dir}}/{task}/spec.md` and `tasks.json`
 - `--improve` & `--edit`: Independent (can run anytime)
-- `--evolve`: Independent (can run anytime to improve framework health)
+- `--evolve`: Independent (analyzes `{{paths.analytics_dir}}` for framework improvements)
 
 ### Dependency Types
 - **Workflow Dependencies**: Required files and execution order validation

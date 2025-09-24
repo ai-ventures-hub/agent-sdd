@@ -18,7 +18,7 @@ MODES:
 
 WORKFLOW:
 1. VALIDATE file type and directory path
-2. ENSURE directory structure exists (create .claude/product/, .claude/standards/, .claude/specs/ if missing)
+2. ENSURE directory structure exists (create {{paths.product_dir}}, {{paths.standards_dir}}, {{paths.specs_dir}} if missing)
 3. CHECK for existing files
    - CREATE mode: skip write if file exists
    - UPDATE mode: create `<filename>.bak` backup using Run_terminal_cmd, then continue
@@ -39,10 +39,10 @@ OUTPUT_FORMAT:
 }
 
 DIRECTORY_CREATION:
-- ALWAYS create directories within {{CLAUDE_DIR}} structure
-- Create .claude/product/ for overview.md, roadmap.md
-- Create .claude/standards/ for tech-stack.md, best-practices.md, theme-standards.md
-- Create .claude/specs/ for spec.md, tasks.json
+- ALWAYS create directories within {{paths.base_dir}} structure
+- Create {{paths.product_dir}} for overview.md, roadmap.md
+- Create {{paths.standards_dir}} for tech-stack.md, best-practices.md, theme-standards.md
+- Create {{paths.specs_dir}} for spec.md, tasks.json
 - Use mkdir -p to create parent directories as needed
 
 CONSTRAINTS:

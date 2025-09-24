@@ -12,8 +12,8 @@ SEQUENCE_GUARDS:
   - IF steps executed out of order → RETURN {{errors.shared.ERR_012}}
 
 DEPENDENCIES:
-- Requires active Agent-SDD framework
-- May reference changelog.md and analytics data
+- Requires active .claude framework
+- May reference {{paths.changelog_file}} and {{paths.analytics_dir}} data
 
 1. COLLECT_METRICS: {{agents.analytics_collector}}(mode="collect") → usage_stats, perf_data, error_patterns
 2. ANALYZE_PATTERNS: {{agents.framework_improver}}(mode="analyze") → bottlenecks, opportunities

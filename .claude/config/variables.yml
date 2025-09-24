@@ -21,6 +21,16 @@ paths:
   overview_file: "{{paths.product_dir}}/overview.md"
   roadmap_file: "{{paths.product_dir}}/roadmap.md"
   changelog_file: "{{paths.base_dir}}/changelog.md"
+  changelog_archive_dir: "{{paths.base_dir}}/changelog-archive/"
+
+  # Analytics paths
+  analytics_dir: "{{paths.base_dir}}/analytics"
+  logs_dir: "{{paths.analytics_dir}}/logs"
+  history_dir: "{{paths.analytics_dir}}/history"
+  reports_dir: "{{paths.analytics_dir}}/reports"
+  metrics_file: "{{paths.analytics_dir}}/metrics.json"
+  commands_log: "{{paths.logs_dir}}/commands.jsonl"
+  errors_log: "{{paths.logs_dir}}/errors.jsonl"
 
   # Project-aware paths
   project_root: "{{PROJECT_ROOT}}"
@@ -50,7 +60,7 @@ agents:
   code_reviewer: "{{paths.agents_dir}}/code_reviewer.md"
   analytics_collector: "{{paths.agents_dir}}/analytics_collector.md"
   framework_improver: "{{paths.agents_dir}}/framework_improver.md"
-  agent_registry_validator: "{{paths.templates_dir}}/agent-registry-validator.md"
+  agent_registry_validator: "{{paths.agents_dir}}/agent_registry_validator.md"
 
 constraints:
   task_id_regex: "^[A-Z]+-[0-9]{3}$"
@@ -178,7 +188,7 @@ templates:
 
 # System Counts (Single Source of Truth)
 system_counts:
-  agents: 13        # Number of active sub-agents
+  agents: 14        # Number of active sub-agents
   workflows: 9      # Number of workflow flags
   templates: 7      # Number of template files
   error_codes: 24   # Total error codes defined
