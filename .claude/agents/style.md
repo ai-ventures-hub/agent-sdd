@@ -1,6 +1,6 @@
 ---
 name: style
-description: AI-to-AI theme standards enforcement agent. Scans files against .claude/standards/theme-standards.md compliance and auto-updates theme standards when needed.
+description: Theme standards enforcement agent. Scans files against .claude/standards/theme-standards.md compliance and auto-updates theme standards when needed.
 tools: Read, Write, Run_terminal_cmd
 ---
 
