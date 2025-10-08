@@ -1,0 +1,51 @@
+{
+  "platform": "grok",
+  "version": "1.0",
+  "display_name": "Grok Code Fast",
+  "command_prefix": "@",
+  "command_syntax": "@{command} {args}",
+  "environment_variables": {
+    "workspace_root": "GROK_WORKSPACE",
+    "project_root": "GROK_PROJECT_ROOT",
+    "current_dir": "GROK_CURRENT_DIR"
+  },
+  "tool_mapping": {
+    "file_read": "read_file",
+    "file_write": "write_file",
+    "terminal_exec": "run_command",
+    "search_glob": "glob_search",
+    "search_grep": "grep_search",
+    "web_request": "http_request",
+    "task_invoke": "invoke_agent"
+  },
+  "capabilities": {
+    "sub_agent_orchestration": true,
+    "advanced_file_operations": true,
+    "terminal_execution": true,
+    "search_and_replace": true,
+    "batch_operations": false,
+    "context_caching": true,
+    "error_recovery": true,
+    "web_access": true
+  },
+  "limitations": [
+    "batch_operations_not_supported",
+    "limited_concurrent_execution"
+  ],
+  "optimizations": {
+    "fast_inference": true,
+    "web_integration": true,
+    "adaptive_context": true,
+    "streaming_responses": true
+  },
+  "command_mapping": {
+    "sdd-task": "@sdd-task",
+    "help": "@help",
+    "status": "@status"
+  },
+  "fallback_strategies": {
+    "missing_tools": "simulate_with_available_tools",
+    "capability_limits": "sequential_processing",
+    "execution_failures": "enhanced_error_reporting"
+  }
+}

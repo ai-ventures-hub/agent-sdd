@@ -1,0 +1,267 @@
+# Agent-SDD Variable Configuration (Framework Agnostic)
+# Framework optimized for local development workflows
+# Auto-discovers project structure and adapts paths accordingly
+# Framework type determined by .sddrc file
+
+# Framework-Agnostic Directory Structure (auto-detected per platform)
+paths:
+  # Platform-aware environment variable resolution
+  workspace_root: "{{platform_vars.workspace_root}}"
+  project_root: "{{platform_vars.project_root}}"
+  current_dir: "{{platform_vars.current_dir}}"
+  platform_name: "{{platform_vars.name}}"
+
+  # Base directory (auto-resolved from .sddrc FRAMEWORK setting)
+  base_dir: "{{platform_vars.project_root}}/.{{platform_vars.name}}"
+
+  # Subdirectories (relative to base_dir)
+  product_dir: "{{paths.base_dir}}/product"
+  specs_dir: "{{paths.base_dir}}/specs"
+  agents_dir: "{{paths.base_dir}}/agents"
+  templates_dir: "{{paths.base_dir}}/templates"
+  commands_dir: "{{paths.base_dir}}/commands"
+  workflows_dir: "{{paths.commands_dir}}/workflows"
+  config_dir: "{{paths.base_dir}}/config"
+  platforms_dir: "{{paths.base_dir}}/platforms"
+
+  # Core files
+  overview_file: "{{paths.product_dir}}/overview.md"
+  roadmap_file: "{{paths.product_dir}}/roadmap.md"
+  tech_stack_file: "{{paths.product_dir}}/tech-stack.md"
+  best_practices_file: "{{paths.product_dir}}/best-practices.md"
+  architecture_file: "{{paths.product_dir}}/architecture.md"
+  theme_standards_file: "{{paths.product_dir}}/theme-standards.md"
+  changelog_file: "{{paths.base_dir}}/changelog.md"
+  changelog_archive_dir: "{{paths.base_dir}}/changelog-archive/"
+
+  # Analytics paths
+  analytics_dir: "{{paths.base_dir}}/analytics"
+  logs_dir: "{{paths.analytics_dir}}/logs"
+  history_dir: "{{paths.analytics_dir}}/history"
+  reports_dir: "{{paths.analytics_dir}}/reports"
+  metrics_file: "{{paths.analytics_dir}}/metrics.json"
+  commands_log: "{{paths.logs_dir}}/commands.jsonl"
+  errors_log: "{{paths.logs_dir}}/errors.jsonl"
+
+# Platform Variable Mappings (loaded based on detected platform)
+platform_vars:
+  # Top-level variables resolved for current framework (update these when switching platforms)
+  name: "grok"
+  command_prefix: "@g"
+  workspace_root: "{{CLAUDE_DIR}}"
+  project_root: "{{PROJECT_ROOT}}"
+  current_dir: "{{CURRENT_DIR}}"
+
+  # Framework-specific platform configurations
+  claude:
+    name: "grok"
+    command_prefix: "@g"
+    workspace_root: "{{CLAUDE_DIR}}"
+    project_root: "{{PROJECT_ROOT}}"
+    current_dir: "{{CURRENT_DIR}}"
+
+  grok:
+    name: "grok"
+    command_prefix: "@"
+    workspace_root: "{{GROK_WORKSPACE}}"
+    project_root: "{{GROK_PROJECT_ROOT}}"
+    current_dir: "{{GROK_CURRENT_DIR}}"
+
+  codex:
+    name: "codex"
+    command_prefix: "#"
+    workspace_root: "{{COPILOT_WORKSPACE}}"
+    project_root: "{{COPILOT_PROJECT}}"
+    current_dir: "{{COPILOT_CWD}}"
+
+# Agent Registry
+agents:
+  # Core initialization agents
+  project_analyzer: "{{paths.agents_dir}}/project_analyzer.md"
+  project_starter: "{{paths.agents_dir}}/project_starter.md"
+
+  # Task management agents
+  task_decomposer: "{{paths.agents_dir}}/task_decomposer.md"
+  task_schema_validator: "{{paths.agents_dir}}/task_schema_validator.md"
+
+  # Content creation agents
+  file_creator: "{{paths.agents_dir}}/file_creator.md"
+  designer: "{{paths.agents_dir}}/designer.md"
+
+  # Utility agents
+  context_manager: "{{paths.agents_dir}}/context_manager.md"
+  date_checker: "{{paths.agents_dir}}/date_checker.md"
+  logger: "{{paths.agents_dir}}/logger.md"
+
+  # Quality assurance agents
+  test_runner: "{{paths.agents_dir}}/test_runner.md"
+  code_reviewer: "{{paths.agents_dir}}/code_reviewer.md"
+  analytics_collector: "{{paths.agents_dir}}/analytics_collector.md"
+  framework_improver: "{{paths.agents_dir}}/framework_improver.md"
+  agent_registry_validator: "{{paths.agents_dir}}/agent_registry_validator.md"
+  style: "{{paths.agents_dir}}/style.md"
+  architecture_visualizer: "{{paths.agents_dir}}/architecture_visualizer.md"
+
+constraints:
+  task_id_regex: "^[A-Z]{2,5}-[0-9]{1,4}(-[a-z]+(-[0-9]+)?)?$"
+  spec_dir_pattern: "{slug}_{type}_{YYYY-MM-DD}"
+
+errors:
+  shared:
+    ERR_001: "[ERR_001]"
+    ERR_002: "[ERR_002]"
+    ERR_002A: "[ERR_002A]"
+    ERR_003: "[ERR_003]"
+    ERR_010: "[ERR_010]"
+    ERR_011: "[ERR_011]"
+    ERR_012: "[ERR_012]"
+    ERR_013: "[ERR_013]"
+    ERR_014: "[ERR_014]"
+  next_spec_docs:
+    ERR_004: "[ERR_004]"
+    ERR_005: "[ERR_005]"
+    ERR_006: "[ERR_006]"
+    ERR_007: "[ERR_007]"
+    ERR_008: "[ERR_008]"
+  bootstrap:
+    ERR_015: "[ERR_015]"
+    ERR_016: "[ERR_016]"
+    ERR_017: "[ERR_017]"
+    ERR_018: "[ERR_018]"
+    ERR_019: "[ERR_019]"
+    ERR_020: "[ERR_020]"
+  improve:
+    ERR_021: "[ERR_021]"
+    ERR_022: "[ERR_022]"
+    ERR_023: "[ERR_023]"
+    ERR_024: "[ERR_024]"
+  evolve:
+    ERR_025: "[ERR_025]"
+    ERR_026: "[ERR_026]"
+    ERR_027: "[ERR_027]"
+    ERR_028: "[ERR_028]"
+    ERR_029: "[ERR_029]"
+    ERR_030: "[ERR_030]"
+  agent:
+    ERR_031: "[ERR_031]"
+    ERR_032: "[ERR_032]"
+    ERR_033: "[ERR_033]"
+    ERR_034: "[ERR_034]"
+  init:
+    ERR_035: "[ERR_035]"
+    ERR_036: "[ERR_036]"
+    ERR_040: "[ERR_040]"
+    ERR_041: "[ERR_041]"
+    ERR_042: "[ERR_042]"
+    ERR_043: "[ERR_043]"
+    ERR_044: "[ERR_044]"
+  architecture:
+    ERR_045: "[ERR_045]"  # Architecture diagram generation failed
+    ERR_046: "[ERR_046]"  # Architecture file not found
+    ERR_047: "[ERR_047]"  # Mermaid syntax validation failed
+
+# Command Configuration
+# Update workflow metadata here; other files reference this registry directly.
+commands:
+  base_command: "{{platform_vars.command_prefix}}sdd-task"
+  init:
+    flag: "--init"
+    description: "Initialize project with intelligent analysis & roadmap"
+    workflow: "{{paths.workflows_dir}}/init.md"
+  bootstrap:
+    flag: "--bootstrap"
+    description: "Project bootstrap and component initialization"
+    workflow: "{{paths.workflows_dir}}/bootstrap.md"
+  next:
+    flag: "--next"
+    description: "Analyze roadmap for next task and generate spec sheet"
+    workflow: "{{paths.workflows_dir}}/next.md"
+  execute:
+    flag: "--execute"
+    description: "Execute one or more tasks with automated testing and quality checks"
+    workflow: "{{paths.workflows_dir}}/execute.md"
+  spec:
+    flag: "--spec"
+    description: "Create a new Software Design Document with task decomposition"
+    workflow: "{{paths.workflows_dir}}/spec.md"
+  improve:
+    flag: "--improve"
+    description: "Apply enhancements, fixes, refactors, accessibility, performance"
+    workflow: "{{paths.workflows_dir}}/improve.md"
+  edit:
+    flag: "--edit"
+    description: "Lightweight edits without full spec overhead"
+    workflow: "{{paths.workflows_dir}}/edit.md"
+  evolve:
+    flag: "--evolve"
+    description: "Run framework self-improvement and analytics cycle"
+    workflow: "{{paths.workflows_dir}}/evolve.md"
+  agent:
+    flag: "--agent"
+    description: "Scaffold and register a new agent"
+    workflow: "{{paths.workflows_dir}}/agent.md"
+  style:
+    flag: "--style"
+    description: "Theme standards enforcement and compliance checking"
+    workflow: "{{paths.workflows_dir}}/style.md"
+  validate_system:
+    flag: "--validate_system"
+    description: "Comprehensive framework validation and health check"
+    workflow: "{{paths.workflows_dir}}/validate_system.md"
+
+# Runtime Configuration (See config.json)
+# Configuration values are now centralized in config.json for runtime use
+# This file focuses on variable definitions and command routing only
+
+# Framework Settings (Reference Only - Runtime in config.json)
+framework:
+  supported_types: ["shadcn", "antd", "mui", "chakra", "tailwind", "mantine"]
+  extensions: [".ts", ".tsx", ".js", ".jsx", ".py", ".go", ".rs", ".java", ".cs"]
+
+# Error Code Registry - See {{paths.base_dir}}/docs/error-codes.md
+
+# MCP Configuration - See {{paths.config_dir}}/mcp-config.yml
+
+# Template Configuration (Simplified with MCP)
+templates:
+  # Project initialization templates
+  project:
+    overview: "{{paths.templates_dir}}/overview.md"
+    roadmap: "{{paths.templates_dir}}/roadmap.md"
+    tech_stack: "{{paths.templates_dir}}/tech-stack.md"
+    best_practices: "{{paths.templates_dir}}/best-practices.md"
+    theme_standards: "{{paths.templates_dir}}/theme-standards.md"
+    architecture: "{{paths.templates_dir}}/architecture.md"
+
+  agents:
+    agent_template: "{{paths.templates_dir}}/agent-template.md"
+
+  # MCP-powered UI components (replaces custom templates)
+  ui_components:
+    source: "shadcn-registry"  # Use MCP instead of local templates
+    fallback: null
+
+  # Legacy boilerplate templates removed; MCP-first approach
+
+# System Counts (Single Source of Truth)
+system_counts:
+  agents: 16        # Number of active sub-agents
+  workflows: 11     # Number of workflow flags
+  templates: 11     # Number of template files
+  error_codes: 44   # Total error codes defined
+
+# Development Settings Reference (Runtime in config.json)
+
+output_styles:
+  default: "ai-to-ai-strict"
+  by_flag:
+    init: "ai-to-ai-strict"
+    bootstrap: "bootstrap-ops"
+    next: "spec-author"
+    spec: "spec-author"
+    execute: "executor-strict"
+    improve: "executor-strict"
+    edit: "surgical-edit"
+    evolve: "evolve-ops"
+    agent: "ai-to-ai-strict"
+    validate_system: "ai-to-ai-strict"

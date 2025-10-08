@@ -1,0 +1,40 @@
+{
+  "framework_version": "2.0.0",
+  "last_updated": "2025-09-23",
+  "collection_timestamp": "2025-09-23T22:04:00Z",
+  "collection_mode": "initial",
+  "metrics": {
+    "usage": {
+      "total_commands": 0,
+      "command_frequency": {
+        "--init": 0,
+        "--bootstrap": 0,
+        "--next": 0,
+        "--spec": 0,
+        "--execute": 0,
+        "--improve": 0,
+        "--edit": 0,
+        "--evolve": 0,
+        "--agent": 0
+      },
+      "framework_readiness": "100%"
+    },
+    "performance": {
+      "system_health": "excellent",
+      "cache_hit_rate": 0,
+      "bottlenecks": []
+    },
+    "errors": {
+      "total_errors": 0,
+      "error_frequency": {},
+      "system_stability": "excellent"
+    }
+  },
+  "health": {
+    "overall_score": 100,
+    "last_health_check": "2025-09-23",
+    "critical_issues": [],
+    "warnings": [],
+    "system_readiness": "ready"
+  }
+}

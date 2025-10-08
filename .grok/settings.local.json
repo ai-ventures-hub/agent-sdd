@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(awk:*)",
+      "Bash(rm:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash([ -f .claude/platforms/claude/adapter.json ])"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

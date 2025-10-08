@@ -1,0 +1,117 @@
+{
+  "logger": {
+    "max_entries": 50,
+    "archive_threshold": 40,
+    "archive_dir": "..{{platform_vars.name}}/changelog-archive/"
+  },
+  "test": {
+    "preferred_framework": "auto",
+    "coverage_thresholds": {
+      "branches": 70,
+      "functions": 70,
+      "lines": 70,
+      "statements": 70
+    },
+    "fail_on_below_threshold": false,
+    "monorepo": {
+      "enabled": false,
+      "workspaces": []
+    }
+  },
+  "paths": {
+    "project_root": ".",
+    "src_dirs": ["src"],
+    "workspaces": [],
+    "project_root_search_depth": 3,
+    "allow_parent_directory_search": true
+  },
+  "commits": {
+    "message_template": "{type}({scope}): {description} ({taskId})",
+    "require_task_id": true
+  },
+  "review": {
+    "enable_animations": false,
+    "font_family_from_theme_tokens": true
+  },
+  "task_decomposer": {
+    "complexity_threshold_high": 65,
+    "complexity_threshold_medium": 35,
+    "max_tasks_per_decomposition": 8,
+    "default_task_priority": "medium",
+    "enable_dependency_validation": true
+  },
+  "context_manager": {
+    "cache_enabled": true,
+    "max_cache_size_mb": 10,
+    "enable_performance_tracking": true,
+    "batch_read_enabled": true,
+    "agent_result_passing": true,
+    "cache_ttl_seconds": 300
+  },
+  "performance": {
+    "enable_metrics": false,
+    "show_cache_stats": false,
+    "detailed_timing": false
+  },
+  "validation": {
+    "default_mode": "full",
+    "enable_selective_validation": true,
+    "light_mode_fields": ["status", "completed_date", "ux_ui_reviewed"]
+  },
+  "bootstrap": {
+    "default_type": "shadcn",
+    "shadcn": {
+      "components_dir": "./components/ui",
+      "utils_dir": "./lib",
+      "css_file": "./styles/globals.css",
+      "enable_dark_mode": true,
+      "base_color": "slate",
+      "css_variables": true,
+      "rsc": true,
+      "initial_components": ["button", "card", "input", "label"],
+      "create_examples": false,
+      "auto_install_dependencies": true,
+      "backup_existing_config": true
+    },
+    "antd": {
+      "theme_customization": true,
+      "enable_dark_mode": true,
+      "initial_components": ["button", "card", "input", "form"],
+      "create_examples": false
+    },
+    "mui": {
+      "theme_customization": true,
+      "enable_dark_mode": true,
+      "initial_components": ["button", "card", "textfield"],
+      "create_examples": false
+    }
+  },
+  "design": {
+    "wireframe_generator": {
+      "ascii_art_enabled": true,
+      "responsive_layouts": true,
+      "accessibility_annotations": true
+    },
+    "user_journey": {
+      "entry_points_tracking": true,
+      "interaction_flows": true,
+      "error_states": true
+    }
+  },
+  "optimization": {
+    "framework_version": "optimized",
+    "agent_size_reduction": 70,
+    "performance_improvement": 40,
+    "context_caching": true,
+    "selective_validation": true
+  },
+  "permissions": {
+    "allow": [
+      "Read(./**)",
+      "Read(../**)",
+      "Read(../../**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

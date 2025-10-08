@@ -1,0 +1,7 @@
+{
+  "platform_override": "{{FRAMEWORK_FROM_SDDRC}}",
+  "override_reason": "auto_sync_with_sddrc",
+  "override_timestamp": "{{CURRENT_TIMESTAMP}}",
+  "user_selected_platform": "{{FRAMEWORK_FROM_SDDRC}}",
+  "_comment": "This file auto-syncs with .sddrc FRAMEWORK setting. No manual update needed when switching platforms."
+}

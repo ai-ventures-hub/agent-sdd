@@ -1,0 +1,22 @@
+# Agent-SDD Framework Auto-Detection
+# This file signals that Agent-SDD framework is present
+# When AI assistants encounter sdd-task commands, they should:
+# 1. Read the instructions file for the specified framework
+# 2. Follow the established protocols
+
+# Framework Configuration (single source of truth - change ONLY this line)
+FRAMEWORK=grok
+FRAMEWORK_ACTIVE=true
+
+# ============================================================
+# NO EDITS NEEDED BELOW - Values auto-derived from FRAMEWORK
+# ============================================================
+#
+# Derived value patterns:
+#   INSTRUCTIONS=${FRAMEWORK^^}.md (uppercase)
+#   DIRECTORY=.${FRAMEWORK}/
+#
+# Available frameworks:
+#   FRAMEWORK=grok   → uses GROK.md and .grok/ directory
+#   FRAMEWORK=grok → uses CLAUDE.md and .claude/ directory
+#   FRAMEWORK=grok  → uses CODEX.md and .codex/ directory

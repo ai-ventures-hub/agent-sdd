@@ -1,0 +1,186 @@
+# Agent-SDD MCP Configuration
+# MCP-powered shadcn/ui integration for streamlined project initialization
+# Framework-agnostic and project-aware configuration
+
+# MCP Server Configuration
+mcp:
+  # Primary MCP server for shadcn/ui
+  server:
+    name: "shadcn-mcp"
+    version: "3.0"
+    url: "https://ui.shadcn.com/mcp"
+
+  # Connection settings
+  connection:
+    timeout: 30
+    retries: 3
+    retry_delay: 2
+
+  # Authentication (optional for private registries)
+  auth:
+    enabled: false
+    token_env: "SHADCN_REGISTRY_TOKEN"
+    header: "Authorization: Bearer ${SHADCN_REGISTRY_TOKEN}"
+
+# Registry Configuration
+registries:
+  # Primary shadcn/ui registry
+  primary:
+    name: "shadcn/ui"
+    url: "https://ui.shadcn.com/registry"
+    description: "Official shadcn/ui component registry"
+    components_url: "https://ui.shadcn.com/components/{component}.json"
+    blocks_url: "https://ui.shadcn.com/blocks/{block}.json"
+
+  # Additional registries (optional)
+  additional: []
+    # - name: "company-internal"
+    #   url: "https://registry.company.com/{name}.json"
+    #   auth_required: true
+
+# Component Mapping by Project Type
+project_types:
+  # Web Dashboard Applications
+  dashboard:
+    description: "Admin dashboards, analytics platforms"
+    priority_blocks:
+      - "dashboard-01"  # Dashboard with sidebar, charts, data table
+      - "sidebar-07"    # Collapsible sidebar to icons
+      - "data-table"    # Advanced data table with sorting/filtering
+    essential_components:
+      - "button"
+      - "card"
+      - "input"
+      - "select"
+      - "table"
+      - "chart"
+    natural_language: "Create a modern admin dashboard with sidebar and data visualization"
+
+  # E-commerce Applications
+  ecommerce:
+    description: "Online stores, marketplaces"
+    priority_blocks:
+      - "login-04"      # Login form with image
+      - "product-grid"  # Product catalog display
+      - "shopping-cart" # Cart management interface
+    essential_components:
+      - "button"
+      - "card"
+      - "input"
+      - "badge"
+      - "dialog"
+      - "form"
+    natural_language: "Build an e-commerce platform with product catalog and shopping cart"
+
+  # Content Management Systems
+  cms:
+    description: "Blogs, news sites, content platforms"
+    priority_blocks:
+      - "blog-layout"   # Blog listing and detail pages
+      - "rich-editor"   # Content creation interface
+      - "comment-system" # User interaction components
+    essential_components:
+      - "button"
+      - "card"
+      - "textarea"
+      - "avatar"
+      - "badge"
+      - "pagination"
+    natural_language: "Create a content management system with rich editing and user comments"
+
+  # SaaS Applications
+  saas:
+    description: "Software as a Service platforms"
+    priority_blocks:
+      - "dashboard-01"  # Main application dashboard
+      - "settings-page" # User preferences and configuration
+      - "billing-portal" # Subscription and payment management
+    essential_components:
+      - "button"
+      - "card"
+      - "input"
+      - "select"
+      - "dialog"
+      - "form"
+      - "table"
+    natural_language: "Build a SaaS application with user dashboard and billing integration"
+
+# Natural Language Command Templates
+command_templates:
+  # Component installation
+  install_component: "Add the {component} component to my project"
+  install_block: "Add the {block} block from shadcn registry"
+  install_multiple: "Install {components} components for a {project_type} application"
+
+  # Block-based setup
+  setup_dashboard: "Create a dashboard with sidebar, navigation, and data visualization"
+  setup_auth: "Add user authentication with login and registration forms"
+  setup_crud: "Create CRUD interface with forms and data tables"
+
+  # Advanced combinations
+  full_stack: "Build a complete {project_type} application with authentication, dashboard, and data management"
+
+# MCP Command Mappings
+mcp_commands:
+  # Component queries
+  search_components: "Show me all available {category} components in the shadcn registry"
+  find_component: "Find me a {component_type} component from the shadcn registry"
+
+  # Installation commands
+  install_essentials: "Install essential UI components: button, input, card, dialog, form"
+  install_dashboard: "Install dashboard components: sidebar, chart, data-table, nav-user"
+  install_forms: "Install form components: input, select, textarea, checkbox, radio-group"
+
+  # Block installations
+  install_login: "Add a login page with form and background"
+  install_sidebar: "Add a sidebar that collapses to icons"
+  install_datatable: "Add a data table with sorting and filtering"
+
+# Configuration Validation
+validation:
+  required_fields: ["mcp.server.name", "registries.primary.url"]
+  optional_fields: ["auth.token_env", "registries.additional"]
+
+  # Environment variable checks
+  env_vars:
+    - "SHADCN_REGISTRY_TOKEN"  # For private registries
+    - "MCP_SERVER_URL"        # Custom MCP server URL
+
+# Performance Optimization
+optimization:
+  # Component caching
+  cache:
+    enabled: true
+    ttl_hours: 24
+    max_size_mb: 100
+
+  # Batch installation
+  batch_install:
+    enabled: true
+    max_concurrent: 5
+    retry_failed: true
+
+  # Dependency resolution
+  dependency_resolution:
+    enabled: true
+    check_conflicts: true
+    auto_resolve: true
+
+# Error Handling
+error_handling:
+  retry_on_failure:
+    network_errors: true
+    auth_errors: true
+    rate_limits: true
+
+  fallback_strategies:
+    - "retry_with_delay"
+    - "use_cached_version"
+    - "fallback_to_basic_components"
+
+# Logging Configuration
+logging:
+  level: "info"  # debug, info, warn, error
+  log_commands: true
+  log_performance: true
+  log_errors: true

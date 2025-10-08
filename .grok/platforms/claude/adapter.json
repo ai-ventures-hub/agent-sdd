@@ -1,0 +1,47 @@
+{
+  "platform": "claude",
+  "version": "1.0",
+  "display_name": "Claude Code",
+  "command_prefix": "/",
+  "command_syntax": "/{command} {args}",
+  "environment_variables": {
+    "workspace_root": "CLAUDE_DIR",
+    "project_root": "PROJECT_ROOT",
+    "current_dir": "CURRENT_DIR"
+  },
+  "tool_mapping": {
+    "file_read": "Read",
+    "file_write": "Write",
+    "terminal_exec": "Bash",
+    "search_glob": "Glob",
+    "search_grep": "Grep",
+    "web_request": null,
+    "task_invoke": "Task"
+  },
+  "capabilities": {
+    "sub_agent_orchestration": true,
+    "advanced_file_operations": true,
+    "terminal_execution": true,
+    "search_and_replace": true,
+    "batch_operations": true,
+    "context_caching": true,
+    "error_recovery": true
+  },
+  "limitations": [],
+  "optimizations": {
+    "context_sharing": true,
+    "parallel_execution": true,
+    "memory_efficient": true,
+    "fast_file_operations": true
+  },
+  "command_mapping": {
+    "sdd-task": "/sdd-task",
+    "output-style": "/output-style",
+    "help": "/help"
+  },
+  "fallback_strategies": {
+    "missing_tools": "error_with_guidance",
+    "capability_limits": "graceful_degradation",
+    "execution_failures": "retry_with_backoff"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "platform": "codex",
+  "version": "1.0",
+  "display_name": "GitHub Copilot",
+  "command_prefix": "#",
+  "command_syntax": "#{command} {args}",
+  "environment_variables": {
+    "workspace_root": "COPILOT_WORKSPACE",
+    "project_root": "COPILOT_PROJECT",
+    "current_dir": "COPILOT_CWD"
+  },
+  "tool_mapping": {
+    "file_read": "readFile",
+    "file_write": "writeFile",
+    "terminal_exec": "execTerminal",
+    "search_glob": "findFiles",
+    "search_grep": "searchText",
+    "web_request": "fetchUrl",
+    "task_invoke": "callAgent"
+  },
+  "capabilities": {
+    "sub_agent_orchestration": false,
+    "advanced_file_operations": true,
+    "terminal_execution": true,
+    "search_and_replace": true,
+    "batch_operations": false,
+    "context_caching": true,
+    "error_recovery": false,
+    "workspace_integration": true
+  },
+  "limitations": [
+    "no_sub_agent_orchestration",
+    "limited_error_recovery",
+    "batch_operations_not_supported",
+    "vscode_extension_dependent"
+  ],
+  "optimizations": {
+    "vscode_integration": true,
+    "workspace_awareness": true,
+    "git_integration": true,
+    "intellisense_compatible": true
+  },
+  "command_mapping": {
+    "sdd-task": "#sdd-task",
+    "help": "#help",
+    "workspace": "#workspace"
+  },
+  "fallback_strategies": {
+    "missing_tools": "vscode_api_fallback",
+    "capability_limits": "workspace_file_operations",
+    "execution_failures": "manual_intervention_required"
+  }
+}
