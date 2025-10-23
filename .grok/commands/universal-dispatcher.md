@@ -54,16 +54,14 @@ Universal → Codex:
   sdd-task --execute TASK-001 → #sdd-task --execute TASK-001
   output-style ai-to-ai-strict → #output-style ai-to-ai-strict
 
-VARIABLE_RESOLUTION:
+PATH_RESOLUTION:
 
-Universal Variables → Platform Variables:
-  {{workspace_root}} → {{CLAUDE_DIR}} (Claude)
-  {{workspace_root}} → {{GROK_WORKSPACE}} (Grok)
-  {{workspace_root}} → {{COPILOT_WORKSPACE}} (Codex)
-
-  {{project_root}} → {{PROJECT_ROOT}} (Claude)
-  {{project_root}} → {{GROK_PROJECT_ROOT}} (Grok)
-  {{project_root}} → {{COPILOT_PROJECT}} (Codex)
+Runtime Detection (No Environment Variables):
+  - AI detects current working directory via pwd
+  - Constructs base_dir: .{platform_name} (e.g., .grok, .claude, .codex)
+  - All paths relative to detected working directory
+  - No environment variable dependencies
+  - Consistent behavior across all platforms
 
 AGENT_COMPATIBILITY_LAYER:
 

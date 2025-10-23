@@ -8,28 +8,31 @@ PLATFORM_DETECTION_WITH_OVERRIDE (Framework workspace):
    - IF override = "auto" → PROCEED to auto-detection
    - ELSE → USE explicit override value (for testing/development)
 
-2. ENVIRONMENT_VARIABLE_CHECK (Auto-Detection):
-   - IF {{CLAUDE_DIR}} exists → PLATFORM = claude
-   - ELIF {{GROK_WORKSPACE}} exists → PLATFORM = grok
-   - ELIF {{COPILOT_WORKSPACE}} exists → PLATFORM = codex
-   - ELSE → FALLBACK_DETECTION
+2. FRAMEWORK_DIRECTORY_CHECK (Primary Detection):
+   - CHECK for .sddrc file in current directory
+   - READ FRAMEWORK value from .sddrc
+   - VALIDATE corresponding directory exists (.claude/, .grok/, or .codex/)
+   - PLATFORM = FRAMEWORK value from .sddrc
 
-3. COMMAND_AVAILABILITY_CHECK (Fallback):
-   - TEST #sdd-task command → CONFIRMS codex
-   - TEST /sdd-task command → CONFIRMS claude
-   - TEST @sdd-task command → CONFIRMS grok
+3. RUNTIME_PATH_DETECTION:
+   - USE current working directory (pwd) as project root
+   - CONSTRUCT base_dir from platform name: .{platform_name}/
+   - NO environment variable dependencies
+   - Works consistently across all platforms
 
-4. CAPABILITY_ASSESSMENT:
-   - DETECT available tools for selected platform
-   - ASSESS command execution capabilities
-   - IDENTIFY platform limitations
+4. COMMAND_PREFIX_MAPPING:
+   - READ platform_vars.command_prefix from variables.yml
+   - APPLY correct prefix for detected platform:
+     * Claude: /sdd-task
+     * Grok: @sdd-task
+     * Codex: #sdd-task
 
 5. ADAPTER_LOADING (Framework directory):
-   - Directory name is {{platform_vars.name}} (framework-specific, adapters maintain compatibility)
+   - Directory name is {{platform_vars.name}}
    - LOAD platform-specific configuration from {{paths.base_dir}}/platforms/{platform}/
    - INITIALIZE tool mappings for selected platform
-   - SET command prefixes and execution model
-   - CONFIGURE environment variable mappings
+   - SET command prefixes based on platform_vars
+   - USE runtime path detection (no env var resolution needed)
 
 PLATFORM_CAPABILITIES:
 - CLAUDE: Full feature support, sub-agent orchestration, advanced tooling
@@ -48,10 +51,10 @@ ADAPTATION_RULES:
 4. PRESERVE all existing Agent-SDD functionality across platforms
 
 CONFIGURATION_VALIDATION_POST_SWITCH:
-- VALIDATE platform_vars top-level variables match FRAMEWORK setting
-- CHECK platform-specific variables resolve correctly
-- VERIFY command_prefix matches detected platform
-- CONFIRM workspace_root, project_root, current_dir are platform-appropriate
+- VALIDATE platform_vars.name matches .sddrc FRAMEWORK setting
+- VERIFY command_prefix is correct for platform (/, @, or #)
+- CONFIRM framework directory exists (.claude/, .grok/, or .codex/)
+- TEST path construction works (base_dir resolution)
 - TEST file operations with platform tools
 - LOG configuration validation results
 - SUGGEST manual fixes if validation fails

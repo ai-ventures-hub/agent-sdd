@@ -4,7 +4,7 @@ Streamlined system for structured software development across Claude, Grok, and 
 
 ## 🎯 How It Works: Platform Adaptation
 
-Agent-SDD is a **universal framework** that automatically adapts to the AI platform you're using (Claude, Grok, or Codex). The framework uses a simple 3-step configuration to switch between platforms:
+Agent-SDD is a framework that automatically adapts to the AI platform you're using (Claude, Grok, or Codex). The framework uses a simple 3-step configuration to switch between platforms:
 
 1. **Directory naming**: `.claude/`, `.grok/`, or `.codex/` contains the framework files
 2. **Configuration file**: `.sddrc` with `FRAMEWORK=claude`, `FRAMEWORK=grok`, or `FRAMEWORK=codex`
@@ -52,7 +52,7 @@ The framework then automatically:
 1. **Configure for your AI platform (3 steps):**
    ```bash
    # For Claude Code users:
-   mv .grok .claude                                    # Step 1: Rename directory
+   mv .grok .claude                                   # Step 1: Rename directory
    sed -i 's/FRAMEWORK=.*/FRAMEWORK=claude/' .sddrc   # Step 2: Update config
    mv GROK.md CLAUDE.md                               # Step 3: Rename instruction file
 
@@ -128,15 +128,15 @@ echo "   Instruction: ${OLD^^}.md → ${NEW^^}.md"
 # Universal format (recommended)
 sdd-task --agent my_agent --capabilities file_read,file_write,terminal_exec
 
-# Platform-specific formats (still supported)
-/sdd-task --agent my_agent --tools Read,Write,Bash                     # Claude
+# Platform-specific formats
+/sdd-task --agent my_agent --tools Read,Write,Bash                            # Claude
 @sdd-task --agent my_agent --capabilities file_read,file_write,terminal_exec  # Grok
 #sdd-task --agent my_agent --capabilities file_read,file_write,terminal_exec  # Codex
 ```
 
 ## Directory Layout (Framework Workspace)
 ```
-.{framework}/                    # .claude, .grok, or .codex (auto-detected from .sddrc)
+.{framework}/         # .claude, .grok, or .codex (auto-detected from .sddrc)
 ├── agents/           # Sub-agent definitions ({{system_counts.agents}} specialized agents)
 ├── analytics/        # Framework analytics and metrics
 │   ├── history/      # Archived JSON Lines log files

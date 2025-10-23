@@ -126,10 +126,30 @@ fi
 # Step 4: Update platform variables in config
 print_step "Updating platform variables in configuration"
 if [ -f ".$TARGET_PLATFORM/config/variables.yml" ]; then
-    # Update the top-level platform variables
-    sed -i.bak "s/name: \"claude\"/name: \"$TARGET_PLATFORM\"/" ".$TARGET_PLATFORM/config/variables.yml"
-    sed -i.bak "s/command_prefix: \"\/\"/command_prefix: \"@${TARGET_PLATFORM:0:1}\"/" ".$TARGET_PLATFORM/config/variables.yml"
-    rm ".$TARGET_PLATFORM/config/variables.yml.bak"
+    # Determine the correct command prefix for the target platform
+    case "$TARGET_PLATFORM" in
+        "claude")
+            NEW_PREFIX="/"
+            ;;
+        "grok")
+            NEW_PREFIX="@"
+            ;;
+        "codex")
+            NEW_PREFIX="#"
+            ;;
+    esac
+
+    # Update only name and command_prefix (runtime detection handles paths)
+    awk -v target="$TARGET_PLATFORM" -v prefix="$NEW_PREFIX" '
+    /^platform_vars:/ { in_platform_vars=1; print; next }
+    in_platform_vars && /^  # Active platform/ { print; next }
+    in_platform_vars && /^  name:/ { print "  name: \"" target "\""; next }
+    in_platform_vars && /^  command_prefix:/ { print "  command_prefix: \"" prefix "\""; next }
+    /^  # Platform-specific/ { in_platform_vars=0 }
+    { print }
+    ' ".$TARGET_PLATFORM/config/variables.yml" > ".$TARGET_PLATFORM/config/variables.yml.tmp"
+
+    mv ".$TARGET_PLATFORM/config/variables.yml.tmp" ".$TARGET_PLATFORM/config/variables.yml"
 fi
 
 # Step 5: Validate the switch

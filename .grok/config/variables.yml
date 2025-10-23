@@ -3,16 +3,17 @@
 # Auto-discovers project structure and adapts paths accordingly
 # Framework type determined by .sddrc file
 
-# Framework-Agnostic Directory Structure (auto-detected per platform)
+# Framework-Agnostic Directory Structure (runtime detection)
+# Paths detected from current working directory - no env var dependencies
 paths:
-  # Platform-aware environment variable resolution
-  workspace_root: "{{platform_vars.workspace_root}}"
-  project_root: "{{platform_vars.project_root}}"
-  current_dir: "{{platform_vars.current_dir}}"
+  # Runtime detection - AI uses current working directory directly
+  # These are reference placeholders for documentation purposes
   platform_name: "{{platform_vars.name}}"
 
-  # Base directory (auto-resolved from .sddrc FRAMEWORK setting)
-  base_dir: "{{platform_vars.project_root}}/.{{platform_vars.name}}"
+  # Base directory (detected at runtime from current working directory)
+  # AI agent detects: pwd → /Users/cjm/Projects/agent-sdd
+  # Then constructs: .grok/ or .claude/ or .codex/ based on platform_vars.name
+  base_dir: ".{{platform_vars.name}}"
 
   # Subdirectories (relative to base_dir)
   product_dir: "{{paths.base_dir}}/product"
@@ -43,36 +44,26 @@ paths:
   commands_log: "{{paths.logs_dir}}/commands.jsonl"
   errors_log: "{{paths.logs_dir}}/errors.jsonl"
 
-# Platform Variable Mappings (loaded based on detected platform)
+# Platform Variable Mappings (runtime detection)
+# Paths are detected at runtime from current working directory
+# No environment variable dependencies - works consistently across all platforms
 platform_vars:
-  # Top-level variables resolved for current framework (update these when switching platforms)
+  # Active platform configuration (auto-syncs with .sddrc FRAMEWORK setting)
   name: "grok"
-  command_prefix: "@g"
-  workspace_root: "{{CLAUDE_DIR}}"
-  project_root: "{{PROJECT_ROOT}}"
-  current_dir: "{{CURRENT_DIR}}"
+  command_prefix: "@"
 
-  # Framework-specific platform configurations
+  # Platform-specific command prefixes (for reference when switching)
   claude:
-    name: "grok"
-    command_prefix: "@g"
-    workspace_root: "{{CLAUDE_DIR}}"
-    project_root: "{{PROJECT_ROOT}}"
-    current_dir: "{{CURRENT_DIR}}"
+    name: "claude"
+    command_prefix: "/"
 
   grok:
     name: "grok"
     command_prefix: "@"
-    workspace_root: "{{GROK_WORKSPACE}}"
-    project_root: "{{GROK_PROJECT_ROOT}}"
-    current_dir: "{{GROK_CURRENT_DIR}}"
 
   codex:
     name: "codex"
     command_prefix: "#"
-    workspace_root: "{{COPILOT_WORKSPACE}}"
-    project_root: "{{COPILOT_PROJECT}}"
-    current_dir: "{{COPILOT_CWD}}"
 
 # Agent Registry
 agents:
@@ -141,8 +132,8 @@ errors:
     ERR_027: "[ERR_027]"
     ERR_028: "[ERR_028]"
     ERR_029: "[ERR_029]"
-    ERR_030: "[ERR_030]"
   agent:
+    ERR_030: "[ERR_030]"
     ERR_031: "[ERR_031]"
     ERR_032: "[ERR_032]"
     ERR_033: "[ERR_033]"
@@ -246,7 +237,7 @@ templates:
 # System Counts (Single Source of Truth)
 system_counts:
   agents: 16        # Number of active sub-agents
-  workflows: 11     # Number of workflow flags
+  workflows: 11     # Number of workflow flags (--init, --bootstrap, --next, --execute, --spec, --improve, --edit, --evolve, --agent, --style, --validate_system)
   templates: 11     # Number of template files
   error_codes: 44   # Total error codes defined
 
