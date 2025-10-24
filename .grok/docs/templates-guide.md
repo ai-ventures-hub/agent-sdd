@@ -117,7 +117,7 @@ Agent-SDD Universal uses a comprehensive template system for generating consiste
 **Optimization:** Streaming responses for large template generation
 **Integration:** Context-aware template selection
 
-### GitHub Copilot (Codex)
+### Codex
 **Advantages:** VS Code integration enables workspace-aware templates
 **Optimization:** Git-aware template content
 **Integration:** Extension-based template enhancements

@@ -1,6 +1,6 @@
-# Agent-SDD: Universal Software Development Framework
+# Agent-SDD: Spec Driven Development Framework
 
-Streamlined system for structured software development across Claude, Grok, and Codex platforms, featuring automated variable resolution, comprehensive error handling, workflow dependency enforcement, path validation, framework resilience with self-healing capabilities, living architecture diagrams, and {{system_counts.agents}} specialized sub-agents for reliable execution.
+Streamlined system for specification driven development across Claude, Grok, and Codex platforms, featuring automated variable resolution, comprehensive error handling, workflow dependency enforcement, path validation, framework resilience with self-healing capabilities, living architecture diagrams, and {{system_counts.agents}} specialized sub-agents for reliable execution.
 
 ## 🎯 How It Works: Platform Adaptation
 
@@ -59,7 +59,7 @@ The framework then automatically:
    # For Grok users:
    # Already configured if FRAMEWORK=grok
 
-   # For Codex/GitHub Copilot users:
+   # For Codex users:
    mv .grok .codex                                    # Step 1: Rename directory
    sed -i 's/FRAMEWORK=.*/FRAMEWORK=codex/' .sddrc    # Step 2: Update config
    mv GROK.md CODEX.md                                # Step 3: Rename instruction file

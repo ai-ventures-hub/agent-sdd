@@ -6,7 +6,7 @@ Security updates are provided for the latest version of Agent-SDD. We recommend 
 
 ## Reporting Security Vulnerabilities
 
-If you discover a security vulnerability in Agent-SDD, please report it responsibly. **Do not** create public issues for security vulnerabilities.
+If you discover a security vulnerability in Agent-SDD, please report it. **Do not** create public issues for security vulnerabilities.
 
 ### How to Report
 
@@ -59,12 +59,6 @@ If you discover a security vulnerability in Agent-SDD, please report it responsi
 3. Use the framework only in trusted development environments
 4. Regularly run `sdd-task --validate_system` to check framework integrity
 
-### For Contributors
-1. Follow secure coding practices
-2. Validate all inputs and file paths
-3. Use platform-appropriate security measures
-4. Document security considerations for new features
-
 ## Known Security Measures
 
 - File locking prevents concurrent critical operations
@@ -84,5 +78,5 @@ Security updates will be:
 ## Contact
 
 For security-related questions or concerns:
-- Email: security@agent-sdd.dev
+- Email: support@agent-sdd.com
 - Response time: Within 48 hours for critical issues

@@ -4,10 +4,9 @@ COMMAND: set-platform [platform]
 PURPOSE: Configure Agent-SDD to use a specific AI assistant platform
 
 USAGE:
-- set-platform codex     # Configure for GitHub Copilot (default in this edition)
+- set-platform codex     # Configure for Codex
 - set-platform claude    # Configure for Claude Code
 - set-platform grok      # Configure for Grok
-- set-platform auto      # Enable automatic platform detection
 
 PLATFORM_CONFIGURATION:
 

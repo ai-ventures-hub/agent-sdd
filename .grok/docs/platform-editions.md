@@ -1,6 +1,6 @@
 # Universal Framework: Single Framework Directory
 
-Agent-SDD Universal uses one framework directory (`.claude`, `.grok`, or `.codex`) that automatically adapts to Claude, Grok, and GitHub Copilot through intelligent platform detection.
+Agent-SDD Universal uses one framework directory (`.claude`, `.grok`, or `.codex`) that automatically adapts to Claude, Grok, and Codex through intelligent platform detection.
 
 ## Universal Directory Strategy
 
@@ -20,7 +20,7 @@ The same directory structure works across all platforms:
 ├── platforms/        # Platform adapters (auto-selected based on detection)
 │   ├── claude/       # Claude Code configuration
 │   ├── grok/         # Grok configuration
-│   └── codex/        # GitHub Copilot configuration
+│   └── codex/        # Codex configuration
 ├── agents/          # Universal agents (adapt to platform capabilities)
 ├── commands/        # Workflows and dispatchers (platform-aware)
 ├── config/          # Configuration (platform-specific loading)

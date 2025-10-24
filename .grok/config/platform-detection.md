@@ -37,7 +37,7 @@ PLATFORM_DETECTION_WITH_OVERRIDE (Framework workspace):
 PLATFORM_CAPABILITIES:
 - CLAUDE: Full feature support, sub-agent orchestration, advanced tooling
 - GROK: Standard tooling, adapted command syntax, sequential adapter optimizations
-- CODEX: VS Code integration, GitHub Copilot features, workspace awareness
+- CODEX: VS Code integration, Codex features, workspace awareness
 
 FALLBACK_STRATEGIES:
 - IF platform undetected → DEFAULT to {{platform_vars.name}} (framework edition baseline)

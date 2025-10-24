@@ -1,13 +1,12 @@
 {
   "platform": "codex",
   "version": "1.0",
-  "display_name": "GitHub Copilot",
+  "display_name": "Codex",
   "command_prefix": "#",
   "command_syntax": "#{command} {args}",
-  "environment_variables": {
-    "workspace_root": "COPILOT_WORKSPACE",
-    "project_root": "COPILOT_PROJECT",
-    "current_dir": "COPILOT_CWD"
+  "path_detection": {
+    "method": "runtime",
+    "note": "Paths detected from current working directory (pwd) at runtime. No environment variables required."
   },
   "tool_mapping": {
     "file_read": "readFile",

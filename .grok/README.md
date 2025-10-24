@@ -1,6 +1,6 @@
 # Agent-SDD Universal Framework Directory
 
-This directory contains the Agent-SDD Universal Framework, a multi-platform framework for structured software development that works across Claude, Grok, and GitHub Copilot (Codex).
+This directory contains the Agent-SDD Universal Framework, a multi-platform framework for structured software development that works across Claude, Grok, and Codex.
 
 ## Quick Reference
 

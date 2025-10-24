@@ -4,10 +4,9 @@
   "display_name": "Claude Code",
   "command_prefix": "/",
   "command_syntax": "/{command} {args}",
-  "environment_variables": {
-    "workspace_root": "CLAUDE_DIR",
-    "project_root": "PROJECT_ROOT",
-    "current_dir": "CURRENT_DIR"
+  "path_detection": {
+    "method": "runtime",
+    "note": "Paths detected from current working directory (pwd) at runtime. No environment variables required."
   },
   "tool_mapping": {
     "file_read": "Read",
